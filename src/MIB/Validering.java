@@ -45,7 +45,7 @@ public class Validering {
             }
         }
         catch (InfException e){
-            System.out.println("Ingen epost hittades"+e);
+            System.out.println("Ingen epost hittades, försök igen."+e);
         }
         return finns;
     }
