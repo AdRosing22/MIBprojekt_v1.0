@@ -26,7 +26,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
     public InloggningsFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
-        val = "";
+        
         
         
         
@@ -148,8 +148,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         // TODO add your handling code here:
         kontrollAvRuta();
-        
-        
+         
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     
@@ -157,10 +156,11 @@ public class InloggningsFonster extends javax.swing.JFrame {
     
     
     //hämtar val av inloggningssätt från rullmenyn och lagrar i variabeln val.
-private void kontrollAvRuta()
-{
+private void kontrollAvRuta(){
     val = JComboBox.getSelectedItem().toString();
 }
+
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

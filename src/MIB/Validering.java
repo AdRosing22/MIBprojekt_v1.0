@@ -34,26 +34,22 @@ public class Validering {
         try{
             dbEpost = idb.fetchSingle(fragaAgent);
             
-            if(dbEpost.equals(epost))
-            {
+            if(dbEpost.equals(epost)){
                 finns = true;
             }
-            else
-            {
+            else{
                 dbEpost = idb.fetchSingle(fragaAlien);
-                if(dbEpost.equals(dbEpost));
-                {
+                if(dbEpost.equals(dbEpost));{
                     finns = true;
                 }
             }
         }
-        catch (InfException e)
-        {
+        catch (InfException e){
             System.out.println("Ingen epost hittades"+e);
         }
-        
         return finns;
     }
+    
     
     
     
