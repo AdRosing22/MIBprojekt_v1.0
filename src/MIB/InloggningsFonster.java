@@ -148,6 +148,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         // TODO add your handling code here:
         kontrollAvRuta();
+        
          
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
