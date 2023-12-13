@@ -4,6 +4,7 @@
  */
 package MIB;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -26,26 +27,31 @@ public class Validering {
         boolean finns = false;
         String dbEpost;
         
-        String fragaAgent = "SELECT epost FROM agent WHERE epost='"+epost+"'";
-        String fragaAlien = "SELECT epost FROM alien WHERE epost='"+epost+"'";
+        String fragaAgent = "SELECT epost FROM agent WHERE epost like'"+epost+"'";
+        String fragaAlien = "SELECT epost FROM alien WHERE epost like'"+epost+"'";
         
         //kör fråga mot databas
         
         try{
             dbEpost = idb.fetchSingle(fragaAgent);
             
-            if(dbEpost.equals(epost)){
+            if(dbEpost != null){
                 finns = true;
             }
             else{
                 dbEpost = idb.fetchSingle(fragaAlien);
-                if(dbEpost.equals(dbEpost));{
+                if(dbEpost != null){
                     finns = true;
                 }
             }
         }
         catch (InfException e){
+<<<<<<< HEAD
             System.out.println("Ingen epost hittades, försök igen."+e);
+=======
+            JOptionPane.showMessageDialog(null, "Ingen epost hittades, försök igen");
+            System.out.println("Internt felmeddelande"+e);
+>>>>>>> 4562f03e23e620ebdc5df6ebe8a1ec273d3582c0
         }
         return finns;
     }
