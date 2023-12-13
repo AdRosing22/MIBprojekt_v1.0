@@ -209,7 +209,7 @@ private boolean kontrollOmLosenStammerAlien()
     String logEpost = txtbEpost.getText();
     epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
     
-    if(!epostFinns)
+    if(epostFinns)
     {
         try{
             String fraga = "SELECT losenord FROM alien WHERE epost='"+logEpost+"'";

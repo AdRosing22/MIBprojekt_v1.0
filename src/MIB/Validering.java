@@ -4,6 +4,7 @@
  */
 package MIB;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -34,18 +35,19 @@ public class Validering {
         try{
             dbEpost = idb.fetchSingle(fragaAgent);
             
-            if(dbEpost.equals(epost)){
+            if(dbEpost != null){
                 finns = true;
             }
             else{
                 dbEpost = idb.fetchSingle(fragaAlien);
-                if(dbEpost.equals(dbEpost));{
+                if(dbEpost != null){
                     finns = true;
                 }
             }
         }
         catch (InfException e){
-            System.out.println("Ingen epost hittades, försök igen"+e);
+            JOptionPane.showMessageDialog(null, "Ingen epost hittades, försök igen");
+            System.out.println("Internt felmeddelande"+e);
         }
         return finns;
     }
