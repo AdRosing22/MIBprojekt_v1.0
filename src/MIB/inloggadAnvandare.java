@@ -6,6 +6,7 @@ package MIB;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -14,42 +15,63 @@ import oru.inf.InfException;
  * @author Adam
  */
 public class inloggadAnvandare {
+
+    private static String namn;
+    private static String telefon;
+    private static String omrade;
+    private static String agentid;
+    private static InfDB idb;
+    private static String epost;
+    private static String alienid;
+    private static String plats;
     
-    private String namn;
-    private InfDB idb;
-    
-    public inloggadAnvandare(InfDB idb)
+    public inloggadAnvandare(InfDB idb, String epost)
     {
         this.idb = idb;
-    }
+        this.epost = epost;
+    }  
     
-    public String hamtaNamnAgent(String epost)
+    public static void hamtaInfoOmAgent()
     {
+        String fraga1 = "SELECT agent_id FROM agent WHERE epost='"+epost+"'";
+        String fraga2 = "SELECT namn FROM agent WHERE epost='"+epost+"'";
+        String fraga3 = "SELECT telefon FROM agent WHERE epost='"+epost+"'";
+        String fraga4 = "SELECT omrade FROM agent WHERE epost='"+epost+"'";
+        
         try{
-            String fraga = "SELECT namn FROM agent WHERE epost='"+epost+"'";
-            String svar = idb.fetchSingle(fraga);
-            try{  
-                if(!svar.isEmpty())
-                {
-                    namn = svar;
-                }
-            }catch (Exception undantag){
-                System.out.println("Internt felmeddelande"+undantag);
-            }
-            
-        }catch (InfException ex){
-            Logger.getLogger(inloggadAnvandare.class.getName()).log(Level.SEVERE, null, ex);
+            if(fraga1 != null || fraga2!= null || fraga3 != null || fraga4 != null){
+                agentid = idb.fetchSingle(fraga1);
+                namn = idb.fetchSingle(fraga2);
+                telefon = idb.fetchSingle(fraga3);
+                omrade = idb.fetchSingle(fraga4);
+            }   
+    }catch (InfException undantag){
+                    
+        JOptionPane.showMessageDialog(null, "Fel");
+        System.out.println("Internt felmeddelande"+undantag);
         }
-        
-         return namn;
     }
     
-   /* public String hamtaNamnAlien(String epost) throws InfException
+    
+    public static void hamtaInfoOmAlien()
     {
-        String fraga = "SELECT namn FROM alien WHERE epost='"+epost+"'";
-        String svar = idb.fetchSingle(fraga);
+        String fraga1 = "SELECT alien_id FROM alien WHERE epost='"+epost+"'";
+        String fraga2 = "SELECT namn FROM alien WHERE epost='"+epost+"'";
+        String fraga3 = "SELECT telefon FROM alien WHERE epost='"+epost+"'";
+        String fraga4 = "SELECT plats FROM alien WHERE epost='"+epost+"'";
         
-    }*/
-    
-    
+        try{
+            if(fraga1 != null || fraga2!= null || fraga3 != null || fraga4 != null){
+                alienid = idb.fetchSingle(fraga1);
+                namn = idb.fetchSingle(fraga2);
+                telefon = idb.fetchSingle(fraga3);
+                plats = idb.fetchSingle(fraga4);
+            }   
+    }catch (InfException undantag){
+                    
+        JOptionPane.showMessageDialog(null, "Fel");
+        System.out.println("Internt felmeddelande"+undantag);
+        }
+    }
+
 }
