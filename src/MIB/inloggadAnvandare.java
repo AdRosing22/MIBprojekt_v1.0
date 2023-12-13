@@ -73,5 +73,32 @@ public class inloggadAnvandare {
         System.out.println("Internt felmeddelande"+undantag);
         }
     }
+    
+    
+    public static String getNamn() {
+        return namn;
+    }
+    public static String getTelefon() {
+        return telefon;
+    }
+    public static String getOmrade() {
+        return omrade;
+    }
+    public static String getAgentId() {
+        return agentid;
+    }
+    public static InfDB idb() {
+        return idb;
+    }
+    public static String getEpost() {
+        return epost;
+    }
+    public static String getAlienId() {
+        return alienid;
+    }
+    public static String getPlats() {
+        return plats;
+    }
+    
 
 }
