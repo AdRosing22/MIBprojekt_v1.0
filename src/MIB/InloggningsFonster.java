@@ -165,10 +165,6 @@ public class InloggningsFonster extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
-    
-    
-    
-    
     //hämtar val av inloggningssätt från rullmenyn och lagrar i variabeln val.
 private void kontrollAvRuta(){
     menyVal = JComboBox.getSelectedItem().toString();
@@ -180,7 +176,7 @@ private boolean kontrollOmLosenStammerAgent()
 {
     boolean isMatch = false;
     String logEpost = txtbEpost.getText();
-    //epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
+    epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
     
     if(epostFinns)
     {
@@ -211,7 +207,7 @@ private boolean kontrollOmLosenStammerAlien()
 {
     boolean isMatch = false;
     String logEpost = txtbEpost.getText();
-    //epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
+    epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
     
     if(!epostFinns)
     {
