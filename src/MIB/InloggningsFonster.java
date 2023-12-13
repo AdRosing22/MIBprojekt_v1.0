@@ -178,6 +178,9 @@ public class InloggningsFonster extends javax.swing.JFrame {
         kontrollAvRuta();
         if(menyVal.equals("Alien") && kontrollOmLosenStammerAlien())
         {
+            //kör metoden hamtaInfoOmAlien som använder sig av txtbEpost
+            inloggadAnvandare.hamtaInfoOmAlien();
+            //skapar ny inloggadAnvandre med txtbEpost
             new inloggadAnvandare(idb, txtbEpost.getText());
             new AlienFonster().setVisible(true);
             dispose();
@@ -187,13 +190,15 @@ public class InloggningsFonster extends javax.swing.JFrame {
             if(Validering.kontrollOmAdmin(txtbEpost.getText()))
             {
                 new inloggadAnvandare(idb, txtbEpost.getText());
+                inloggadAnvandare.hamtaInfoOmAgent();
                 new AgentAdminFonster().setVisible(true);
                 dispose();
             }
             else
             {
             new inloggadAnvandare(idb, txtbEpost.getText());
-            new AgentFonster().setVisible(true);
+            inloggadAnvandare.hamtaInfoOmAgent();
+            new AgentFonster(idb).setVisible(true);
             dispose();
             }
         }

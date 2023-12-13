@@ -76,4 +76,27 @@ public static boolean kontrollOmAdmin(String epost)
         return arAdmin;
         }
     
+public static boolean kontrollOmLosenStammerAgent(String epost, String losenord)
+{
+    boolean stammer = false;
+    String fraga = "SELECT losenord FROM agent WHERE epost='"+epost+"'";
+    
+    try{
+        String svar = idb.fetchSingle(fraga);
+        if(svar.equals(losenord))
+        {
+            stammer = true;
+        }
+        else{
+           JOptionPane.showMessageDialog(null, "Fel lösenord"); 
+        }
+    }
+    catch (InfException undantag)
+    {
+        JOptionPane.showMessageDialog(null, "Fel");
+        System.out.println("Internt felmeddelande"+undantag);
+    }
+    return stammer;
+}
+
 }

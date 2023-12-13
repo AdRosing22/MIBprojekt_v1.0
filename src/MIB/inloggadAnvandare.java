@@ -25,12 +25,15 @@ public class inloggadAnvandare {
     private static String alienid;
     private static String plats;
     
+    //konstruktorn tar in databasen och epost (som identifierare) som parametrar
     public inloggadAnvandare(InfDB idb, String epost)
     {
         this.idb = idb;
         this.epost = epost;
     }  
     
+    
+    //metod för att hämta ut info kring agent utifrån epost och lagra i fält
     public static void hamtaInfoOmAgent()
     {
         String fraga1 = "SELECT agent_id FROM agent WHERE epost='"+epost+"'";
@@ -53,6 +56,7 @@ public class inloggadAnvandare {
     }
     
     
+    //metod för att hämta ut info kring alien utifrån epost och lagra i fält
     public static void hamtaInfoOmAlien()
     {
         String fraga1 = "SELECT alien_id FROM alien WHERE epost='"+epost+"'";
@@ -75,7 +79,7 @@ public class inloggadAnvandare {
     }
     
     
-
+//alla getters för att kunna ha åtkomst till specifika uppgifter hämtade via hamtaInfo metoderna
     public static String getNamn() {
         return namn;
     }

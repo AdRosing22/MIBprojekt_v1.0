@@ -4,17 +4,24 @@
  */
 package MIB;
 
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 /**
  *
  * @author Adam
  */
 public class AndraLosenordFonster extends javax.swing.JFrame {
 
+    private InfDB idb;
+
     /**
      * Creates new form AndraLosenordFonster
      */
-    public AndraLosenordFonster() {
+    public AndraLosenordFonster(InfDB idb) {
         initComponents();
+        this.idb = idb;
     }
 
     /**
@@ -113,12 +120,33 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
-        new AgentFonster().setVisible(true);
+        new AgentFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
         // TODO add your handling code here:
+        try{
+            if(Validering.kontrollOmLosenStammerAgent(inloggadAnvandare.getEpost(), txtbNuvLosen.getText()))
+            {
+                if(txtbNuvLosen.getText().equals(txtbNyttLosen.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Ditt nya lösenord är samma som ditt gamla, försök med något annat");
+                }
+                else{
+                idb.update("UPDATE agent SET losenord='"+txtbNyttLosen.getText()+"' WHERE epost='"+inloggadAnvandare.getEpost()+"'");
+                 JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+txtbNyttLosen.getText());
+                 dispose();
+                 new AgentFonster(idb).setVisible(true);
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Fel nuvarande lösenord, försök igen");
+            }
+        }catch (InfException undantag){
+            JOptionPane.showMessageDialog(null, "Fel");
+            System.out.println("Internt felmeddelande"+undantag);
+        }        
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
 
