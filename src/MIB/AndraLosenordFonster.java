@@ -172,7 +172,10 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         }catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
             System.out.println("Internt felmeddelande"+undantag);
-        }        
+        }catch (Exception e)
+        {
+            System.out.println("Internt felmeddelande"+e);
+        }
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
     private void txtbNuvLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbNuvLosenActionPerformed

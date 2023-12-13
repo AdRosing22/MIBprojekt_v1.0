@@ -55,7 +55,7 @@ public class AlienFonster extends javax.swing.JFrame {
                         .addGap(139, 139, 139)
                         .addComponent(jLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
+                        .addGap(45, 45, 45)
                         .addComponent(btnAndraLosenord)))
                 .addContainerGap(157, Short.MAX_VALUE))
         );
@@ -64,9 +64,9 @@ public class AlienFonster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jLvalkommen)
-                .addGap(33, 33, 33)
+                .addGap(41, 41, 41)
                 .addComponent(btnAndraLosenord)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         pack();
