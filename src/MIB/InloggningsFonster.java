@@ -178,6 +178,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
         kontrollAvRuta();
         if(menyVal.equals("Alien") && kontrollOmLosenStammerAlien())
         {
+            new inloggadAnvandare(idb, txtbEpost.getText());
             new AlienFonster().setVisible(true);
             dispose();
         }
@@ -185,11 +186,13 @@ public class InloggningsFonster extends javax.swing.JFrame {
         {
             if(Validering.kontrollOmAdmin(txtbEpost.getText()))
             {
+                new inloggadAnvandare(idb, txtbEpost.getText());
                 new AgentAdminFonster().setVisible(true);
                 dispose();
             }
             else
             {
+            new inloggadAnvandare(idb, txtbEpost.getText());
             new AgentFonster().setVisible(true);
             dispose();
             }
