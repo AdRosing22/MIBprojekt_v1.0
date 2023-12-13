@@ -4,6 +4,8 @@
  */
 package MIB;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -73,8 +75,5 @@ public static boolean kontrollOmAdmin(String epost)
         
         return arAdmin;
         }
-    
-    
-    
     
 }
