@@ -61,7 +61,7 @@ public static boolean kontrollOmAdmin(String epost)
     try{
         svar = idb.fetchSingle(fraga);
             
-        if(svar.equals("J"))
+        if(svar != null && svar.equals("J"))
         {
             arAdmin = true;
         }
