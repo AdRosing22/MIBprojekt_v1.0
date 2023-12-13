@@ -75,7 +75,7 @@ public class inloggadAnvandare {
     }
     
     
-
+//getters
     public static String getNamn() {
         return namn;
     }
