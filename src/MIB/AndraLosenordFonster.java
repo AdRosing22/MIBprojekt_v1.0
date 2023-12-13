@@ -126,7 +126,13 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
-        new AgentFonster(idb).setVisible(true);
+        if(InloggningsFonster.getMenyval().equals("Agent"))
+        {
+            new AgentFonster(idb).setVisible(true);
+        }else if(InloggningsFonster.getMenyval().equals("Alien"))
+        {
+            new AlienFonster(idb).setVisible(true);
+        }
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
