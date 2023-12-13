@@ -75,7 +75,7 @@ public class inloggadAnvandare {
     }
     
     
-<<<<<<< HEAD
+
     public static String getNamn() {
         return namn;
     }
@@ -100,8 +100,7 @@ public class inloggadAnvandare {
     public static String getPlats() {
         return plats;
     }
-=======
->>>>>>> 2f60914ec480d8e7583f316d6e4aa0fd6dbcfc89
+
     
 
 }
