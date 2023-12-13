@@ -45,9 +45,19 @@ public class Validering {
                 }
             }
         }
+<<<<<<< HEAD
         catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
             System.out.println("Internt felmeddelande"+undantag);
+=======
+        catch (InfException e){
+<<<<<<< HEAD
+            System.out.println("Ingen epost hittades, försök igen."+e);
+=======
+            JOptionPane.showMessageDialog(null, "Ingen epost hittades, försök igen");
+            System.out.println("Internt felmeddelande"+e);
+>>>>>>> 4562f03e23e620ebdc5df6ebe8a1ec273d3582c0
+>>>>>>> 7d4a3213aed89b6ce670f6e6507a4b5b4af96ec7
         }
         return finns;
     }
