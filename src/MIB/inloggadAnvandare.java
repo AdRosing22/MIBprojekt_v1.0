@@ -79,11 +79,9 @@ public class inloggadAnvandare {
     }
     
     
-<<<<<<< HEAD
+
 //alla getters för att kunna ha åtkomst till specifika uppgifter hämtade via hamtaInfo metoderna
-=======
-//getters
->>>>>>> b39c2aa80cf4454e8ff3f518d93ad9568f9ce710
+
     public static String getNamn() {
         return namn;
     }
