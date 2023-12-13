@@ -45,39 +45,26 @@ public class Validering {
                 }
             }
         }
-<<<<<<< HEAD
         catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
             System.out.println("Internt felmeddelande"+undantag);
-=======
-        catch (InfException e){
-<<<<<<< HEAD
-            System.out.println("Ingen epost hittades, försök igen."+e);
-=======
-            JOptionPane.showMessageDialog(null, "Ingen epost hittades, försök igen");
-            System.out.println("Internt felmeddelande"+e);
->>>>>>> 4562f03e23e620ebdc5df6ebe8a1ec273d3582c0
->>>>>>> 7d4a3213aed89b6ce670f6e6507a4b5b4af96ec7
-        }
-        return finns;
     }
+    return finns;
+}
     
-    
-    
-    //metod som kontrollerar adminstatus för agent
-    public static boolean kontrollOmAdmin(String epost)
-    {
-        boolean arAdmin = false;
-        String svar;
-        String fraga = "SELECT administrator FROM agent WHERE epost='"+epost+"'";
+public static boolean kontrollOmAdmin(String epost)
+{
+    boolean arAdmin = false;
+    String svar;
+    String fraga = "SELECT administrator FROM agent WHERE epost='"+epost+"'";
         
-        try{
-            svar = idb.fetchSingle(fraga);
+    try{
+        svar = idb.fetchSingle(fraga);
             
-            if(svar.equals("J"))
-            {
-                arAdmin = true;
-            }
+        if(svar.equals("J"))
+        {
+            arAdmin = true;
+        }
         }
         catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
