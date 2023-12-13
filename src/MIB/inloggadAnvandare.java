@@ -12,7 +12,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Adam
+ * @author Adam & Melker
  */
 public class inloggadAnvandare {
 
