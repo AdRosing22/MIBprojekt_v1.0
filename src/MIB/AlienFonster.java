@@ -4,17 +4,22 @@
  */
 package MIB;
 
+import oru.inf.InfDB;
+
 /**
  *
  * @author Adam
  */
 public class AlienFonster extends javax.swing.JFrame {
 
+    
+    private InfDB idb;
     /**
      * Creates new form AlienFonster
      */
-    public AlienFonster() {
+    public AlienFonster(InfDB idb) {
         initComponents();
+        this.idb = idb;
     }
 
     /**
@@ -27,34 +32,56 @@ public class AlienFonster extends javax.swing.JFrame {
     private void initComponents() {
 
         jLvalkommen = new javax.swing.JLabel();
+        btnAndraLosenord = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLvalkommen.setText("Välkommen alien");
+
+        btnAndraLosenord.setText("Ändra lösenord");
+        btnAndraLosenord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraLosenordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addComponent(jLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(btnAndraLosenord)))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(46, 46, 46)
                 .addComponent(jLvalkommen)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(btnAndraLosenord)
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosenordActionPerformed
+        // TODO add your handling code here:
+        new AndraLosenordFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAndraLosenordActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnAndraLosenord;
     private javax.swing.JLabel jLvalkommen;
     // End of variables declaration//GEN-END:variables
 }

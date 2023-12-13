@@ -45,6 +45,12 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
 
         jLtitel.setText("Ändra lösenord");
 
+        txtbNuvLosen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbNuvLosenActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Nytt lösenord:");
 
         jLabel2.setText("Nuvarande lösenord:");
@@ -127,6 +133,7 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
         // TODO add your handling code here:
         try{
+            if(InloggningsFonster.getMenyval().equals("Agent")){
             if(Validering.kontrollOmLosenStammerAgent(inloggadAnvandare.getEpost(), txtbNuvLosen.getText()))
             {
                 if(txtbNuvLosen.getText().equals(txtbNyttLosen.getText()))
@@ -143,11 +150,34 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
             else{
                 JOptionPane.showMessageDialog(null, "Fel nuvarande lösenord, försök igen");
             }
+            }else if(InloggningsFonster.getMenyval().equals("Alien"))
+            {
+                if(Validering.kontrollOmLosenStammerAlien(inloggadAnvandare.getEpost(), txtbNuvLosen.getText()))
+                {
+                    if(txtbNuvLosen.getText().equals(txtbNyttLosen.getText()))
+                    {
+                        JOptionPane.showMessageDialog(null, "Ditt nya lösenord är samma som ditt gamla, försök med något annat");
+                    }
+                    else{
+                        idb.update("UPDATE alien SET losenord='"+txtbNyttLosen.getText()+"'WHERE epost='"+inloggadAnvandare.getEpost()+"'");
+                        JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+txtbNyttLosen.getText());
+                        dispose();
+                        new AgentFonster(idb).setVisible(true);
+                    }
+                }
+                else{
+                JOptionPane.showMessageDialog(null, "Fel nuvarande lösenord, försök igen");
+                }
+            }
         }catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
             System.out.println("Internt felmeddelande"+undantag);
         }        
     }//GEN-LAST:event_btnBekraftaActionPerformed
+
+    private void txtbNuvLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbNuvLosenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbNuvLosenActionPerformed
 
 
 

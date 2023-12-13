@@ -94,6 +94,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtbNuvLosen">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtbNuvLosenActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtbNyttLosen">
     </Component>

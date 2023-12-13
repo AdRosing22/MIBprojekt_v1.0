@@ -4,8 +4,6 @@
  */
 package MIB;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -37,18 +35,18 @@ public class Validering {
         try{
             dbEpost = idb.fetchSingle(fragaAgent);
             
-            if(dbEpost != null){
+            if(dbEpost != null && dbEpost.equals(epost)){
                 finns = true;
             }
             else{
                 dbEpost = idb.fetchSingle(fragaAlien);
-                if(dbEpost != null){
+                if(dbEpost != null && dbEpost.equals(epost)){
                     finns = true;
                 }
             }
         }
         catch (InfException undantag){
-            JOptionPane.showMessageDialog(null, "Fel");
+            JOptionPane.showMessageDialog(null, "Epost hittades inte");
             System.out.println("Internt felmeddelande"+undantag);
     }
     return finns;
@@ -83,20 +81,59 @@ public static boolean kontrollOmLosenStammerAgent(String epost, String losenord)
     
     try{
         String svar = idb.fetchSingle(fraga);
-        if(svar.equals(losenord))
+        
+        if(finnsAnvandareEpostIDB(epost)&& svar!= null)
         {
-            stammer = true;
+            if(svar.equals(losenord))
+            {
+                stammer = true;
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Fel lösenord, försök igen"); 
+            }
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Fel epost, försök igen");
         }
-        else{
-           JOptionPane.showMessageDialog(null, "Fel lösenord"); 
-        }
-    }
-    catch (InfException undantag)
+    }catch (InfException undantag)
     {
         JOptionPane.showMessageDialog(null, "Fel");
         System.out.println("Internt felmeddelande"+undantag);
     }
-    return stammer;
+    return stammer;   
+}
+
+public static boolean kontrollOmLosenStammerAlien(String epost, String losenord)
+{
+    boolean stammer = false;
+    String fraga = "SELECT losenord FROM alien WHERE epost='"+epost+"'";
+    
+    try{
+        String svar = idb.fetchSingle(fraga);
+        
+        if(finnsAnvandareEpostIDB(epost) && svar!= null)
+        {
+            if(svar.equals(losenord))
+            {
+                stammer = true;
+            }
+            else
+            {
+           JOptionPane.showMessageDialog(null, "Fel lösenord eller epost, försök igen"); 
+            }
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Fel epost, försök igen");
+        }
+    }catch (InfException undantag)
+    {
+        JOptionPane.showMessageDialog(null, "Fel");
+        System.out.println("Internt felmeddelande"+undantag);
+    }
+    return stammer;   
 }
 
 }
+
+

@@ -5,9 +5,9 @@
 package MIB;
 
 
-import javax.swing.JOptionPane;
+
 import oru.inf.InfDB;
-import oru.inf.InfException;
+
 
 
 
@@ -18,7 +18,7 @@ import oru.inf.InfException;
 public class InloggningsFonster extends javax.swing.JFrame {
     
     private InfDB idb;
-    private String menyVal;
+    private static String menyVal;
     private boolean epostFinns;
     private String svar;
     
@@ -172,39 +172,38 @@ public class InloggningsFonster extends javax.swing.JFrame {
     //2.ifall agent så kontrolleras epost mot lösenord
     //--kontroll ifall agenten har adminstatus via valideringsklassen
     //--beroende på ifall admin eller inte så öppnas antingen adminfönster eller agentfönster
+    //ANVÄNDER SIG AV VALIDERINGSKLASSEN FÖR ATT KONTROLLERA LÖSENORD
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        // TODO add your handling code here:
-  
-        kontrollAvRuta();
-        if(menyVal.equals("Alien") && kontrollOmLosenStammerAlien())
+    
+    kontrollAvRuta();
+    String anv = txtbEpost.getText();
+    String los = txtbLosenord.getText();
+    
+    if(menyVal.equals("Alien") && Validering.kontrollOmLosenStammerAlien(anv,los))
+    {
+        new inloggadAnvandare(idb, anv);
+        inloggadAnvandare.hamtaInfoOmAlien();
+        new AlienFonster(idb).setVisible(true);
+        dispose();
+    }
+    else if(menyVal.equals("Agent") && Validering.kontrollOmLosenStammerAgent(anv,los))
+    {
+        if(Validering.kontrollOmAdmin(anv))
         {
-            //kör metoden hamtaInfoOmAlien som använder sig av txtbEpost
-            inloggadAnvandare.hamtaInfoOmAlien();
-            //skapar ny inloggadAnvandre med txtbEpost
-            new inloggadAnvandare(idb, txtbEpost.getText());
-            new AlienFonster().setVisible(true);
+            new inloggadAnvandare(idb, anv);
+            inloggadAnvandare.hamtaInfoOmAgent();
+            new AgentAdminFonster().setVisible(true);
             dispose();
         }
-        else if(menyVal.equals("Agent") && kontrollOmLosenStammerAgent())
+        else
         {
-            if(Validering.kontrollOmAdmin(txtbEpost.getText()))
-            {
-                new inloggadAnvandare(idb, txtbEpost.getText());
-                inloggadAnvandare.hamtaInfoOmAgent();
-                new AgentAdminFonster().setVisible(true);
-                dispose();
-            }
-            else
-            {
-            new inloggadAnvandare(idb, txtbEpost.getText());
+            new inloggadAnvandare(idb, anv);
             inloggadAnvandare.hamtaInfoOmAgent();
             new AgentFonster(idb).setVisible(true);
             dispose();
-            }
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Fel lösenord");
-        }
+    }
+        
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
@@ -219,65 +218,10 @@ private void kontrollAvRuta(){
     menyVal = JComboBox.getSelectedItem().toString();
 }
 
-
-//kontrollerar ifall angivet lösenord stämmer mot angiven epost i agent tabellen i databasen
-private boolean kontrollOmLosenStammerAgent()
+public static String getMenyval()
 {
-    boolean isMatch = false;
-    String logEpost = txtbEpost.getText();
-    
-    //kontrollerar så att den angivna eposten faktiskt finns i databasen
-    epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
-    
-    if(epostFinns)
-    {
-        try{
-            String fraga = "SELECT losenord FROM agent WHERE epost='"+logEpost+"'";
-            svar = idb.fetchSingle(fraga);
-            
-        }catch (InfException e)
-        {
-            System.out.println("Internt felmeddelande"+e.getMessage()); 
-        }
-        if(svar.equals(txtbLosenord.getText())){
-            isMatch = true;
-        }
-    }
-    else{
-        JOptionPane.showMessageDialog(null, "Fel epost");
-    }
-    return isMatch; 
+    return menyVal;
 }
-
-
-
-//kontrollerar ifall angivet lösenord stämmer mot angiven epost i alien tabellen i databasen
-private boolean kontrollOmLosenStammerAlien()
-{
-    boolean isMatch = false;
-    String logEpost = txtbEpost.getText();
-    epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
-    
-    if(epostFinns)
-    {
-        try{
-            String fraga = "SELECT losenord FROM alien WHERE epost='"+logEpost+"'";
-            svar= idb.fetchSingle(fraga);
-            
-        }catch(InfException e)
-        {
-            System.out.println("Intern felmeddelande"+e.getMessage());
-        }
-        if(svar.equals(txtbLosenord.getText())){
-            isMatch = true;
-        }
-    }
-    else{
-        JOptionPane.showMessageDialog(null, "Fel epost");
-    }
-    return isMatch;
-}
-
 
 
 
