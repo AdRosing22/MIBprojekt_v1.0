@@ -12,7 +12,7 @@ import oru.inf.InfException;
  *
  * @author Adam
  * 
- * heej
+ * 
  */
 public class Start {
     

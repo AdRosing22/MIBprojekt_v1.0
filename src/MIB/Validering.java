@@ -26,8 +26,8 @@ public class Validering {
         boolean finns = false;
         String dbEpost;
         
-        String fragaAgent = "SELECT epost FROM agent WHERE epost='"+epost+"'";
-        String fragaAlien = "SELECT epost FROM alien WHERE epost='"+epost+"'";
+        String fragaAgent = "SELECT epost FROM agent WHERE epost like'"+epost+"'";
+        String fragaAlien = "SELECT epost FROM alien WHERE epost like'"+epost+"'";
         
         //kör fråga mot databas
         

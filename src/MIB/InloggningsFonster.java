@@ -5,7 +5,9 @@
 package MIB;
 
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 
 
@@ -16,7 +18,9 @@ import oru.inf.InfDB;
 public class InloggningsFonster extends javax.swing.JFrame {
     
     private InfDB idb;
-    private String val;
+    private String menyVal;
+    private boolean epostFinns;
+    private Object svar;
     
     
 
@@ -148,8 +152,17 @@ public class InloggningsFonster extends javax.swing.JFrame {
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         // TODO add your handling code here:
         kontrollAvRuta();
+        if(menyVal.equals("Alien") && kontrollOmLosenStammerAlien())
+        {
+            new AlienFonster().setVisible(true);
+            dispose();
+        }
+        else if(menyVal.equals("Agent") && kontrollOmLosenStammerAgent())
+        {
+            new AgentFonster().setVisible(true);
+            dispose();
+        }
         
-         
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     
@@ -158,7 +171,68 @@ public class InloggningsFonster extends javax.swing.JFrame {
     
     //hämtar val av inloggningssätt från rullmenyn och lagrar i variabeln val.
 private void kontrollAvRuta(){
-    val = JComboBox.getSelectedItem().toString();
+    menyVal = JComboBox.getSelectedItem().toString();
+}
+
+
+//kontrollerar ifall angivet lösenord stämmer mot angiven epost i agent tabellen i databasen
+private boolean kontrollOmLosenStammerAgent()
+{
+    boolean isMatch = false;
+    String logEpost = txtbEpost.getText();
+    //epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
+    
+    if(epostFinns)
+    {
+        try{
+            String fraga = "SELECT losenord FROM agent WHERE epost='"+logEpost+"'";
+            svar = idb.fetchSingle(fraga);
+            
+        }catch (InfException e)
+        {
+            JOptionPane.showMessageDialog(null, "Fel lösenord eller epost");
+            System.out.println("Internt felmeddelande"+e.getMessage()); 
+        }
+        if(svar == null){
+            isMatch = false;
+        }
+        else if(svar.equals(txtbLosenord.getText()))
+        {
+            isMatch = true;
+        }
+    }
+    return isMatch; 
+}
+
+
+
+//kontrollerar ifall angivet lösenord stämmer mot angiven epost i alien tabellen i databasen
+private boolean kontrollOmLosenStammerAlien()
+{
+    boolean isMatch = false;
+    String logEpost = txtbEpost.getText();
+    //epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
+    
+    if(!epostFinns)
+    {
+        try{
+            String fraga = "SELECT losenord FROM alien WHERE epost='"+logEpost+"'";
+            svar= idb.fetchSingle(fraga);
+            
+        }catch(InfException e)
+        {
+            JOptionPane.showMessageDialog(null, "Fel lösenord eller epost");
+            System.out.println("Intern felmeddelande"+e.getMessage());
+        }
+        if(svar == null){
+            isMatch = false;
+        }
+        else if(svar.equals(txtbLosenord.getText()))
+        {
+            isMatch = true;
+        }
+    }
+    return isMatch;
 }
 
 
