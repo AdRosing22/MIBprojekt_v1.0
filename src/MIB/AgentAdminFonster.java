@@ -8,12 +8,12 @@ package MIB;
  *
  * @author Adam
  */
-public class AgentFonster extends javax.swing.JFrame {
+public class AgentAdminFonster extends javax.swing.JFrame {
 
     /**
-     * Creates new form AgentFonster
+     * Creates new form AgentAdminFonster
      */
-    public AgentFonster() {
+    public AgentAdminFonster() {
         initComponents();
     }
 
@@ -26,34 +26,35 @@ public class AgentFonster extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JLvalkommen = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        JLvalkommen.setText("Välkommen Agent");
+        jLabel1.setText("admin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addComponent(JLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addGap(155, 155, 155)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(JLvalkommen)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(jLabel1)
+                .addContainerGap(237, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JLvalkommen;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

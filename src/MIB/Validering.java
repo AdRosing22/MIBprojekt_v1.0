@@ -27,8 +27,8 @@ public class Validering {
         boolean finns = false;
         String dbEpost;
         
-        String fragaAgent = "SELECT epost FROM agent WHERE epost like'"+epost+"'";
-        String fragaAlien = "SELECT epost FROM alien WHERE epost like'"+epost+"'";
+        String fragaAgent = "SELECT epost FROM agent WHERE epost ='"+epost+"'";
+        String fragaAlien = "SELECT epost FROM alien WHERE epost ='"+epost+"'";
         
         //kör fråga mot databas
         
@@ -45,11 +45,38 @@ public class Validering {
                 }
             }
         }
-        catch (InfException e){
-            JOptionPane.showMessageDialog(null, "Ingen epost hittades, försök igen");
-            System.out.println("Internt felmeddelande"+e);
+        catch (InfException undantag){
+            JOptionPane.showMessageDialog(null, "Fel");
+            System.out.println("Internt felmeddelande"+undantag);
         }
         return finns;
+    }
+    
+    
+    
+    //metod som kontrollerar adminstatus för agent
+    public static boolean kontrollOmAdmin(String epost)
+    {
+        boolean arAdmin = false;
+        String svar;
+        String fraga = "SELECT administrator FROM agent WHERE epost='"+epost+"'";
+        
+        try{
+            svar = idb.fetchSingle(fraga);
+            
+            if(svar.equals("J"))
+            {
+                arAdmin = true;
+            }
+        }
+        catch (InfException undantag){
+            JOptionPane.showMessageDialog(null, "Fel");
+            System.out.println("Internt felmeddelande"+undantag);
+        }
+        
+        return arAdmin;
+        
+        
     }
     
     

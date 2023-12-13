@@ -20,7 +20,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
     private InfDB idb;
     private String menyVal;
     private boolean epostFinns;
-    private Object svar;
+    private String svar;
     
     
 
@@ -149,8 +149,18 @@ public class InloggningsFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbLosenordActionPerformed
 
+    
+    
+    //hämtar först värdet från rullgardinsmenyn
+    //kontrollerar ifall användaren har valt alien eller agent
+    //1.ifall alien så kontrolleras ifall epost stämmer överens med lösenord och alienfönster öppnas
+    //--det här fönstret stängs
+    //2.ifall agent så kontrolleras epost mot lösenord
+    //--kontroll ifall agenten har adminstatus via valideringsklassen
+    //--beroende på ifall admin eller inte så öppnas antingen adminfönster eller agentfönster
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         // TODO add your handling code here:
+  
         kontrollAvRuta();
         if(menyVal.equals("Alien") && kontrollOmLosenStammerAlien())
         {
@@ -159,13 +169,25 @@ public class InloggningsFonster extends javax.swing.JFrame {
         }
         else if(menyVal.equals("Agent") && kontrollOmLosenStammerAgent())
         {
+            if(Validering.kontrollOmAdmin(txtbEpost.getText()))
+            {
+                new AgentAdminFonster().setVisible(true);
+                dispose();
+            }
+            else
+            {
             new AgentFonster().setVisible(true);
             dispose();
+            }
         }
-        
+        else{
+            JOptionPane.showMessageDialog(null, "Fel lösenord");
+        }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
-    //hämtar val av inloggningssätt från rullmenyn och lagrar i variabeln val.
+    
+    
+    //hämtar val av inloggningssätt från rullmenyn och lagrar i variabeln menyVal.
 private void kontrollAvRuta(){
     menyVal = JComboBox.getSelectedItem().toString();
 }
@@ -176,6 +198,8 @@ private boolean kontrollOmLosenStammerAgent()
 {
     boolean isMatch = false;
     String logEpost = txtbEpost.getText();
+    
+    //kontrollerar så att den angivna eposten faktiskt finns i databasen
     epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
     
     if(epostFinns)
@@ -186,16 +210,14 @@ private boolean kontrollOmLosenStammerAgent()
             
         }catch (InfException e)
         {
-            JOptionPane.showMessageDialog(null, "Fel lösenord eller epost");
             System.out.println("Internt felmeddelande"+e.getMessage()); 
         }
-        if(svar == null){
-            isMatch = false;
-        }
-        else if(svar.equals(txtbLosenord.getText()))
-        {
+        if(svar.equals(txtbLosenord.getText())){
             isMatch = true;
         }
+    }
+    else{
+        JOptionPane.showMessageDialog(null, "Fel epost");
     }
     return isMatch; 
 }
@@ -217,16 +239,14 @@ private boolean kontrollOmLosenStammerAlien()
             
         }catch(InfException e)
         {
-            JOptionPane.showMessageDialog(null, "Fel lösenord eller epost");
             System.out.println("Intern felmeddelande"+e.getMessage());
         }
-        if(svar == null){
-            isMatch = false;
-        }
-        else if(svar.equals(txtbLosenord.getText()))
-        {
+        if(svar.equals(txtbLosenord.getText())){
             isMatch = true;
         }
+    }
+    else{
+        JOptionPane.showMessageDialog(null, "Fel epost");
     }
     return isMatch;
 }
