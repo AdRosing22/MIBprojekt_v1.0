@@ -72,9 +72,7 @@ public static boolean kontrollOmAdmin(String epost)
         }
         
         return arAdmin;
-        
-        
-    }
+        }
     
     
     

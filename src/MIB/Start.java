@@ -24,7 +24,7 @@ public class Start {
         //koppling mot databasen mibdb
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
-            System.out.println("Koppling LYCKAD");
+            System.out.println("Koppling mot databas LYCKAD");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());

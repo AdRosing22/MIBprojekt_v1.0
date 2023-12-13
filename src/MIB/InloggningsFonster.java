@@ -53,6 +53,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
         jLlosenord = new javax.swing.JLabel();
         btnLoggaIn = new javax.swing.JButton();
         JComboBox = new javax.swing.JComboBox<>();
+        btnAvsluta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +88,13 @@ public class InloggningsFonster extends javax.swing.JFrame {
         JComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agent", "Alien" }));
         JComboBox.setToolTipText("");
 
+        btnAvsluta.setText("Avsluta");
+        btnAvsluta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvslutaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,6 +123,10 @@ public class InloggningsFonster extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLoggaIn)
                 .addGap(198, 198, 198))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAvsluta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +147,9 @@ public class InloggningsFonster extends javax.swing.JFrame {
                     .addComponent(jLlosenord))
                 .addGap(34, 34, 34)
                 .addComponent(btnLoggaIn)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(btnAvsluta)
+                .addContainerGap())
         );
 
         pack();
@@ -184,6 +198,11 @@ public class InloggningsFonster extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Fel lösenord");
         }
     }//GEN-LAST:event_btnLoggaInActionPerformed
+
+    private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnAvslutaActionPerformed
 
     
     
@@ -256,6 +275,7 @@ private boolean kontrollOmLosenStammerAlien()
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JComboBox;
+    private javax.swing.JButton btnAvsluta;
     private javax.swing.JButton btnLoggaIn;
     private javax.swing.JLabel jLepost;
     private javax.swing.JLabel jLinloggning;
