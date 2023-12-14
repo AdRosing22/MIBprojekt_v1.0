@@ -33,53 +33,94 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
     private void initComponents() {
 
         jTtitel = new javax.swing.JLabel();
-        btnRegAlien = new javax.swing.JToggleButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        btnRegNyAlien = new javax.swing.JToggleButton();
+        btnRedigeraAlien = new javax.swing.JToggleButton();
+        btnBacka = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTtitel.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jTtitel.setText("Alienåtgärder");
 
-        btnRegAlien.setText("Registrera ny alien");
+        btnRegNyAlien.setText("Registrera ny alien");
+        btnRegNyAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegNyAlienActionPerformed(evt);
+            }
+        });
 
-        jToggleButton1.setText("Ändra information om alien");
+        btnRedigeraAlien.setText("Redigera alieninformation");
+        btnRedigeraAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRedigeraAlienActionPerformed(evt);
+            }
+        });
+
+        btnBacka.setText("Tillbaka");
+        btnBacka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jTtitel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRegAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRegNyAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addComponent(jTtitel, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(btnBacka, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(26, 26, 26)
                 .addComponent(jTtitel)
-                .addGap(66, 66, 66)
-                .addComponent(btnRegAlien)
-                .addGap(18, 18, 18)
-                .addComponent(jToggleButton1)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(btnRegNyAlien)
+                .addGap(43, 43, 43)
+                .addComponent(btnRedigeraAlien)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(btnBacka)
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRedigeraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAlienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRedigeraAlienActionPerformed
+
+    private void btnBackaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackaActionPerformed
+        // TODO add your handling code here:
+        new AgentFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnBackaActionPerformed
+
+    private void btnRegNyAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegNyAlienActionPerformed
+        // TODO add your handling code here:
+        new RegistreraAlienFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegNyAlienActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnRegAlien;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton btnBacka;
+    private javax.swing.JToggleButton btnRedigeraAlien;
+    private javax.swing.JToggleButton btnRegNyAlien;
     private javax.swing.JLabel jTtitel;
     // End of variables declaration//GEN-END:variables
 }

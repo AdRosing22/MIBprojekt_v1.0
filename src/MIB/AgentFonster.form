@@ -30,22 +30,17 @@
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnSokOChef" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
-                          <Component id="btnHanteraAlien" min="-2" pref="144" max="-2" attributes="0"/>
-                          <Component id="btnAndraLosen" min="-2" pref="144" max="-2" attributes="0"/>
-                          <Component id="btnRegUtr" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnAndraLosen1" min="-2" pref="144" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnAvsluta" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnAndraLosen1" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnRegUtr" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnHanteraAlien" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnAndraLosen" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnSokOChef" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnAvsluta" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">

@@ -7,6 +7,7 @@ package MIB;
 
 
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 //------------FUNDERING-----------------------//adam
 //Fundering ifall man ska skicka med inloggadAnvandare hela vägen till alla fönster?
@@ -176,7 +177,13 @@ public class InloggningsFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbLosenordActionPerformed
 
-    
+        //hämtar först värdet från rullgardinsmenyn
+    //kontrollerar ifall användaren har valt alien eller agent
+    //1.ifall alien så kontrolleras ifall epost stämmer överens med lösenord och alienfönster öppnas
+    //--det här fönstret stängs
+    //2.ifall agent så kontrolleras epost mot lösenord
+    //--kontroll ifall agenten har adminstatus via valideringsklassen
+    //--beroende på ifall admin eller inte så öppnas antingen adminfönster eller agentfönster
     
     private void skapaAnvandareOchOppnaFonster()
     {
@@ -201,16 +208,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
         }
         dispose();
     }
-    
-    
-    //hämtar först värdet från rullgardinsmenyn
-    //kontrollerar ifall användaren har valt alien eller agent
-    //1.ifall alien så kontrolleras ifall epost stämmer överens med lösenord och alienfönster öppnas
-    //--det här fönstret stängs
-    //2.ifall agent så kontrolleras epost mot lösenord
-    //--kontroll ifall agenten har adminstatus via valideringsklassen
-    //--beroende på ifall admin eller inte så öppnas antingen adminfönster eller agentfönster
-    //ANVÄNDER SIG AV VALIDERINGSKLASSEN FÖR ATT KONTROLLERA LÖSENORD
+//ANVÄNDER SIG AV VALIDERINGSKLASSEN FÖR ATT KONTROLLERA LÖSENORD
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
     
     kontrollAvRuta();
