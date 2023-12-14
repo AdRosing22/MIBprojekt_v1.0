@@ -125,8 +125,7 @@ public class AgentFonster extends javax.swing.JFrame {
 
     private void btnHanteraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHanteraAlienActionPerformed
         // TODO add your handling code here:
-        new HanteraAliensFonster(idb).setVisible(true);
-        dispose();
+        
     }//GEN-LAST:event_btnHanteraAlienActionPerformed
 
     private void btnRegUtrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegUtrActionPerformed
