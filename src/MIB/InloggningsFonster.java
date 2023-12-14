@@ -8,7 +8,23 @@ package MIB;
 
 import oru.inf.InfDB;
 
+//------------FUNDERING-----------------------//adam
+//Fundering ifall man ska skicka med inloggadAnvandare hela vägen till alla fönster?
 
+/*ex.
+field:
+private inloggadAnvandare logAnv;
+constructor:
+this.logAnv = logAnv;
+metod:
+logAnv = new inloggadAnvandare(idb, txtbEpost.getText());
+new AgentFonster(idb, logAnv)
+*/
+
+//men borde fungera att inte göra det eftersom det initialiseras vid inloggningen
+//Vette fan hur man ska göra ifall det blir förhinder någonstans? Det som inte går att göra
+//är att logga ut och logga in på nytt med annat konto utan att stänga programmet och köra det på nytt
+//-----------------------------------//adam
 
 
 /**
@@ -21,6 +37,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
     private static String menyVal;
     private boolean epostFinns;
     private String svar;
+    
     
     
 
@@ -175,7 +192,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
             inloggadAnvandare.hamtaInfoOmAgent();
             if(Validering.kontrollOmAdmin(anv))
             {
-                new AgentAdminFonster().setVisible(true);
+                new AgentAdminFonster(idb).setVisible(true);
             }
             else{
                 new AgentFonster(idb).setVisible(true);

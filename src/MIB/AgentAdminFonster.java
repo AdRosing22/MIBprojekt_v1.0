@@ -4,17 +4,23 @@
  */
 package MIB;
 
+import oru.inf.InfDB;
+
 /**
  *
  * @author Adam
  */
 public class AgentAdminFonster extends javax.swing.JFrame {
 
+    private InfDB idb;
+    
     /**
      * Creates new form AgentAdminFonster
      */
-    public AgentAdminFonster() {
+    public AgentAdminFonster(InfDB idb) {
         initComponents();
+        this.idb = idb;
+        
     }
 
     /**
@@ -27,34 +33,53 @@ public class AgentAdminFonster extends javax.swing.JFrame {
     private void initComponents() {
 
         jLvalkommen = new javax.swing.JLabel();
+        btnAvsluta = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLvalkommen.setText("admin");
+        jLvalkommen.setText("Välkommen Agent med administratörs rättigheter");
+
+        btnAvsluta.setText("Avsluta program");
+        btnAvsluta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvslutaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btnAvsluta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(68, Short.MAX_VALUE)
+                .addComponent(jLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(25, 25, 25)
                 .addComponent(jLvalkommen)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                .addComponent(btnAvsluta)
+                .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAvslutaActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnAvsluta;
     private javax.swing.JLabel jLvalkommen;
     // End of variables declaration//GEN-END:variables
 }

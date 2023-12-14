@@ -14,12 +14,14 @@ import oru.inf.InfDB;
 public class AgentFonster extends javax.swing.JFrame {
 
     private InfDB idb;
+    
     /**
      * Creates new form AgentFonster
      */
     public AgentFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
+        
     }
 
     /**
@@ -37,6 +39,8 @@ public class AgentFonster extends javax.swing.JFrame {
         btnRegUtr = new javax.swing.JButton();
         btnSokOChef = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnAvsluta = new javax.swing.JToggleButton();
+        btnAndraLosen1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,27 +76,47 @@ public class AgentFonster extends javax.swing.JFrame {
 
         jLabel1.setText("Åtgärder");
 
+        btnAvsluta.setText("Avsluta program");
+        btnAvsluta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvslutaActionPerformed(evt);
+            }
+        });
+
+        btnAndraLosen1.setText("Sök Alien");
+        btnAndraLosen1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraLosen1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAndraLosen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnHanteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRegUtr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSokOChef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(189, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 127, Short.MAX_VALUE)
                 .addComponent(JLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(127, 127, 127))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSokOChef, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnHanteraAlien, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAndraLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegUtr))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAndraLosen1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAvsluta)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +133,11 @@ public class AgentFonster extends javax.swing.JFrame {
                 .addComponent(btnRegUtr)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSokOChef)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAndraLosen1)
+                    .addComponent(btnAvsluta))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,7 +153,8 @@ public class AgentFonster extends javax.swing.JFrame {
 
     private void btnHanteraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHanteraAlienActionPerformed
         // TODO add your handling code here:
-        
+        new HanteraAliensFonster(idb).setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnHanteraAlienActionPerformed
 
     private void btnRegUtrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegUtrActionPerformed
@@ -136,10 +165,21 @@ public class AgentFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSokOChefActionPerformed
 
+    private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnAvslutaActionPerformed
+
+    private void btnAndraLosen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosen1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAndraLosen1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLvalkommen;
     private javax.swing.JButton btnAndraLosen;
+    private javax.swing.JButton btnAndraLosen1;
+    private javax.swing.JToggleButton btnAvsluta;
     private javax.swing.JButton btnHanteraAlien;
     private javax.swing.JButton btnRegUtr;
     private javax.swing.JButton btnSokOChef;

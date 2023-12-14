@@ -14,12 +14,14 @@ public class AlienFonster extends javax.swing.JFrame {
 
     
     private InfDB idb;
+    
     /**
      * Creates new form AlienFonster
      */
     public AlienFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
+        
     }
 
     /**
@@ -33,15 +35,23 @@ public class AlienFonster extends javax.swing.JFrame {
 
         jLvalkommen = new javax.swing.JLabel();
         btnAndraLosenord = new javax.swing.JToggleButton();
+        btnAvsluta = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLvalkommen.setText("Välkommen alien");
+        jLvalkommen.setText("Välkommen Alien");
 
         btnAndraLosenord.setText("Ändra lösenord");
         btnAndraLosenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAndraLosenordActionPerformed(evt);
+            }
+        });
+
+        btnAvsluta.setText("Avsluta program");
+        btnAvsluta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvslutaActionPerformed(evt);
             }
         });
 
@@ -52,12 +62,15 @@ public class AlienFonster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(btnAndraLosenord)))
-                .addContainerGap(157, Short.MAX_VALUE))
+                        .addComponent(btnAndraLosenord))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAvsluta, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,7 +79,9 @@ public class AlienFonster extends javax.swing.JFrame {
                 .addComponent(jLvalkommen)
                 .addGap(41, 41, 41)
                 .addComponent(btnAndraLosenord)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addComponent(btnAvsluta)
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -78,10 +93,16 @@ public class AlienFonster extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnAndraLosenordActionPerformed
 
+    private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnAvslutaActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAndraLosenord;
+    private javax.swing.JToggleButton btnAvsluta;
     private javax.swing.JLabel jLvalkommen;
     // End of variables declaration//GEN-END:variables
 }
