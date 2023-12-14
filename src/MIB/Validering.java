@@ -22,6 +22,9 @@ public class Validering {
     }
     
     
+    //kontrollerar att angiven epost går att hitta i databasen
+    //ifall det inte är null och den hämtade eposten stämmer överens med parametern
+    //--söker igenom både alien och agent
     public static boolean finnsAnvandareEpostIDB(String epost)
     {
         boolean finns = false;
@@ -52,6 +55,9 @@ public class Validering {
     return finns;
 }
     
+//kontrollerar ifall agent har administarörsstatus
+//--hårdkodat så att det alltid kommer angivas med J eller N
+    
 public static boolean kontrollOmAdmin(String epost)
 {
     boolean arAdmin = false;
@@ -74,66 +80,92 @@ public static boolean kontrollOmAdmin(String epost)
         return arAdmin;
         }
     
-public static boolean kontrollOmLosenStammerAgent(String epost, String losenord)
+
+
+
+//kontrollerar ifall angivet lösenord stämmer överens med angiven epost
+
+public static boolean kontrollLosenStammer(String epost, String losenord)
 {
     boolean stammer = false;
-    String fraga = "SELECT losenord FROM agent WHERE epost='"+epost+"'";
+    String agentFraga = "SELECT losenord FROM agent WHERE epost='"+epost+"'";
+    String alienFraga = "SELECT losenord FROM alien WHERE epost='"+epost+"'";
+    String svar;
     
     try{
-        String svar = idb.fetchSingle(fraga);
-        
-        if(finnsAnvandareEpostIDB(epost)&& svar!= null)
+        if(valImeny("Agent"))
         {
-            if(svar.equals(losenord))
+            svar = idb.fetchSingle(agentFraga);
+            if(finnsAnvandareEpostIDB(epost) && svar != null)
             {
-                stammer = true;
+                if(svar.equals(losenord))
+                {
+                    stammer = true;
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Fel lösenord, försök igen");
+                }
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Fel lösenord, försök igen"); 
+            else{
+                JOptionPane.showMessageDialog(null, "Fel epost, försök igen");
             }
-        }else
-        {
-            JOptionPane.showMessageDialog(null, "Fel epost, försök igen");
+        }
+        else if(valImeny("Alien")){
+            svar = idb.fetchSingle(alienFraga);
+            if(finnsAnvandareEpostIDB(epost) && svar != null){
+                if(svar.equals(losenord))
+                {
+                    stammer = true;
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Fel lösenord, försök igen");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Fel epost, försök igen");
+            }
         }
     }catch (InfException undantag)
     {
-        JOptionPane.showMessageDialog(null, "Fel");
-        System.out.println("Internt felmeddelande"+undantag);
-    }
-    return stammer;   
-}
-
-public static boolean kontrollOmLosenStammerAlien(String epost, String losenord)
-{
-    boolean stammer = false;
-    String fraga = "SELECT losenord FROM alien WHERE epost='"+epost+"'";
-    
-    try{
-        String svar = idb.fetchSingle(fraga);
-        
-        if(finnsAnvandareEpostIDB(epost) && svar!= null)
-        {
-            if(svar.equals(losenord))
-            {
-                stammer = true;
-            }
-            else
-            {
-           JOptionPane.showMessageDialog(null, "Fel lösenord eller epost, försök igen"); 
-            }
-        }else
-        {
-            JOptionPane.showMessageDialog(null, "Fel epost, försök igen");
-        }
-    }catch (InfException undantag)
+        JOptionPane.showMessageDialog(null, "Något gick fel");
+        System.out.println("Internt Fel"+undantag);
+    }catch (Exception e)
     {
-        JOptionPane.showMessageDialog(null, "Fel");
-        System.out.println("Internt felmeddelande"+undantag);
+        System.out.println("Internt fel"+e);
     }
-    return stammer;   
+    
+    return stammer;
 }
 
+
+
+
+
+
+
+public static boolean valImeny(String val)
+{
+    boolean vald = false;
+    if(InloggningsFonster.getMenyval().equals(val))
+    {
+        vald = true;
+    }
+    return vald;
+}
+
+public static boolean godkanndLosenLangd(String losenord)
+{
+    boolean godkand = false;
+    int maxLangd = 6;
+    int losLangd = losenord.length();
+    
+    
+    if(losLangd <= maxLangd)
+    {
+        godkand = true;
+    }
+    return godkand;
+}
 }
 
 

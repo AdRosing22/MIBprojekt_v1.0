@@ -29,11 +29,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
      */
     public InloggningsFonster(InfDB idb) {
         initComponents();
-        this.idb = idb;
-        
-        
-        
-        
+        this.idb = idb;     
     }
 
     /**
@@ -165,6 +161,31 @@ public class InloggningsFonster extends javax.swing.JFrame {
 
     
     
+    private void skapaAnvandareOchOppnaFonster()
+    {
+        String anv = txtbEpost.getText();
+        new inloggadAnvandare(idb, anv);
+        if(menyVal.equals("Alien"))
+        {
+            inloggadAnvandare.hamtaInfoOmAlien();;
+            new AlienFonster(idb).setVisible(true);
+        }
+        else if(menyVal.equals("Agent"))
+        {
+            inloggadAnvandare.hamtaInfoOmAgent();
+            if(Validering.kontrollOmAdmin(anv))
+            {
+                new AgentAdminFonster().setVisible(true);
+            }
+            else{
+                new AgentFonster(idb).setVisible(true);
+            }
+            
+        }
+        dispose();
+    }
+    
+    
     //hämtar först värdet från rullgardinsmenyn
     //kontrollerar ifall användaren har valt alien eller agent
     //1.ifall alien så kontrolleras ifall epost stämmer överens med lösenord och alienfönster öppnas
@@ -179,33 +200,15 @@ public class InloggningsFonster extends javax.swing.JFrame {
     String anv = txtbEpost.getText();
     String los = txtbLosenord.getText();
     
-    if(menyVal.equals("Alien") && Validering.kontrollOmLosenStammerAlien(anv,los))
+    if(Validering.kontrollLosenStammer(anv, los))
     {
-        new inloggadAnvandare(idb, anv);
-        inloggadAnvandare.hamtaInfoOmAlien();
-        new AlienFonster(idb).setVisible(true);
-        dispose();
-    }
-    else if(menyVal.equals("Agent") && Validering.kontrollOmLosenStammerAgent(anv,los))
-    {
-        if(Validering.kontrollOmAdmin(anv))
-        {
-            new inloggadAnvandare(idb, anv);
-            inloggadAnvandare.hamtaInfoOmAgent();
-            new AgentAdminFonster().setVisible(true);
-            dispose();
-        }
-        else
-        {
-            new inloggadAnvandare(idb, anv);
-            inloggadAnvandare.hamtaInfoOmAgent();
-            new AgentFonster(idb).setVisible(true);
-            dispose();
-        }
+        skapaAnvandareOchOppnaFonster();
     }
         
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
+    
+    
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
         // TODO add your handling code here:
         dispose();

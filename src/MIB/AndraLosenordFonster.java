@@ -40,6 +40,7 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnBekrafta = new javax.swing.JToggleButton();
         btnTillbaka = new javax.swing.JToggleButton();
+        jLinstruktion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +70,8 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
             }
         });
 
+        jLinstruktion.setText("Det får vara max 6 tecken långt");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,14 +87,15 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtbNuvLosen)
-                                    .addComponent(txtbNyttLosen, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))))
+                                    .addComponent(txtbNyttLosen, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))
+                            .addComponent(jLinstruktion)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(141, 141, 141)
                         .addComponent(jLtitel)))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(41, 41, 41)
@@ -103,7 +107,9 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLtitel)
-                .addGap(68, 68, 68)
+                .addGap(18, 18, 18)
+                .addComponent(jLinstruktion)
+                .addGap(33, 33, 33)
                 .addComponent(txtbNuvLosen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -111,7 +117,7 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(29, 29, 29)
                 .addComponent(btnBekrafta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(btnTillbaka)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,55 +130,59 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
-        if(InloggningsFonster.getMenyval().equals("Agent"))
+        if(Validering.valImeny("Agent"))
         {
             new AgentFonster(idb).setVisible(true);
-        }else if(InloggningsFonster.getMenyval().equals("Alien"))
+        }else if(Validering.valImeny("Alien"))
         {
             new AlienFonster(idb).setVisible(true);
         }
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    
+    //lokala variabler för att lättare arbeta med textfälten
+    //anropar validerings klassen för att kontrollera att nuvarande lösenord stämmer
+    //anropar valideringsklassen för att kolla att det nya lösenordet inte är för långt
+    //kontrollerar att det nya och nuvarande lösen inte är samma
+    //anropar validerings klassen för att kontrollera rullgardinsmenyn vid inloggning
+    //--ifall agent vald så körs sql UPDATE mot InfDB för att uppdatera lösenordet
+    //--ifall alien samma fast mot alien tabellen
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
         // TODO add your handling code here:
+        
+        String nuvLos = txtbNuvLosen.getText();
+        String nyttLos = txtbNyttLosen.getText();
+        
         try{
-            if(InloggningsFonster.getMenyval().equals("Agent")){
-            if(Validering.kontrollOmLosenStammerAgent(inloggadAnvandare.getEpost(), txtbNuvLosen.getText()))
+            if(Validering.kontrollLosenStammer(inloggadAnvandare.getEpost(), nuvLos))
             {
-                if(txtbNuvLosen.getText().equals(txtbNyttLosen.getText()))
+                if(Validering.godkanndLosenLangd(nyttLos))
                 {
-                    JOptionPane.showMessageDialog(null, "Ditt nya lösenord är samma som ditt gamla, försök med något annat");
-                }
-                else{
-                idb.update("UPDATE agent SET losenord='"+txtbNyttLosen.getText()+"' WHERE epost='"+inloggadAnvandare.getEpost()+"'");
-                 JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+txtbNyttLosen.getText());
-                 dispose();
-                 new AgentFonster(idb).setVisible(true);
-                }
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Fel nuvarande lösenord, försök igen");
-            }
-            }else if(InloggningsFonster.getMenyval().equals("Alien"))
-            {
-                if(Validering.kontrollOmLosenStammerAlien(inloggadAnvandare.getEpost(), txtbNuvLosen.getText()))
-                {
-                    if(txtbNuvLosen.getText().equals(txtbNyttLosen.getText()))
+                    if(nuvLos.equals(nyttLos))
                     {
                         JOptionPane.showMessageDialog(null, "Ditt nya lösenord är samma som ditt gamla, försök med något annat");
                     }
-                    else{
-                        idb.update("UPDATE alien SET losenord='"+txtbNyttLosen.getText()+"'WHERE epost='"+inloggadAnvandare.getEpost()+"'");
-                        JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+txtbNyttLosen.getText());
+                    else if(Validering.valImeny("Agent"))
+                    {
+                        idb.update("UPDATE agent SET losenord='"+nyttLos+"' WHERE epost='"+inloggadAnvandare.getEpost()+"'");
+                        JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
                         dispose();
                         new AgentFonster(idb).setVisible(true);
                     }
-                }
-                else{
-                JOptionPane.showMessageDialog(null, "Fel nuvarande lösenord, försök igen");
+                    else if(Validering.valImeny("Alien"))
+                    {
+                        idb.update("UPDATE alien SET losenord='"+nyttLos+"'WHERE epost='"+inloggadAnvandare.getEpost()+"'");
+                        JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
+                        dispose();
+                        new AlienFonster(idb).setVisible(true);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Det nya lösenordet får vara max 6 tecken långt, försök igen");
                 }
             }
         }catch (InfException undantag){
@@ -184,6 +194,8 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
+    
+    
     private void txtbNuvLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbNuvLosenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbNuvLosenActionPerformed
@@ -195,6 +207,7 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnTillbaka;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLinstruktion;
     private javax.swing.JLabel jLtitel;
     private javax.swing.JPasswordField txtbNuvLosen;
     private javax.swing.JPasswordField txtbNyttLosen;
