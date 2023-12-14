@@ -110,7 +110,7 @@ public class inloggadAnvandare {
     public static String getAgentId() {
         return agentid;
     }
-    public static InfDB idb() {
+    public static InfDB getIdb() {
         return idb;
     }
     public static String getEpost() {
@@ -135,6 +135,46 @@ public class inloggadAnvandare {
     {
         return administrator;
     }
+    
+    
+    //tillfälligt lägga till setters tills vi fattar hur man kopplar det med SQL
+    public void setNamn() {
+        this.namn = namn;
+    }
+    public void setTelefon() {
+        this.telefon = telefon;
+    }
+    public void setOmrade() {
+        this.omrade = omrade;
+    }
+    public void setAgentId() {
+        this.agentid = agentid;
+    }
+    public void setIdb() {
+        this.idb = idb;
+    }
+    public void setEpost() {
+        this.epost = epost;
+    }
+    public void setAlienId() {
+        this.alienid = alienid;
+    }
+    public void setPlats() {
+        this.plats = plats;
+    }
+    public void setLosenord() {
+        this.losenord = losenord;
+    }
+    public void setDatum() {
+        this.datum = datum;
+    }
+    public void setAnsvarigAgent() {
+        this.ansvarig_agent = ansvarig_agent;
+    }
+    public void setAdministrator() {
+        this.administrator = administrator;
+    }
+    
 
     
 
