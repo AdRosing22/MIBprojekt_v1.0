@@ -145,6 +145,7 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+   
     
     //lokala variabler för att lättare arbeta med textfälten
     //anropar validerings klassen för att kontrollera att nuvarande lösenord stämmer
@@ -160,32 +161,34 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         String nyttLos = txtbNyttLosen.getText();
         
         try{
-            if(Validering.kontrollLosenStammer(inloggadAnvandare.getEpost(), nuvLos))
-            {
-                if(Validering.godkanndLosenLangd(nyttLos))
-                {
-                    if(nuvLos.equals(nyttLos))
-                    {
-                        JOptionPane.showMessageDialog(null, "Ditt nya lösenord är samma som ditt gamla, försök med något annat");
-                    }
-                    else if(Validering.valImeny("Agent"))
-                    {
-                        idb.update("UPDATE agent SET losenord='"+nyttLos+"' WHERE epost='"+inloggadAnvandare.getEpost()+"'");
-                        JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
-                        dispose();
-                        new AgentFonster(idb).setVisible(true);
-                    }
-                    else if(Validering.valImeny("Alien"))
-                    {
-                        idb.update("UPDATE alien SET losenord='"+nyttLos+"'WHERE epost='"+inloggadAnvandare.getEpost()+"'");
-                        JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
-                        dispose();
-                        new AlienFonster(idb).setVisible(true);
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Det nya lösenordet får vara max 6 tecken långt, försök igen");
+                if(nuvLos.equals(nyttLos)){
+                    JOptionPane.showMessageDialog(null, "Ditt nya lösenord är samma som ditt gamla, försök med något annat");
                 }
-            }
+                else if(Validering.valImeny("Agent")){
+                    if(Validering.kontrollLosenStammer(InlogAgent.getEpost(), nuvLos)){
+                        if(Validering.godkanndLosenLangd(nyttLos)){
+                            idb.update("UPDATE agent SET losenord='"+nyttLos+"' WHERE epost='"+InlogAgent.getEpost()+"'");
+                            JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
+                            dispose();
+                            new AgentFonster(idb).setVisible(true);
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Det nya lösenordet får vara max 6 tecken långt, försök igen");
+                        }
+                    }
+                }
+                else if(Validering.valImeny("Alien")){
+                    if(Validering.kontrollLosenStammer(InlogAlien.getEpost(), nuvLos)){
+                        if(Validering.godkanndLosenLangd(nyttLos)){
+                            idb.update("UPDATE alien SET losenord='"+nyttLos+"'WHERE epost='"+InlogAlien.getEpost()+"'");
+                            JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
+                            dispose();
+                            new AlienFonster(idb).setVisible(true);
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Det nya lösenordet får vara max 6 tecken långt, försök igen");
+                        }
+                    }
+                }
+            
         }catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
             System.out.println("Internt felmeddelande"+undantag);
@@ -193,9 +196,9 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         {
             System.out.println("Internt felmeddelande"+e);
         }
+    
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
-    
     
     private void txtbNuvLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbNuvLosenActionPerformed
         // TODO add your handling code here:
@@ -214,3 +217,4 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtbNyttLosen;
     // End of variables declaration//GEN-END:variables
 }
+

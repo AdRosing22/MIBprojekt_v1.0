@@ -12,7 +12,7 @@ import oru.inf.InfException;
  *
  * @author Adam & Melker
  */
-public class inloggadAnvandare {
+public class InlogAgent {
 
     private static String namn;
     private static String telefon;
@@ -20,15 +20,13 @@ public class inloggadAnvandare {
     private static String agentid;
     private static InfDB idb;
     private static String epost;
-    private static String alienid;
-    private static String plats;
     private static String datum;
     private static String losenord;
     private static String administrator;
-    private static String ansvarig_agent;
+    
     
     //konstruktorn tar in databasen och epost (som identifierare) som parametrar
-    public inloggadAnvandare(InfDB idb, String epost)
+    public InlogAgent(InfDB idb, String epost)
     {
         this.idb = idb;
         this.epost = epost;
@@ -67,32 +65,7 @@ public class inloggadAnvandare {
     
     
     //metod för att hämta ut info kring alien utifrån epost och lagra i fält
-    public static void hamtaInfoOmAlien()
-    {
-        String fraga1 = "SELECT alien_id FROM alien WHERE epost='"+epost+"'";
-        String fraga2 = "SELECT namn FROM alien WHERE epost='"+epost+"'";
-        String fraga3 = "SELECT telefon FROM alien WHERE epost='"+epost+"'";
-        String fraga4 = "SELECT plats FROM alien WHERE epost='"+epost+"'";
-        String fraga5 = "SELECT registreringsdatum FROM alien WHERE epost='"+epost+"'";
-        String fraga6 = "SELECT losenord FROM alien WHERE epost='"+epost+"'";
-        String fraga7 = "SELECT ansvarig_agent FROM alien WHERE epost='"+epost+"'";
-        
-        try{
-            if(fraga1!=null||fraga2!=null||fraga3!=null||fraga4!=null||fraga5 != null||fraga6!=null||fraga7!=null){
-                alienid = idb.fetchSingle(fraga1);
-                namn = idb.fetchSingle(fraga2);
-                telefon = idb.fetchSingle(fraga3);
-                plats = idb.fetchSingle(fraga4);
-                datum = idb.fetchSingle(fraga5);
-                losenord = idb.fetchSingle(fraga6);
-                ansvarig_agent = idb.fetchSingle(fraga7);
-            }   
-    }catch (InfException undantag){
-                    
-        JOptionPane.showMessageDialog(null, "Fel");
-        System.out.println("Internt felmeddelande"+undantag.getMessage());
-        }
-    }
+    
     
     
 
@@ -116,20 +89,11 @@ public class inloggadAnvandare {
     public static String getEpost() {
         return epost;
     }
-    public static String getAlienId() {
-        return alienid;
-    }
-    public static String getPlats() {
-        return plats;
-    }
     public static String getLosenord(){
         return losenord;
     }
     public static String getDatum(){
         return datum;
-    }
-    public static String getAnsvarigAgent(){
-        return ansvarig_agent;
     }
     public static String getAdministrator()
     {
@@ -156,20 +120,11 @@ public class inloggadAnvandare {
     public void setEpost() {
         this.epost = epost;
     }
-    public void setAlienId() {
-        this.alienid = alienid;
-    }
-    public void setPlats() {
-        this.plats = plats;
-    }
     public void setLosenord() {
         this.losenord = losenord;
     }
     public void setDatum() {
         this.datum = datum;
-    }
-    public void setAnsvarigAgent() {
-        this.ansvarig_agent = ansvarig_agent;
     }
     public void setAdministrator() {
         this.administrator = administrator;

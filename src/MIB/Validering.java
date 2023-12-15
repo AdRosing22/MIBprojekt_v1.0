@@ -47,10 +47,13 @@ public class Validering {
                     finns = true;
                 }
             }
+            if(!finns){
+                JOptionPane.showMessageDialog(null, "Ingen kopplad epost hittades");
+            }
         }
         catch (InfException undantag){
-            JOptionPane.showMessageDialog(null, "Epost hittades inte");
-            System.out.println("Internt felmeddelande"+undantag);
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande"+undantag.getMessage());
     }
     return finns;
 }
@@ -74,7 +77,10 @@ public static boolean kontrollOmAdmin(String epost)
         }
         catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
-            System.out.println("Internt felmeddelande"+undantag);
+            System.out.println("Internt felmeddelande"+undantag.getMessage());
+        }catch(Exception e)
+        {
+            System.out.println("Internt fel"+e);
         }
         
         return arAdmin;
@@ -90,13 +96,17 @@ public static boolean kontrollLosenStammer(String epost, String losenord)
     boolean stammer = false;
     String agentFraga = "SELECT losenord FROM agent WHERE epost='"+epost+"'";
     String alienFraga = "SELECT losenord FROM alien WHERE epost='"+epost+"'";
+
     String svar;
     
+    
+    
     try{
+        
         if(valImeny("Agent"))
         {
             svar = idb.fetchSingle(agentFraga);
-            if(finnsAnvandareEpostIDB(epost) && svar != null)
+            if(svar != null)
             {
                 if(svar.equals(losenord))
                 {
@@ -106,13 +116,10 @@ public static boolean kontrollLosenStammer(String epost, String losenord)
                     JOptionPane.showMessageDialog(null, "Fel lösenord, försök igen");
                 }
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Fel epost, försök igen");
-            }
         }
         else if(valImeny("Alien")){
             svar = idb.fetchSingle(alienFraga);
-            if(finnsAnvandareEpostIDB(epost) && svar != null){
+            if(svar != null){
                 if(svar.equals(losenord))
                 {
                     stammer = true;
@@ -121,14 +128,12 @@ public static boolean kontrollLosenStammer(String epost, String losenord)
                     JOptionPane.showMessageDialog(null, "Fel lösenord, försök igen");
                 }
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Fel epost, försök igen");
-            }
+            
         }
     }catch (InfException undantag)
     {
         JOptionPane.showMessageDialog(null, "Något gick fel");
-        System.out.println("Internt Fel"+undantag);
+        System.out.println("Internt Fel"+undantag.getMessage());
     }catch (Exception e)
     {
         System.out.println("Internt fel"+e);
