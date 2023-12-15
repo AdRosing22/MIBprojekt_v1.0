@@ -4,6 +4,8 @@
  */
 package MIB;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -29,6 +31,11 @@ public class InlogAlien {
     public InlogAlien(InfDB idb, String epost){
             this.idb = idb;
             this.epost = epost;
+    }
+    
+    public InlogAlien(InfDB idb)
+    {
+        this.idb = idb;
     }
     
     
