@@ -33,7 +33,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jAtgarder" min="-2" max="-2" attributes="0"/>
                           <Component id="jLvalkommen" min="-2" pref="273" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
@@ -43,18 +43,18 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="57" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jButton3" max="32767" attributes="0"/>
-                  <Component id="jButton8" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButton7" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButton9" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
+                  <Component id="jSokOmradesChef" max="32767" attributes="0"/>
+                  <Component id="jSokAlien" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jRegistreraUtrustning" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jAndraLosenord" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jSokAgent" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton5" max="32767" attributes="0"/>
-                  <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButton6" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
+                  <Component id="jHanteraUtrustning" max="32767" attributes="0"/>
+                  <Component id="jHanteraAgenter" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jHanteraAlien" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jHanteraChefer" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
@@ -66,29 +66,29 @@
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Component id="jLvalkommen" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jAtgarder" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jAndraLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jHanteraChefer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="10" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jHanteraAlien" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRegistreraUtrustning" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jHanteraAgenter" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSokAgent" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSokAlien" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jHanteraUtrustning" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+              <Component id="jSokOmradesChef" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnAvsluta" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -110,79 +110,79 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvslutaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jHanteraAlien">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hantera alien"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jHanteraAlienActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="jHanteraAgenter">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hantera agenter"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jHanteraAgenterActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="jSokOmradesChef">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xf6;k omr&#xe5;descef"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSokOmradesChefActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="jAndraLosenord">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra l&#xf6;senord"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAndraLosenordActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton5">
+    <Component class="javax.swing.JButton" name="jHanteraUtrustning">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hantera utrustning"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jHanteraUtrustningActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton6">
+    <Component class="javax.swing.JButton" name="jHanteraChefer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hantera chefer"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jHanteraCheferActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton7">
+    <Component class="javax.swing.JButton" name="jRegistreraUtrustning">
       <Properties>
         <Property name="text" type="java.lang.String" value="Registrera utrustning"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRegistreraUtrustningActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton8">
+    <Component class="javax.swing.JButton" name="jSokAlien">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xf6;k Alien"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSokAlienActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton9">
+    <Component class="javax.swing.JButton" name="jSokAgent">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xf6;k agent"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSokAgentActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jAtgarder">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc5;tg&#xe4;rder:"/>
       </Properties>

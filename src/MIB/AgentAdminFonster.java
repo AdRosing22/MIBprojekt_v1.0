@@ -34,16 +34,16 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
         jLvalkommen = new javax.swing.JLabel();
         btnAvsluta = new javax.swing.JToggleButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jHanteraAlien = new javax.swing.JButton();
+        jHanteraAgenter = new javax.swing.JButton();
+        jSokOmradesChef = new javax.swing.JButton();
+        jAndraLosenord = new javax.swing.JButton();
+        jHanteraUtrustning = new javax.swing.JButton();
+        jHanteraChefer = new javax.swing.JButton();
+        jRegistreraUtrustning = new javax.swing.JButton();
+        jSokAlien = new javax.swing.JButton();
+        jSokAgent = new javax.swing.JButton();
+        jAtgarder = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,70 +56,70 @@ public class AgentAdminFonster extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Hantera alien");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jHanteraAlien.setText("Hantera alien");
+        jHanteraAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jHanteraAlienActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Hantera agenter");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jHanteraAgenter.setText("Hantera agenter");
+        jHanteraAgenter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jHanteraAgenterActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Sök områdescef");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jSokOmradesChef.setText("Sök områdescef");
+        jSokOmradesChef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jSokOmradesChefActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Ändra lösenord");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jAndraLosenord.setText("Ändra lösenord");
+        jAndraLosenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jAndraLosenordActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Hantera utrustning");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jHanteraUtrustning.setText("Hantera utrustning");
+        jHanteraUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jHanteraUtrustningActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Hantera chefer");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jHanteraChefer.setText("Hantera chefer");
+        jHanteraChefer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jHanteraCheferActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Registrera utrustning");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jRegistreraUtrustning.setText("Registrera utrustning");
+        jRegistreraUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jRegistreraUtrustningActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Sök Alien");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jSokAlien.setText("Sök Alien");
+        jSokAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jSokAlienActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Sök agent");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        jSokAgent.setText("Sök agent");
+        jSokAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                jSokAgentActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Åtgärder:");
+        jAtgarder.setText("Åtgärder:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,23 +134,23 @@ public class AgentAdminFonster extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(jAtgarder)
                             .addComponent(jLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(59, 59, 59))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSokOmradesChef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSokAlien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jRegistreraUtrustning, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jAndraLosenord, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSokAgent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jHanteraUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jHanteraAgenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jHanteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jHanteraChefer, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
@@ -159,25 +159,25 @@ public class AgentAdminFonster extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLvalkommen)
                 .addGap(8, 8, 8)
-                .addComponent(jLabel1)
+                .addComponent(jAtgarder)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton6))
+                    .addComponent(jAndraLosenord)
+                    .addComponent(jHanteraChefer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton7))
+                    .addComponent(jHanteraAlien)
+                    .addComponent(jRegistreraUtrustning))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton9))
+                    .addComponent(jHanteraAgenter)
+                    .addComponent(jSokAgent))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(jButton5))
+                    .addComponent(jSokAlien)
+                    .addComponent(jHanteraUtrustning))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(jSokOmradesChef)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAvsluta)
                 .addGap(15, 15, 15))
@@ -190,56 +190,58 @@ public class AgentAdminFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAvslutaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jHanteraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraAlienActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jHanteraAlienActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jHanteraAgenterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraAgenterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jHanteraAgenterActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jSokOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSokOmradesChefActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jSokOmradesChefActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAndraLosenordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        new AndraLosenordAdminFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jAndraLosenordActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jHanteraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraUtrustningActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jHanteraUtrustningActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jHanteraCheferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraCheferActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jHanteraCheferActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jRegistreraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegistreraUtrustningActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jRegistreraUtrustningActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void jSokAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSokAlienActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jSokAlienActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jSokAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSokAgentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_jSokAgentActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAvsluta;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jAndraLosenord;
+    private javax.swing.JLabel jAtgarder;
+    private javax.swing.JButton jHanteraAgenter;
+    private javax.swing.JButton jHanteraAlien;
+    private javax.swing.JButton jHanteraChefer;
+    private javax.swing.JButton jHanteraUtrustning;
     private javax.swing.JLabel jLvalkommen;
+    private javax.swing.JButton jRegistreraUtrustning;
+    private javax.swing.JButton jSokAgent;
+    private javax.swing.JButton jSokAlien;
+    private javax.swing.JButton jSokOmradesChef;
     // End of variables declaration//GEN-END:variables
 }
