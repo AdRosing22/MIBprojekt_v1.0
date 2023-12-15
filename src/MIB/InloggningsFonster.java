@@ -198,6 +198,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
         else if(menyVal.equals("Agent"))
         {
             new InlogAgent(idb, anv);
+            new InlogAlien(idb);
             InlogAgent.hamtaInfoOmAgent();
             if(Validering.kontrollOmAdmin(anv))
             {
