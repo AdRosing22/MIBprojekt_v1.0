@@ -10,15 +10,15 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 //------------FUNDERING-----------------------//adam
-//Fundering ifall man ska skicka med inloggadAnvandare hela vägen till alla fönster?
+//Fundering ifall man ska skicka med InlogAgent hela vägen till alla fönster?
 
 /*ex.
 field:
-private inloggadAnvandare logAnv;
+private InlogAgent logAnv;
 constructor:
 this.logAnv = logAnv;
 metod:
-logAnv = new inloggadAnvandare(idb, txtbEpost.getText());
+logAnv = new InlogAgent(idb, txtbEpost.getText());
 new AgentFonster(idb, logAnv)
 */
 
@@ -188,15 +188,17 @@ public class InloggningsFonster extends javax.swing.JFrame {
     private void skapaAnvandareOchOppnaFonster()
     {
         String anv = txtbEpost.getText();
-        new inloggadAnvandare(idb, anv);
+        
         if(menyVal.equals("Alien"))
         {
-            inloggadAnvandare.hamtaInfoOmAlien();;
+            new InlogAlien(idb, anv);
+            InlogAlien.hamtaInfoOmAlien();;
             new AlienFonster(idb).setVisible(true);
         }
         else if(menyVal.equals("Agent"))
         {
-            inloggadAnvandare.hamtaInfoOmAgent();
+            new InlogAgent(idb, anv);
+            InlogAgent.hamtaInfoOmAgent();
             if(Validering.kontrollOmAdmin(anv))
             {
                 new AgentAdminFonster(idb).setVisible(true);
