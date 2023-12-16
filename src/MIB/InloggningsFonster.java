@@ -194,14 +194,13 @@ public class InloggningsFonster extends javax.swing.JFrame {
         if(menyVal.equals("Alien"))
         {
             nyAlien = new InlogAlien(idb, anv);
-            nyAlien.hamtaInfoOmAlien();;
+            
             new AlienFonster(idb, nyAlien).setVisible(true);
         }
         else if(menyVal.equals("Agent"))
         {
             nyAgent = new InlogAgent(idb, anv);
             new InlogAlien(idb);
-            InlogAgent.hamtaInfoOmAgent();
             if(Validering.kontrollOmAdmin(anv))
             {
                 new AgentAdminFonster(idb, nyAgent).setVisible(true);

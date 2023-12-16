@@ -31,6 +31,7 @@ public class InlogAgent {
     {
         this.idb = idb;
         this.epost = epost;
+        hamtaInfoOmAgent();
     }  
     
     

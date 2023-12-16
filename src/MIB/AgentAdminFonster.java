@@ -206,7 +206,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     private void jAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAndraLosenordActionPerformed
         // TODO add your handling code here:
-        new AndraLosenordAdminFonster(idb).setVisible(true);
+        new AndraLosenordFonster(idb, agent).setVisible(true);
         dispose();
     }//GEN-LAST:event_jAndraLosenordActionPerformed
 

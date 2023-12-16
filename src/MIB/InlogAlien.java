@@ -31,6 +31,7 @@ public class InlogAlien {
     public InlogAlien(InfDB idb, String epost){
             this.idb = idb;
             this.epost = epost;
+            hamtaInfoOmAlien();
     }
     
     public InlogAlien(InfDB idb)
