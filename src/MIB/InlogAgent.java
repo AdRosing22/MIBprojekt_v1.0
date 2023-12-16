@@ -4,7 +4,7 @@
  */
 package MIB;
 
-import java.util.HashMap;
+
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -65,8 +65,6 @@ public static void hamtaInfoOmAgent()
     }
 
     
-    
-    //metod för att hämta ut info kring alien utifrån epost och lagra i fält
     
     
     
