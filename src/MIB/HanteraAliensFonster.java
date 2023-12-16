@@ -13,16 +13,16 @@ import oru.inf.InfDB;
 public class HanteraAliensFonster extends javax.swing.JFrame {
     
     private InfDB idb;
-    private InlogAgent agent;
+    
     
 
     /**
      * Creates new form HanteraAliensFonster
      */
-    public HanteraAliensFonster(InfDB idb, InlogAgent agent) {
+    public HanteraAliensFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
-        this.agent = agent;
+        
     }
 
     /**
@@ -107,7 +107,7 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
 
     private void btnBackaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackaActionPerformed
         // TODO add your handling code here:
-        new AgentFonster(idb, agent).setVisible(true);
+        new AgentFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnBackaActionPerformed
 

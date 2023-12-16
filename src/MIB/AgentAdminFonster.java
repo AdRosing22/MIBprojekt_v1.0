@@ -13,15 +13,15 @@ import oru.inf.InfDB;
 public class AgentAdminFonster extends javax.swing.JFrame {
 
     private InfDB idb;
-    private InlogAgent agent;
+    
     
     /**
      * Creates new form AgentAdminFonster
      */
-    public AgentAdminFonster(InfDB idb, InlogAgent agent) {
+    public AgentAdminFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
-        this.agent = agent;
+        
         
     }
 
@@ -206,7 +206,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     private void jAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAndraLosenordActionPerformed
         // TODO add your handling code here:
-        new AndraLosenordFonster(idb, agent).setVisible(true);
+        new AndraLosenordFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_jAndraLosenordActionPerformed
 

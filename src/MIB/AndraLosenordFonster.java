@@ -146,10 +146,10 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(Validering.valImeny("Agent"))
         {
-            new AgentFonster(idb, agent).setVisible(true);
+            new AgentFonster(idb).setVisible(true);
         }else if(Validering.valImeny("Alien"))
         {
-            new AlienFonster(idb, alien).setVisible(true);
+            new AlienFonster(idb).setVisible(true);
         }
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
@@ -179,7 +179,7 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
                             idb.update("UPDATE agent SET losenord='"+nyttLos+"' WHERE epost='"+InlogAgent.getEpost()+"'");
                             JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
                             dispose();
-                            new AgentFonster(idb, agent).setVisible(true);
+                            new AgentFonster(idb).setVisible(true);
                         }else{
                             JOptionPane.showMessageDialog(null, "Det nya lösenordet får vara max 6 tecken långt, försök igen");
                         }
@@ -191,7 +191,7 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
                             idb.update("UPDATE alien SET losenord='"+nyttLos+"'WHERE epost='"+InlogAlien.getEpost()+"'");
                             JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
                             dispose();
-                            new AlienFonster(idb, alien).setVisible(true);
+                            new AlienFonster(idb).setVisible(true);
                         }else{
                             JOptionPane.showMessageDialog(null, "Det nya lösenordet får vara max 6 tecken långt, försök igen");
                         }

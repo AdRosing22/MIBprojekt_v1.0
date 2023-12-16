@@ -14,15 +14,15 @@ import oru.inf.InfDB;
 public class AgentFonster extends javax.swing.JFrame {
 
     private InfDB idb;
-    private InlogAgent agent;
+    
     
     /**
      * Creates new form AgentFonster
      */
-    public AgentFonster(InfDB idb, InlogAgent agent) {
+    public AgentFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
-        this.agent = agent;
+        
         
     }
 
@@ -146,13 +146,13 @@ public class AgentFonster extends javax.swing.JFrame {
     //öppnar fönstret för att ändra lösenord
     private void btnAndraLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosenActionPerformed
         // TODO add your handling code here:
-        new AndraLosenordFonster(idb, agent).setVisible(true);
+        new AndraLosenordFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAndraLosenActionPerformed
 
     private void btnHanteraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHanteraAlienActionPerformed
         // TODO add your handling code here:
-        new HanteraAliensFonster(idb, agent).setVisible(true);
+        new HanteraAliensFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnHanteraAlienActionPerformed
 

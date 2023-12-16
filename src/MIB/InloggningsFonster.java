@@ -176,7 +176,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
         {
             nyAlien = new InlogAlien(idb, anv);
             
-            new AlienFonster(idb, nyAlien).setVisible(true);
+            new AlienFonster(idb).setVisible(true);
         }
         else if(menyVal.equals("Agent"))
         {
@@ -184,13 +184,12 @@ public class InloggningsFonster extends javax.swing.JFrame {
             new InlogAlien(idb);
             if(Validering.kontrollOmAdmin(anv))
             {
-                new AgentAdminFonster(idb, nyAgent).setVisible(true);
+                new AgentAdminFonster(idb).setVisible(true);
             }
             else{
-                new AgentFonster(idb, nyAgent).setVisible(true);
+                new AgentFonster(idb).setVisible(true);
             }
             
-            int m = 2;
         }
         dispose();
     }
@@ -201,7 +200,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
     String anv = txtbEpost.getText();
     String los = txtbLosenord.getText();
     
-    if(Validering.kontrollLosenStammer(anv, los))
+    if(Validering.kontrollLosenStammer(anv, los) && Validering.finnsAnvandareEpostIDB(anv))
     {
         skapaAnvandareOchOppnaFonster();
     }

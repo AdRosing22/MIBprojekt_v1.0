@@ -14,15 +14,15 @@ public class AlienFonster extends javax.swing.JFrame {
 
     
     private InfDB idb;
-    private InlogAlien alien;
+    
     
     /**
      * Creates new form AlienFonster
      */
-    public AlienFonster(InfDB idb, InlogAlien alien) {
+    public AlienFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
-        this.alien = alien;
+        
         
     }
 
