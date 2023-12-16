@@ -9,25 +9,6 @@ package MIB;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
-//------------FUNDERING-----------------------//adam
-//Fundering ifall man ska skicka med InlogAgent hela vägen till alla fönster?
-
-/*ex.
-field:
-private InlogAgent logAnv;
-constructor:
-this.logAnv = logAnv;
-metod:
-logAnv = new InlogAgent(idb, txtbEpost.getText());
-new AgentFonster(idb, logAnv)
-*/
-
-//men borde fungera att inte göra det eftersom det initialiseras vid inloggningen
-//Vette fan hur man ska göra ifall det blir förhinder någonstans? Det som inte går att göra
-//är att logga ut och logga in på nytt med annat konto utan att stänga programmet och köra det på nytt
-//-----------------------------------//adam
-
-
 /**
  *
  * @author Adam

@@ -4,6 +4,7 @@
  */
 package MIB;
 
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -50,7 +51,7 @@ public class InlogAlien {
     
     
     
-    public static void hamtaInfoOmAlien()
+public static void hamtaInfoOmAlien()
     {
         String fraga1 = "SELECT alien_id FROM alien WHERE epost='"+epost+"'";
         String fraga2 = "SELECT namn FROM alien WHERE epost='"+epost+"'";
@@ -76,6 +77,7 @@ public class InlogAlien {
         System.out.println("Internt felmeddelande"+undantag.getMessage());
         }
     }
+
     
     
     public static String getEpost()

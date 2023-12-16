@@ -91,7 +91,7 @@ public class AlienFonster extends javax.swing.JFrame {
 
     private void btnAndraLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosenordActionPerformed
         // TODO add your handling code here:
-        new AndraLosenordFonster(idb, alien).setVisible(true);
+        new AndraLosenordFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAndraLosenordActionPerformed
 

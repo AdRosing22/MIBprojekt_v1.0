@@ -28,10 +28,10 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         this.agent = agent;
     }
     
-    public AndraLosenordFonster(InfDB idb, InlogAlien alien)
+    public AndraLosenordFonster(InfDB idb)
     {
         this.idb = idb;
-        this.alien = alien;
+        
     }
 
     /**
