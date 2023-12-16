@@ -25,38 +25,44 @@ public class Validering {
     //kontrollerar att angiven epost går att hitta i databasen
     //ifall det inte är null och den hämtade eposten stämmer överens med parametern
     //--söker igenom både alien och agent
-    public static boolean finnsAnvandareEpostIDB(String epost)
-    {
+    public static boolean finnsAnvandareEpostIDB(String epost){
         boolean finns = false;
-        String dbEpost;
-        
-        String fragaAgent = "SELECT epost FROM agent WHERE epost ='"+epost+"'";
-        String fragaAlien = "SELECT epost FROM alien WHERE epost ='"+epost+"'";
-        
-        //kör fråga mot databas
-        
-        try{
-            dbEpost = idb.fetchSingle(fragaAgent);
+        String anvEpost;
+
+        String fraga1 = "SELECT epost FROM Agent WHERE Epost ='"+ epost+"'";
+        String fraga2 = "SELECT epost FROM Alien WHERE Epost ='"+ epost+"'";
+
+        // Hämtar ut ur databasen
+        try {
+            if(valImeny("Agent")){
+            anvEpost = idb.fetchSingle(fraga1);
             
-            if(dbEpost != null && dbEpost.equals(epost)){
+            if(anvEpost != null){
                 finns = true;
             }
-            else{
-                dbEpost = idb.fetchSingle(fragaAlien);
-                if(dbEpost != null && dbEpost.equals(epost)){
+            }
+            else if(valImeny("Alien")){
+                anvEpost = idb.fetchSingle(fraga2);
+                
+                    if(anvEpost != null){
                     finns = true;
+                    }
                 }
+            if(!finns)
+            {
+                JOptionPane.showMessageDialog(null, "Inget konto med den eposten kan hittas");
             }
-            if(!finns){
-                JOptionPane.showMessageDialog(null, "Ingen kopplad epost hittades");
-            }
+  
+        } catch (InfException e) {
+            System.out.println("Internt felmeddelande" + e);
+
         }
-        catch (InfException undantag){
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande"+undantag.getMessage());
+
+        return finns;
     }
-    return finns;
-}
+
+    
+    
     
 //kontrollerar ifall agent har administarörsstatus
 //--hårdkodat så att det alltid kommer angivas med J eller N
@@ -98,9 +104,7 @@ public static boolean kontrollLosenStammer(String epost, String losenord)
     String alienFraga = "SELECT losenord FROM alien WHERE epost='"+epost+"'";
 
     String svar;
-    
-    
-    
+  
     try{
         
         if(valImeny("Agent"))
@@ -169,8 +173,28 @@ public static boolean godkanndLosenLangd(String losenord)
     {
         godkand = true;
     }
+    else{
+        JOptionPane.showMessageDialog(null, "Lösenordet får max vara 6 tecken långt, försök igen");
+    }
+        
     return godkand;
 }
+
+
+
+public static boolean isTxtFilled(String txtb)
+{
+    boolean isFilled = false;
+    if(txtb.isEmpty())
+    {
+        JOptionPane.showMessageDialog(null, "Vänligen fyll i den nödvändiga informationen för att fortsätta");
+    }
+    else{
+        isFilled = true;
+    }
+    return isFilled;
+}
+        
 }
 
 

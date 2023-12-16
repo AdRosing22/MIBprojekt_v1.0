@@ -6,6 +6,7 @@ package MIB;
 
 
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -160,7 +161,10 @@ public class InloggningsFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbLosenordActionPerformed
 
-        //hämtar först värdet från rullgardinsmenyn
+  
+ 
+//ANVÄNDER SIG AV VALIDERINGSKLASSEN FÖR ATT KONTROLLERA LÖSENORD
+    //hämtar först värdet från rullgardinsmenyn
     //kontrollerar ifall användaren har valt alien eller agent
     //1.ifall alien så kontrolleras ifall epost stämmer överens med lösenord och alienfönster öppnas
     //--det här fönstret stängs
@@ -168,9 +172,15 @@ public class InloggningsFonster extends javax.swing.JFrame {
     //--kontroll ifall agenten har adminstatus via valideringsklassen
     //--beroende på ifall admin eller inte så öppnas antingen adminfönster eller agentfönster
     
-    private void skapaAnvandareOchOppnaFonster()
+    private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
+    
+    kontrollAvRuta();
+    String anv = txtbEpost.getText();
+    String los = txtbLosenord.getText();
+    
+    if(Validering.isTxtFilled(anv) && Validering.isTxtFilled(los) && Validering.finnsAnvandareEpostIDB(anv)
+       && Validering.kontrollLosenStammer(anv, los))
     {
-        String anv = txtbEpost.getText();
         
         if(menyVal.equals("Alien"))
         {
@@ -188,25 +198,12 @@ public class InloggningsFonster extends javax.swing.JFrame {
             }
             else{
                 new AgentFonster(idb).setVisible(true);
-            }
-            
+            }   
         }
         dispose();
-    }
-//ANVÄNDER SIG AV VALIDERINGSKLASSEN FÖR ATT KONTROLLERA LÖSENORD
-    private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-    
-    kontrollAvRuta();
-    String anv = txtbEpost.getText();
-    String los = txtbLosenord.getText();
-    
-    if(Validering.kontrollLosenStammer(anv, los) && Validering.finnsAnvandareEpostIDB(anv))
-    {
-        skapaAnvandareOchOppnaFonster();
-    }
-        
+    }  
     }//GEN-LAST:event_btnLoggaInActionPerformed
-
+    
     
     
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
@@ -225,7 +222,6 @@ public static String getMenyval()
 {
     return menyVal;
 }
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

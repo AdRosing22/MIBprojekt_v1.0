@@ -15,21 +15,16 @@ import oru.inf.InfException;
 public class AndraLosenordFonster extends javax.swing.JFrame {
 
     private InfDB idb;
-    private InlogAgent agent;
-    private InlogAlien alien;
+
     
 
     /**
      * Creates new form AndraLosenordFonster
      */
-    public AndraLosenordFonster(InfDB idb, InlogAgent agent) {
-        initComponents();
-        this.idb = idb;
-        this.agent = agent;
-    }
     
     public AndraLosenordFonster(InfDB idb)
     {
+        initComponents();
         this.idb = idb;
         
     }
@@ -166,38 +161,24 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
         // TODO add your handling code here:
         
-        String nuvLos = txtbNuvLosen.getText();
-        String nyttLos = txtbNyttLosen.getText();
+    String nuvLos = txtbNuvLosen.getText();
+    String nyttLos = txtbNyttLosen.getText();
         
-        try{
-                if(nuvLos.equals(nyttLos)){
-                    JOptionPane.showMessageDialog(null, "Ditt nya lösenord är samma som ditt gamla, försök med något annat");
+    try{
+        if(Validering.isTxtFilled(nuvLos) && Validering.isTxtFilled(nyttLos) && Validering.godkanndLosenLangd(nyttLos)){
+            if(Validering.valImeny("Agent") && Validering.kontrollLosenStammer(InlogAgent.getEpost(), nuvLos)){
+                idb.update("UPDATE agent SET losenord='"+nyttLos+"' WHERE epost='"+InlogAgent.getEpost()+"'");
+                JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
+                dispose();
+                new AgentFonster(idb).setVisible(true);
                 }
-                else if(Validering.valImeny("Agent")){
-                    if(Validering.kontrollLosenStammer(InlogAgent.getEpost(), nuvLos)){
-                        if(Validering.godkanndLosenLangd(nyttLos)){
-                            idb.update("UPDATE agent SET losenord='"+nyttLos+"' WHERE epost='"+InlogAgent.getEpost()+"'");
-                            JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
-                            dispose();
-                            new AgentFonster(idb).setVisible(true);
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Det nya lösenordet får vara max 6 tecken långt, försök igen");
-                        }
-                    }
-                }
-                else if(Validering.valImeny("Alien")){
-                    if(Validering.kontrollLosenStammer(InlogAlien.getEpost(), nuvLos)){
-                        if(Validering.godkanndLosenLangd(nyttLos)){
-                            idb.update("UPDATE alien SET losenord='"+nyttLos+"'WHERE epost='"+InlogAlien.getEpost()+"'");
-                            JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
-                            dispose();
-                            new AlienFonster(idb).setVisible(true);
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Det nya lösenordet får vara max 6 tecken långt, försök igen");
-                        }
-                    }
-                }
-            
+            else if(Validering.valImeny("Alien") && Validering.kontrollLosenStammer(InlogAlien.getEpost(), nuvLos)){
+                idb.update("UPDATE alien SET losenord='"+nyttLos+"'WHERE epost='"+InlogAlien.getEpost()+"'");
+                JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
+                dispose();
+                new AlienFonster(idb).setVisible(true);
+                }    
+            } 
         }catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
             System.out.println("Internt felmeddelande"+undantag);
@@ -205,7 +186,6 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         {
             System.out.println("Internt felmeddelande"+e);
         }
-    
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
     
