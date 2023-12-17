@@ -171,7 +171,7 @@ public class AgentFonster extends javax.swing.JFrame {
 
     private void btnAndraLosen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosen1ActionPerformed
         // TODO add your handling code here:
-        new SokAlienFonster(idb).setVisible(true);
+        new SokAlien(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAndraLosen1ActionPerformed
 
