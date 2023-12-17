@@ -65,6 +65,7 @@ public class SokAlienFonster extends javax.swing.JFrame {
         sokAlienKnapp = new javax.swing.JButton();
         platsSkroll = new javax.swing.JScrollPane();
         platsLista = new javax.swing.JList<>();
+        gaTillbakaKnapp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,26 +87,39 @@ public class SokAlienFonster extends javax.swing.JFrame {
 
         platsSkroll.setViewportView(platsLista);
 
+        gaTillbakaKnapp.setText("Gå tillbaka");
+        gaTillbakaKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gaTillbakaKnappActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(114, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(sokAlienKnapp)
-                        .addComponent(valAvPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 108, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(sokAlienKnapp)
+                                .addComponent(valAvPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(sokAlien)
+                                        .addGap(178, 178, 178))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(sokPlatsKnapp)
+                                        .addGap(159, 159, 159))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(sokAlien)
-                                .addGap(178, 178, 178))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(sokPlatsKnapp)
-                                .addGap(159, 159, 159))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(platsSkroll, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105))))
+                                .addComponent(platsSkroll, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(105, 105, 105))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gaTillbakaKnapp)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +134,9 @@ public class SokAlienFonster extends javax.swing.JFrame {
                 .addComponent(sokAlienKnapp)
                 .addGap(18, 18, 18)
                 .addComponent(platsSkroll, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(gaTillbakaKnapp)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,9 +154,16 @@ public class SokAlienFonster extends javax.swing.JFrame {
         hamtaAlien();
     }//GEN-LAST:event_sokAlienKnappActionPerformed
 
+    private void gaTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gaTillbakaKnappActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new AgentFonster(idb).setVisible(true);
+    }//GEN-LAST:event_gaTillbakaKnappActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton gaTillbakaKnapp;
     private javax.swing.JList<String> platsLista;
     private javax.swing.JScrollPane platsSkroll;
     private javax.swing.JLabel sokAlien;
