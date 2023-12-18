@@ -77,6 +77,8 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         }
     }
     
+    
+    //generarar nytt AlienID utifrån senast tillagdas id-värde
     private void genereraAlienID()
     {
         try{
