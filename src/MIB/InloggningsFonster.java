@@ -5,11 +5,10 @@
 package MIB;
 
 
+
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
-
-
 
 /**
  *
@@ -18,9 +17,12 @@ import oru.inf.InfException;
 public class InloggningsFonster extends javax.swing.JFrame {
     
     private InfDB idb;
-    private String menyVal;
+    private static String menyVal;
     private boolean epostFinns;
-    private Object svar;
+    private String svar;
+    private InlogAgent nyAgent;
+    private InlogAlien nyAlien;
+    
     
     
 
@@ -29,11 +31,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
      */
     public InloggningsFonster(InfDB idb) {
         initComponents();
-        this.idb = idb;
-        
-        
-        
-        
+        this.idb = idb;     
     }
 
     /**
@@ -53,6 +51,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
         jLlosenord = new javax.swing.JLabel();
         btnLoggaIn = new javax.swing.JButton();
         JComboBox = new javax.swing.JComboBox<>();
+        btnAvsluta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +86,13 @@ public class InloggningsFonster extends javax.swing.JFrame {
         JComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agent", "Alien" }));
         JComboBox.setToolTipText("");
 
+        btnAvsluta.setText("Avsluta");
+        btnAvsluta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvslutaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,6 +121,10 @@ public class InloggningsFonster extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLoggaIn)
                 .addGap(198, 198, 198))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAvsluta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +145,9 @@ public class InloggningsFonster extends javax.swing.JFrame {
                     .addComponent(jLlosenord))
                 .addGap(34, 34, 34)
                 .addComponent(btnLoggaIn)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(btnAvsluta)
+                .addContainerGap())
         );
 
         pack();
@@ -149,93 +161,72 @@ public class InloggningsFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbLosenordActionPerformed
 
+  
+ 
+//ANVÄNDER SIG AV VALIDERINGSKLASSEN FÖR ATT KONTROLLERA LÖSENORD
+    //hämtar först värdet från rullgardinsmenyn
+    //kontrollerar ifall användaren har valt alien eller agent
+    //1.ifall alien så kontrolleras ifall epost stämmer överens med lösenord och alienfönster öppnas
+    //--det här fönstret stängs
+    //2.ifall agent så kontrolleras epost mot lösenord
+    //--kontroll ifall agenten har adminstatus via valideringsklassen
+    //--beroende på ifall admin eller inte så öppnas antingen adminfönster eller agentfönster
+    
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        // TODO add your handling code here:
-        kontrollAvRuta();
-        if(menyVal.equals("Alien") && kontrollOmLosenStammerAlien())
-        {
-            new AlienFonster().setVisible(true);
-            dispose();
-        }
-        else if(menyVal.equals("Agent") && kontrollOmLosenStammerAgent())
-        {
-            new AgentFonster().setVisible(true);
-            dispose();
-        }
+    
+    kontrollAvRuta();
+    String anv = txtbEpost.getText();
+    String los = txtbLosenord.getText();
+    
+    if(Validering.isTxtFilled(anv) && Validering.isTxtFilled(los) && Validering.finnsAnvandareEpostIDB(anv)
+       && Validering.kontrollLosenStammer(anv, los))
+    {
         
+        if(menyVal.equals("Alien"))
+        {
+            nyAlien = new InlogAlien(idb, anv);
+            
+            new AlienFonster(idb).setVisible(true);
+        }
+        else if(menyVal.equals("Agent"))
+        {
+            nyAgent = new InlogAgent(idb, anv);
+            new InlogAlien(idb);
+            if(Validering.kontrollOmAdmin(anv))
+            {
+                new AgentAdminFonster(idb).setVisible(true);
+            }
+            else{
+                new AgentFonster(idb).setVisible(true);
+            }   
+        }
+        dispose();
+    }  
     }//GEN-LAST:event_btnLoggaInActionPerformed
+    
+    
+    
+    private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnAvslutaActionPerformed
 
-    //hämtar val av inloggningssätt från rullmenyn och lagrar i variabeln val.
+    
+    
+    //hämtar val av inloggningssätt från rullmenyn och lagrar i variabeln menyVal.
 private void kontrollAvRuta(){
     menyVal = JComboBox.getSelectedItem().toString();
 }
 
-
-//kontrollerar ifall angivet lösenord stämmer mot angiven epost i agent tabellen i databasen
-private boolean kontrollOmLosenStammerAgent()
+public static String getMenyval()
 {
-    boolean isMatch = false;
-    String logEpost = txtbEpost.getText();
-    epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
-    
-    if(epostFinns)
-    {
-        try{
-            String fraga = "SELECT losenord FROM agent WHERE epost='"+logEpost+"'";
-            svar = idb.fetchSingle(fraga);
-            
-        }catch (InfException e)
-        {
-            JOptionPane.showMessageDialog(null, "Fel lösenord eller epost");
-            System.out.println("Internt felmeddelande"+e.getMessage()); 
-        }
-        if(svar == null){
-            isMatch = false;
-        }
-        else if(svar.equals(txtbLosenord.getText()))
-        {
-            isMatch = true;
-        }
-    }
-    return isMatch; 
+    return menyVal;
 }
-
-
-
-//kontrollerar ifall angivet lösenord stämmer mot angiven epost i alien tabellen i databasen
-private boolean kontrollOmLosenStammerAlien()
-{
-    boolean isMatch = false;
-    String logEpost = txtbEpost.getText();
-    epostFinns = Validering.finnsAnvandareEpostIDB(logEpost);
-    
-    if(epostFinns)
-    {
-        try{
-            String fraga = "SELECT losenord FROM alien WHERE epost='"+logEpost+"'";
-            svar= idb.fetchSingle(fraga);
-            
-        }catch(InfException e)
-        {
-            JOptionPane.showMessageDialog(null, "Fel lösenord eller epost");
-            System.out.println("Intern felmeddelande"+e.getMessage());
-        }
-        if(svar == null){
-            isMatch = false;
-        }
-        else if(svar.equals(txtbLosenord.getText()))
-        {
-            isMatch = true;
-        }
-    }
-    return isMatch;
-}
-
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JComboBox;
+    private javax.swing.JButton btnAvsluta;
     private javax.swing.JButton btnLoggaIn;
     private javax.swing.JLabel jLepost;
     private javax.swing.JLabel jLinloggning;

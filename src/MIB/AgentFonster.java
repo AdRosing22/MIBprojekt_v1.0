@@ -4,17 +4,26 @@
  */
 package MIB;
 
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+
 /**
  *
  * @author Adam
  */
 public class AgentFonster extends javax.swing.JFrame {
 
+    private InfDB idb;
+    
+    
     /**
      * Creates new form AgentFonster
      */
-    public AgentFonster() {
+    public AgentFonster(InfDB idb) {
         initComponents();
+        this.idb = idb;
+        
+        
     }
 
     /**
@@ -26,57 +35,155 @@ public class AgentFonster extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JLvalkommen = new javax.swing.JLabel();
+        btnAndraLosen = new javax.swing.JButton();
+        btnHanteraAlien = new javax.swing.JButton();
+        btnRegUtr = new javax.swing.JButton();
+        btnSokOChef = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnAvsluta = new javax.swing.JToggleButton();
+        btnAndraLosen1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        JLvalkommen.setText("Välkommen Agent");
+
+        btnAndraLosen.setText("Ändra lösenord");
+        btnAndraLosen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraLosenActionPerformed(evt);
+            }
+        });
+
+        btnHanteraAlien.setText("Hantera alien");
+        btnHanteraAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHanteraAlienActionPerformed(evt);
+            }
+        });
+
+        btnRegUtr.setText("Registrera utrustning");
+        btnRegUtr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegUtrActionPerformed(evt);
+            }
+        });
+
+        btnSokOChef.setText("Sök områdeschef");
+        btnSokOChef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokOChefActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Åtgärder");
+
+        btnAvsluta.setText("Avsluta program");
+        btnAvsluta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvslutaActionPerformed(evt);
+            }
+        });
+
+        btnAndraLosen1.setText("Sök Alien");
+        btnAndraLosen1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraLosen1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 127, Short.MAX_VALUE)
+                .addComponent(JLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(127, 127, 127))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAndraLosen1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnRegUtr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnHanteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAndraLosen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSokOChef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAvsluta)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(JLvalkommen)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAndraLosen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnHanteraAlien)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegUtr)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSokOChef)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAndraLosen1)
+                    .addComponent(btnAvsluta))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgentFonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgentFonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgentFonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgentFonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    
+    //öppnar fönstret för att ändra lösenord
+    private void btnAndraLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosenActionPerformed
+        // TODO add your handling code here:
+        new AndraLosenordFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAndraLosenActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AgentFonster().setVisible(true);
-            }
-        });
-    }
+    private void btnHanteraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHanteraAlienActionPerformed
+        // TODO add your handling code here:
+        new HanteraAliensFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnHanteraAlienActionPerformed
+
+    private void btnRegUtrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegUtrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegUtrActionPerformed
+
+    private void btnSokOChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokOChefActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSokOChefActionPerformed
+
+    private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnAvslutaActionPerformed
+
+    private void btnAndraLosen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosen1ActionPerformed
+        // TODO add your handling code here:
+        new SokAlien(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAndraLosen1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLvalkommen;
+    private javax.swing.JButton btnAndraLosen;
+    private javax.swing.JButton btnAndraLosen1;
+    private javax.swing.JToggleButton btnAvsluta;
+    private javax.swing.JButton btnHanteraAlien;
+    private javax.swing.JButton btnRegUtr;
+    private javax.swing.JButton btnSokOChef;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

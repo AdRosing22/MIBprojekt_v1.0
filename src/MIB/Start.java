@@ -4,6 +4,8 @@
  */
 package MIB;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -24,13 +26,13 @@ public class Start {
         //koppling mot databasen mibdb
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
-            System.out.println("Koppling LYCKAD");
+            System.out.println("Koppling mot databas LYCKAD");
         } catch (InfException ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
 
-        //
         new InloggningsFonster(idb).setVisible(true); 
         new Validering(idb);
         
