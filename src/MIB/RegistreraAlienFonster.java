@@ -114,7 +114,16 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     //metod för att hantera rull menyn för ras
     private void registreraRas(){
         //lokal variabel för att korta ner koden
-        String ras = cbxRas.getSelectedItem().toString();
+        String ras = (String) cbxRas.getSelectedItem();
+        
+        if(ras == null || ras.equals("Välj")) {
+            jLattribut.setVisible(false);
+            txtbRasAttribut.setVisible(false);
+            return;
+        } else {
+            jLattribut.setVisible(true);
+            txtbRasAttribut.setVisible(true);
+        }
         
         //switch som bestämmer vilken beskrivande text som ska visas bredvid inmatningsfältet
         switch(ras){
