@@ -176,7 +176,6 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
                     new AgentFonster(idb).setVisible(true);
                 }
             } else if(Validering.valImenyInloggningFonster("Alien") && Validering.kontrollLosenStammer(InlogAlien.getEpost(), nuvLos)){
-
                 idb.update("UPDATE alien SET losenord='"+nyttLos+"'WHERE epost='"+InlogAlien.getEpost()+"'");
                 JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
                 dispose();
