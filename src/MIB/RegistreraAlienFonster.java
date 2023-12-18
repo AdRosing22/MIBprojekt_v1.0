@@ -24,6 +24,14 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
     }
+    
+    private void registreraNyAlien() {
+        String epost = epostField.getText();
+        String losenord = losenordField.getText();
+        String plats = platsCbx.getSelectedItem().toString();
+        String telefon = telefonField.getText();
+        String ansvarigagent = ansvarigAgentCbx.getSelectedItem().toString();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
