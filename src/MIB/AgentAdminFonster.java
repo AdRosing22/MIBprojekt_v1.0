@@ -190,6 +190,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnAvslutaActionPerformed
 
     private void jHanteraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraAlienActionPerformed

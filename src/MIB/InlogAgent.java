@@ -65,7 +65,9 @@ public static void hamtaInfoOmAgent()
         }
     }
 
-    
+    public static boolean isAdministrator() {
+        return administrator.equals("J");
+    }
     
     
     
