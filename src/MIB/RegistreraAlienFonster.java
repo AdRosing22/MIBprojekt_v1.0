@@ -30,7 +30,23 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         String losenord = losenordField.getText();
         String plats = platsCbx.getSelectedItem().toString();
         String telefon = telefonField.getText();
-        String ansvarigagent = ansvarigAgentCbx.getSelectedItem().toString();
+        String ansvarigAgent = ansvarigAgentCbx.getSelectedItem().toString();
+        String registreringsdatum = registreringsdatumField.getText();
+        
+        String fraga = "INSERT INTO alien (Epost, Losenord, Plats, Telefon, Ansvarig_Agent, Registreringsdatum) VALUES (?, ?, ?, ?, ?, ?)";
+        
+        try {
+            ArrayList<String> values = new ArrayList<>();
+            values.add(epost);
+            values.add(losenord);
+            values.add(plats);
+            values.add(telefon);
+            values.add(ansvarigAgent);
+            values.add(registreringsdatum);
+            idb.insert(fraga, values);
+            
+            jOptionPane()
+        }
     }
 
     /**
