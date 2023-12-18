@@ -152,6 +152,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
             }
         });
 
+        telefonField.setText("555-");
         telefonField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefonFieldActionPerformed(evt);

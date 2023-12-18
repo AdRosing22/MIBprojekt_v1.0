@@ -195,6 +195,18 @@ public static boolean isTxtFilled(String txtb)
     return isFilled;
 }
         
+
+
+public static boolean isLosenordNew(String nuv, String nytt)
+{
+    boolean samma = true;
+    
+    if(nuv.equals(nytt)){
+        JOptionPane.showMessageDialog(null, "Lösenord är samma som det gamla, pröva någonting nytt");
+        samma = false;
+    }
+    return samma;  
+}
 }
 
 

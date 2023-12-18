@@ -111,6 +111,7 @@ public class OmradesChefInfo extends javax.swing.JFrame {
     private void btnHamtaOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtaOmradesChefActionPerformed
         // TODO add your handling code here:
 try {
+        //SQL fråga för sammanfoga alien och agent på plats, till område, till områdeschef, till agent.
         String fraga = "SELECT agent.namn, agent.telefon, agent.anstallningsdatum, agent.epost, omrade.benamning FROM Agent "
                     + "JOIN omradeschef ON agent.agent_id = omradeschef.Agent_ID "
                     + "JOIN omrade ON omradeschef.Omrade = omrade.Omrades_ID "
@@ -118,25 +119,29 @@ try {
                     + "JOIN alien ON plats.Plats_ID = alien.Plats "
                     + "WHERE alien.Epost = '"+InlogAlien.getEpost()+"'";
          
+        //skapar ny hasmap för att kunna hämta rad via InfDB fetchRow() metod
         HashMap<String, String> omradeschefInfo = idb.fetchRow(fraga);
     
+        //mapen får inte vara tom
         if (omradeschefInfo != null) {
             
+            //hämtar från mapen på SQL tabellens kolumnnamn som nyckel
             namn = omradeschefInfo.get("Namn");
             telefon = omradeschefInfo.get("Telefon");
             anstallningsdatum = omradeschefInfo.get("Anstallningsdatum");
             epost = omradeschefInfo.get("Epost");
             omrade = omradeschefInfo.get("Benamning");
           
-            
+            //via append() visar man det i textrutan
             txtOmradeschef.append("Namn:"+namn+"\n");
             txtOmradeschef.append("Telefonnummer:"+telefon+"\n");
             txtOmradeschef.append("Anställningsdatum:"+anstallningsdatum+"\n");
             txtOmradeschef.append("Epost:"+epost+"\n");
             txtOmradeschef.append("Ansvar över ditt område:"+omrade+"\n");
-            
+          
+        //ifall alien inte har någon som är områdeschef, eller saknar område
         } else {
-            System.out.println("Ingen information kunde hittas, kontakta kontoret");  
+            txtOmradeschef.append("Ingen information kunde hittas, kontakta kontoret");  
         }
     } catch (InfException ex) {
         JOptionPane.showMessageDialog(null, "Fel");
