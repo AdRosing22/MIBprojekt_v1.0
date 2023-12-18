@@ -4,6 +4,7 @@
  */
 package MIB;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import oru.inf.InfDB;
@@ -25,7 +26,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         this.idb = idb;
     }
     
-    private void registreraNyAlien() {
+   /* private void registreraNyAlien() {
         String epost = epostField.getText();
         String losenord = losenordField.getText();
         String plats = platsCbx.getSelectedItem().toString();
@@ -43,9 +44,9 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
             values.add(telefon);
             values.add(ansvarigAgent);
             values.add(registreringsdatum);
-            idb.insert(fraga, values);
+            //idb.insert(fraga, values);
             
-            jOptionPane()
+            //jOptionPane()
         }
     }
 
