@@ -19,6 +19,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     
     private InfDB idb;
     private HashMap<String, Integer> platsIdMap = new HashMap<>(); 
+<<<<<<< HEAD
     private int alienid;
     private int id;
     private String epost;
@@ -32,6 +33,9 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     private double regDatum;
     private int rasValINT;
     private double rasValDouble;
+=======
+    private HashMap<String, Integer> agentIdMap = new HashMap<>();
+>>>>>>> 66e0e49ab408707322a25840a4cc22bc96e2dc24
 
     /**
      * Creates new form RegistreraAlienFonster
@@ -67,16 +71,22 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     
     private void laddaAgenter() {
         try {
-            ArrayList<String> allaAgenter = idb.fetchColumn("SELECT Namn FROM agent");
+            ArrayList<HashMap<String, String>> allaAgenter = idb.fetchRows("SELECT Agent_ID, Namn FROM agent");
             ansvarigAgentCbx.removeAllItems();
-            for (String agent : allaAgenter) {
-                ansvarigAgentCbx.addItem(agent);
+            agentIdMap.clear();
+            for (HashMap<String, String> agent : allaAgenter) {
+                String id = agent.get("Agent_ID");
+                String namn = agent.get("Namn");
+                
+                agentIdMap.put(namn, Integer.parseInt(id));
+                ansvarigAgentCbx.addItem(namn);
             }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något blev fel");
         }
     }
     
+<<<<<<< HEAD
     private void genereraAlienID()
     {
         try{
@@ -183,6 +193,23 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
        
         String fraga =  "INSERT INTO Alien VALUES ("+alienid +","+regDatum+",'"+epost+"','"+losenord+"','"+namn+"','"+telefon+"',"+platsId+","+ansvarigAgent+")";
         
+=======
+    private void registreraNyAlien() {
+        String epost = epostField.getText();
+        String losenord = losenordField.getText();
+        String plats = platsCbx.getSelectedItem().toString();
+        String telefon = telefonField.getText();
+        String ansvarigAgent = ansvarigAgentCbx.getSelectedItem().toString();
+        String registreringsdatum = registreringsdatumField.getText();
+        if(!registreringsdatum.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            JOptionPane.showMessageDialog(null, "Datumet måste vara i formatet ÅÅÅÅ-MM-DD.");
+            return;
+        }
+        Integer platsId = platsIdMap.get(plats);
+        Integer agentId = agentIdMap.get(ansvarigAgent);
+        
+        String fraga =  "INSERT INTO alien (Epost, Losenord, Plats, Telefon, Ansvarig_Agent, Registreringsdatum) VALUES ('" + epost + "', '" + losenord + "', '" + telefon + "', " + agentId + ", '" + registreringsdatum + "', " + platsId + ")";
+>>>>>>> 66e0e49ab408707322a25840a4cc22bc96e2dc24
         
         try {
             idb.insert(fraga);
@@ -194,8 +221,14 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
             telefonField.setText("");
             ansvarigAgentCbx.setSelectedIndex(0);
             registreringsdatumField.setText("");
+<<<<<<< HEAD
             txtbRasAttribut.setText("");
             registreraRas();   
+=======
+            
+            
+            
+>>>>>>> 66e0e49ab408707322a25840a4cc22bc96e2dc24
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod");
             System.out.println("Internt felmeddelande" + e.getMessage());
@@ -221,16 +254,19 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         losenordField = new javax.swing.JTextField();
         epostField = new javax.swing.JTextField();
         telefonField = new javax.swing.JTextField();
-        registreringsdatumField = new javax.swing.JTextField();
         registreraKnapp = new javax.swing.JToggleButton();
         platsCbx = new javax.swing.JComboBox<>();
         ansvarigAgentCbx = new javax.swing.JComboBox<>();
+<<<<<<< HEAD
         registreringsdatumText1 = new javax.swing.JLabel();
         cbxRas = new javax.swing.JComboBox<>();
         jLattribut = new javax.swing.JLabel();
         txtbRasAttribut = new javax.swing.JTextField();
         txtbNamn = new javax.swing.JTextField();
         jLnamn = new javax.swing.JLabel();
+=======
+        registreringsdatumField = new javax.swing.JFormattedTextField();
+>>>>>>> 66e0e49ab408707322a25840a4cc22bc96e2dc24
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -267,6 +303,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         registreringsdatumField.setText("ÅÅÅÅMMDD");
         registreringsdatumField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,6 +311,8 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
             }
         });
 
+=======
+>>>>>>> 66e0e49ab408707322a25840a4cc22bc96e2dc24
         registreraKnapp.setText("Registrera");
         registreraKnapp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,6 +320,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         platsCbx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 platsCbxActionPerformed(evt);
@@ -316,6 +356,15 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
 
         jLnamn.setText("Namn:");
 
+=======
+        registreringsdatumField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        registreringsdatumField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registreringsdatumFieldActionPerformed(evt);
+            }
+        });
+
+>>>>>>> 66e0e49ab408707322a25840a4cc22bc96e2dc24
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -324,6 +373,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
+<<<<<<< HEAD
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(losenordText)
@@ -359,6 +409,34 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                                 .addComponent(jLnamn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtbNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+=======
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(losenordText)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                                        .addComponent(losenordField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(epostText)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(epostField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(telefonText)
+                                        .addComponent(platsText)
+                                        .addComponent(ansvarigAgentText))
+                                    .addGap(72, 72, 72)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(telefonField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ansvarigAgentCbx, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(platsCbx, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(registreraNyAlienText, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(registreringsdatumText)
+                                .addGap(48, 48, 48)
+                                .addComponent(registreringsdatumField))))
+>>>>>>> 66e0e49ab408707322a25840a4cc22bc96e2dc24
                     .addGroup(layout.createSequentialGroup()
                         .addGap(125, 125, 125)
                         .addComponent(registreraKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -428,14 +506,11 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_telefonFieldActionPerformed
 
-    private void registreringsdatumFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registreringsdatumFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registreringsdatumFieldActionPerformed
-
     private void registreraKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registreraKnappActionPerformed
         registreraNyAlien();
     }//GEN-LAST:event_registreraKnappActionPerformed
 
+<<<<<<< HEAD
     private void ansvarigAgentCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ansvarigAgentCbxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ansvarigAgentCbxActionPerformed
@@ -457,6 +532,11 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     private void txtbNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbNamnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbNamnActionPerformed
+=======
+    private void registreringsdatumFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registreringsdatumFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registreringsdatumFieldActionPerformed
+>>>>>>> 66e0e49ab408707322a25840a4cc22bc96e2dc24
 
 
 
@@ -474,7 +554,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     private javax.swing.JLabel platsText;
     private javax.swing.JToggleButton registreraKnapp;
     private javax.swing.JLabel registreraNyAlienText;
-    private javax.swing.JTextField registreringsdatumField;
+    private javax.swing.JFormattedTextField registreringsdatumField;
     private javax.swing.JLabel registreringsdatumText;
     private javax.swing.JLabel registreringsdatumText1;
     private javax.swing.JTextField telefonField;
