@@ -7,8 +7,11 @@ package MIB;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -17,6 +20,7 @@ import oru.inf.InfException;
 public class RegistreraAlienFonster extends javax.swing.JFrame {
     
     private InfDB idb;
+    private HashMap<String, Integer> platsIdMap = new HashMap<>(); 
 
     /**
      * Creates new form RegistreraAlienFonster
@@ -24,17 +28,51 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     public RegistreraAlienFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
+        laddaPlatser();
+        laddaAgenter();
     }
     
-   /* private void registreraNyAlien() {
+    private void laddaPlatser() {
+        try {
+            ArrayList<HashMap<String,String>> allaPlatser = idb.fetchRows("SELECT Plats_ID, Benamning FROM plats");
+            platsCbx.removeAllItems();
+            platsIdMap.clear();
+            for (HashMap<String, String> plats : allaPlatser) {
+                String id = plats.get("Plats_ID");
+                String namn = plats.get("Benamning");
+                
+                platsIdMap.put(namn, Integer.parseInt(id));
+                platsCbx.addItem(namn);
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något blev fel.");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Något blev fel");
+        }
+    }
+    
+    private void laddaAgenter() {
+        try {
+            ArrayList<String> allaAgenter = idb.fetchColumn("SELECT Namn FROM agent");
+            ansvarigAgentCbx.removeAllItems();
+            for (String agent : allaAgenter) {
+                ansvarigAgentCbx.addItem(agent);
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något blev fel");
+        }
+    }
+    
+    private void registreraNyAlien() {
         String epost = epostField.getText();
         String losenord = losenordField.getText();
         String plats = platsCbx.getSelectedItem().toString();
         String telefon = telefonField.getText();
         String ansvarigAgent = ansvarigAgentCbx.getSelectedItem().toString();
         String registreringsdatum = registreringsdatumField.getText();
+        Integer platsId = platsIdMap.get(plats);
         
-        String fraga = "INSERT INTO alien (Epost, Losenord, Plats, Telefon, Ansvarig_Agent, Registreringsdatum) VALUES (?, ?, ?, ?, ?, ?)";
+        String fraga =  "INSERT INTO alien (Epost, Losenord, Plats, Telefon, Ansvarig_Agent, Registreringsdatum) VALUES ('" + epost + "', '" + losenord + "', '" + plats + "', '" + telefon + "', '" + ansvarigAgent + "', '" + registreringsdatum + "', " + platsId + ")";
         
         try {
             ArrayList<String> values = new ArrayList<>();
@@ -44,9 +82,21 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
             values.add(telefon);
             values.add(ansvarigAgent);
             values.add(registreringsdatum);
-            //idb.insert(fraga, values);
+            idb.insert(fraga);
             
-            //jOptionPane()
+            JOptionPane.showMessageDialog(null, "En ny alien har registrerats.");
+            
+            epostField.setText("");
+            losenordField.setText("");
+            platsCbx.setSelectedIndex(0);
+            telefonField.setText("");
+            ansvarigAgentCbx.setSelectedIndex(0);
+            registreringsdatumField.setText("");
+            
+            
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod");
+            System.out.println("Internt felmeddelande" + e.getMessage());
         }
     }
 
@@ -121,10 +171,6 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                 registreraKnappActionPerformed(evt);
             }
         });
-
-        platsCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        ansvarigAgentCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,7 +264,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_registreringsdatumFieldActionPerformed
 
     private void registreraKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registreraKnappActionPerformed
-        
+        registreraNyAlien();
     }//GEN-LAST:event_registreraKnappActionPerformed
 
 
