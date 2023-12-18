@@ -166,6 +166,7 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         
     try{
         if(Validering.isTxtFilled(nuvLos) && Validering.isTxtFilled(nyttLos) && Validering.godkanndLosenLangd(nyttLos)){
+            if(!nuvLos.equals(nyttLos)){
             if(Validering.valImenyInloggningFonster("Agent") && Validering.kontrollLosenStammer(InlogAgent.getEpost(), nuvLos)){
                 idb.update("UPDATE agent SET losenord='"+nyttLos+"' WHERE epost='"+InlogAgent.getEpost()+"'");
                 JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
@@ -182,6 +183,7 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
                 new AlienFonster(idb).setVisible(true);
                 }    
             }
+        }
         }catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
             System.out.println("Internt felmeddelande"+undantag);
