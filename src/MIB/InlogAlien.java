@@ -5,6 +5,7 @@
 package MIB;
 
 
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -51,28 +52,28 @@ public class InlogAlien {
     
 public static void hamtaInfoOmAlien()
     {
-        String fraga1 = "SELECT alien_id FROM alien WHERE epost='"+epost+"'";
-        String fraga2 = "SELECT namn FROM alien WHERE epost='"+epost+"'";
-        String fraga3 = "SELECT telefon FROM alien WHERE epost='"+epost+"'";
-        String fraga4 = "SELECT plats FROM alien WHERE epost='"+epost+"'";
-        String fraga5 = "SELECT registreringsdatum FROM alien WHERE epost='"+epost+"'";
-        String fraga6 = "SELECT losenord FROM alien WHERE epost='"+epost+"'";
-        String fraga7 = "SELECT ansvarig_agent FROM alien WHERE epost='"+epost+"'";
-        
+        String fraga = "SELECT alien_id, registreringsdatum, losenord, namn, telefon, plats, ansvarig_agent FROM Alien WHERE epost ='"+epost+"'";
+
         try{
-            if(fraga1!=null||fraga2!=null||fraga3!=null||fraga4!=null||fraga5 != null||fraga6!=null||fraga7!=null){
-                alienid = idb.fetchSingle(fraga1);
-                namn = idb.fetchSingle(fraga2);
-                telefon = idb.fetchSingle(fraga3);
-                plats = idb.fetchSingle(fraga4);
-                datum = idb.fetchSingle(fraga5);
-                losenord = idb.fetchSingle(fraga6);
-                ansvarig_agent = idb.fetchSingle(fraga7);
-            }   
-    }catch (InfException undantag){
-                    
-        JOptionPane.showMessageDialog(null, "Fel");
-        System.out.println("Internt felmeddelande"+undantag.getMessage());
+            HashMap<String, String> alienInfo = idb.fetchRow(fraga);
+            
+            if(alienInfo != null){
+                alienid = alienInfo.get("Alien_ID");
+                namn = alienInfo.get("Namn");
+                telefon = alienInfo.get("Telefon");
+                plats = alienInfo.get("Plats");
+                datum = alienInfo.get("Registreringsdatum");
+                losenord = alienInfo.get("Losenord");
+                ansvarig_agent = alienInfo.get("Ansvarig_Agent");
+                
+                
+                System.out.println(alienid+namn+telefon+plats+datum+ansvarig_agent);
+                
+            }
+            
+        }catch(InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande"+ex.getMessage());
         }
     }
 

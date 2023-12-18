@@ -5,6 +5,7 @@
 package MIB;
 
 
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -38,30 +39,27 @@ public class InlogAgent {
     //metod för att hämta ut info kring agent utifrån epost och lagra i fält
 public static void hamtaInfoOmAgent()
     {
-        String fraga1 = "SELECT agent_id FROM agent WHERE epost='"+epost+"'";
-        String fraga2 = "SELECT namn FROM agent WHERE epost='"+epost+"'";
-        String fraga3 = "SELECT telefon FROM agent WHERE epost='"+epost+"'";
-        String fraga4 = "SELECT omrade FROM agent WHERE epost='"+epost+"'";
-        String fraga5 = "SELECT anstallningsdatum FROM agent WHERE epost='"+epost+"'";
-        String fraga6 = "SELECT losenord FROM agent WHERE epost='"+epost+"'";
-        String fraga7 = "SELECT administrator FROM agent WHERE epost='"+epost+"'";
-        
+        String fraga = "SELECT agent_id, namn, telefon, omrade, anstallningsdatum, losenord, administrator FROM Agent WHERE epost ='"+epost+"'";
+
         try{
-            if(fraga1!=null||fraga2!=null||fraga3!=null||fraga4!=null||fraga5!=null||fraga6!=null||fraga7!=null){
-                agentid = idb.fetchSingle(fraga1);
-                namn = idb.fetchSingle(fraga2);
-                telefon = idb.fetchSingle(fraga3);
-                omrade = idb.fetchSingle(fraga4);
-                datum = idb.fetchSingle(fraga5);
-                losenord = idb.fetchSingle(fraga6);
-                administrator = idb.fetchSingle(fraga7);
+            HashMap<String, String> agentInfo = idb.fetchRow(fraga);
+            
+            if(agentInfo != null){
+                agentid = agentInfo.get("Agent_ID");
+                namn = agentInfo.get("Namn");
+                telefon = agentInfo.get("Telefon");
+                omrade = agentInfo.get("Omrade");
+                datum = agentInfo.get("Anstallningsdatum");
+                losenord = agentInfo.get("Losenord");
+                administrator = agentInfo.get("Administrator");
                 
+                System.out.println(agentid+namn+telefon+omrade+datum+administrator);
                 
-            }   
-    }catch (InfException undantag){
-                    
-        JOptionPane.showMessageDialog(null, "Fel");
-        System.out.println("Internt felmeddelande"+undantag.getMessage());
+            }
+            
+        }catch(InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande"+ex.getMessage());
         }
     }
 
