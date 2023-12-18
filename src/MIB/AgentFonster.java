@@ -44,6 +44,7 @@ public class AgentFonster extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnAvsluta = new javax.swing.JToggleButton();
         btnAndraLosen1 = new javax.swing.JButton();
+        btnSeutrustning = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +94,13 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
+        btnSeutrustning.setText("Se din utrustning");
+        btnSeutrustning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeutrustningActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,8 +113,10 @@ public class AgentFonster extends javax.swing.JFrame {
                     .addComponent(btnHanteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAndraLosen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSokOChef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(btnAvsluta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAvsluta)
+                    .addComponent(btnSeutrustning))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
@@ -127,8 +137,10 @@ public class AgentFonster extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAndraLosen)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnHanteraAlien)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHanteraAlien)
+                    .addComponent(btnSeutrustning))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegUtr)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSokOChef)
@@ -136,7 +148,7 @@ public class AgentFonster extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAndraLosen1)
                     .addComponent(btnAvsluta))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,6 +187,12 @@ public class AgentFonster extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnAndraLosen1ActionPerformed
 
+    private void btnSeutrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeutrustningActionPerformed
+        // TODO add your handling code here:
+        new AgentUtrustningFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnSeutrustningActionPerformed
+
     private void setValkommen(String namn)
     {
         if(namn!=null){
@@ -192,6 +210,7 @@ public class AgentFonster extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnAvsluta;
     private javax.swing.JButton btnHanteraAlien;
     private javax.swing.JButton btnRegUtr;
+    private javax.swing.JToggleButton btnSeutrustning;
     private javax.swing.JButton btnSokOChef;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

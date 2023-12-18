@@ -32,8 +32,11 @@
                   <Component id="btnAndraLosen" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnSokOChef" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="64" max="32767" attributes="0"/>
-              <Component id="btnAvsluta" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="61" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnAvsluta" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSeutrustning" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -58,8 +61,11 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnAndraLosen" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnHanteraAlien" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnHanteraAlien" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSeutrustning" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="btnRegUtr" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnSokOChef" min="-2" max="-2" attributes="0"/>
@@ -68,7 +74,7 @@
                   <Component id="btnAndraLosen1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAvsluta" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -130,6 +136,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAndraLosen1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="btnSeutrustning">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Se din utrustning"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeutrustningActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
