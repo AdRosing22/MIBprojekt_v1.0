@@ -170,15 +170,18 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
                 idb.update("UPDATE agent SET losenord='"+nyttLos+"' WHERE epost='"+InlogAgent.getEpost()+"'");
                 JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
                 dispose();
-                new AgentFonster(idb).setVisible(true);
+                if(InlogAgent.isAdministrator()) {
+                new AgentAdminFonster(idb).setVisible(true);
+                } else {
+                    new AgentFonster(idb).setVisible(true);
                 }
-            else if(Validering.valImeny("Alien") && Validering.kontrollLosenStammer(InlogAlien.getEpost(), nuvLos)){
+            } else if(Validering.valImeny("Alien") && Validering.kontrollLosenStammer(InlogAlien.getEpost(), nuvLos)){
                 idb.update("UPDATE alien SET losenord='"+nyttLos+"'WHERE epost='"+InlogAlien.getEpost()+"'");
                 JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
                 dispose();
                 new AlienFonster(idb).setVisible(true);
                 }    
-            } 
+            }
         }catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
             System.out.println("Internt felmeddelande"+undantag);
