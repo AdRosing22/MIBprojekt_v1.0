@@ -196,7 +196,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
             if(Validering.isTxtFilled(epost)&&Validering.isTxtFilled(losenord)&&Validering.isTxtFilled(valPlats)&& Validering.isTxtFilled(registreringsdatum)){
                 
                 if(!Validering.epostKontrollVidreg(epost)){
-                    JOptionPane.showMessageDialog(null,"E-posten är redan registrerad i databasen,+"+"\n"+"ange en ny och unik epost för den nya alien");
+                    JOptionPane.showMessageDialog(null,"E-posten är redan registrerad i databasen, ange en ny och unik epost för den nya alien");
                 
                 }else{
                     String fraga =  "INSERT INTO Alien VALUES ("+alienid +","+regDatum+",'"+epost+"','"+losenord+"','"+namn+"','"+telefon+"',"+platsId+","+ansvarigAgent+")";
