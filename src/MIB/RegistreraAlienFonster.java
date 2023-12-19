@@ -46,6 +46,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         
     }
     
+    //Ladda lista på tillgängliga platser så att man i sin tur kan välja plats
     private void laddaPlatser() {
         try {
             ArrayList<HashMap<String,String>> allaPlatser = idb.fetchRows("SELECT Plats_ID, Benamning FROM plats");
@@ -65,6 +66,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         }
     }
     
+    //Ladda lista på tillgängliga agenter så att man kan i sin tur välja ansvarig agent
     private void laddaAgenter() {
         try {
             ArrayList<String> allaAgenter = idb.fetchColumn("SELECT Namn FROM agent");
@@ -118,6 +120,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         //lokal variabel för att korta ner koden
         String ras = (String) cbxRas.getSelectedItem();
         
+        //kontroll för att säkerställa att frågan ska synas när den ska synas
         if(ras == null || ras.equals("Välj")) {
             jLattribut.setVisible(false);
             txtbRasAttribut.setVisible(false);
