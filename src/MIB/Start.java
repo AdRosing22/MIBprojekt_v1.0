@@ -29,7 +29,7 @@ public class Start {
             System.out.println("Koppling mot databas LYCKAD");
         } catch (InfException ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            JOptionPane.showMessageDialog(null, "Fel i systemet, vänligen testa igen");
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
 
