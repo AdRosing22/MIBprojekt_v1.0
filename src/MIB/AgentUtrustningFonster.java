@@ -101,6 +101,7 @@ public class AgentUtrustningFonster extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListautrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListautrustningActionPerformed

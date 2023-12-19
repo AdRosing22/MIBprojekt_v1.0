@@ -145,12 +145,13 @@ public class InloggningsFonster extends javax.swing.JFrame {
                     .addComponent(jLlosenord))
                 .addGap(34, 34, 34)
                 .addComponent(btnLoggaIn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(btnAvsluta)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtbEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbEpostActionPerformed

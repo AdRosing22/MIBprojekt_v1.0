@@ -119,6 +119,7 @@ private static InfDB idb;
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxPlatserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPlatserActionPerformed
