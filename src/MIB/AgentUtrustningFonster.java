@@ -144,12 +144,15 @@ public class AgentUtrustningFonster extends javax.swing.JFrame {
                     
                     //kontroll för att skriva ut attribut beroende på vilket kategori utrustningen hör till
                     if(kaliber != null){
+                        txtBoxUtrustning.append("Kategori: Vapen"+"\n");
                         txtBoxUtrustning.append("Vapenkaliber: "+kaliber+"\n");
                     }
                     else if(ovrfTeknik != null){
+                        txtBoxUtrustning.append("Kategori: Kommunikation"+"\n");
                         txtBoxUtrustning.append("Typ av teknik: "+ovrfTeknik+"\n");
                     }
                     else if(kraftK != null){
+                        txtBoxUtrustning.append("Kategori: Teknik"+"\n");
                         txtBoxUtrustning.append("Typ av kraftkälla: "+kraftK+"\n");
                     }
                     txtBoxUtrustning.append("Utkvitteringsdatum: "+datum);
@@ -161,8 +164,8 @@ public class AgentUtrustningFonster extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande"+ex.getMessage());
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "något gick fel");
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt fel: " + e);
         }
         
         
