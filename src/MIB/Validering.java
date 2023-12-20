@@ -60,6 +60,24 @@ public class Validering {
 
         return finns;
     }
+    
+    public static boolean epostKontrollVidreg(String ep)
+    {
+        boolean finnsInte = false;
+        try{
+        String fragaAlien ="SELECT epost FROM alien WHERE epost='"+ep+"'";
+        String svarAlien = idb.fetchSingle(fragaAlien);
+        String fragaAgent = "SELECT epost FROM agent WHERE epost='"+ep+"'";
+        String svarAgent = idb.fetchSingle(fragaAgent);
+        if(svarAlien == null && svarAgent == null){
+            finnsInte = true;
+        }
+        }catch(InfException ex){
+            JOptionPane.showMessageDialog(null,"Fel");
+           System.out.println("Internt felmeddelande: "+ex.getMessage());
+        }
+        return finnsInte;
+    }
 
     
     

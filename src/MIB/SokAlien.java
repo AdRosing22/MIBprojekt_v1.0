@@ -119,6 +119,7 @@ private static InfDB idb;
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxPlatserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPlatserActionPerformed
@@ -221,7 +222,7 @@ private static InfDB idb;
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        new AgentFonster(idb).setVisible(true);
+        new ValjTypSokAvAlien(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 

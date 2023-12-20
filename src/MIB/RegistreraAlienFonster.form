@@ -6,7 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -23,6 +23,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="registreraNyAlienText" min="-2" pref="194" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -38,21 +43,6 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="epostField" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="registreringsdatumText" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="registreringsdatumText1" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="jLattribut" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="registreringsdatumField" pref="120" max="32767" attributes="0"/>
-                                      <Component id="cbxRas" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="txtbRasAttribut" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="telefonText" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -66,36 +56,55 @@
                                   <Component id="platsCbx" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="registreraNyAlienText" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLnamn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="txtbNamn" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="registreringsdatumText" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="registreringsdatumText1" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="jLattribut" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="registreraKnapp" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="registreringsdatumField" pref="120" max="32767" attributes="0"/>
+                                          <Component id="cbxRas" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="txtbRasAttribut" alignment="1" min="-2" pref="120" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLinstruktion" min="-2" pref="86" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
-                      <Component id="registreraKnapp" min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnTillbaka" min="-2" pref="102" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="62" max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="registreraNyAlienText" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="epostText" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="epostField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="txtbNamn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -121,26 +130,26 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="registreringsdatumText" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="registreringsdatumField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLinstruktion" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="registreringsdatumText1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxRas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLattribut" min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="txtbRasAttribut" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
-                      <Component id="registreraKnapp" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jLnamn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLnamn" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="registreringsdatumText1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbxRas" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLattribut" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="txtbRasAttribut" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="registreraKnapp" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -153,17 +162,17 @@
     </Component>
     <Component class="javax.swing.JLabel" name="epostText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="E-post:"/>
+        <Property name="text" type="java.lang.String" value="E-post:*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="losenordText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="L&#xf6;senord:"/>
+        <Property name="text" type="java.lang.String" value="L&#xf6;senord:*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="platsText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Plats:"/>
+        <Property name="text" type="java.lang.String" value="Plats:*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="telefonText">
@@ -173,12 +182,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="ansvarigAgentText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ansvarig agent:"/>
+        <Property name="text" type="java.lang.String" value="Ansvarig agent:*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="registreringsdatumText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Registreringsdatum:"/>
+        <Property name="text" type="java.lang.String" value="Registreringsdatum:*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="losenordField">
@@ -200,9 +209,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="registreringsdatumField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#xc5;&#xc5;&#xc5;&#xc5;MMDD"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registreringsdatumFieldActionPerformed"/>
       </Events>
@@ -281,6 +287,19 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Namn:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLinstruktion">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(&#xc5;&#xc5;&#xc5;&#xc5;MMDD)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="btnTillbaka">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tillbaka"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
