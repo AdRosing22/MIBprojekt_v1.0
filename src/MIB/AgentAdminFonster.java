@@ -188,6 +188,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     private void jHanteraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraAlienActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jHanteraAlienActionPerformed
 
     private void jHanteraAgenterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraAgenterActionPerformed
