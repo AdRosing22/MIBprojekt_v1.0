@@ -210,6 +210,8 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     private void jRegistreraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegistreraUtrustningActionPerformed
         // TODO add your handling code here:
+        new RegNyUtrustning(idb).setVisible(true);
+        dispose();
     }//GEN-LAST:event_jRegistreraUtrustningActionPerformed
 
     private void jSokAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSokAlienActionPerformed

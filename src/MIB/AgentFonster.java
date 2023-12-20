@@ -171,6 +171,8 @@ public class AgentFonster extends javax.swing.JFrame {
 
     private void btnRegUtrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegUtrActionPerformed
         // TODO add your handling code here:
+        new RegNyUtrustning(idb).setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnRegUtrActionPerformed
 
     private void btnSokOChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokOChefActionPerformed
