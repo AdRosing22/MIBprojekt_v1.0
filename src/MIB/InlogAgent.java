@@ -53,7 +53,7 @@ public static void hamtaInfoOmAgent()
                 losenord = agentInfo.get("Losenord");
                 administrator = agentInfo.get("Administrator");
                 
-                System.out.println(agentid+namn+telefon+omrade+datum+administrator);
+                
                 
             }
             

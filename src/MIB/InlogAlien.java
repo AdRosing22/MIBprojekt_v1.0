@@ -58,7 +58,7 @@ public static void hamtaInfoOmAlien()
                 ansvarig_agent = alienInfo.get("Ansvarig_Agent");
                 
                 
-                System.out.println(alienid+namn+telefon+plats+datum+ansvarig_agent);
+               
                 
             }
             
