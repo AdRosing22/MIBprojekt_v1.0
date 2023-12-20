@@ -168,7 +168,7 @@ public class ValjTypSokAvAlien extends javax.swing.JFrame {
 
     private void btnSokPlatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokPlatsActionPerformed
         // TODO add your handling code here:
-        new SokAlien(idb).setVisible(true);
+        new SokAlienPlats(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnSokPlatsActionPerformed
 

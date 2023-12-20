@@ -20,12 +20,12 @@ import oru.inf.InfException;
  * @author gustafneander & Melker
  */
 
-public class SokAlien extends javax.swing.JFrame {
+public class SokAlienPlats extends javax.swing.JFrame {
 private static InfDB idb;
     /**
      * Creates new form MainFrame
      */
-    public SokAlien(InfDB idb) {
+    public SokAlienPlats(InfDB idb) {
         initComponents();
         this.idb = idb;
         
@@ -215,7 +215,7 @@ private static InfDB idb;
     } 
     
         catch (InfException ex) {
-        Logger.getLogger(SokAlien.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(SokAlienPlats.class.getName()).log(Level.SEVERE, null, ex);
     }
         
     }//GEN-LAST:event_btnHämtaAliensActionPerformed

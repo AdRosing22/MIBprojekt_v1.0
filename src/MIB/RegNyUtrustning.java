@@ -51,7 +51,7 @@ public class RegNyUtrustning extends javax.swing.JFrame {
         jLväljUtrustningstyp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLväljUtrustningstyp.setText("Välj utrustningstyp:");
 
-        cbxVälj.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj", "Vapen", "Kommunikation", "Teknik" }));
+        cbxVälj.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vapen", "Kommunikation", "Teknik" }));
         cbxVälj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxVäljActionPerformed(evt);

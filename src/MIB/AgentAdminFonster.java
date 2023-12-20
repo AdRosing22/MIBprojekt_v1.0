@@ -223,6 +223,8 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     private void jSokAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSokAgentActionPerformed
         // TODO add your handling code here:
+        new SokEnskildAgent(idb).setVisible(true);
+        dispose();
     }//GEN-LAST:event_jSokAgentActionPerformed
 
 
