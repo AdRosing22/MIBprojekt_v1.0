@@ -18,6 +18,7 @@ public class HanteraAlienAdmin extends javax.swing.JFrame {
      */
     public HanteraAlienAdmin(InfDB idb) {
         initComponents();
+        setLocationRelativeTo(null);
         this.idb = idb;
     }
 

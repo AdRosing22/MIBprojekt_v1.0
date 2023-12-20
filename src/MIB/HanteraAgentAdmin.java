@@ -18,6 +18,7 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
      */
     public HanteraAgentAdmin(InfDB idb) {
         initComponents();
+        setLocationRelativeTo(null);
         this.idb = idb;
     }
 
