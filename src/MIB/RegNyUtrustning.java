@@ -20,6 +20,7 @@ public class RegNyUtrustning extends javax.swing.JFrame {
      */
     public RegNyUtrustning(InfDB idb) {
         initComponents();
+        setLocationRelativeTo(null);
         this.idb = idb;
     }
 
