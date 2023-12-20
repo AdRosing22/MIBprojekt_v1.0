@@ -175,6 +175,8 @@ public class AgentFonster extends javax.swing.JFrame {
 
     private void btnSokOChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokOChefActionPerformed
         // TODO add your handling code here:
+        new SokOmradeschef(idb).setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnSokOChefActionPerformed
 
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
