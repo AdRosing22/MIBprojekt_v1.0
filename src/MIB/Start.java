@@ -12,7 +12,8 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Adam
+ * @author adamrosing, melker langell, gustaf neander, alvin källberg
+ * //V1.0 2023-12-09
  *
  * 
  */
