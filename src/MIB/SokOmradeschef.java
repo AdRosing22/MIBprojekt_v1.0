@@ -25,8 +25,10 @@ public class SokOmradeschef extends javax.swing.JFrame {
     public SokOmradeschef(InfDB idb) {
         initComponents();
         this.idb = idb;
+        setLocationRelativeTo(null);
         //laddar comboboxen med dem områden som finns
         laddaOmraden();
+        
     }
 
     /**
