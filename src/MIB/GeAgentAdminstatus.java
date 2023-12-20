@@ -4,6 +4,7 @@
  */
 package MIB;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -15,6 +16,8 @@ import oru.inf.InfException;
 public class GeAgentAdminstatus extends javax.swing.JFrame {
     
     private InfDB idb;
+    private String val;
+    
 
     /**
      * Creates new form GeAgentAdminstatus
@@ -22,6 +25,9 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
     public GeAgentAdminstatus(InfDB idb) {
         initComponents();
         this.idb = idb;
+        jLbekraftning.setVisible(false);
+        jLerror.setVisible(false);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -41,6 +47,8 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
         btnTillbaka = new javax.swing.JToggleButton();
         jLbekraftning = new javax.swing.JLabel();
         jLerror = new javax.swing.JLabel();
+        rdbtnTabort = new javax.swing.JRadioButton();
+        rdbtnGe = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,7 +57,7 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
 
         jLAngeEpost.setText("Ange agentens e-post:");
 
-        jLinformation.setText("Vilken agent vill du ge administratörsstatus?");
+        jLinformation.setText("Välj åtgärd:");
 
         btnBekrafta.setText("Bekräfta");
         btnBekrafta.addActionListener(new java.awt.event.ActionListener() {
@@ -71,85 +79,165 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
         jLerror.setForeground(new java.awt.Color(255, 0, 0));
         jLerror.setText("Något gick fel");
 
+        rdbtnTabort.setText("Ta bort adminstatus");
+        rdbtnTabort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbtnTabortActionPerformed(evt);
+            }
+        });
+
+        rdbtnGe.setText("Ge adminstatus");
+        rdbtnGe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbtnGeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLinformation)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnBekrafta)
-                            .addComponent(jLAngeEpost))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtbEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLtitel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rdbtnGe)
+                                .addGap(213, 213, 213))
+                            .addComponent(jLtitel))
                         .addGap(41, 41, 41))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnTillbaka)
-                        .addGap(53, 53, 53))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLbekraftning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLerror, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
-                        .addGap(141, 141, 141))))
+                        .addComponent(rdbtnTabort)
+                        .addGap(53, 53, 53))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLAngeEpost)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtbEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(128, 128, 128))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(jLinformation))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnTillbaka))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLerror, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLbekraftning, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(btnBekrafta)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLtitel)
-                .addGap(76, 76, 76)
+                .addGap(36, 36, 36)
                 .addComponent(jLinformation)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdbtnGe)
+                    .addComponent(rdbtnTabort))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtbEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLAngeEpost))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLAngeEpost)
-                    .addComponent(txtbEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLbekraftning, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLbekraftning, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBekrafta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLerror, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBekrafta)
-                    .addComponent(btnTillbaka))
-                .addGap(32, 32, 32))
+                .addComponent(jLerror)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(btnTillbaka)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    
+    
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
         //läs txtbEpost
         String epost = txtbEpost.getText();
+        //tömmer textfältet för att slippa behöva ta bort det manuellt
         txtbEpost.setText("");
+        //gömmer fel/rätt meddelanden
         jLbekraftning.setVisible(false);
         jLerror.setVisible(false);
         
+        
+        
         try {
-        
-            String fraga = "UPDATE Agent SET Administrator = J WHERE epost ='"+epost+"'";
-        
-            if(Validering.isTxtFilled(epost) && Validering.finnsAnvandareEpostIDB(epost)){
-                idb.update(fraga);
-                jLbekraftning.setVisible(true);
-                JOptionPane.showMessageDialog(null,"Användare med e-post: "+epost+" är nu administratör");
-            }
-            else{
+          //kontroll för att kontrollera ifall användaren har den status man försöker ge
+          //ifall ge knappen är vald och eposten inte har admin status
+             if(rdbtnGe.isSelected() && !Validering.kontrollOmAdmin(epost)){
+                    val = "J";
+                    //ifall tabort är vald och eposten har adminstatus
+                }else if(rdbtnTabort.isSelected() && Validering.kontrollOmAdmin(epost)){
+                    val = "N";
+                }
+                //ifall inget stämmer så sätts variabeln till X för att stoppa i senare villkor då null inte skulle fungera hos val
+                else{
+                    val ="X";   
+                }
+            
+            //kontrollerar att textrutan är ifylld
+            if(Validering.isTxtFilled(epost)){
+                
+                //kontroll för att inte kunna ändra sin egen status
+                if(!InlogAgent.getEpost().equals(epost)){
+               
+                     //ifall något av villkoren som kontrollerar adminstatus stämde, ifall inte så kommer val vara X
+                    if(val.equals("J") || val.equals("N")){
+                
+                        //sql fråga
+                        String fraga = "UPDATE Agent SET Administrator ='"+val+"' WHERE epost ='"+epost+"'";
+                        
+                        //ifall någon av knapparna är valda
+                        if(rdbtnTabort.isSelected() || rdbtnGe.isSelected()){
+                            
+                            // ifall eposten finns i agent-tabellen, eftersom man loggade in med menyval agent kommer metoden leta där
+                            if(Validering.finnsAnvandareEpostIDB(epost)){
+                                
+                                //uppdaterar databasen
+                                idb.update(fraga);
+                                
+                                //visar label att det lyckades
+                                jLbekraftning.setVisible(true);
+                                JOptionPane.showMessageDialog(null,"Ändringen lyckades, uppdaterad behörighet för konto med e-post: "+epost);
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Välj en av åtgärderna för att fortsätta");  
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Användaren har redan rättigheterna du försöker ge");
+                        jLerror.setVisible(true);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Du kan inte ändra dina egna rättigheter");
+                    jLerror.setVisible(true);
+                } 
+            }else{
                 jLerror.setVisible(true);
             }
         }catch(InfException ex){
             JOptionPane.showMessageDialog(null,"Något gick fel");
             System.out.println(ex.getMessage());
+        }catch(Exception e){
+            System.out.println("Interntf fel: "+e);
         }
-        //VALIDERA?? kolla om epost är giltig
+        
         
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
@@ -158,6 +246,29 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
         new AgentAdminFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void rdbtnGeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtnGeActionPerformed
+        // TODO add your handling code here:
+        String epost = txtbEpost.getText();
+        if(rdbtnGe.isSelected()){
+            rdbtnTabort.setEnabled(false);    
+        }
+        else{
+            
+            rdbtnTabort.setEnabled(true);
+        }
+    }//GEN-LAST:event_rdbtnGeActionPerformed
+
+    private void rdbtnTabortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtnTabortActionPerformed
+        // TODO add your handling code here:
+        
+        if(rdbtnTabort.isSelected()){
+            rdbtnGe.setEnabled(false);  
+        }
+        else{
+            rdbtnGe.setEnabled(true);
+        }
+    }//GEN-LAST:event_rdbtnTabortActionPerformed
 
 
 
@@ -169,6 +280,8 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
     private javax.swing.JLabel jLerror;
     private javax.swing.JLabel jLinformation;
     private javax.swing.JLabel jLtitel;
+    private javax.swing.JRadioButton rdbtnGe;
+    private javax.swing.JRadioButton rdbtnTabort;
     private javax.swing.JTextField txtbEpost;
     // End of variables declaration//GEN-END:variables
 }
