@@ -139,10 +139,10 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
     
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
-        if(Validering.valImeny("Agent"))
+        if(Validering.valImenyInloggningFonster("Agent"))
         {
             new AgentFonster(idb).setVisible(true);
-        }else if(Validering.valImeny("Alien"))
+        }else if(Validering.valImenyInloggningFonster("Alien"))
         {
             new AlienFonster(idb).setVisible(true);
         }
@@ -166,19 +166,22 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
         
     try{
         if(Validering.isTxtFilled(nuvLos) && Validering.isTxtFilled(nyttLos) && Validering.godkanndLosenLangd(nyttLos)){
-            if(Validering.valImeny("Agent") && Validering.kontrollLosenStammer(InlogAgent.getEpost(), nuvLos)){
+            if(Validering.valImenyInloggningFonster("Agent") && Validering.kontrollLosenStammer(InlogAgent.getEpost(), nuvLos) && Validering.isLosenordNew(nuvLos, nyttLos)){
                 idb.update("UPDATE agent SET losenord='"+nyttLos+"' WHERE epost='"+InlogAgent.getEpost()+"'");
                 JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
                 dispose();
-                new AgentFonster(idb).setVisible(true);
+                if(InlogAgent.isAdministrator()) {
+                new AgentAdminFonster(idb).setVisible(true);
+                } else {
+                    new AgentFonster(idb).setVisible(true);
                 }
-            else if(Validering.valImeny("Alien") && Validering.kontrollLosenStammer(InlogAlien.getEpost(), nuvLos)){
+            } else if(Validering.valImenyInloggningFonster("Alien") && Validering.kontrollLosenStammer(InlogAlien.getEpost(), nuvLos) && Validering.isLosenordNew(nuvLos, nyttLos)){
                 idb.update("UPDATE alien SET losenord='"+nyttLos+"'WHERE epost='"+InlogAlien.getEpost()+"'");
                 JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
                 dispose();
                 new AlienFonster(idb).setVisible(true);
                 }    
-            } 
+            }
         }catch (InfException undantag){
             JOptionPane.showMessageDialog(null, "Fel");
             System.out.println("Internt felmeddelande"+undantag);
@@ -187,7 +190,7 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
             System.out.println("Internt felmeddelande"+e);
         }
     }//GEN-LAST:event_btnBekraftaActionPerformed
-
+    
     
     private void txtbNuvLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbNuvLosenActionPerformed
         // TODO add your handling code here:

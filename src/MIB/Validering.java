@@ -34,14 +34,14 @@ public class Validering {
 
         // Hämtar ut ur databasen
         try {
-            if(valImeny("Agent")){
+            if(valImenyInloggningFonster("Agent")){
             anvEpost = idb.fetchSingle(fraga1);
             
             if(anvEpost != null){
                 finns = true;
             }
             }
-            else if(valImeny("Alien")){
+            else if(valImenyInloggningFonster("Alien")){
                 anvEpost = idb.fetchSingle(fraga2);
                 
                     if(anvEpost != null){
@@ -107,7 +107,7 @@ public static boolean kontrollLosenStammer(String epost, String losenord)
   
     try{
         
-        if(valImeny("Agent"))
+        if(valImenyInloggningFonster("Agent"))
         {
             svar = idb.fetchSingle(agentFraga);
             if(svar != null)
@@ -121,7 +121,7 @@ public static boolean kontrollLosenStammer(String epost, String losenord)
                 }
             }
         }
-        else if(valImeny("Alien")){
+        else if(valImenyInloggningFonster("Alien")){
             svar = idb.fetchSingle(alienFraga);
             if(svar != null){
                 if(svar.equals(losenord))
@@ -152,7 +152,7 @@ public static boolean kontrollLosenStammer(String epost, String losenord)
 
 
 
-public static boolean valImeny(String val)
+public static boolean valImenyInloggningFonster(String val)
 {
     boolean vald = false;
     if(InloggningsFonster.getMenyval().equals(val))
@@ -195,6 +195,18 @@ public static boolean isTxtFilled(String txtb)
     return isFilled;
 }
         
+
+
+public static boolean isLosenordNew(String nuv, String nytt)
+{
+    boolean samma = true;
+    
+    if(nuv.equals(nytt)){
+        JOptionPane.showMessageDialog(null, "Lösenord är samma som det gamla, pröva någonting nytt");
+        samma = false;
+    }
+    return samma;  
+}
 }
 
 
