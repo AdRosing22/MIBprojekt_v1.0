@@ -218,7 +218,8 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null,"Ändringen lyckades, uppdaterad behörighet för konto med e-post: "+epost);
                             }
                         }else{
-                            JOptionPane.showMessageDialog(null,"Välj en av åtgärderna för att fortsätta");  
+                            JOptionPane.showMessageDialog(null,"Välj en av åtgärderna för att fortsätta");
+                            jLerror.setVisible(true);
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Användaren har redan rättigheterna du försöker ge");

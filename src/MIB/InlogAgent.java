@@ -68,6 +68,7 @@ public static void hamtaInfoOmAgent()
     }
     
     
+
     
 
 //alla getters och setters för att kunna ha åtkomst till specifika uppgifter hämtade via hamtaInfo metoderna
