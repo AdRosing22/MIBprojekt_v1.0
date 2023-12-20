@@ -77,6 +77,21 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Du har inte befogenhet till att göra detta");
         }
     }
+    
+    private void visaAlienInformation(String epost) {
+        try {
+            HashMap<String, String> alienInfo = idb.fetchRow("SELECT * FROM alien WHERE epost = '" + epost + "'");
+            if (alienInfo != null) {
+                alienIDField.setText(alienInfo.get("Alien_ID"));
+                registreringsdatumField.setText(alienInfo.get("Registreringsdatum"));
+                losenordField.setText(alienInfo.get("Losenord"));
+                namnField.setText(alienInfo.get("Namn"));
+                telefonField.setText(alienInfo.get("Telefon"));
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något blev fel.");
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -249,11 +264,13 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void laddaAliensKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laddaAliensKnappActionPerformed
         // TODO add your handling code here:
         laddaAliens();
+        visaAlienInformation(epost);
     }//GEN-LAST:event_laddaAliensKnappActionPerformed
 
     private void losenordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_losenordFieldActionPerformed
