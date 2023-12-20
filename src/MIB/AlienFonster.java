@@ -14,6 +14,7 @@ public class AlienFonster extends javax.swing.JFrame {
 
     
     private InfDB idb;
+    private InlogAlien nyAlien;
     
     
    
@@ -27,6 +28,14 @@ public class AlienFonster extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         setValkommen(InlogAlien.getNamn());
+    }
+    
+    public AlienFonster(InfDB idb, InlogAlien nyAlien)
+    {
+        initComponents();
+        this.idb=idb;
+        this.nyAlien=nyAlien;
+        setValkommen(nyAlien.getNamn());
     }
 
     /**
@@ -56,7 +65,7 @@ public class AlienFonster extends javax.swing.JFrame {
             }
         });
 
-        btnAvsluta.setText("Avsluta");
+        btnAvsluta.setText("Logga ut");
         btnAvsluta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvslutaActionPerformed(evt);
@@ -123,6 +132,8 @@ public class AlienFonster extends javax.swing.JFrame {
 
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
         // TODO add your handling code here:
+        nyAlien.loggaUt();
+        new InloggningsFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAvslutaActionPerformed
 

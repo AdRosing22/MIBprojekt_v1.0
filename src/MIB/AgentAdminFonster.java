@@ -13,14 +13,22 @@ import oru.inf.InfDB;
 public class AgentAdminFonster extends javax.swing.JFrame {
 
     private InfDB idb;
+    private InlogAgent nyAgent;
     
     
     /**
      * Creates new form AgentAdminFonster
      */
-    public AgentAdminFonster(InfDB idb) {
+    public AgentAdminFonster(InfDB idb, InlogAgent nyAgent) {
         initComponents();
-        this.idb = idb;   
+        this.idb = idb;
+        this.nyAgent = nyAgent;
+    }
+    
+    public AgentAdminFonster(InfDB idb)
+    {
+        initComponents();
+        this.idb = idb;
     }
     
   
@@ -50,7 +58,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
         jLvalkommen.setText("Välkommen Agent med administratörs rättigheter!");
 
-        btnLoggaut.setText("Avsluta");
+        btnLoggaut.setText("Logga ut");
         btnLoggaut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoggautActionPerformed(evt);
@@ -183,6 +191,8 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     private void btnLoggautActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggautActionPerformed
         // TODO add your handling code here:
+        nyAgent.loggaUt();
+        new InloggningsFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLoggautActionPerformed
 

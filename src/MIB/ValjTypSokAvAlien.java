@@ -262,7 +262,14 @@ public class ValjTypSokAvAlien extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
-        new AgentFonster(idb).setVisible(true);
+        if(Validering.kontrollOmAdmin(InlogAgent.getEpost()))
+        {
+            new AgentAdminFonster(idb).setVisible(true);
+        }
+        else{
+            new AgentFonster(idb).setVisible(true);
+        }
+        
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 

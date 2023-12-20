@@ -14,15 +14,24 @@ import oru.inf.InfDB;
 public class AgentFonster extends javax.swing.JFrame {
 
     private InfDB idb;
+    private InlogAgent nyAgent;
     
     
     /**
      * Creates new form AgentFonster
      */
-    public AgentFonster(InfDB idb) {
+    public AgentFonster(InfDB idb, InlogAgent nyAgent) {
         initComponents();
         setValkommen(InlogAgent.getEpost());
         this.idb = idb;  
+        this.nyAgent = nyAgent;
+    }
+    
+    public AgentFonster(InfDB idb)
+    {
+        initComponents();
+        this.idb = idb;
+        setValkommen(InlogAgent.getEpost());
     }
     
    
@@ -80,7 +89,7 @@ public class AgentFonster extends javax.swing.JFrame {
 
         jLabel1.setText("Åtgärder");
 
-        btnAvsluta.setText("Avsluta");
+        btnAvsluta.setText("Logga ut");
         btnAvsluta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvslutaActionPerformed(evt);
@@ -186,6 +195,8 @@ public class AgentFonster extends javax.swing.JFrame {
 
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
         // TODO add your handling code here:
+        nyAgent.loggaUt();
+        new InloggningsFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAvslutaActionPerformed
 

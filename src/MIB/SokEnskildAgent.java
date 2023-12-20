@@ -41,6 +41,7 @@ public class SokEnskildAgent extends javax.swing.JFrame {
         txtbEpost = new javax.swing.JTextField();
         jLepost = new javax.swing.JLabel();
         btnSok = new javax.swing.JToggleButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +58,13 @@ public class SokEnskildAgent extends javax.swing.JFrame {
         btnSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSokActionPerformed(evt);
+            }
+        });
+
+        jToggleButton1.setText("Tillbaka");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
             }
         });
 
@@ -84,6 +92,10 @@ public class SokEnskildAgent extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSok)
                 .addGap(213, 213, 213))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,8 +109,10 @@ public class SokEnskildAgent extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnSok)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                .addGap(17, 17, 17))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -185,6 +199,12 @@ public class SokEnskildAgent extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSokActionPerformed
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        new AgentAdminFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -192,6 +212,7 @@ public class SokEnskildAgent extends javax.swing.JFrame {
     private javax.swing.JLabel jLepost;
     private javax.swing.JLabel jLtitel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextArea txtFagentinfo;
     private javax.swing.JTextField txtbEpost;
     // End of variables declaration//GEN-END:variables

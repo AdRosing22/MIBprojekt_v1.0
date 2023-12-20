@@ -187,7 +187,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
         {
             nyAlien = new InlogAlien(idb, anv);
             
-            new AlienFonster(idb).setVisible(true);
+            new AlienFonster(idb, nyAlien).setVisible(true);
         }
         else if(menyVal.equals("Agent"))
         {
@@ -195,10 +195,10 @@ public class InloggningsFonster extends javax.swing.JFrame {
             new InlogAlien(idb);
             if(Validering.kontrollOmAdmin(anv))
             {
-                new AgentAdminFonster(idb).setVisible(true);
+                new AgentAdminFonster(idb, nyAgent).setVisible(true);
             }
             else{
-                new AgentFonster(idb).setVisible(true);
+                new AgentFonster(idb, nyAgent).setVisible(true);
             }   
         }
         dispose();

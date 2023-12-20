@@ -69,7 +69,17 @@ public static void hamtaInfoOmAgent()
     
     
 
-    
+    public static void loggaUt()
+    {
+        namn ="";
+        epost="";
+        telefon="";
+        omrade="";
+        agentid="";
+        losenord="";
+        datum="";
+        administrator="";          
+    }
 
 //alla getters och setters för att kunna ha åtkomst till specifika uppgifter hämtade via hamtaInfo metoderna
 

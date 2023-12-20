@@ -70,6 +70,18 @@ public static void hamtaInfoOmAlien()
 
     
     
+public static void loggaUt()
+{
+    epost="";
+    alienid="";
+    namn="";
+    telefon="";
+    plats="";
+    datum="";
+    losenord="";
+    ansvarig_agent="";
+}
+
     public static String getEpost()
     {
         return epost;
