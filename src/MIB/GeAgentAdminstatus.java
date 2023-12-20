@@ -196,7 +196,7 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
             if(Validering.isTxtFilled(epost)){
                 
                 //kontroll för att inte kunna ändra sin egen status
-                if(!InlogAgent.getEpost().equals(epost)){
+                if(!InlogAgent.getEpost().equals(epost) && Validering.finnsAnvandareEpostIDB(epost)){
                
                      //ifall något av villkoren som kontrollerar adminstatus stämde, ifall inte så kommer val vara X
                     if(val.equals("J") || val.equals("N")){
@@ -206,28 +206,24 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
                         
                         //ifall någon av knapparna är valda
                         if(rdbtnTabort.isSelected() || rdbtnGe.isSelected()){
-                            
-                            // ifall eposten finns i agent-tabellen, eftersom man loggade in med menyval agent kommer metoden leta där
-                            if(Validering.finnsAnvandareEpostIDB(epost)){
-                                
                                 //uppdaterar databasen
                                 idb.update(fraga);
                                 
                                 //visar label att det lyckades
                                 jLbekraftning.setVisible(true);
                                 JOptionPane.showMessageDialog(null,"Ändringen lyckades, uppdaterad behörighet för konto med e-post: "+epost);
-                            }
+                            
                         }else{
                             JOptionPane.showMessageDialog(null,"Välj en av åtgärderna för att fortsätta");
-                            jLerror.setVisible(true);
+                            
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Användaren har redan rättigheterna du försöker ge");
-                        jLerror.setVisible(true);
+                        
                     }
                 }else{
                     JOptionPane.showMessageDialog(null, "Du kan inte ändra dina egna rättigheter");
-                    jLerror.setVisible(true);
+                    
                 } 
             }else{
                 jLerror.setVisible(true);
