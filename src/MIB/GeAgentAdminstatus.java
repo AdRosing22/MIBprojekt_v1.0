@@ -10,7 +10,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author alvin
+ * @author alvin & adam
  */
 public class GeAgentAdminstatus extends javax.swing.JFrame {
     
