@@ -27,7 +27,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btnAvsluta" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnLoggaut" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -93,7 +93,7 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-              <Component id="btnAvsluta" min="-2" max="-2" attributes="0"/>
+              <Component id="btnLoggaut" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -105,12 +105,12 @@
         <Property name="text" type="java.lang.String" value="V&#xe4;lkommen Agent med administrat&#xf6;rs r&#xe4;ttigheter!"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="btnAvsluta">
+    <Component class="javax.swing.JToggleButton" name="btnLoggaut">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Avsluta program"/>
+        <Property name="text" type="java.lang.String" value="Avsluta"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvslutaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoggautActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jHanteraAlien">

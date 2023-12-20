@@ -39,16 +39,7 @@ public class InlogAlien {
         this.idb = idb;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+      
     
 public static void hamtaInfoOmAlien()
     {

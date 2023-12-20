@@ -20,10 +20,10 @@ public class AgentAdminFonster extends javax.swing.JFrame {
      */
     public AgentAdminFonster(InfDB idb) {
         initComponents();
-        this.idb = idb;
-        
-        
+        this.idb = idb;   
     }
+    
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,7 +35,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
     private void initComponents() {
 
         jLvalkommen = new javax.swing.JLabel();
-        btnAvsluta = new javax.swing.JToggleButton();
+        btnLoggaut = new javax.swing.JToggleButton();
         jHanteraAlien = new javax.swing.JButton();
         jHanteraAgenter = new javax.swing.JButton();
         jAndraLosenord = new javax.swing.JButton();
@@ -50,10 +50,10 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
         jLvalkommen.setText("Välkommen Agent med administratörs rättigheter!");
 
-        btnAvsluta.setText("Avsluta program");
-        btnAvsluta.addActionListener(new java.awt.event.ActionListener() {
+        btnLoggaut.setText("Avsluta");
+        btnLoggaut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAvslutaActionPerformed(evt);
+                btnLoggautActionPerformed(evt);
             }
         });
 
@@ -123,7 +123,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAvsluta)
+                        .addComponent(btnLoggaut)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jAtgarder)
@@ -173,7 +173,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
                             .addComponent(jHanteraUtrustning)
                             .addComponent(jSokAlien))))
                 .addGap(59, 59, 59)
-                .addComponent(btnAvsluta)
+                .addComponent(btnLoggaut)
                 .addContainerGap())
         );
 
@@ -181,10 +181,10 @@ public class AgentAdminFonster extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
+    private void btnLoggautActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggautActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_btnAvslutaActionPerformed
+    }//GEN-LAST:event_btnLoggautActionPerformed
 
     private void jHanteraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraAlienActionPerformed
         // TODO add your handling code here:
@@ -235,7 +235,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnAvsluta;
+    private javax.swing.JToggleButton btnLoggaut;
     private javax.swing.JButton jAndraLosenord;
     private javax.swing.JLabel jAtgarder;
     private javax.swing.JButton jHanteraAgenter;

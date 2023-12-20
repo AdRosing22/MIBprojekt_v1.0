@@ -134,11 +134,11 @@ try {
             omrade = omradeschefInfo.get("Benamning");
           
             //via append() visar man det i textrutan
-            txtOmradeschef.append("Namn:"+namn+"\n");
-            txtOmradeschef.append("Telefonnummer:"+telefon+"\n");
-            txtOmradeschef.append("Anställningsdatum:"+anstallningsdatum+"\n");
-            txtOmradeschef.append("Epost:"+epost+"\n");
-            txtOmradeschef.append("Ansvar över ditt område:"+omrade+"\n");
+            txtOmradeschef.append("Namn: "+namn+"\n");
+            txtOmradeschef.append("Telefonnummer: "+telefon+"\n");
+            txtOmradeschef.append("Anställningsdatum: "+anstallningsdatum+"\n");
+            txtOmradeschef.append("Epost: "+epost+"\n");
+            txtOmradeschef.append("Ansvar över ditt område: "+omrade+"\n");
           
         //ifall alien inte har någon som är områdeschef, eller saknar område
         } else {

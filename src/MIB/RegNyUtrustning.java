@@ -10,7 +10,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author alvin
+ * @author alvin & adam
  */
 public class RegNyUtrustning extends javax.swing.JFrame {
 
@@ -51,7 +51,7 @@ public class RegNyUtrustning extends javax.swing.JFrame {
         jLväljUtrustningstyp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLväljUtrustningstyp.setText("Välj utrustningstyp:");
 
-        cbxVälj.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vapen", "Kommunikation", "Teknik" }));
+        cbxVälj.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj", "Vapen", "Kommunikation", "Teknik" }));
         cbxVälj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxVäljActionPerformed(evt);
@@ -163,8 +163,8 @@ public class RegNyUtrustning extends javax.swing.JFrame {
             case "Teknik":
                 jLattribut.setText("Kraftkälla");
                 break;
-            default:
-                //Om ingen typ är vald
+            case "Välj":
+                jLattribut.setText("");
                 break;
                
         }
@@ -172,6 +172,7 @@ public class RegNyUtrustning extends javax.swing.JFrame {
 
     private void btnRegistreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraActionPerformed
       
+        
         String valdUtrustning = cbxVälj.getSelectedItem().toString();
         
        
@@ -191,9 +192,13 @@ public class RegNyUtrustning extends javax.swing.JFrame {
                     {
                         idb.insert(fraga1);
                         idb.insert(fraga2);
+                        JOptionPane.showMessageDialog(null,"Registreringen lyckades!");
+                        txtbNamn.setText("");
+                        txtbEgenskap.setText("");
                     }
                 }catch(InfException ex)
                 {
+                    JOptionPane.showMessageDialog(null,"Något gick fel");
                     System.out.println(ex.getMessage());
                 }
                 
@@ -210,9 +215,13 @@ public class RegNyUtrustning extends javax.swing.JFrame {
                     {
                         idb.insert(fraga1);
                         idb.insert(fraga2);
+                        JOptionPane.showMessageDialog(null,"Registreringen lyckades!");
+                        txtbNamn.setText("");
+                        txtbEgenskap.setText("");
                     }
                     }catch(InfException ex)
                     {
+                        JOptionPane.showMessageDialog(null,"Något gick fel");
                         System.out.println(ex.getMessage());
                     }
                 
@@ -228,18 +237,25 @@ public class RegNyUtrustning extends javax.swing.JFrame {
                     {
                         idb.insert(fraga1);
                         idb.insert(fraga2);
+                        JOptionPane.showMessageDialog(null,"Registreringen lyckades!");
+                        txtbNamn.setText("");
+                        txtbEgenskap.setText("");
                     }
                     }catch(InfException ex)
                     {
+                        JOptionPane.showMessageDialog(null,"Något gick fel");
                         System.out.println(ex.getMessage());
                     }
                 
                 break;
-            default:
-                //Om ingen typ är vald
+            case "Välj":
+                JOptionPane.showMessageDialog(null,"Välj kategori i rullgardinen för att slutföra registreringen");
                 break;
                
         }
+        
+        
+        
     }//GEN-LAST:event_btnRegistreraActionPerformed
 
     private void txtbEgenskapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbEgenskapActionPerformed
