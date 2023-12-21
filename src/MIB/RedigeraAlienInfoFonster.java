@@ -34,7 +34,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     public RedigeraAlienInfoFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
-        this.epost = epost;
+        epost = InlogAgent.getEpost();
         kontrolleraAdminStatus();
     }
     
