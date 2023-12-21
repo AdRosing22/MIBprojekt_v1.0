@@ -4,7 +4,6 @@
  */
 package MIB;
 
-//hej
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
