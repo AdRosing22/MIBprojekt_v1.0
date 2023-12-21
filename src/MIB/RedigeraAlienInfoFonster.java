@@ -50,6 +50,12 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
                 chooseAlienCbx.addItem(namn + " (" + epost + ")");
                 alienEpostMap.put(namn, epost);
             }
+            
+            if(!alienlist.isEmpty()) {
+                chooseAlienCbx.setSelectedIndex(0);
+                visaAlienInformation(alienEpostMap.get(alienlist.get(0).get("Namn")));
+            }
+            
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod");
         }
@@ -391,7 +397,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     private void chooseAlienCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseAlienCbxActionPerformed
         // TODO add your handling code here:
         String selected = (String) chooseAlienCbx.getSelectedItem();
-        if(selected != null & selected.isEmpty()) {
+        if(selected != null & !selected.isEmpty()) {
             String epost = alienEpostMap.get(selected.split(" \\(")[0]);
             visaAlienInformation(epost);
         }
