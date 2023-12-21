@@ -69,16 +69,14 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     
     
     private void taBortAlien(String epost) {
-        if (isAdmin) {
+       
             try {
                 idb.delete("DELETE FROM alien WHERE Epost = '" + epost + "'");
                 JOptionPane.showMessageDialog(null, "Alien borttagen.");
             } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "Något blev fel.");
+                System.out.println("Intern felmeddelande." + e.getMessage());
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Du har inte befogenhet till att göra detta");
-        }
     }
     
     private void visaAlienInformation(String epost) {
