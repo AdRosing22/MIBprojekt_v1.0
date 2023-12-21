@@ -13,6 +13,7 @@ import oru.inf.InfDB;
 public class HanteraAlienAdmin extends javax.swing.JFrame {
 
     private InfDB idb;
+    private String epost;
     /**
      * Creates new form HanteraAlienAdmin
      */
@@ -20,6 +21,7 @@ public class HanteraAlienAdmin extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.idb = idb;
+        this.epost = epost;
     }
 
     /**
@@ -31,21 +33,42 @@ public class HanteraAlienAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnRedigeraAlien = new javax.swing.JToggleButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnRedigeraAlien.setText("Redigera alieninformation");
+        btnRedigeraAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRedigeraAlienActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(118, 118, 118))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(btnRedigeraAlien)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRedigeraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAlienActionPerformed
+        // TODO add your handling code here:
+        new RedigeraAlienInfoFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRedigeraAlienActionPerformed
 
     /**
      * @param args the command line arguments
@@ -53,5 +76,6 @@ public class HanteraAlienAdmin extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnRedigeraAlien;
     // End of variables declaration//GEN-END:variables
 }

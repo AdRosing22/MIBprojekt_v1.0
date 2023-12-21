@@ -13,6 +13,7 @@ import oru.inf.InfDB;
 public class HanteraAliensFonster extends javax.swing.JFrame {
     
     private InfDB idb;
+
     
     
 
@@ -22,6 +23,7 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
     public HanteraAliensFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
+       
         
     }
 

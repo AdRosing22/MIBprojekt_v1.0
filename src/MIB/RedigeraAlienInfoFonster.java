@@ -34,7 +34,6 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     public RedigeraAlienInfoFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
-        this.isAdmin = isAdmin;
         this.epost = epost;
         kontrolleraAdminStatus();
     }
@@ -57,9 +56,23 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     }
     
     private void kontrolleraAdminStatus() {
-        isAdmin = Validering.kontrollOmAdmin(epost);
-        tabortKnapp.setVisible(isAdmin);
+        try {
+            String fraga = "SELECT Administrator FROM agent WHERE Epost = '" + epost + "'";
+            String adminStatus = idb.fetchSingle(fraga);
+            
+            if(adminStatus != null && adminStatus.equals("J")) {
+                isAdmin = true;
+            } else {
+                isAdmin = false;
+                
+                
+                tabortKnapp.setVisible(!isAdmin);
+            }
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+        }
     }
+
     
     
     private void taBortAlien(String epost) {
