@@ -27,7 +27,6 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.isAdmin = isAdmin;
-        checkAdminStatus();
         this.epost = epost;
         kontrolleraAdminStatus();
     }
@@ -50,18 +49,8 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     }
     
     private void kontrolleraAdminStatus() {
-        try {
-            String adminStatus = idb.fetchSingle("SELECT Administrator FROM agent WHERE epost = '" + epost + "'");
-            isAdmin = "J".equals(adminStatus);
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något blev fel");
-        }
-    }
-    
-    private void checkAdminStatus() {
-        if(!isAdmin) {
-            tabortKnapp.setVisible(false);
-        }
+        isAdmin = Validering.kontrollOmAdmin(epost);
+        tabortKnapp.setVisible(isAdmin);
     }
     
     
@@ -90,6 +79,73 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något blev fel.");
+        }
+    }
+    
+    private void uppdateraAlienInformation(String epost) {
+        
+        try {
+            String nyttNamn = namnField.getText();
+            String nyttLosenord = losenordField.getText();
+            String nyRegistreringsdatum = registreringsdatumField.getText();
+            String nyttTelefon = telefonField.getText();
+            String nyPlats = (String) platsCbx.getSelectedItem();
+            String nyAgent = (String) ansvarigAgentCbx.getSelectedItem();
+            
+            int platsID = getPlatsID(nyPlats);
+            int agentID = getAgentID(nyAgent);
+            
+            String fraga = "UPDATE alien SET Namn = '" + nyttNamn + "', Losenord = '" + nyttLosenord + "', Registreringsdatum = '" + nyRegistreringsdatum + "', Telefon = '" + nyttTelefon + "', Plats = " + platsID + ", Ansvarig_Agent = " + agentID + "WHERE Epost = '" + epost + "'";
+            
+            idb.update(fraga);
+            JOptionPane.showMessageDialog(null, "Aliens information har uppdaterats.");
+            
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+            System.out.println("Internt felmeddelande." + e.getMessage());
+        }
+}  
+
+    private int getPlatsID(String platsNamn) throws InfException {
+        String fraga = "SELECT Plats_ID FROM plats WHERE Benamning = '" + platsNamn + "'";
+        String platsID = idb.fetchSingle(fraga);
+        if (platsID == null) {
+            throw new InfException("Platsen kunde inte hittas.");
+        }
+        return Integer.parseInt(platsID);
+    }
+    
+    private int getAgentID(String agentNamn) throws InfException {
+        String fraga = "SELECT Agent_ID FROM agent WHERE Namn = '" + agentNamn + "'";
+        String agentID = idb.fetchSingle(fraga);
+        if (agentID == null) {
+            throw new InfException("Platsen kunde inte hittas.");
+        }
+        return Integer.parseInt(agentID);
+    }
+    
+    
+    private void laddaPlatser() {
+        try {
+            ArrayList<HashMap<String, String>> platslist = idb.fetchRows("SELECT Plats_ID, Benamning FROM plats");
+            platsCbx.removeAllItems();
+            for(HashMap<String, String> plats : platslist) {
+                platsCbx.addItem(plats.get("Benamning"));
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+        }
+    }
+    
+    private void laddaAgenter() {
+        try {
+            ArrayList<HashMap<String, String>> agentlist = idb.fetchRows("SELECT Agent_ID, Namn FROM agent");
+            ansvarigAgentCbx.removeAllItems();
+            for(HashMap<String, String> agent : agentlist) {
+                ansvarigAgentCbx.addItem(agent.get("Namn"));
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
         }
     }
 
@@ -136,6 +192,12 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             }
         });
 
+        chooseAlienCbx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseAlienCbxActionPerformed(evt);
+            }
+        });
+
         alienIDLabel.setText("AlienID");
 
         registreringsdatumLabel.setText("Registreringsdatum");
@@ -176,6 +238,11 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
         });
 
         redigeraKnapp.setText("Redigera");
+        redigeraKnapp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redigeraKnappActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -271,6 +338,8 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
         laddaAliens();
         visaAlienInformation(epost);
+        laddaPlatser();
+        laddaAgenter();
     }//GEN-LAST:event_laddaAliensKnappActionPerformed
 
     private void losenordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_losenordFieldActionPerformed
@@ -293,6 +362,24 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     private void platsCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_platsCbxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_platsCbxActionPerformed
+
+    private void chooseAlienCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseAlienCbxActionPerformed
+        // TODO add your handling code here:
+        String selected = (String) chooseAlienCbx.getSelectedItem();
+        if(selected != null & selected.isEmpty()) {
+            String epost = alienEpostMap.get(selected.split(" \\(")[0]);
+            visaAlienInformation(epost);
+        }
+    }//GEN-LAST:event_chooseAlienCbxActionPerformed
+
+    private void redigeraKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigeraKnappActionPerformed
+        // TODO add your handling code here:
+        String selected = (String) chooseAlienCbx.getSelectedItem();
+        if(selected != null & !selected.isEmpty()) {
+            String epost = alienEpostMap.get(selected.split(" \\(")[0]);
+            uppdateraAlienInformation(epost);
+        }
+    }//GEN-LAST:event_redigeraKnappActionPerformed
 
     
     
