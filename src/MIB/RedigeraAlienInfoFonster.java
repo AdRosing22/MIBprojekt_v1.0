@@ -387,6 +387,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
         if (selected != null) {
             String epost = alienEpostMap.get(selected.split(" \\(")[0]);
             taBortAlien(epost);
+            laddaAliens();
         }
     }//GEN-LAST:event_tabortKnappActionPerformed
 
