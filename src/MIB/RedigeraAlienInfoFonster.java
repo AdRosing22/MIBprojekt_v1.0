@@ -68,9 +68,12 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
 
     
     
-    private void taBortAlien(String epost) {
-       
+    private void taBortAlien(String epost) {       
             try {
+                idb.delete("DELETE FROM boglodite WHERE Alien_ID IN (SELECT Alien_ID FROM alien WHERE Epost = '" + epost + "')");
+                idb.delete("DELETE FROM squid WHERE Alien_ID IN (SELECT Alien_ID FROM alien WHERE Epost = '" + epost + "')");
+                idb.delete("DELETE FROM worm WHERE Alien_ID IN (SELECT Alien_ID FROM alien WHERE Epost = '" + epost + "')");
+                
                 idb.delete("DELETE FROM alien WHERE Epost = '" + epost + "'");
                 JOptionPane.showMessageDialog(null, "Alien borttagen.");
             } catch (InfException e) {
