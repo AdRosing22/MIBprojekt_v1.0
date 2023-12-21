@@ -50,42 +50,42 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
                 chooseAlienCbx.addItem(namn + " (" + epost + ")");
                 alienEpostMap.put(namn, epost);
             }
+            
+            if(!alienlist.isEmpty()) {
+                chooseAlienCbx.setSelectedIndex(0);
+                visaAlienInformation(alienEpostMap.get(alienlist.get(0).get("Namn")));
+            }
+            
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod");
         }
     }
     
     private void kontrolleraAdminStatus() {
-        try {
-            String fraga = "SELECT Administrator FROM agent WHERE Epost = '" + epost + "'";
-            String adminStatus = idb.fetchSingle(fraga);
-            
-            if(adminStatus != null && adminStatus.equals("J")) {
-                isAdmin = true;
+            if(Validering.kontrollOmAdmin(InlogAgent.getEpost())) {
+                tabortKnapp.setVisible(true);
             } else {
-                isAdmin = false;
-                
-                
-                tabortKnapp.setVisible(!isAdmin);
+                tabortKnapp.setVisible(false);
             }
-            } catch (InfException e) {
-                JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
-        }
+                
+            
+            
     }
 
     
     
-    private void taBortAlien(String epost) {
-        if (isAdmin) {
+    private void taBortAlien(String epost) {       
             try {
+                idb.delete("DELETE FROM boglodite WHERE Alien_ID IN (SELECT Alien_ID FROM alien WHERE Epost = '" + epost + "')");
+                idb.delete("DELETE FROM squid WHERE Alien_ID IN (SELECT Alien_ID FROM alien WHERE Epost = '" + epost + "')");
+                idb.delete("DELETE FROM worm WHERE Alien_ID IN (SELECT Alien_ID FROM alien WHERE Epost = '" + epost + "')");
+                
                 idb.delete("DELETE FROM alien WHERE Epost = '" + epost + "'");
                 JOptionPane.showMessageDialog(null, "Alien borttagen.");
             } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "Något blev fel.");
+                System.out.println("Intern felmeddelande." + e.getMessage());
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Du har inte befogenhet till att göra detta");
-        }
     }
     
     private void visaAlienInformation(String epost) {
@@ -397,7 +397,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     private void chooseAlienCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseAlienCbxActionPerformed
         // TODO add your handling code here:
         String selected = (String) chooseAlienCbx.getSelectedItem();
-        if(selected != null & selected.isEmpty()) {
+        if(selected != null & !selected.isEmpty()) {
             String epost = alienEpostMap.get(selected.split(" \\(")[0]);
             visaAlienInformation(epost);
         }
