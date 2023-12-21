@@ -221,6 +221,8 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     private void jHanteraCheferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraCheferActionPerformed
         // TODO add your handling code here:
+        new RedigeraChef(idb).setVisible(true);
+        dispose();
     }//GEN-LAST:event_jHanteraCheferActionPerformed
 
     private void jRegistreraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegistreraUtrustningActionPerformed
