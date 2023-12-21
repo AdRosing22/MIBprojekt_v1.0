@@ -56,21 +56,14 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     }
     
     private void kontrolleraAdminStatus() {
-        try {
-            String fraga = "SELECT Administrator FROM agent WHERE Epost = '" + epost + "'";
-            String adminStatus = idb.fetchSingle(fraga);
-            
-            if(adminStatus != null && adminStatus.equals("J")) {
-                isAdmin = true;
+            if(Validering.kontrollOmAdmin(InlogAgent.getEpost())) {
+                tabortKnapp.setVisible(true);
             } else {
-                isAdmin = false;
-                
-                
-                tabortKnapp.setVisible(!isAdmin);
+                tabortKnapp.setVisible(false);
             }
-            } catch (InfException e) {
-                JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
-        }
+                
+            
+            
     }
 
     
