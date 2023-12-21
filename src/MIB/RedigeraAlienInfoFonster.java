@@ -108,6 +108,16 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             idb.update(fraga);
             JOptionPane.showMessageDialog(null, "Aliens information har uppdaterats.");
             
+            alienIDField.setText("");
+            registreringsdatumField.setText("");
+            losenordField.setText("");
+            namnField.setText("");
+            telefonField.setText("");          
+            platsCbx.setSelectedIndex(0);           
+            ansvarigAgentCbx.setSelectedIndex(0);
+            
+            
+            
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
             System.out.println("Internt felmeddelande." + e.getMessage());
