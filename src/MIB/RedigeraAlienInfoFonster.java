@@ -20,6 +20,14 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     private boolean isAdmin;
     private HashMap<String, String> alienEpostMap;
     private String epost;
+    private String nyttNamn;
+    private String nyttLosenord;
+    private String nyRegistreringsdatum;
+    private String nyttTelefon;
+    private String nyAgent;
+    private String nyPlats;
+    private int agentID;
+    private int platsID;
     /**
      * Creates new form RedigeraAlienInfoFonster
      */
@@ -85,17 +93,17 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     private void uppdateraAlienInformation(String epost) {
         
         try {
-            String nyttNamn = namnField.getText();
-            String nyttLosenord = losenordField.getText();
-            String nyRegistreringsdatum = registreringsdatumField.getText();
-            String nyttTelefon = telefonField.getText();
-            String nyPlats = (String) platsCbx.getSelectedItem();
-            String nyAgent = (String) ansvarigAgentCbx.getSelectedItem();
+            nyttNamn = namnField.getText();
+            nyttLosenord = losenordField.getText();
+            nyRegistreringsdatum = registreringsdatumField.getText();
+            nyttTelefon = telefonField.getText();
+            nyPlats = (String) platsCbx.getSelectedItem();
+            nyAgent = (String) ansvarigAgentCbx.getSelectedItem();
             
-            int platsID = getPlatsID(nyPlats);
-            int agentID = getAgentID(nyAgent);
+            platsID = getPlatsID(nyPlats);
+            agentID = getAgentID(nyAgent);
             
-            String fraga = "UPDATE alien SET Namn = '" + nyttNamn + "', Losenord = '" + nyttLosenord + "', Registreringsdatum = '" + nyRegistreringsdatum + "', Telefon = '" + nyttTelefon + "', Plats = " + platsID + ", Ansvarig_Agent = " + agentID + "WHERE Epost = '" + epost + "'";
+            String fraga = "UPDATE alien SET Namn = '" + nyttNamn + "', Losenord = '" + nyttLosenord + "', Registreringsdatum = '" + nyRegistreringsdatum + "', Telefon = '" + nyttTelefon + "', Plats = " + platsID + ", Ansvarig_Agent = " + agentID + " WHERE Epost = '" + epost + "'";
             
             idb.update(fraga);
             JOptionPane.showMessageDialog(null, "Aliens information har uppdaterats.");
