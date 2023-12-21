@@ -34,6 +34,7 @@ public class HanteraAlienAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         btnRedigeraAlien = new javax.swing.JToggleButton();
+        btnRegNyAlien = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,21 +45,32 @@ public class HanteraAlienAdmin extends javax.swing.JFrame {
             }
         });
 
+        btnRegNyAlien.setText("Registrera ny alien");
+        btnRegNyAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegNyAlienActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(118, 118, 118))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRegNyAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(112, Short.MAX_VALUE)
+                .addComponent(btnRegNyAlien)
+                .addGap(38, 38, 38)
                 .addComponent(btnRedigeraAlien)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addGap(100, 100, 100))
         );
 
         pack();
@@ -70,6 +82,12 @@ public class HanteraAlienAdmin extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnRedigeraAlienActionPerformed
 
+    private void btnRegNyAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegNyAlienActionPerformed
+        // TODO add your handling code here:
+        new RegistreraAlienFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegNyAlienActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -77,5 +95,6 @@ public class HanteraAlienAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnRedigeraAlien;
+    private javax.swing.JToggleButton btnRegNyAlien;
     // End of variables declaration//GEN-END:variables
 }
