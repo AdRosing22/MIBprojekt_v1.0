@@ -35,6 +35,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     private int rasValINT;
     private double rasValDouble;
     private String dagensdatum;
+    private String ras;
 
     /**
      * Creates new form RegistreraAlienFonster
@@ -171,7 +172,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     //uppdelat int och double eftersom längd i worm lagras i double
     private void registreraRasIdb(){
         //lokala varibaler för att korta koden och göra mer läsbar
-        String ras = cbxRas.getSelectedItem().toString();
+        ras = cbxRas.getSelectedItem().toString();
         String txtSvar = txtbRasAttribut.getText();
         
         //sql fråga
@@ -179,7 +180,10 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         
         try{
             //hårdkodat så ifall Squid eller Boglodite är valt:
-            if(ras.equals("Squid") || ras.equals("Boglodite")){
+            if(ras == null || ras.equals("Välj")){
+                 JOptionPane.showMessageDialog(null, "Du valde inte någon ras för den nya alien, för att lägga till det nu i efterhand kan du använda dig av 'redigera alien' funktionen");
+            }
+            else if(ras.equals("Squid") || ras.equals("Boglodite")){
                 //svaret i txtrutan omvandlas till int
                 rasValINT = Integer.parseInt(txtSvar);
                 //kompletterar frågan med rasValINT variabeln
@@ -192,6 +196,8 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                 String sqlfraga = fraga+rasValDouble+")";
                 idb.insert(sqlfraga);
             }
+               
+            
 
         }
         catch(InfException ex){
@@ -221,7 +227,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                 if(!Validering.epostKontrollVidreg(epost) ){
                     JOptionPane.showMessageDialog(null,"E-posten är redan registrerad i databasen, ange en ny och unik epost för den nya alien");
                     
-                }else{
+                }else if(Validering.isTxtFilled(registreringsdatumField.getText()) && Validering.isTxtFilled(losenordField.getText()) && Validering.godkanndLosenLangd(losenord) && Validering.isEpostTrustable(epost) && Validering.containsAlphabet(epost) && Validering.containsAlphabet(namn)) {
                     String fraga =  "INSERT INTO Alien VALUES ("+alienid +","+regDatum+",'"+epost+"','"+losenord+"','"+namn+"','"+telefon+"',"+platsId+","+ansvarigAgent+")";
                     idb.insert(fraga);
                     registreraRasIdb();
@@ -230,8 +236,9 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                 
                     epostField.setText("");
                     losenordField.setText("");
+                    txtbNamn.setText("");
                     platsCbx.setSelectedIndex(0);
-                    telefonField.setText("");
+                    telefonField.setText("555-");
                     ansvarigAgentCbx.setSelectedIndex(0);
                     registreringsdatumField.setText(dagensDatum());
                     txtbRasAttribut.setText("");
@@ -490,6 +497,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
 
     private void registreraKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registreraKnappActionPerformed
         registreraNyAlien();
+        genereraAlienID();
     }//GEN-LAST:event_registreraKnappActionPerformed
 
     private void ansvarigAgentCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ansvarigAgentCbxActionPerformed

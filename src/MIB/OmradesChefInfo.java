@@ -133,6 +133,8 @@ try {
             epost = omradeschefInfo.get("Epost");
             omrade = omradeschefInfo.get("Benamning");
             
+            
+            //kontrollerar att det finns en chef, eftersom vi hämtar benamning som kommer göra att mapen inte är null
             if(epost != null){
           
             //via append() visar man det i textrutan

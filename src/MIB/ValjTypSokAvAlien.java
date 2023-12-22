@@ -272,6 +272,8 @@ public class ValjTypSokAvAlien extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
+        
+        //kontroll ifall adming eller vanlig agent öppnade fönstret
         if(Validering.kontrollOmAdmin(InlogAgent.getEpost()))
         {
             new AgentAdminFonster(idb).setVisible(true);

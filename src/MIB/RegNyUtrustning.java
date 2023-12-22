@@ -188,7 +188,7 @@ public class RegNyUtrustning extends javax.swing.JFrame {
                     System.out.println(fraga1);
                     System.out.println(fraga2);
                     
-                    if(nyUtrustningsID != 0 && Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()))
+                    if(nyUtrustningsID != 0 && Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()) && Validering.containsAlphabet(txtbNamn.getText()))
                     {
                         idb.insert(fraga1);
                         idb.insert(fraga2);
@@ -211,7 +211,7 @@ public class RegNyUtrustning extends javax.swing.JFrame {
                     String fraga1 = "INSERT INTO utrustning VALUES("+nyUtrustningsID+",'"+txtbNamn.getText()+"')";
                     String fraga2 = "INSERT into kommunikation VALUES("+nyUtrustningsID+",'"+txtbEgenskap.getText()+"')";
                     
-                    if(nyUtrustningsID !=0 && Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()))
+                    if(nyUtrustningsID != 0 && Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()) && Validering.containsAlphabet(txtbNamn.getText()))
                     {
                         idb.insert(fraga1);
                         idb.insert(fraga2);
@@ -233,7 +233,7 @@ public class RegNyUtrustning extends javax.swing.JFrame {
                     String fraga1 = "INSERT INTO utrustning VALUES("+nyUtrustningsID+",'"+txtbNamn.getText()+"')";
                     String fraga2 = "INSERT INTO teknik VALUES("+nyUtrustningsID+",'"+txtbEgenskap.getText()+"')";
                     
-                    if(nyUtrustningsID !=0 && Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()))
+                    if(nyUtrustningsID != 0 && Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()) && Validering.containsAlphabet(txtbNamn.getText()))
                     {
                         idb.insert(fraga1);
                         idb.insert(fraga2);

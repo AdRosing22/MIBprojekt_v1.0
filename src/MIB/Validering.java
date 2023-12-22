@@ -225,6 +225,37 @@ public static boolean isLosenordNew(String nuv, String nytt)
     }
     return samma;  
 }
+
+
+
+
+public static boolean isEpostTrustable(String epost)
+{
+    boolean ja = false;
+    
+    if(epost.contains("@")){
+        ja = true;
+    }else{
+        JOptionPane.showMessageDialog(null,"Din angivna epost verkar inte vara korrekt, kan du ha glömt använda @?");
+    }
+    return ja;
+}
+
+
+public static boolean containsAlphabet(String txt) {
+    boolean sant = false;
+
+    if (txt.matches(".*[a-öA-Ö]+.*")) {
+        sant = true;
+    } else {
+        System.out.println("Txt: " + txt);
+        JOptionPane.showMessageDialog(null, "Du har fält som innehåller enbart siffror istället för kombination av siffror och tecken. Kontrollera ifall du har ett namnfält eller epostfält t.ex. att inmatning är korrekt");
+    }
+
+    return sant;
+}
+
+
 }
 
 

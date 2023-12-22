@@ -142,7 +142,7 @@ public class SokOmradeschef extends javax.swing.JFrame {
                 String namn = rad.get("Benamning");
                 
                 //lägger till det värdet som hittas i comboboxen
-                cbxOmraden.addItem(omrID+" - "+namn);
+                cbxOmraden.addItem(omrID+"-"+namn);
             }
             
             //gör så att sök och cbx fungerar att interagera med
@@ -169,15 +169,16 @@ public class SokOmradeschef extends javax.swing.JFrame {
         try{
             //hämtar det valda omradet från comboboxen
             String platsid = cbxOmraden.getSelectedItem().toString();
+            String [] id = platsid.split("-");
             //kollar så det valda alternativet inte är tomt (validering)
             if(!platsid.isEmpty()){
                 //tar via substring ut första tecknet, vilket vi lagt är ID
-                String id = platsid.substring(0, 1);
+                String pid = id[0];
                 //sql fraga som söker på omrades id
                 String fraga ="SELECT namn, agent.agent_id, telefon, agent.epost FROM agent " +
                               "JOIN omradeschef on agent.Agent_ID = omradeschef.Agent_ID " +
                               "JOIN omrade ON omradeschef.Omrade = omrade.Omrades_ID " +
-                              "WHERE omrade.Omrades_ID ="+id;
+                              "WHERE omrade.Omrades_ID ="+pid;
                 
                 //hämtar raden, eftersom en agent kan vara chef för ett område ska en rad va i resultSet
                 HashMap<String, String> chef = idb.fetchRow(fraga);
@@ -190,7 +191,7 @@ public class SokOmradeschef extends javax.swing.JFrame {
                     String telefon= chef.get("Telefon");
                     String epost = chef.get("Epost");
                     
-                    
+                    //ytterligare validering
                     if(agentid != null){
                     //skriver det i textrutan
                     txtFchef.append("Chef för området "+platsid+": \n");
