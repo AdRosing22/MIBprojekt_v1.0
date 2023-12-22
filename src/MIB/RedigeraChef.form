@@ -51,17 +51,17 @@
                                           <Component id="cbxOmrade" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="btnKontorsChefBekräfta" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="btnOmradesChefBekrafta" min="-2" pref="115" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="btnOmradesChefBekrafta" min="-2" pref="115" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+                                  <EmptySpace min="217" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jLtitel" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLtitel" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLinfo" min="-2" pref="426" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -70,11 +70,7 @@
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="nuvKontorInfo" min="-2" pref="290" max="-2" attributes="0"/>
-                          <Component id="jLvarning2" min="-2" pref="418" max="-2" attributes="0"/>
-                          <Component id="jLinfo" alignment="0" min="-2" pref="393" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLvarning2" min="-2" pref="418" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -118,11 +114,9 @@
               <Component id="btnOmradesChefBekrafta" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnKontorsChefBekräfta" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="56" max="32767" attributes="0"/>
+              <EmptySpace pref="60" max="32767" attributes="0"/>
               <Component id="jLinfo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="nuvKontorInfo" min="-2" pref="23" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -248,8 +242,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Vid &#xe4;ndring kommer den chefen tas bort fr&#xe5;n eventuell tidigare chefs roll"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="nuvKontorInfo">
     </Component>
     <Component class="javax.swing.JLabel" name="jLinfo">
       <Properties>

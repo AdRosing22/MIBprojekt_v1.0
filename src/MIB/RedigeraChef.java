@@ -39,7 +39,7 @@ public class RedigeraChef extends javax.swing.JFrame {
         jLvarning.setVisible(false);
         jLvarning2.setVisible(false);
         jLinfo.setVisible(false);
-        nuvKontorInfo.setVisible(false);
+        
     }
 
     /**
@@ -64,7 +64,6 @@ public class RedigeraChef extends javax.swing.JFrame {
         btnKontorsChefBekräfta = new javax.swing.JToggleButton();
         jLvarning = new javax.swing.JLabel();
         jLvarning2 = new javax.swing.JLabel();
-        nuvKontorInfo = new javax.swing.JLabel();
         jLinfo = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JToggleButton();
 
@@ -161,21 +160,18 @@ public class RedigeraChef extends javax.swing.JFrame {
                                             .addComponent(cbxAgenter, 0, 128, Short.MAX_VALUE)
                                             .addComponent(cbxOmrade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addComponent(btnKontorsChefBekräfta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(btnOmradesChefBekrafta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, Short.MAX_VALUE)))
-                                    .addGap(217, 217, 217))))
+                                        .addComponent(btnOmradesChefBekrafta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLtitel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLtitel)
+                                .addComponent(jLinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(58, 58, 58)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLvarning, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nuvKontorInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLvarning2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLvarning2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -210,11 +206,9 @@ public class RedigeraChef extends javax.swing.JFrame {
                 .addComponent(btnOmradesChefBekrafta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnKontorsChefBekräfta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(jLinfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nuvKontorInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(56, 56, 56)
                 .addComponent(btnTillbaka)
                 .addContainerGap())
         );
@@ -240,6 +234,7 @@ public class RedigeraChef extends javax.swing.JFrame {
         jLkontor.setVisible(false);
         btnKontorsChefBekräfta.setVisible(false);
         btnKontorsChefBekräfta.setEnabled(false);
+        jLinfo.setVisible(false);
         
         
         
@@ -295,12 +290,18 @@ public class RedigeraChef extends javax.swing.JFrame {
         //Tar bort agenten från nuvarande chefsområde för att uppdatera till nya
         String fraga5 = "DELETE FROM omradeschef WHERE Agent_ID = "+agentid;
         
+       
+        
         try{
             String arChef = idb.fetchSingle(fraga4);
+            
             int arChefint = Integer.parseInt(arChef);
+            
+            
             
             String namn = agentnamn;
             String omrnamn = omradesnamn;
+            
             
             //ifall agenten man vill lägga till redan finns som chef över annat område
             if(arChefint >0){
@@ -322,7 +323,6 @@ public class RedigeraChef extends javax.swing.JFrame {
                 idb.insert(fraga3);
                 JOptionPane.showMessageDialog(null,"Tillagt! Chef för området " + omrnamn +" är nu "+namn);
             }
-            
         }catch(InfException ex){
             JOptionPane.showMessageDialog(null,"Något gick fel");
             System.out.println("Internt felmed: "+ex.getMessage());
@@ -338,9 +338,8 @@ public class RedigeraChef extends javax.swing.JFrame {
     
     private void btnKontorsChefBekräftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKontorsChefBekräftaActionPerformed
        
-        nuvKontorInfo.setVisible(false);
         
-        
+      
         //får ut vald agent id och namn från comboboxen
         Object avalIcbx = cbxAgenter.getSelectedItem();
         String valAgent = avalIcbx.toString();
@@ -391,7 +390,6 @@ public class RedigeraChef extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Uppdaterat! Chef för kontoret " + beteckning+" är nu "+agentnamn);
                 }else{
                     JOptionPane.showMessageDialog(null,"Du måste tilldela någon till kontoret som agent "+ agentnamn + " är chef över innan du kan tilldela agenten till ett annat kontor!");
-                    nuvKontorInfo.setText("Agent: "+agentnamn + " är just nu chef över: "+nuvarandeKontor);
                 }
                 laddaKontor();
             }  
@@ -475,6 +473,5 @@ public class RedigeraChef extends javax.swing.JFrame {
     private javax.swing.JLabel jLvaljAgent;
     private javax.swing.JLabel jLvarning;
     private javax.swing.JLabel jLvarning2;
-    private javax.swing.JLabel nuvKontorInfo;
     // End of variables declaration//GEN-END:variables
 }

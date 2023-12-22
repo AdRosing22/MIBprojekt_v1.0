@@ -35,7 +35,6 @@ public class Start {
         }
 
         new InloggningsFonster(idb).setVisible(true); 
-        
         new Validering(idb);
         
 
