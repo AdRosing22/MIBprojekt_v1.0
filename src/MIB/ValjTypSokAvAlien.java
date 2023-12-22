@@ -62,8 +62,18 @@ public class ValjTypSokAvAlien extends javax.swing.JFrame {
         });
 
         btnSokRas.setText("Sök via ras");
+        btnSokRas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokRasActionPerformed(evt);
+            }
+        });
 
         btnSokRas1.setText("Sök mellan registreringsdatum");
+        btnSokRas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokRas1ActionPerformed(evt);
+            }
+        });
 
         btnSok.setText("Sök");
         btnSok.addActionListener(new java.awt.event.ActionListener() {
@@ -272,6 +282,18 @@ public class ValjTypSokAvAlien extends javax.swing.JFrame {
         
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void btnSokRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokRasActionPerformed
+        // TODO add your handling code here:
+        new AlienRas(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnSokRasActionPerformed
+
+    private void btnSokRas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokRas1ActionPerformed
+        // TODO add your handling code here:
+        new AlienDatum(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnSokRas1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

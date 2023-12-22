@@ -129,11 +129,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xf6;k via ras"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSokRasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="btnSokRas1">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xf6;k mellan registreringsdatum"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSokRas1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="btnSok">
       <Properties>

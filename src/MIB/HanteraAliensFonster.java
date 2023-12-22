@@ -112,7 +112,11 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
 
     private void btnBackaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackaActionPerformed
         // TODO add your handling code here:
-        new AgentFonster(idb).setVisible(true);
+        if(Validering.kontrollOmAdmin(InlogAgent.getEpost())){
+            new AgentAdminFonster(idb).setVisible(true);
+        }else{
+            new AgentFonster(idb).setVisible(true);
+        }
         dispose();
     }//GEN-LAST:event_btnBackaActionPerformed
 

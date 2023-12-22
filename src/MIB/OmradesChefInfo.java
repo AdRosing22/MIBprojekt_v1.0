@@ -132,6 +132,8 @@ try {
             anstallningsdatum = omradeschefInfo.get("Anstallningsdatum");
             epost = omradeschefInfo.get("Epost");
             omrade = omradeschefInfo.get("Benamning");
+            
+            if(epost != null){
           
             //via append() visar man det i textrutan
             txtOmradeschef.append("Namn: "+namn+"\n");
@@ -143,6 +145,7 @@ try {
         //ifall alien inte har någon som är områdeschef, eller saknar område
         } else {
             txtOmradeschef.append("Ingen information kunde hittas, kontakta kontoret");  
+        }
         }
     } catch (InfException ex) {
         JOptionPane.showMessageDialog(null, "Fel");

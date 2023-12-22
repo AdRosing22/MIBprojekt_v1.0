@@ -190,6 +190,8 @@ public class SokOmradeschef extends javax.swing.JFrame {
                     String telefon= chef.get("Telefon");
                     String epost = chef.get("Epost");
                     
+                    
+                    if(agentid != null){
                     //skriver det i textrutan
                     txtFchef.append("Chef för området "+platsid+": \n");
                     txtFchef.append("Namn: "+agentnamn+"\n");
@@ -202,6 +204,7 @@ public class SokOmradeschef extends javax.swing.JFrame {
                 else{
                     txtFchef.append("Ingen chef registrerad i området");
                 }
+            }
             }
         }catch(InfException ex){
             JOptionPane.showMessageDialog(null, "Något gick fel");
