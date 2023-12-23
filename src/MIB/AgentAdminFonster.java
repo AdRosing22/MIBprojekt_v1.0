@@ -8,7 +8,7 @@ import oru.inf.InfDB;
 
 /**
  *
- * @author Adam & Melker
+ * @author Adam & Melker & Alvin
  */
 public class AgentAdminFonster extends javax.swing.JFrame {
 
@@ -217,6 +217,8 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     private void jHanteraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraUtrustningActionPerformed
         // TODO add your handling code here:
+        new TaBortUtrustning(idb).setVisible(true);
+        dispose();
     }//GEN-LAST:event_jHanteraUtrustningActionPerformed
 
     private void jHanteraCheferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHanteraCheferActionPerformed
