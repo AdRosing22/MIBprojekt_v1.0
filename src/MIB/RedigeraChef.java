@@ -98,6 +98,11 @@ public class RedigeraChef extends javax.swing.JFrame {
         jLomrade.setText("Område:");
 
         cbxOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxOmrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxOmradeActionPerformed(evt);
+            }
+        });
 
         cbxKontor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -405,6 +410,10 @@ public class RedigeraChef extends javax.swing.JFrame {
         new AgentAdminFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void cbxOmradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOmradeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxOmradeActionPerformed
 
 
     private void laddaKontor()

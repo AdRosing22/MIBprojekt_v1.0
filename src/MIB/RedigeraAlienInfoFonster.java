@@ -261,6 +261,12 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             }
         });
 
+        ansvarigAgentCbx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ansvarigAgentCbxActionPerformed(evt);
+            }
+        });
+
         tabortKnapp.setText("Ta bort alien");
         tabortKnapp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -413,6 +419,10 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             uppdateraAlienInformation(epost);
         }
     }//GEN-LAST:event_redigeraKnappActionPerformed
+
+    private void ansvarigAgentCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ansvarigAgentCbxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ansvarigAgentCbxActionPerformed
 
     
     

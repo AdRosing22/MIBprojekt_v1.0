@@ -34,10 +34,12 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
         btnAdmin = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JToggleButton();
         jLtitel = new javax.swing.JLabel();
+        btnRedigeraAgent = new javax.swing.JButton();
+        btnTabortagent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnAdmin.setText("Ge adminstatus ");
+        btnAdmin.setText("Ändra adminstatus ");
         btnAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdminActionPerformed(evt);
@@ -52,6 +54,20 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
         });
 
         jLtitel.setText("Välj åtgärd för agent:");
+
+        btnRedigeraAgent.setText("Redigera agentinformation");
+        btnRedigeraAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRedigeraAgentActionPerformed(evt);
+            }
+        });
+
+        btnTabortagent.setText("Ta bort agent ");
+        btnTabortagent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTabortagentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,8 +84,11 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
                         .addComponent(btnTillbaka))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(btnAdmin)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRedigeraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTabortagent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,7 +97,11 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
                 .addComponent(jLtitel)
                 .addGap(39, 39, 39)
                 .addComponent(btnAdmin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnRedigeraAgent)
+                .addGap(18, 18, 18)
+                .addComponent(btnTabortagent)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(btnTillbaka)
                 .addGap(16, 16, 16))
         );
@@ -98,10 +121,23 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void btnRedigeraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAgentActionPerformed
+        // TODO add your handling code here:
+        new RedigeraAgentFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRedigeraAgentActionPerformed
+
+    private void btnTabortagentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabortagentActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnTabortagentActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdmin;
+    private javax.swing.JButton btnRedigeraAgent;
+    private javax.swing.JButton btnTabortagent;
     private javax.swing.JToggleButton btnTillbaka;
     private javax.swing.JLabel jLtitel;
     // End of variables declaration//GEN-END:variables

@@ -36,10 +36,14 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="btnAdmin" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnRedigeraAgent" max="32767" attributes="0"/>
+                          <Component id="btnAdmin" max="32767" attributes="0"/>
+                          <Component id="btnTabortagent" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="175" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,7 +54,11 @@
               <Component id="jLtitel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Component id="btnAdmin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="146" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnRedigeraAgent" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnTabortagent" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="64" max="32767" attributes="0"/>
               <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
@@ -60,7 +68,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnAdmin">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ge adminstatus "/>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra adminstatus "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminActionPerformed"/>
@@ -78,6 +86,22 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="V&#xe4;lj &#xe5;tg&#xe4;rd f&#xf6;r agent:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRedigeraAgent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Redigera agentinformation"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRedigeraAgentActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTabortagent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ta bort agent "/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTabortagentActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
