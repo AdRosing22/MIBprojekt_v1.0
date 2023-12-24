@@ -394,7 +394,7 @@ public class RedigeraChef extends javax.swing.JFrame {
                     idb.update(fraga1);
                     JOptionPane.showMessageDialog(null, "Uppdaterat! Chef för kontoret " + beteckning+" är nu "+agentnamn);
                 }else{
-                    JOptionPane.showMessageDialog(null,"Du måste tilldela någon till kontoret som agent "+ agentnamn + " är chef över innan du kan tilldela agenten till ett annat kontor!");
+                    JOptionPane.showMessageDialog(null,"Agent "+ agentnamn + " är redan chef över ett annat kontor och kan inte ha ansvaret över två kontor samtidigt!");
                 }
                 laddaKontor();
             }  

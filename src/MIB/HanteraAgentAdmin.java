@@ -129,6 +129,8 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
 
     private void btnTabortagentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabortagentActionPerformed
         // TODO add your handling code here:
+        new TaBortAgentFonster(idb).setVisible(true);
+        dispose();
         
     }//GEN-LAST:event_btnTabortagentActionPerformed
 
