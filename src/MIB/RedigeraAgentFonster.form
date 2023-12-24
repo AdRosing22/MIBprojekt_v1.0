@@ -48,13 +48,17 @@
                                   <Component id="jLansDatum" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLlosenord1" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLnuvomrade" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLutrustning" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLlamnaIn" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtfDatum" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <Component id="txtfLosen" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <Component id="cbxOmrade" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <Component id="txtfNuvomrade" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtfDatum" pref="170" max="32767" attributes="0"/>
+                                  <Component id="txtfLosen" pref="170" max="32767" attributes="0"/>
+                                  <Component id="cbxOmrade" pref="170" max="32767" attributes="0"/>
+                                  <Component id="txtfNuvomrade" pref="170" max="32767" attributes="0"/>
+                                  <Component id="cbxUtrustning" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cbxInneharUtr" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -136,7 +140,17 @@
                   <Component id="cbxOmrade" min="-2" max="-2" attributes="0"/>
                   <Component id="jLlosenord1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="31" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLutrustning" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbxUtrustning" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLlamnaIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbxInneharUtr" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnBekrafta" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTillbaka" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -198,11 +212,8 @@
     <Component class="javax.swing.JComboBox" name="cbxOmrade">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="1">
+            <StringItem index="0" value="V&#xe4;lj"/>
           </StringArray>
         </Property>
       </Properties>
@@ -269,6 +280,40 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLutrustning">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Kvittera ut utrustning:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbxUtrustning">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value="V&#xe4;lj"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLlamnaIn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Kvittera in utrustning:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbxInneharUtr">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value="V&#xe4;lj"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

@@ -4,6 +4,7 @@
  */
 package MIB;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import oru.inf.InfException;
 public class RedigeraAgentFonster extends javax.swing.JFrame {
 
     private InfDB idb;
+    private String dagensdatum;
     
     
     
@@ -29,6 +31,7 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         laddaAgenter();
         laddaOmraden();
+        
     }
 
     /**
@@ -61,6 +64,10 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
         txtfNuvomrade = new javax.swing.JTextField();
         btnBekrafta = new javax.swing.JToggleButton();
         btnTillbaka = new javax.swing.JButton();
+        jLutrustning = new javax.swing.JLabel();
+        cbxUtrustning = new javax.swing.JComboBox<>();
+        jLlamnaIn = new javax.swing.JLabel();
+        cbxInneharUtr = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,7 +86,7 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
 
         jLlosenord1.setText("Nytt Område:");
 
-        cbxOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxOmrade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj" }));
 
         jLabel1.setText("För att ändra administratörsstatus, gå tillbaka till tidigare fönster och välj \"Redigera adminstatus\"");
 
@@ -120,6 +127,14 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
             }
         });
 
+        jLutrustning.setText("Kvittera ut utrustning:");
+
+        cbxUtrustning.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj" }));
+
+        jLlamnaIn.setText("Kvittera in utrustning:");
+
+        cbxInneharUtr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,13 +160,17 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
                                     .addComponent(jLlosenord)
                                     .addComponent(jLansDatum)
                                     .addComponent(jLlosenord1)
-                                    .addComponent(jLnuvomrade))
+                                    .addComponent(jLnuvomrade)
+                                    .addComponent(jLutrustning)
+                                    .addComponent(jLlamnaIn))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtfDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtfLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbxOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtfNuvomrade, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtfDatum, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                    .addComponent(txtfLosen, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                    .addComponent(cbxOmrade, 0, 170, Short.MAX_VALUE)
+                                    .addComponent(txtfNuvomrade, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                    .addComponent(cbxUtrustning, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbxInneharUtr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLnamn)
                                 .addGap(18, 18, 18)
@@ -213,7 +232,15 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbxOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLlosenord1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLutrustning)
+                    .addComponent(cbxUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLlamnaIn)
+                    .addComponent(cbxInneharUtr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBekrafta)
                     .addComponent(btnTillbaka))
@@ -232,10 +259,21 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxAgenterItemStateChanged
 
     private void btnHamtainfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtainfoActionPerformed
-        // TODO add your handling code here:
-        tomAllaFalt();
-        hamtaInfoAgent();
         
+        //när man hämtar info om en agent
+        //tömmer alla fält från tidigare redigering
+        tomAllaFalt();
+        //hämtar info om nya agenten och fyller fälten
+        hamtaInfoAgent();
+        //laddar in alla områden
+        laddaOmraden();
+        //laddar in all utrustning som agenten redan inte har
+        laddaAllUtrustning();
+        //laddar utrustningen som agenten har
+        laddaInneharUtrustning();
+        
+        //ifall man försöker redigera sin egen epost ska det inte fungera
+        //skulle göra utloggningsprocessen krånglig tror jag?
         if(txtfEpost.getText().equals(InlogAgent.getEpost())){
             txtfEpost.setEditable(false);
             txtfEpost.setText("");
@@ -251,10 +289,11 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
-        // TODO add your handling code here:
-        
-        
-        
+        // printar ut för att avskilja och kunna följa processen i system printen
+        System.out.println("----------");
+        //genererar dagens datum
+        dagensDatum();
+        //hämtar all information från textrutorna
         String epost = txtfEpost.getText();
         String namn = txtfNamn.getText();
         String losenord = txtfLosen.getText();
@@ -266,15 +305,27 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
         
         
         try{
-            String valAgent = cbxAgenter.getSelectedItem().toString();
-            String[] agent = valAgent.split("-");
-            String agentid =agent[0];
             
+            String agentid =hamtaAgentID();
+            
+            //splitar alla cboxar för att få ut id från varje
             String valOmrade = cbxOmrade.getSelectedItem().toString();
             String[] omrade = valOmrade.split("-");
             String omradeid = omrade[0];
             
+            String valNyUtr = cbxUtrustning.getSelectedItem().toString();
+            String[] nyUtrID = valNyUtr.split("-");
+            String utID = nyUtrID[0];
+            
+            String valGammalUtr = cbxInneharUtr.getSelectedItem().toString();
+            String[] gamUtrID = valGammalUtr.split("-");
+            String inID = gamUtrID[0];
+            
+            
+            //ifall rutorna är fyllda, eposten innehåller @ och bokstav och namnet innehåller bokstav
             if(Validering.isTxtFilled(epost) && Validering.isTxtFilled(namn)&&Validering.isTxtFilled(losenord)&&Validering.isTxtFilled(datumFalse)&&Validering.isTxtFilled(telefon) && Validering.containsAlphabet(namn)&&Validering.containsAlphabet(epost)&&Validering.isEpostTrustable(epost)){
+                
+                //ifall man inte valt något nytt område så ska inte områdesid uppdateras
                 if(valOmrade.equals("Välj")){
                     String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"' WHERE Agent_ID = "+agentid;
                     idb.update(fraga);
@@ -283,7 +334,29 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
                     String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"', Omrade = "+omradeid+" WHERE Agent_ID = "+agentid;
                     idb.update(fraga);
                     JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");
-                }   
+                }
+                
+                //ifall man inte valt att kvittera ut någon utrustning så får man bara system meddelande, inget ska visas för användaren
+                if(valNyUtr.equals("Välj")){
+                    System.out.println("Ingen förändring i utag av utrustning");
+                }else{
+                    //annars sätter man in agentid, utrustningsid och dagensdatum
+                    String fraga = "INSERT INTO innehar_utrustning VALUES ("+agentid+", "+utID+",'"+dagensdatum+"')";
+                    idb.insert(fraga);
+                }
+                
+                //ifall man inte valt att kvittera in innehavd utrustning
+                if(valGammalUtr.equals("Välj")){
+                    System.out.println("Ingen förändring i inkvittering av utrustning");
+                }else{
+                    //annars deletas det från innehar_utrustning eftersom man lämnar tillbaka
+                    String fraga = "DELETE FROM innehar_utrustning WHERE Agent_ID = "+agentid+" AND Utrustnings_ID = "+inID;
+                    idb.delete(fraga);
+                }
+                //tömmer alla fält så, eftersom uppdateringarna inte syns direkt i cboxarna
+                tomAllaFalt();
+                
+                
             }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Något gick fel");
@@ -292,7 +365,19 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
     
+//live metod för att generera dagens datum
+private String dagensDatum()
+    {
+        String datum = LocalDate.now().toString();
+        String ar = datum.substring(0, 4);
+        String manad = datum.substring(5, 7);
+        String dag = datum.substring(8, 10);
+        System.out.println(ar + manad + dag);
+        dagensdatum = ar + manad + dag;
+        return dagensdatum;
+    }
     
+//metod för att tömma alla fält
 private void tomAllaFalt(){
     txtfEpost.setText("");
     txtfNamn.setText("");
@@ -300,20 +385,26 @@ private void tomAllaFalt(){
     txtfTelefon.setText("");
     txtfDatum.setText("");
     txtfNuvomrade.setText("");
+    cbxOmrade.removeAllItems();
+    cbxUtrustning.removeAllItems();
+    cbxInneharUtr.removeAllItems();
+    cbxOmrade.addItem("Välj");
+    cbxUtrustning.addItem("Välj");
+    cbxInneharUtr.addItem("Välj");
 }    
     
+//metod för att hämta all info från agent tabellen
 private void hamtaInfoAgent(){
     
-    Object valdAgent = cbxAgenter.getSelectedItem();
-    String agent = valdAgent.toString();
-    String[] idOchNamn = agent.split("-");
-   
+    String id = hamtaAgentID();
     
-    String fraga = "SELECT * FROM Agent WHERE Agent_ID = "+idOchNamn[0];
+  
+    String fraga = "SELECT * FROM Agent WHERE Agent_ID = "+id;
     
     try{
         HashMap<String, String> agentInfo = idb.fetchRow(fraga);
         
+        //här sker kontroll för varje värde för att inte visa null i något textfält, utgår från att epost och lösenord inte ska kunna saknas
         if(agentInfo !=null){
             String namn = agentInfo.get("Namn");
             if(namn != null){
@@ -342,7 +433,7 @@ private void hamtaInfoAgent(){
                 txtfLosen.setText(losenord);
             }     
             
-            
+            //hämtar nuvarande område för agenten
             String nuvOmradesID = agentInfo.get("Omrade");
             String omrnamn = idb.fetchSingle("SELECT benamning FROM omrade where Omrades_ID= "+nuvOmradesID);
             txtfNuvomrade.setText(omrnamn);
@@ -359,11 +450,61 @@ private void hamtaInfoAgent(){
     
 }
 
+//metod för att få id för vald agent i cbx
+private String hamtaAgentID(){
+    String AgentID = cbxAgenter.getSelectedItem().toString();
+    String[] agentInfo = AgentID.split("-");
+    String id = agentInfo[0];
+    return id;
+}
 
+
+//metod för att visa utrustningen agenten har just nu
+private void laddaInneharUtrustning(){
+    
+    String id = hamtaAgentID();
+    
+    try{
+        ArrayList<HashMap<String, String>> inneharUtr = idb.fetchRows("SELECT innehar_utrustning.Utrustnings_ID, utrustning.Benamning FROM innehar_utrustning JOIN utrustning ON innehar_utrustning.Utrustnings_ID = utrustning.Utrustnings_ID WHERE Agent_ID =" + id);
+        cbxInneharUtr.removeAllItems();
+        cbxInneharUtr.addItem("Välj");
+        for(HashMap<String,String> innehar : inneharUtr){
+            String inneharId = innehar.get("Utrustnings_ID");
+            String namn = innehar.get("Benamning");
+            
+            cbxInneharUtr.addItem(inneharId+"-"+namn);
+        }
+    }catch(InfException ex){
+        JOptionPane.showMessageDialog(null,"något gick fel");
+        System.out.println("Internt felmed: "+ex.getMessage());
+    }
+}
+
+
+//metod för att visa all utrustning som agenten inte innehar, eftersom den inte kan ha två av samma samtidigt
+private void laddaAllUtrustning()
+{
+    String agentID = hamtaAgentID();
+    try{
+        ArrayList<HashMap<String, String>> utrustningInfo = idb.fetchRows("SELECT utrustning.Utrustnings_ID, utrustning.benamning FROM utrustning LEFT JOIN innehar_utrustning ON utrustning.Utrustnings_ID = innehar_utrustning.Utrustnings_ID AND innehar_utrustning.agent_id = "+agentID+" WHERE innehar_utrustning.Utrustnings_ID IS NULL");
+        cbxUtrustning.removeAllItems();
+        cbxUtrustning.addItem("Välj");
+        for(HashMap<String, String> utrustning : utrustningInfo){
+            String utrID = utrustning.get("Utrustnings_ID");
+            String namn = utrustning.get("Benamning");
+            
+            cbxUtrustning.addItem(utrID+"-"+namn);
+        }
+    }catch(InfException ex){
+        JOptionPane.showMessageDialog(null,"något gick fel");
+        System.out.println("Internt felmed: "+ex.getMessage());
+    }
+            
+}
 
 
     
-    
+//metod som hämtar alla agenter
 private void laddaAgenter() {
         try {
             ArrayList<HashMap<String, String>> agentlist = idb.fetchRows("SELECT Agent_ID, Namn FROM agent");
@@ -379,7 +520,7 @@ private void laddaAgenter() {
         }
     }
             
-        
+//metod som hämtar alla områden
 private void laddaOmraden(){
     try{
         ArrayList<HashMap<String, String>> omradeList = idb.fetchRows("SELECT * FROM omrade");
@@ -403,16 +544,20 @@ private void laddaOmraden(){
     private javax.swing.JButton btnHamtainfo;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cbxAgenter;
+    private javax.swing.JComboBox<String> cbxInneharUtr;
     private javax.swing.JComboBox<String> cbxOmrade;
+    private javax.swing.JComboBox<String> cbxUtrustning;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLansDatum;
     private javax.swing.JLabel jLepost;
+    private javax.swing.JLabel jLlamnaIn;
     private javax.swing.JLabel jLlosenord;
     private javax.swing.JLabel jLlosenord1;
     private javax.swing.JLabel jLnamn;
     private javax.swing.JLabel jLnuvomrade;
     private javax.swing.JLabel jLtelefon;
     private javax.swing.JLabel jLtitel;
+    private javax.swing.JLabel jLutrustning;
     private javax.swing.JLabel jLvalAgent;
     private javax.swing.JTextField txtfDatum;
     private javax.swing.JTextField txtfEpost;
