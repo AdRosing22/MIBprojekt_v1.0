@@ -28,6 +28,8 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     private String nyPlats;
     private int agentID;
     private int platsID;
+    private String tidigareRas;
+    private String attribut;
     /**
      * Creates new form RedigeraAlienInfoFonster
      */
@@ -36,6 +38,8 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
         this.idb = idb;
         epost = InlogAgent.getEpost();
         kontrolleraAdminStatus();
+        alienIDField.setEditable(false);
+        epost = InlogAgent.getEpost();
     }
     
     private void laddaAliens() {
@@ -104,6 +108,9 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     }
     
     private void uppdateraAlienInformation(String epost) {
+        
+        Object val = rasCbx.getSelectedItem();
+        String menyVal = val.toString();
         
         try {
             nyttNamn = namnField.getText();
@@ -179,6 +186,97 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
         }
     }
+    
+    private void laddaRaser() {
+        
+            String ras = (String) rasCbx.getSelectedItem();
+            
+            switch (ras) {
+                case "Squid":
+                    rasLabel.setText("Antal Armar:");
+                    break;
+                case "Boglodite":
+                    rasLabel.setText("Antal boogies:");
+                    break;
+                case "Worm":
+                    rasLabel.setText("Längd i formen 0.00:");
+                    break;
+                case "Välj":
+                    rasLabel.setVisible(false);
+            
+            }
+        
+            
+        }
+    
+    
+    private void hamtaTidigareRas(String epost) {
+        try {
+            String fragaAlienID = idb.fetchSingle("SELECT Alien_ID FROM alien WHERE Epost = '"+epost+"'");
+            int alienid = Integer.parseInt(fragaAlienID);
+            String fragaWorm = idb.fetchSingle("SELECT Alien_ID FROM worm WHERE Alien_ID = '"+alienid+"'");
+            String fragaBog = idb.fetchSingle("SELECT Alien_ID FROM boglodite WHERE Alien_ID = '"+alienid+"'");
+            String fragaSquid = idb.fetchSingle("SELECT Alien_ID FROM squid WHERE Alien_ID = '"+alienid+"'");
+            
+            if(fragaSquid != null) {
+                tidigareRas = "Squid";
+            } else if (fragaWorm != null) {
+                tidigareRas = "Worm";
+            } else if (fragaBog != null) {
+                tidigareRas = "Boglodite";
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fell uppstod.");
+        }
+    }
+    
+    private void uppdateraRas(String epost) {
+        Object val = rasCbx.getSelectedItem();
+        String menyVal = val.toString();
+        tidigareRas = "";
+        String delete = "";
+        String fraga = "";
+        
+        try {
+            String fragaAlienID = idb.fetchSingle("SELECT Alien_ID FROM alien WHERE Epost = '"+epost+"'");
+            int alienid = Integer.parseInt(fragaAlienID);
+            hamtaTidigareRas(epost);
+            switch (menyVal) {
+                case "Squid":
+                    attribut = rasEgenskaper.getText();
+                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
+                    fraga = "INSERT INTO Squid VALUES (" + alienid + ", '" + attribut + "')";
+                    idb.delete(delete);
+                    idb.insert(fraga);
+                    
+                    break;
+                    
+                case "Worm":
+                    attribut = rasEgenskaper.getText();
+                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
+                    fraga = "INSERT INTO Worm VALUES (" + alienid + ", '" + attribut + "')";
+                    idb.delete(delete);
+                    idb.insert(fraga);
+                    
+                    break;
+                    
+                case "Boglodite":
+                    attribut = rasEgenskaper.getText();
+                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
+                    fraga = "INSERT INTO Boglodite VALUES (" + alienid + ", '" + attribut + "')";
+                    idb.delete(delete);
+                    idb.insert(fraga);
+                    
+                    break;
+                    
+                case "Välj":
+                    break;
+            }
+            rasEgenskaper.setText("");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -209,6 +307,10 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
         ansvarigAgentCbx = new javax.swing.JComboBox<>();
         tabortKnapp = new javax.swing.JButton();
         redigeraKnapp = new javax.swing.JButton();
+        rasLabel = new javax.swing.JLabel();
+        rasCbx = new javax.swing.JComboBox<>();
+        rasTxt = new javax.swing.JTextField();
+        rasEgenskaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -281,6 +383,20 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             }
         });
 
+        rasLabel.setText("Ras");
+
+        rasCbx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rasCbxActionPerformed(evt);
+            }
+        });
+
+        rasTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rasTxtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -294,6 +410,11 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
                         .addGap(144, 144, 144)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(tabortKnapp)
+                        .addGap(26, 26, 26)
+                        .addComponent(redigeraKnapp))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(alienIDLabel)
@@ -302,24 +423,23 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
                             .addComponent(namnLabel)
                             .addComponent(telefonLabel)
                             .addComponent(platsLabel)
-                            .addComponent(ansvarigAgentLabel))
+                            .addComponent(ansvarigAgentLabel)
+                            .addComponent(rasLabel)
+                            .addComponent(rasEgenskaper))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(telefonField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(namnField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(losenordField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chooseAlienCbx, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(laddaAliensKnapp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(registreringsdatumField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(alienIDField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(platsCbx, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ansvarigAgentCbx, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(tabortKnapp)
-                        .addGap(26, 26, 26)
-                        .addComponent(redigeraKnapp)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rasTxt)
+                            .addComponent(telefonField)
+                            .addComponent(namnField)
+                            .addComponent(losenordField)
+                            .addComponent(chooseAlienCbx, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(laddaAliensKnapp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(registreringsdatumField)
+                            .addComponent(alienIDField)
+                            .addComponent(platsCbx, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ansvarigAgentCbx, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rasCbx, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,9 +482,17 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
                     .addComponent(ansvarigAgentCbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rasLabel)
+                    .addComponent(rasCbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rasTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rasEgenskaper))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tabortKnapp)
                     .addComponent(redigeraKnapp))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -395,6 +523,8 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             taBortAlien(epost);
             laddaAliens();
             uppdateraAlienInformation(epost);
+        } else {
+            JOptionPane.showMessageDialog(null, "Vänligen fyll i uppgifterna.");
         }
     }//GEN-LAST:event_tabortKnappActionPerformed
 
@@ -417,12 +547,24 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
         if(selected != null & !selected.isEmpty()) {
             String epost = alienEpostMap.get(selected.split(" \\(")[0]);
             uppdateraAlienInformation(epost);
+            uppdateraRas(epost);
         }
     }//GEN-LAST:event_redigeraKnappActionPerformed
 
     private void ansvarigAgentCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ansvarigAgentCbxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ansvarigAgentCbxActionPerformed
+
+    private void rasTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rasTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rasTxtActionPerformed
+
+    private void rasCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rasCbxActionPerformed
+        // TODO add your handling code here:
+        rasLabel.setVisible(true);
+        rasEgenskaper.setVisible(true);
+        laddaRaser();
+    }//GEN-LAST:event_rasCbxActionPerformed
 
     
     
@@ -446,6 +588,10 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     private javax.swing.JLabel namnLabel;
     private javax.swing.JComboBox<String> platsCbx;
     private javax.swing.JLabel platsLabel;
+    private javax.swing.JComboBox<String> rasCbx;
+    private javax.swing.JLabel rasEgenskaper;
+    private javax.swing.JLabel rasLabel;
+    private javax.swing.JTextField rasTxt;
     private javax.swing.JButton redigeraKnapp;
     private javax.swing.JTextField registreringsdatumField;
     private javax.swing.JLabel registreringsdatumLabel;

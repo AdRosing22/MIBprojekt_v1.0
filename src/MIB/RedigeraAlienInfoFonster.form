@@ -34,6 +34,12 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+                      <Component id="tabortKnapp" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="redigeraKnapp" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="alienIDLabel" min="-2" max="-2" attributes="0"/>
@@ -43,9 +49,12 @@
                           <Component id="telefonLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="platsLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="ansvarigAgentLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="rasLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="rasEgenskaper" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="rasTxt" max="32767" attributes="0"/>
                           <Component id="telefonField" alignment="0" max="32767" attributes="0"/>
                           <Component id="namnField" alignment="0" max="32767" attributes="0"/>
                           <Component id="losenordField" alignment="0" max="32767" attributes="0"/>
@@ -55,16 +64,11 @@
                           <Component id="alienIDField" alignment="0" max="32767" attributes="0"/>
                           <Component id="platsCbx" alignment="0" max="32767" attributes="0"/>
                           <Component id="ansvarigAgentCbx" alignment="0" max="32767" attributes="0"/>
+                          <Component id="rasCbx" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                      <Component id="tabortKnapp" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="redigeraKnapp" min="-2" max="-2" attributes="0"/>
-                  </Group>
               </Group>
-              <EmptySpace pref="117" max="32767" attributes="0"/>
+              <EmptySpace pref="112" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -116,10 +120,20 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="rasLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rasCbx" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="rasTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rasEgenskaper" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tabortKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="redigeraKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -248,6 +262,31 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="redigeraKnappActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="rasLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ras"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="rasCbx">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rasCbxActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="rasTxt">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rasTxtActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="rasEgenskaper">
     </Component>
   </SubComponents>
 </Form>
