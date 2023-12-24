@@ -18,14 +18,13 @@ public class TaBortAgentFonster extends javax.swing.JFrame {
 
     private InfDB idb;
     private int nyID;
-    private int antal;
     /**
      * Creates new form TaBortAgentFonster
      */
     public TaBortAgentFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
-        antal = 0;
+        
         laddaAgenter();
     }
 
@@ -97,20 +96,19 @@ public class TaBortAgentFonster extends javax.swing.JFrame {
     private void btnTabortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabortActionPerformed
         // TODO add your handling code here:
         
+        //man ska inte kunna ta bort sig själv
         if(getAgentID().equals(InlogAgent.getAgentId())){
             JOptionPane.showMessageDialog(null,"Du får inte ta bort dig själv ur systemet!");
         }else{
-        if(antal <= 2){
-            JOptionPane.showMessageDialog(null,"Verksamheten fungerar inte med enbart en agent, så därför få du inte genomföra den här ändringen!");
-        }else{
             taBortAgent();
             cbxAgenter.removeAllItems();
-            antal = 0;
             laddaAgenter();
         }
-        }
+        
     }//GEN-LAST:event_btnTabortActionPerformed
 
+    
+//metod för att ladda in alla agenter från databasen till cboxen
 private void laddaAgenter() {
     try {
         ArrayList<HashMap<String, String>> agentlist = idb.fetchRows("SELECT Agent_ID, Namn, Epost FROM agent");
@@ -120,7 +118,7 @@ private void laddaAgenter() {
             String namn = agent.get("Namn");
             String epost = agent.get("Epost");
             cbxAgenter.addItem(agentid+"-"+namn +" ("+epost+")");
-            antal = antal +1;
+            
             }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
@@ -128,6 +126,7 @@ private void laddaAgenter() {
     }
 
 
+//metod som hämtar id från vald agent i cboxen
 private String getAgentID(){
     String agentInfo = cbxAgenter.getSelectedItem().toString();
     String[] info = agentInfo.split("-");
@@ -136,30 +135,46 @@ private String getAgentID(){
 }
 
 
+
+//metod som bestämmer vilken agent som ska ta över som ansvarig_agent
+//och kontorschef ifall den agenten man tar bort hade ansvar
 private void nyAgentAnsvar()
 {
     String delAgent = getAgentID();
     int nuAgent = Integer.parseInt(delAgent);
     
     try{
-        String genereraID = idb.getAutoIncrement("Agent","Agent_ID");
-        nyID = Integer.parseInt(genereraID)-1;
-    
-        if(nuAgent == nyID){
-            nyID = nyID - 1;
-        }else if(nuAgent == 1){
-            nyID = nuAgent + 1;
+        //hämtar alla Agent_ID från databasen
+        ArrayList<String> agenter = idb.fetchColumn("SELECT Agent_ID FROM Agent");
+        
+        //kontrollerar varje agentid i databasen
+        for(int i=0; i<agenter.size();i++){
+            String nyttId = agenter.get(i);
+            int id = Integer.parseInt(nyttId);
+            
+            //ifall agenten du vill ta bort inte är samma som ett agent_id i databasen 
+            //blir nyID det agent_id och sen också kontorschef/ansvarig_agent
+            if(nuAgent != id){
+                nyID = id;
+             
+            //annars blir den inloggade agenten ansvarig_agent/kontorschef
+            //vilket skulle betyda att det är den sista agenten i databasen
+            }else{
+                int inAid = Integer.parseInt(InlogAgent.getAgentId());
+                nyID = inAid;
+            }
         }
-        
-        
     }catch(InfException ex){
         JOptionPane.showMessageDialog(null,"Något gick fel");
         System.out.println("Internt felmed: "+ex.getMessage());
     }
 }
 
+
+//metod för att ta bort agent / uppdatera kontorschef/ansvarig_agent
 private void taBortAgent()
 {
+    
     nyAgentAnsvar();
     String delAgent = getAgentID();
     
@@ -179,20 +194,29 @@ private void taBortAgent()
         String svarArNyC = idb.fetchSingle(fragaArNyChef);
         
         
+        //ifall den agenten man vill ta bort är kontorschef
         if(svarArC != null){
-            //dålig lösning men går fan inte jävla äckeldatabas
+            
+            //ifall den nya agenten också är kontorschef så ska det inte fungera
+            //eftersom man inte vill ta bort hela kontoret bara för man tar bort agenten
+            //antar jag?
             if(svarArNyC !=null){
                 JOptionPane.showMessageDialog(null,"Agenten kan inte tas bort eftersom den är kontorschef och det finns ingen som kan ta över uppdraget just nu!");   
             }else{
+                //kontroll värde 
                fungerar = true; 
             }
         }else{
+            //kontroll värde
             fungerar = true;
         }
+        
+        //ifall kontorschefs kontroll är ok
         if(fungerar){
                 
                 String updKntr = "UPDATE kontorschef SET Agent_ID = "+nyID+" WHERE Agent_ID = "+delAgent;
                 
+                //ifall agenten man vill ta bort är ansvarig agent för en alien ska det uppdateras till den nya
                 if(svarAnsA != null){
                     String upd = "UPDATE Alien SET ansvarig_agent = "+nyID+" WHERE ansvarig_agent = "+delAgent;
                     idb.update(upd);
@@ -203,10 +227,20 @@ private void taBortAgent()
                 String delFaltA = "DELETE FROM faltagent WHERE Agent_ID = "+delAgent;
                 String delAgen = "DELETE FROM Agent WHERE Agent_ID = "+delAgent;
                 
+                
+                //uppdaterar kontorschef
                 idb.update(updKntr);
+                
+                //tar bort innehavd utrustning
                 idb.delete(delInUtr);
+                
+                //tar bort områdeschef
                 idb.delete(delOmrC);
+                
+                //tar bort fältagent
                 idb.delete(delFaltA);
+                
+                //tar bort agenten
                 idb.delete(delAgen);
                 
                 JOptionPane.showMessageDialog(null, "Agenten har raderats!");

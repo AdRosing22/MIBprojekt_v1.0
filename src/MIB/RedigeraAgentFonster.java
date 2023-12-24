@@ -276,7 +276,7 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
         //skulle göra utloggningsprocessen krånglig tror jag?
         if(txtfEpost.getText().equals(InlogAgent.getEpost())){
             txtfEpost.setEditable(false);
-            txtfEpost.setText("");
+            
             JOptionPane.showMessageDialog(null,"du kommer inte kunna ändra epost information om dig själv medans du är inloggad, ifall du vill ändra din epost be en annan administratör göra det");
         }
         txtfNuvomrade.setEditable(false);
