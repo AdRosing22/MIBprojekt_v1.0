@@ -24,7 +24,7 @@ public class TaBortAgentFonster extends javax.swing.JFrame {
     public TaBortAgentFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
-        
+        setLocationRelativeTo(null);
         laddaAgenter();
     }
 
@@ -41,6 +41,7 @@ public class TaBortAgentFonster extends javax.swing.JFrame {
         jLvalAgent = new javax.swing.JLabel();
         cbxAgenter = new javax.swing.JComboBox<>();
         btnTabort = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +56,13 @@ public class TaBortAgentFonster extends javax.swing.JFrame {
         btnTabort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTabortActionPerformed(evt);
+            }
+        });
+
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
             }
         });
 
@@ -73,7 +81,10 @@ public class TaBortAgentFonster extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnTabort)
-                            .addComponent(cbxAgenter, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cbxAgenter, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnTillbaka)))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -87,7 +98,9 @@ public class TaBortAgentFonster extends javax.swing.JFrame {
                     .addComponent(cbxAgenter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(btnTabort)
-                .addGap(56, 56, 56))
+                .addGap(27, 27, 27)
+                .addComponent(btnTillbaka)
+                .addContainerGap())
         );
 
         pack();
@@ -106,6 +119,12 @@ public class TaBortAgentFonster extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnTabortActionPerformed
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        // TODO add your handling code here:
+        new HanteraAgentAdmin(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     
 //metod för att ladda in alla agenter från databasen till cboxen
@@ -261,6 +280,7 @@ private void taBortAgent()
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTabort;
+    private javax.swing.JToggleButton btnTillbaka;
     private javax.swing.JComboBox<String> cbxAgenter;
     private javax.swing.JLabel jLtitel;
     private javax.swing.JLabel jLvalAgent;

@@ -240,7 +240,7 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         //gå tillbaka till AgentAdminFonster
-        new AgentAdminFonster(idb).setVisible(true);
+        new HanteraAgentAdmin(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 

@@ -36,6 +36,7 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
         jLtitel = new javax.swing.JLabel();
         btnRedigeraAgent = new javax.swing.JButton();
         btnTabortagent = new javax.swing.JButton();
+        btnRegistreraAgent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +54,7 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
             }
         });
 
+        jLtitel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLtitel.setText("Välj åtgärd för agent:");
 
         btnRedigeraAgent.setText("Redigera agentinformation");
@@ -69,14 +71,17 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
             }
         });
 
+        btnRegistreraAgent.setText("Registrera ny agent");
+        btnRegistreraAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistreraAgentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 136, Short.MAX_VALUE)
-                .addComponent(jLtitel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(124, 124, 124))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -87,8 +92,13 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnRedigeraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTabortagent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnTabortagent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRegistreraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(175, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLtitel, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,8 +110,10 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnRedigeraAgent)
                 .addGap(18, 18, 18)
+                .addComponent(btnRegistreraAgent)
+                .addGap(18, 18, 18)
                 .addComponent(btnTabortagent)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(btnTillbaka)
                 .addGap(16, 16, 16))
         );
@@ -134,11 +146,18 @@ public class HanteraAgentAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnTabortagentActionPerformed
 
+    private void btnRegistreraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAgentActionPerformed
+        // TODO add your handling code here:
+        new RegistreraNyAgent(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegistreraAgentActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnRedigeraAgent;
+    private javax.swing.JButton btnRegistreraAgent;
     private javax.swing.JButton btnTabortagent;
     private javax.swing.JToggleButton btnTillbaka;
     private javax.swing.JLabel jLtitel;

@@ -34,8 +34,7 @@ public class Start {
             System.out.println("Internt felmeddelande" + ex.getMessage());
         }
 
-        //new InloggningsFonster(idb).setVisible(true);
-        new RedigeraAlienInfoFonster(idb).setVisible(true);
+        new InloggningsFonster(idb).setVisible(true);
         new Validering(idb);
         
 

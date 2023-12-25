@@ -255,6 +255,16 @@ public static boolean containsAlphabet(String txt) {
     return sant;
 }
 
+public static boolean containsOnlyNumber(String txt){
+    boolean sant = true;
+    if(txt.matches(".*[a-öA-Ö]+.*")){
+        sant = false;
+        JOptionPane.showMessageDialog(null,"Telefonnumret får inte innehålla bokstäver!");
+    }
+    return sant;
+    
+}
+
 
 }
 

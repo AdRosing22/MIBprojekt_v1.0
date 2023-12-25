@@ -21,6 +21,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     public TaBortUtrustning(InfDB idb) {
         initComponents();
         this.idb = idb;
+        setLocationRelativeTo(null);
     }
 
     /**
