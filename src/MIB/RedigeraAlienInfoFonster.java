@@ -385,6 +385,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
 
         rasLabel.setText("Ras");
 
+        rasCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Squid", "Boglodite", "Worm" }));
         rasCbx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rasCbxActionPerformed(evt);
