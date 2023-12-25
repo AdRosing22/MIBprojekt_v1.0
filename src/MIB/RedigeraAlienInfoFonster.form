@@ -40,21 +40,27 @@
                       <Component id="redigeraKnapp" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="alienIDLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="registreringsdatumLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="losenordLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="namnLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="telefonLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="platsLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="ansvarigAgentLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="rasLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="rasEgenskaper" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="alienIDLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="registreringsdatumLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="losenordLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="namnLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="telefonLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="platsLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ansvarigAgentLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rasLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="rasEgenskaper" min="-2" pref="68" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="rasTxt" max="32767" attributes="0"/>
                           <Component id="telefonField" alignment="0" max="32767" attributes="0"/>
                           <Component id="namnField" alignment="0" max="32767" attributes="0"/>
                           <Component id="losenordField" alignment="0" max="32767" attributes="0"/>
@@ -65,6 +71,7 @@
                           <Component id="platsCbx" alignment="0" max="32767" attributes="0"/>
                           <Component id="ansvarigAgentCbx" alignment="0" max="32767" attributes="0"/>
                           <Component id="rasCbx" alignment="0" max="32767" attributes="0"/>
+                          <Component id="rasTxt" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -123,17 +130,17 @@
                   <Component id="rasLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="rasCbx" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="rasTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rasEgenskaper" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="rasEgenskaper" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="rasTxt" min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tabortKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="redigeraKnapp" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
