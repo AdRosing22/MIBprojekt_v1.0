@@ -324,37 +324,52 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
             
             //ifall rutorna är fyllda, eposten innehåller @ och bokstav och namnet innehåller bokstav
             if(Validering.isTxtFilled(epost) && Validering.isTxtFilled(namn)&&Validering.isTxtFilled(losenord)&&Validering.isTxtFilled(datumFalse)&&Validering.isTxtFilled(telefon) && Validering.containsAlphabet(namn)&&Validering.containsAlphabet(epost)&&Validering.isEpostTrustable(epost)&&Validering.godkanndLosenLangd(losenord)){
-               
-                    //ifall man inte valt något nytt område så ska inte områdesid uppdateras
-                    if(valOmrade.equals("Välj")){
-                        String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"' WHERE Agent_ID = "+agentid;
-                        idb.update(fraga);
-                        JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");   
-                    }else{
-                        String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"', Omrade = "+omradeid+" WHERE Agent_ID = "+agentid;
-                        idb.update(fraga);
-                        JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");
-                    }
+                String[] TEL = telefon.split("-");
+                if(TEL.length != 2){
+                    JOptionPane.showMessageDialog(null,"Du kan inte bara ha riktnumret som telefon utan du måste ha exempelvis: 555-555");
+                }else{
+                    telefon = TEL[0]+TEL[1];
+                    if(Validering.epostKontrollVidreg(epost)){
+                        if(Validering.containsOnlyNumber(telefon)){
+                            telefon = TEL[0]+"-"+TEL[1];
                 
-                    //ifall man inte valt att kvittera ut någon utrustning så får man bara system meddelande, inget ska visas för användaren
-                    if(valNyUtr.equals("Välj")){
-                        System.out.println("Ingen förändring i utag av utrustning");
-                    }else{
-                        //annars sätter man in agentid, utrustningsid och dagensdatum
-                        String fraga = "INSERT INTO innehar_utrustning VALUES ("+agentid+", "+utID+",'"+dagensdatum+"')";
-                        idb.insert(fraga);
-                    }
+                            //ifall man inte valt något nytt område så ska inte områdesid uppdateras
+                            if(valOmrade.equals("Välj")){
+                                String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"' WHERE Agent_ID = "+agentid;
+                                idb.update(fraga);
+                                JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");   
+                            }else{
+                                String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"', Omrade = "+omradeid+" WHERE Agent_ID = "+agentid;
+                                idb.update(fraga);
+                                JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");
+                            }
                 
-                    //ifall man inte valt att kvittera in innehavd utrustning
-                    if(valGammalUtr.equals("Välj")){
-                        System.out.println("Ingen förändring i inkvittering av utrustning");
+                            //ifall man inte valt att kvittera ut någon utrustning så får man bara system meddelande, inget ska visas för användaren
+                            if(valNyUtr.equals("Välj")){
+                                System.out.println("Ingen förändring i utag av utrustning");
+                            }else{
+                                 //annars sätter man in agentid, utrustningsid och dagensdatum
+                                String fraga = "INSERT INTO innehar_utrustning VALUES ("+agentid+", "+utID+",'"+dagensdatum+"')";
+                                idb.insert(fraga);
+                            }
+                
+                            //ifall man inte valt att kvittera in innehavd utrustning
+                            if(valGammalUtr.equals("Välj")){
+                                System.out.println("Ingen förändring i inkvittering av utrustning");
+                            }else{
+                                //annars deletas det från innehar_utrustning eftersom man lämnar tillbaka
+                                String fraga = "DELETE FROM innehar_utrustning WHERE Agent_ID = "+agentid+" AND Utrustnings_ID = "+inID;
+                                idb.delete(fraga);
+                            }
+                            //tömmer alla fält så, eftersom uppdateringarna inte syns direkt i cboxarna
+                            tomAllaFalt();
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Du kan inte ha bokstäver i telefonnumret!");
+                        }   
                     }else{
-                        //annars deletas det från innehar_utrustning eftersom man lämnar tillbaka
-                        String fraga = "DELETE FROM innehar_utrustning WHERE Agent_ID = "+agentid+" AND Utrustnings_ID = "+inID;
-                        idb.delete(fraga);
+                         JOptionPane.showMessageDialog(null, "Det finns redan ett konto med den eposten!");
                     }
-                    //tömmer alla fält så, eftersom uppdateringarna inte syns direkt i cboxarna
-                    tomAllaFalt();
+                }
             } 
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Något gick fel");
