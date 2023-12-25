@@ -193,16 +193,16 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             
             switch (ras) {
                 case "Squid":
-                    rasLabel.setText("Antal Armar:");
+                    rasEgenskaper.setText("Antal Armar:");
                     break;
                 case "Boglodite":
-                    rasLabel.setText("Antal boogies:");
+                    rasEgenskaper.setText("Antal boogies:");
                     break;
                 case "Worm":
-                    rasLabel.setText("Längd i formen 0.00:");
+                    rasEgenskaper.setText("Längd i formen 0.00:");
                     break;
                 case "Välj":
-                    rasLabel.setVisible(false);
+                    rasEgenskaper.setVisible(false);
             
             }
         
