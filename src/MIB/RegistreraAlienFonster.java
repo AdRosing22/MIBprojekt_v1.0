@@ -232,21 +232,27 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"E-posten är redan registrerad i databasen, ange en ny och unik epost för den nya alien");
                     
                 }else if(Validering.isTxtFilled(registreringsdatumField.getText()) && Validering.isTxtFilled(losenordField.getText()) && Validering.godkanndLosenLangd(losenord) && Validering.isEpostTrustable(epost) && Validering.containsAlphabet(epost) && Validering.containsAlphabet(namn)) {
-                    String fraga =  "INSERT INTO Alien VALUES ("+alienid +","+regDatum+",'"+epost+"','"+losenord+"','"+namn+"','"+telefon+"',"+platsId+","+ansvarigAgent+")";
-                    idb.insert(fraga);
-                    registreraRasIdb();
+                    String[] TEL = telefon.split("-");
+                    String nr = TEL[0]+TEL[1];
+                    if(Validering.containsOnlyNumber(nr)){
+                        String fraga =  "INSERT INTO Alien VALUES ("+alienid +","+regDatum+",'"+epost+"','"+losenord+"','"+namn+"','"+telefon+"',"+platsId+","+ansvarigAgent+")";
+                        idb.insert(fraga);
+                        registreraRasIdb();
                 
-                    JOptionPane.showMessageDialog(null, "En ny alien har registrerats.");
+                        JOptionPane.showMessageDialog(null, "En ny alien har registrerats.");
                 
-                    epostField.setText("");
-                    losenordField.setText("");
-                    txtbNamn.setText("");
-                    platsCbx.setSelectedIndex(0);
-                    telefonField.setText("555-");
-                    ansvarigAgentCbx.setSelectedIndex(0);
-                    registreringsdatumField.setText(dagensDatum());
-                    txtbRasAttribut.setText("");
-                    registreraRas(); 
+                        epostField.setText("");
+                        losenordField.setText("");
+                        txtbNamn.setText("");
+                        platsCbx.setSelectedIndex(0);
+                        telefonField.setText("555-");
+                        ansvarigAgentCbx.setSelectedIndex(0);
+                        registreringsdatumField.setText(dagensDatum());
+                        txtbRasAttribut.setText("");
+                        registreraRas(); 
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Telefonnumret får inte innehålla bokstäver");
+                    }
                 }
             }
         } catch (InfException e) {
