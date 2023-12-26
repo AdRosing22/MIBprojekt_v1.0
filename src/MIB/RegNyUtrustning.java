@@ -175,18 +175,22 @@ public class RegNyUtrustning extends javax.swing.JFrame {
         
         String valdUtrustning = cbxVälj.getSelectedItem().toString();
         
-       
+       int nyUtrustningsID = 0;
         
         
         switch (valdUtrustning) {
             case "Vapen":
                 try{
                     String genereraID = idb.getAutoIncrement("Utrustning", "Utrustnings_ID");
-                    int nyUtrustningsID = Integer.parseInt(genereraID);
-                    String fraga1 = "INSERT INTO utrustning VALUES("+nyUtrustningsID+",'"+txtbNamn.getText()+"')";
-                    String fraga2 = "INSERT INTO vapen VALUES("+nyUtrustningsID+",'"+txtbEgenskap.getText()+"')";
-                    System.out.println(fraga1);
-                    System.out.println(fraga2);
+                    if(genereraID == null){
+                        nyUtrustningsID = 1;
+                    }else{
+                        nyUtrustningsID = Integer.parseInt(genereraID);
+                    }
+                        String fraga1 = "INSERT INTO utrustning VALUES("+nyUtrustningsID+",'"+txtbNamn.getText()+"')";
+                        String fraga2 = "INSERT INTO vapen VALUES("+nyUtrustningsID+",'"+txtbEgenskap.getText()+"')";
+                        System.out.println(fraga1);
+                        System.out.println(fraga2);
                     
                     if(nyUtrustningsID != 0 && Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()) && Validering.containsAlphabet(txtbNamn.getText()))
                     {
@@ -207,7 +211,13 @@ public class RegNyUtrustning extends javax.swing.JFrame {
             case "Kommunikation":
                 try{
                     String genereraID = idb.getAutoIncrement("Utrustning", "Utrustnings_ID");
-                    int nyUtrustningsID = Integer.parseInt(genereraID);
+                    
+                    if(genereraID == null){
+                        nyUtrustningsID = 1;
+                    }else{
+                        nyUtrustningsID = Integer.parseInt(genereraID);
+                    }
+                    
                     String fraga1 = "INSERT INTO utrustning VALUES("+nyUtrustningsID+",'"+txtbNamn.getText()+"')";
                     String fraga2 = "INSERT into kommunikation VALUES("+nyUtrustningsID+",'"+txtbEgenskap.getText()+"')";
                     
@@ -229,7 +239,11 @@ public class RegNyUtrustning extends javax.swing.JFrame {
             case "Teknik":
                 try{
                     String genereraID = idb.getAutoIncrement("Utrustning", "Utrustnings_ID");
-                    int nyUtrustningsID = Integer.parseInt(genereraID);
+                    if(genereraID == null){
+                        nyUtrustningsID = 1;
+                    }else{
+                        nyUtrustningsID = Integer.parseInt(genereraID);
+                    }
                     String fraga1 = "INSERT INTO utrustning VALUES("+nyUtrustningsID+",'"+txtbNamn.getText()+"')";
                     String fraga2 = "INSERT INTO teknik VALUES("+nyUtrustningsID+",'"+txtbEgenskap.getText()+"')";
                     

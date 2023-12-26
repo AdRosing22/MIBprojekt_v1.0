@@ -141,6 +141,7 @@ public class AgentUtrustningFonster extends javax.swing.JFrame {
                     System.out.println(utrBenamning+" "+kaliber+" "+ ovrfTeknik+" "+kraftK+" "+datum);
                 
                     
+                    
                     txtBoxUtrustning.append("Utrustningsbenämning: "+utrBenamning+"\n");
                     
                     //kontroll för att skriva ut attribut beroende på vilket kategori utrustningen hör till
@@ -156,9 +157,9 @@ public class AgentUtrustningFonster extends javax.swing.JFrame {
                         txtBoxUtrustning.append("Kategori: Teknik"+"\n");
                         txtBoxUtrustning.append("Typ av kraftkälla: "+kraftK+"\n");
                     }
-                    txtBoxUtrustning.append("Utkvitteringsdatum: "+datum);
-                    //Skapar mellanrum mellan de olika utrustningarna
-                    txtBoxUtrustning.append("\n");
+                    txtBoxUtrustning.append("Utkvitteringsdatum: "+datum+"\n");
+                    txtBoxUtrustning.append("-------------------------"+"\n");
+                    
                 }    
             }
         }catch(InfException ex){
