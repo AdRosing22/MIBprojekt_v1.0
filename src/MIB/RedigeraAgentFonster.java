@@ -31,6 +31,7 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         laddaAgenter();
         laddaOmraden();
+        txtfEpost.setEditable(false);
         
     }
 
@@ -271,15 +272,6 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
         laddaAllUtrustning();
         //laddar utrustningen som agenten har
         laddaInneharUtrustning();
-        
-        //ifall man försöker redigera sin egen epost ska det inte fungera
-        //skulle göra utloggningsprocessen krånglig tror jag?
-        if(txtfEpost.getText().equals(InlogAgent.getEpost())){
-            txtfEpost.setEditable(false);
-            
-            JOptionPane.showMessageDialog(null,"du kommer inte kunna ändra epost information om dig själv medans du är inloggad, ifall du vill ändra din epost be en annan administratör göra det");
-        }
-        txtfNuvomrade.setEditable(false);
     }//GEN-LAST:event_btnHamtainfoActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
@@ -299,8 +291,8 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
         String losenord = txtfLosen.getText();
         String telefon = txtfTelefon.getText();
         String datumFalse = txtfDatum.getText();
-        String [] datum = datumFalse.split("-");
-        String datumTrue = datum[0]+datum[1]+datum[2];
+        
+        
         
         
         
@@ -324,53 +316,76 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
             
             //ifall rutorna är fyllda, eposten innehåller @ och bokstav och namnet innehåller bokstav
             if(Validering.isTxtFilled(epost) && Validering.isTxtFilled(namn)&&Validering.isTxtFilled(losenord)&&Validering.isTxtFilled(datumFalse)&&Validering.isTxtFilled(telefon) && Validering.containsAlphabet(namn)&&Validering.containsAlphabet(epost)&&Validering.isEpostTrustable(epost)&&Validering.godkanndLosenLangd(losenord)){
-                String[] TEL = telefon.split("-");
-                if(TEL.length != 2){
-                    JOptionPane.showMessageDialog(null,"Du kan inte bara ha riktnumret som telefon utan du måste ha exempelvis: 555-555");
+                
+                //validering för datum
+                String [] datum = datumFalse.split("-");
+                String datumTrue = datum[0]+datum[1]+datum[2];
+                int datums = Integer.parseInt(datumTrue);
+                int manad = Integer.parseInt(datum[1]);
+                int ar = Integer.parseInt(datum[0]);
+                int dag = Integer.parseInt(datum[2]);
+                int dagensDatum = Integer.parseInt(dagensDatum());
+                
+                //månad får inte vara större än 12, året kan inte vara mindre än 1900, datumet får inte vara större än dagens datum
+                //dag får inte vara större än 31, dag kan inte vara 00 och månad kan inte vara 00
+                if(manad>12 || ar<1900 || datums>dagensDatum || dag > 31 || dag == 00 || manad == 00){
+                    JOptionPane.showMessageDialog(null,"Ogiltigt datum");
+                 
                 }else{
-                    telefon = TEL[0]+TEL[1];
-                    if(Validering.epostKontrollVidreg(epost)){
-                        if(Validering.containsOnlyNumber(telefon)){
-                            telefon = TEL[0]+"-"+TEL[1];
                 
-                            //ifall man inte valt något nytt område så ska inte områdesid uppdateras
-                            if(valOmrade.equals("Välj")){
-                                String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"' WHERE Agent_ID = "+agentid;
-                                idb.update(fraga);
-                                JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");   
-                            }else{
-                                String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"', Omrade = "+omradeid+" WHERE Agent_ID = "+agentid;
-                                idb.update(fraga);
-                                JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");
-                            }
-                
-                            //ifall man inte valt att kvittera ut någon utrustning så får man bara system meddelande, inget ska visas för användaren
-                            if(valNyUtr.equals("Välj")){
-                                System.out.println("Ingen förändring i utag av utrustning");
-                            }else{
-                                 //annars sätter man in agentid, utrustningsid och dagensdatum
-                                String fraga = "INSERT INTO innehar_utrustning VALUES ("+agentid+", "+utID+",'"+dagensdatum+"')";
-                                idb.insert(fraga);
-                            }
-                
-                            //ifall man inte valt att kvittera in innehavd utrustning
-                            if(valGammalUtr.equals("Välj")){
-                                System.out.println("Ingen förändring i inkvittering av utrustning");
-                            }else{
-                                //annars deletas det från innehar_utrustning eftersom man lämnar tillbaka
-                                String fraga = "DELETE FROM innehar_utrustning WHERE Agent_ID = "+agentid+" AND Utrustnings_ID = "+inID;
-                                idb.delete(fraga);
-                            }
-                            //tömmer alla fält så, eftersom uppdateringarna inte syns direkt i cboxarna
-                            tomAllaFalt();
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Du kan inte ha bokstäver i telefonnumret!");
-                        }   
+                    //validering för telefonnumret, att det är i rätt form med riktnummer och nummer
+                    String[] TEL = telefon.split("-");
+                    if(TEL.length != 2){
+                        JOptionPane.showMessageDialog(null,"Telefonnumret måste skrivas i formen: 999-999");
                     }else{
-                         JOptionPane.showMessageDialog(null, "Det finns redan ett konto med den eposten!");
+                        telefon = TEL[0]+TEL[1];
+                        
+                        //ytterligare validering för datum att det enbart innehåller siffror och inte är längre än 0000-00-00
+                        if(Validering.containsOnlyNumber(datumTrue) && datumTrue.length() == 8){
+                            
+                            //kontroll att inte telefonnumret innehåller bokstäver
+                            if(Validering.containsOnlyNumber(telefon)){
+                                telefon = TEL[0]+"-"+TEL[1];
+                
+                                //ifall man inte valt något nytt område så ska inte områdesid uppdateras
+                                if(valOmrade.equals("Välj")){
+                                    String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"' WHERE Agent_ID = "+agentid;
+                                    idb.update(fraga);
+                                    JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");   
+                                }else{
+                                    String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"', Omrade = "+omradeid+" WHERE Agent_ID = "+agentid;
+                                    idb.update(fraga);
+                                    JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");
+                                }
+                
+                                //ifall man inte valt att kvittera ut någon utrustning så får man bara system meddelande, inget ska visas för användaren
+                                if(valNyUtr.equals("Välj")){
+                                    System.out.println("Ingen förändring i utag av utrustning");
+                                }else{
+                                     //annars sätter man in agentid, utrustningsid och dagensdatum
+                                    String fraga = "INSERT INTO innehar_utrustning VALUES ("+agentid+", "+utID+",'"+dagensdatum+"')";
+                                    idb.insert(fraga);
+                                }
+                
+                                //ifall man inte valt att kvittera in innehavd utrustning
+                                if(valGammalUtr.equals("Välj")){
+                                    System.out.println("Ingen förändring i inkvittering av utrustning");
+                                }else{
+                                    //annars deletas det från innehar_utrustning eftersom man lämnar tillbaka
+                                    String fraga = "DELETE FROM innehar_utrustning WHERE Agent_ID = "+agentid+" AND Utrustnings_ID = "+inID;
+                                    idb.delete(fraga);
+                                }
+                                //tömmer alla fält så, eftersom uppdateringarna inte syns direkt i cboxarna
+                                tomAllaFalt();
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Du kan inte ha bokstäver i telefonnumret!");
+                            }   
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Datumet är i fel format. Det kan inte inehålla bokstäver och måste vara i formatet 0000-00-00");
+                        }
                     }
-                }
-            } 
+                } 
+            }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Något gick fel");
             System.out.println("Intern felmed: "+ex.getMessage());
@@ -429,13 +444,13 @@ private void hamtaInfoAgent(){
             if(telefon != null){
                 txtfTelefon.setText(telefon);
             }else{
-                txtfTelefon.setText("Info saknas");
+                txtfTelefon.setText("000-000");
             }
             String datum = agentInfo.get("Anstallningsdatum");
             if(datum != null){
                 txtfDatum.setText(datum);
             }else{
-                txtfDatum.setText("Info saknas");
+                txtfDatum.setText(dagensDatum());
             }
             String epost = agentInfo.get("Epost");
             if(epost != null){
