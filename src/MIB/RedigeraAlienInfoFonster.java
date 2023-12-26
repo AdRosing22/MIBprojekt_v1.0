@@ -30,6 +30,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     private int platsID;
     private String tidigareRas;
     private String attribut;
+    private int alienid;
     /**
      * Creates new form RedigeraAlienInfoFonster
      */
@@ -62,6 +63,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod");
+            System.out.println("Internt felmeddelande: " + e.getMessage());
         }
     }
     
@@ -104,6 +106,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något blev fel.");
+            System.out.println("Internt felmeddelande: " + e.getMessage());
         }
     }
     
@@ -172,6 +175,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+            System.out.println("Internt felmeddelande: " + e.getMessage());
         }
     }
     
@@ -184,6 +188,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+            System.out.println("Internt felmeddelande: " + e.getMessage());
         }
     }
     
@@ -227,6 +232,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fell uppstod.");
+            System.out.println("Internt felmeddelande: " + e.getMessage());
         }
     }
     
@@ -244,7 +250,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             switch (menyVal) {
                 case "Squid":
                     attribut = rasEgenskaper.getText();
-                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
+                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid + "";
                     fraga = "INSERT INTO Squid VALUES (" + alienid + ", '" + attribut + "')";
                     idb.delete(delete);
                     idb.insert(fraga);
@@ -253,7 +259,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
                     
                 case "Worm":
                     attribut = rasEgenskaper.getText();
-                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
+                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid + "";
                     fraga = "INSERT INTO Worm VALUES (" + alienid + ", '" + attribut + "')";
                     idb.delete(delete);
                     idb.insert(fraga);
@@ -262,7 +268,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
                     
                 case "Boglodite":
                     attribut = rasEgenskaper.getText();
-                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
+                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid + "";
                     fraga = "INSERT INTO Boglodite VALUES (" + alienid + ", '" + attribut + "')";
                     idb.delete(delete);
                     idb.insert(fraga);
@@ -275,6 +281,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             rasEgenskaper.setText("");
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+            System.out.println("Internt felmeddelande: " + e.getMessage());
         }
     }
 
