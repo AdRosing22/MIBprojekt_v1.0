@@ -113,20 +113,26 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
-        String IDstrang = getUtrustningsId();
+        
 
         try {
-                int UtrID = Integer.parseInt(IDstrang);
-
-                idb.delete("DELETE FROM vapen WHERE Utrustnings_ID = " + UtrID);
-                idb.delete("DELETE FROM kommunikation WHERE Utrustnings_ID = " + UtrID);
-                idb.delete("DELETE FROM teknik WHERE Utrustnings_ID = " + UtrID);
-                idb.delete("DELETE FROM innehar_utrustning WHERE Utrustnings_ID ="+ UtrID);
-                idb.delete("DELETE FROM utrustning WHERE Utrustnings_ID = " + UtrID);
-
-                JOptionPane.showMessageDialog(null, "Utrustningen med ID-nummer: " + UtrID + " har tagits bort från systemet!");
             
-                laddaUtrustning();
+                if(cbxUtrustning.getSelectedItem().toString().equals("Välj")){
+                    JOptionPane.showMessageDialog(null, "Du måste välja utrustning du vill ta bort");
+                }else{
+                    String IDstrang = getUtrustningsId();
+                    int UtrID = Integer.parseInt(IDstrang);
+
+                    idb.delete("DELETE FROM vapen WHERE Utrustnings_ID = " + UtrID);
+                    idb.delete("DELETE FROM kommunikation WHERE Utrustnings_ID = " + UtrID);
+                    idb.delete("DELETE FROM teknik WHERE Utrustnings_ID = " + UtrID);
+                    idb.delete("DELETE FROM innehar_utrustning WHERE Utrustnings_ID ="+ UtrID);
+                    idb.delete("DELETE FROM utrustning WHERE Utrustnings_ID = " + UtrID);
+
+                    JOptionPane.showMessageDialog(null, "Utrustningen med ID-nummer: " + UtrID + " har tagits bort från systemet!");
+                    laddaUtrustning();
+                }
+                
 
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Det finns ingen utrustning med det valda ID-numret");
@@ -151,6 +157,7 @@ private String getUtrustningsId(){
          String fraga = "SELECT * FROM Utrustning";
          ArrayList<HashMap<String, String>> utrustningInfo = idb.fetchRows(fraga);
          cbxUtrustning.removeAllItems();
+         cbxUtrustning.addItem("Välj");
          for(HashMap<String, String> enUtrustning : utrustningInfo){
              String id = enUtrustning.get("Utrustnings_ID");
              String namn = enUtrustning.get("Benamning");
