@@ -11,7 +11,9 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *klass som tar bort agent ur databasen
+ * 
+ * 
  * @author adamrosing
  */
 public class TaBortAgentFonster extends javax.swing.JFrame {

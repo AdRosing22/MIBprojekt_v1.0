@@ -9,14 +9,14 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Klass för att ändra lösenord.
+ * Aliens, agenter och admins kommer alla till detta fönster
+ * 
  * @author Adam
  */
 public class AndraLosenordFonster extends javax.swing.JFrame {
 
     private InfDB idb;
-
-    
 
     /**
      * Creates new form AndraLosenordFonster
@@ -139,10 +139,20 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
     
     
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        // TODO add your handling code here:
+        
+        
+        //kontroll för att bestämma vilket fönster den inloggade ska skickas tillbaka till
+        
+        //ifall man loggade in som agent
         if(Validering.valImenyInloggningFonster("Agent"))
         {
-            new AgentFonster(idb).setVisible(true);
+            //ifall man har admin rättigheter
+            if(Validering.kontrollOmAdmin(InlogAgent.getEpost())){
+                new AgentAdminFonster(idb).setVisible(true);
+            }else{
+                new AgentFonster(idb).setVisible(true);
+            }
+            //ifall man loggade in som alien
         }else if(Validering.valImenyInloggningFonster("Alien"))
         {
             new AlienFonster(idb).setVisible(true);
@@ -152,44 +162,32 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
 
    
     
-    //lokala variabler för att lättare arbeta med textfälten
-    //anropar validerings klassen för att kontrollera att nuvarande lösenord stämmer
-    //anropar valideringsklassen för att kolla att det nya lösenordet inte är för långt
-    //kontrollerar att det nya och nuvarande lösen inte är samma
-    //anropar validerings klassen för att kontrollera rullgardinsmenyn vid inloggning
-    //--ifall agent vald så körs sql UPDATE mot InfDB för att uppdatera lösenordet
-    //--ifall alien samma fast mot alien tabellen
+    
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
-        // TODO add your handling code here:
-        
+
+        //lokala variabler på textrutorna
     String nuvLos = txtbNuvLosen.getText();
     String nyttLos = txtbNyttLosen.getText();
         
     try{
+        //ivalidering ifall textrutona är ifyllda och det nya lösenordet inte är längre än 6 tecken
         if(Validering.isTxtFilled(nuvLos) && Validering.isTxtFilled(nyttLos) && Validering.godkanndLosenLangd(nyttLos)){
+            
+            //ifall man är inloggad som agent, nya lösenordet inte är samma som gamla och att det nuvarande lösenordet stämmer
             if(Validering.valImenyInloggningFonster("Agent") && Validering.kontrollLosenStammer(InlogAgent.getEpost(), nuvLos) && Validering.isLosenordNew(nuvLos, nyttLos)){
                 idb.update("UPDATE agent SET losenord='"+nyttLos+"' WHERE epost='"+InlogAgent.getEpost()+"'");
                 JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
-                dispose();
-                if(InlogAgent.isAdministrator()) {
-                new AgentAdminFonster(idb).setVisible(true);
-                } else {
-                    new AgentFonster(idb).setVisible(true);
-                }
-            } else if(Validering.valImenyInloggningFonster("Alien") && Validering.kontrollLosenStammer(InlogAlien.getEpost(), nuvLos) && Validering.isLosenordNew(nuvLos, nyttLos)){
+                
+                //ifall man är inloggad som alien
+            }else if(Validering.valImenyInloggningFonster("Alien") && Validering.kontrollLosenStammer(InlogAlien.getEpost(), nuvLos) && Validering.isLosenordNew(nuvLos, nyttLos)){
                 idb.update("UPDATE alien SET losenord='"+nyttLos+"'WHERE epost='"+InlogAlien.getEpost()+"'");
                 JOptionPane.showMessageDialog(null, "Lösenord ändrats till:"+nyttLos);
-                dispose();
-                new AlienFonster(idb).setVisible(true);
-                }    
-            }
-        }catch (InfException undantag){
-            JOptionPane.showMessageDialog(null, "Fel");
-            System.out.println("Internt felmeddelande"+undantag);
-        }catch (Exception e)
-        {
-            System.out.println("Internt felmeddelande"+e);
-        }
+            }    
+         }
+    }catch (InfException undantag){
+        JOptionPane.showMessageDialog(null, "Fel");
+        System.out.println("Internt felmeddelande"+undantag);
+    }
     }//GEN-LAST:event_btnBekraftaActionPerformed
     
     

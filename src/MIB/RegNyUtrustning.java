@@ -9,7 +9,9 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Klass för att lägga till utrustning i systemet i utrustning tabellen och
+ * --någon av subtabellerna vapen, kommunikato eller teknik
+ * 
  * @author alvin & adam
  */
 public class RegNyUtrustning extends javax.swing.JFrame {
@@ -151,9 +153,14 @@ public class RegNyUtrustning extends javax.swing.JFrame {
 
     private void cbxVäljActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxVäljActionPerformed
 
+        //hämtar valet från hårdkodade cboxen
         String valdUtrustning = cbxVälj.getSelectedItem().toString();
         
+        
+        //switch med valet som villkort
         switch (valdUtrustning) {
+            
+            //ifall vapen är valt blir instruktionen att mata in kaliber
             case "Vapen":
                 jLattribut.setText("Kaliber");
                 break;
@@ -163,6 +170,8 @@ public class RegNyUtrustning extends javax.swing.JFrame {
             case "Teknik":
                 jLattribut.setText("Kraftkälla");
                 break;
+                
+                //ifall inget är valt försivnner instruktionstexten
             case "Välj":
                 jLattribut.setText("");
                 break;
@@ -173,26 +182,32 @@ public class RegNyUtrustning extends javax.swing.JFrame {
     private void btnRegistreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraActionPerformed
       
         
-        String valdUtrustning = cbxVälj.getSelectedItem().toString();
+       String valdUtrustning = cbxVälj.getSelectedItem().toString();
         
        int nyUtrustningsID = 0;
         
-        
+        //switch för att registrera utrustningen med val av kategori som utgångspunkt
         switch (valdUtrustning) {
             case "Vapen":
                 try{
+                    //genererar nytt UtrustningsID via databas metod
                     String genereraID = idb.getAutoIncrement("Utrustning", "Utrustnings_ID");
+                    
+                    //ifall det inte finns någon utrustning blir id 1
                     if(genereraID == null){
                         nyUtrustningsID = 1;
                     }else{
+                        //omvandlar till int från string
                         nyUtrustningsID = Integer.parseInt(genereraID);
                     }
+                        //sql frågor för att lägga till i utrustnings tabellen och vapen tabellen
                         String fraga1 = "INSERT INTO utrustning VALUES("+nyUtrustningsID+",'"+txtbNamn.getText()+"')";
                         String fraga2 = "INSERT INTO vapen VALUES("+nyUtrustningsID+",'"+txtbEgenskap.getText()+"')";
                         System.out.println(fraga1);
                         System.out.println(fraga2);
                     
-                    if(nyUtrustningsID != 0 && Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()) && Validering.containsAlphabet(txtbNamn.getText()))
+                        //validering att båda textrutor är ifyllda och namnet innehåller bokstav
+                    if(Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()) && Validering.containsAlphabet(txtbNamn.getText()))
                     {
                         idb.insert(fraga1);
                         idb.insert(fraga2);
@@ -282,6 +297,8 @@ public class RegNyUtrustning extends javax.swing.JFrame {
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         // TODO add your handling code here:
+        
+        //bestämmer ifall man ska skickas tillbaka till admin eller agentfönster
         if(Validering.kontrollOmAdmin(InlogAgent.getEpost())){
             new AgentAdminFonster(idb).setVisible(true);
             dispose();

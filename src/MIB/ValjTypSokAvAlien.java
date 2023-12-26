@@ -11,7 +11,10 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Klass som kan söka efter enskild alien på epost
+ * eller skicka vidare för att söka via datum, ras och plats
+ * 
+ * 
  * @author adamrosing
  */
 public class ValjTypSokAvAlien extends javax.swing.JFrame {
@@ -189,85 +192,80 @@ public class ValjTypSokAvAlien extends javax.swing.JFrame {
         jLingenhittad.setText("");
         String epost = txtFepost.getText();
         
-     try{
-         //validering att textrutan är ifylld och att den angivna eposten existerar i databasen
-         if(Validering.isTxtFilled(epost)){
-             if(!Validering.epostKontrollVidreg(epost)){
+        try{
+            //validering att textrutan är ifylld och att den angivna eposten existerar i databasen
+            if(Validering.isTxtFilled(epost)){
+                if(!Validering.epostKontrollVidreg(epost)){
              
-             //sqlfraga för at att hämta den nödvändiga infromationen om alien
-         String fraga = "SELECT alien.Alien_ID, alien.Registreringsdatum, alien.Namn AS Aliennamn, alien.Telefon, " +
-                        "plats.Benamning, agent.Agent_ID, Squid.antal_armar, Boglodite.antal_boogies, Worm.langd " +
-                        "FROM Alien " +
-                        "JOIN Plats ON alien.Plats = plats.Plats_ID " +
-                        "JOIN Agent ON alien.Ansvarig_Agent=agent.Agent_ID " +
-                        "LEFT JOIN Squid ON alien.Alien_ID=squid.Alien_ID " +
-                        "LEFT JOIN Boglodite ON alien.Alien_ID=boglodite.Alien_ID " +
-                        "LEFT JOIN Worm ON alien.Alien_ID=worm.Alien_ID " +
-                        "WHERE alien.epost ='"+epost+"'";
+                    //sqlfraga för at att hämta den nödvändiga infromationen om alien
+                    //left join för att tillåta null värden på ras
+                    String fraga = "SELECT alien.Alien_ID, alien.Registreringsdatum, alien.Namn AS Aliennamn, alien.Telefon, " +
+                                   "plats.Benamning, agent.Agent_ID, Squid.antal_armar, Boglodite.antal_boogies, Worm.langd " +
+                                    "FROM Alien " +
+                                    "JOIN Plats ON alien.Plats = plats.Plats_ID " +
+                                    "JOIN Agent ON alien.Ansvarig_Agent=agent.Agent_ID " +
+                                    "LEFT JOIN Squid ON alien.Alien_ID=squid.Alien_ID " +
+                                    "LEFT JOIN Boglodite ON alien.Alien_ID=boglodite.Alien_ID " +
+                                    "LEFT JOIN Worm ON alien.Alien_ID=worm.Alien_ID " +
+                                    "WHERE alien.epost ='"+epost+"'";
          
-         //använder InfDB fetchRow för att hämta den raden som frågan returnerar
-         //använder fetchRow istället för fetchRows eftersom epost är unik och
-         //det ska enbart skapas en rad av frågan
-         HashMap<String, String> alienInfo = idb.fetchRow(fraga);
+                    
+                    HashMap<String, String> alienInfo = idb.fetchRow(fraga);
          
-         //kontroll att inte mapen är tom
-         if(alienInfo != null){
-             String alienid = alienInfo.get("Alien_ID");
-             String datum = alienInfo.get("Registreringsdatum");
-             String aliennamn = alienInfo.get("Namn");
-             String telefon = alienInfo.get("Telefon");
-             String plats = alienInfo.get("Benamning");
-             String agentid = alienInfo.get("Agent_ID");
-             String squid = alienInfo.get("Antal_Armar");
-             String boglodite = alienInfo.get("Antal_Boogies");
-             String worm = alienInfo.get("Langd");
+                    //kontroll att inte mapen är tom
+                    if(alienInfo != null){
+                        String alienid = alienInfo.get("Alien_ID");
+                        String datum = alienInfo.get("Registreringsdatum");
+                        String aliennamn = alienInfo.get("Namn");
+                        String telefon = alienInfo.get("Telefon");
+                        String plats = alienInfo.get("Benamning");
+                        String agentid = alienInfo.get("Agent_ID");
+                        String squid = alienInfo.get("Antal_Armar");
+                        String boglodite = alienInfo.get("Antal_Boogies");
+                        String worm = alienInfo.get("Langd");
              
-             //eftersom fetchRow inte accepterar AS i sql så hämtas agentnamnet
-             //separat för blev problem då aliennamnet också hämtades samtidigt
-             String fraga2 = "SELECT namn FROM agent WHERE agent_id="+agentid;
-             String svar = idb.fetchSingle(fraga2);
+                        //eftersom fetchRow inte accepterar AS i sql så hämtas agentnamnet
+                        //separat för blev problem då aliennamnet också hämtades samtidigt
+                        String fraga2 = "SELECT namn FROM agent WHERE agent_id="+agentid;
+                        String svar = idb.fetchSingle(fraga2);
              
-             if(svar != null){
-                 agentnamn = svar;
-             }else{
-                 agentnamn = "Saknas information";
-             }
+                        if(svar != null){
+                            agentnamn = svar;
+                        }else{
+                            agentnamn = "Saknas information";
+                        }
              
-             //visar hämtade informationen i textrutan
-             txtAlien.append("ID: "+alienid+"\n");
-             txtAlien.append("Namn: "+aliennamn+"\n");
-             txtAlien.append("Registreringsdatum: "+datum+"\n");
-             txtAlien.append("Telefon: "+telefon+"\n");
-             txtAlien.append("Plats: "+plats+"\n");
-             txtAlien.append("Ansvarig agent: ID: "+agentid+", Namn: "+agentnamn+"\n");
+                        //visar hämtade informationen i textrutan
+                        txtAlien.append("ID: "+alienid+"\n");
+                        txtAlien.append("Namn: "+aliennamn+"\n");
+                        txtAlien.append("Registreringsdatum: "+datum+"\n");
+                        txtAlien.append("Telefon: "+telefon+"\n");
+                        txtAlien.append("Plats: "+plats+"\n");
+                        txtAlien.append("Ansvarig agent: ID: "+agentid+", Namn: "+agentnamn+"\n");
              
-             //kontroll för att avgöra rasen
-             //hårdkodat :/ men aja
-             if(squid!= null){
-                 txtAlien.append("Ras: Squid"+"\n");
-                 txtAlien.append("Antal armar: "+squid);
-             }else if(boglodite != null){
-                 txtAlien.append("Ras: Boglodite"+"\n");
-                 txtAlien.append("Antal boogies: "+boglodite);
-             }else if(worm != null){
-                 txtAlien.append("Ras: Worm"+"\n");
-                 txtAlien.append("Längd: "+worm);
-             }
-             
-
-            
-         }
-         //tömmer epost rutan för användarvänlighet
-         txtFepost.setText("");
-         }
-         else{
-             jLingenhittad.setText("Ingen e-post hittad som matchar sökningen");
-         }
-         }    
-     }catch(InfException ex){
-         JOptionPane.showMessageDialog(null,"Något gick fel");
-         System.out.println("Internt felmeddelande: "+ex.getMessage());
-     }
+                        //kontroll för att avgöra rasen
+                        //hårdkodat :/ men aja
+                        if(squid!= null){
+                            txtAlien.append("Ras: Squid"+"\n");
+                            txtAlien.append("Antal armar: "+squid);
+                        }else if(boglodite != null){
+                            txtAlien.append("Ras: Boglodite"+"\n");
+                            txtAlien.append("Antal boogies: "+boglodite);
+                        }else if(worm != null){
+                            txtAlien.append("Ras: Worm"+"\n");
+                            txtAlien.append("Längd: "+worm);
+                        } 
+                    }
+                    //tömmer epost rutan för användarvänlighet
+                    txtFepost.setText("");
+            }else{
+                jLingenhittad.setText("Ingen e-post hittad som matchar sökningen");
+            }
+        }    
+    }catch(InfException ex){
+        JOptionPane.showMessageDialog(null,"Något gick fel");
+        System.out.println("Internt felmeddelande: "+ex.getMessage());
+    }
     }//GEN-LAST:event_btnSokActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed

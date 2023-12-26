@@ -7,15 +7,14 @@ package MIB;
 import oru.inf.InfDB;
 
 /**
- *
+ *Klass för att skicka vidare till nya klasser
+ * Fungerar som uppdelare så inte alla metoder skulle ligga under en klass/fönster
+ * 
  * @author Adam
  */
 public class HanteraAliensFonster extends javax.swing.JFrame {
     
     private InfDB idb;
-
-    
-    
 
     /**
      * Creates new form HanteraAliensFonster
@@ -112,6 +111,10 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
 
     private void btnBackaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackaActionPerformed
         // TODO add your handling code here:
+        
+        
+        //kontroll ifall man ska skickas tillbaka till agent eller admin fönster
+        //-då båda har åtkomst till det här fönstret
         if(Validering.kontrollOmAdmin(InlogAgent.getEpost())){
             new AgentAdminFonster(idb).setVisible(true);
         }else{

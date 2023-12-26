@@ -3,6 +3,7 @@ package MIB;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -12,7 +13,7 @@ import oru.inf.InfException;
  */
 
 /**
- *
+ *Klass för att lista aliens efter rastillhörighet
  * @author gustafneander
  */
 public class AlienRas extends javax.swing.JFrame {
@@ -122,7 +123,6 @@ private static InfDB idb;
     private void btnHamtaAlienRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtaAlienRasActionPerformed
 
         try {
-            idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
             Object ras  = cbxRas.getSelectedItem();
             // Object ras = cbxRas.getSelectedItem();
             String SQLQuery = "SELECT "+ ras +".Alien_ID,Alien.namn as Mittnamn  FROM "+ ras +" left join Alien on "+ras +".Alien_id = Alien.Alien_ID;";
@@ -160,6 +160,8 @@ private static InfDB idb;
         }
 
         catch (InfException ex) {
+            JOptionPane.showMessageDialog(null,"Något gick fel");
+            System.out.println(ex.getMessage());
            
 
         }

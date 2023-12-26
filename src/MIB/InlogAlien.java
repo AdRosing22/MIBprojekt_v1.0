@@ -10,7 +10,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Klass för att lagra information om inloggad alien via inloggningsfönstret
  * @author adamrosing
  */
 public class InlogAlien {
@@ -39,7 +39,7 @@ public class InlogAlien {
     }
     
       
-    
+    //metod som hämtar all information om alien från databasen
 public static void hamtaInfoOmAlien()
     {
         String fraga = "SELECT alien_id, registreringsdatum, losenord, namn, telefon, plats, ansvarig_agent FROM Alien WHERE epost ='"+epost+"'";
@@ -68,7 +68,7 @@ public static void hamtaInfoOmAlien()
     }
 
     
-    
+ //metod som tömmer alla fält   
 public static void loggaUt()
 {
     epost="";
@@ -81,6 +81,7 @@ public static void loggaUt()
     ansvarig_agent="";
 }
 
+//getters
     public static String getEpost()
     {
         return epost;

@@ -11,11 +11,14 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Klass för att lagra information om agent vid inloggning
+ * 
  * @author Adam & Melker
  */
 public class InlogAgent {
 
+    
+    //deklarerar fält
     private static String namn;
     private static String telefon;
     private static String omrade;
@@ -68,7 +71,7 @@ public static void hamtaInfoOmAgent()
     }
     
     
-
+    //tömmer alla fält för att kunna logga in på nytt
     public static void loggaUt()
     {
         namn ="";
@@ -81,7 +84,7 @@ public static void hamtaInfoOmAgent()
         administrator="";          
     }
 
-//alla getters och setters för att kunna ha åtkomst till specifika uppgifter hämtade via hamtaInfo metoderna
+//alla getters för att kunna ha åtkomst till specifika uppgifter hämtade via hamtaInfo metoderna
 
     public static String getNamn() {
         return namn;

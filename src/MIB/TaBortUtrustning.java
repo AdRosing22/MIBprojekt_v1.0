@@ -11,7 +11,9 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *klass för att ta bort utrustning helt ur systemet
+ * 
+ * 
  * @author alvin & adam
  */
 public class TaBortUtrustning extends javax.swing.JFrame {
@@ -116,17 +118,26 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         
 
         try {
-            
+                //ifall inget är valt kommer meddelande
                 if(cbxUtrustning.getSelectedItem().toString().equals("Välj")){
                     JOptionPane.showMessageDialog(null, "Du måste välja utrustning du vill ta bort");
                 }else{
+                    
+                    //hämtar id för vald utrustning i cboxen
                     String IDstrang = getUtrustningsId();
+                    
+                    //omvandlar till int
                     int UtrID = Integer.parseInt(IDstrang);
 
+                    //tar bort ifall det fanns med i antingen vapen, kommunikation eller teknik
                     idb.delete("DELETE FROM vapen WHERE Utrustnings_ID = " + UtrID);
                     idb.delete("DELETE FROM kommunikation WHERE Utrustnings_ID = " + UtrID);
                     idb.delete("DELETE FROM teknik WHERE Utrustnings_ID = " + UtrID);
+                    
+                    //tar bort ifall en agent bar på utrustningen
                     idb.delete("DELETE FROM innehar_utrustning WHERE Utrustnings_ID ="+ UtrID);
+                    
+                    //tar bort helt från utrustningstabellen
                     idb.delete("DELETE FROM utrustning WHERE Utrustnings_ID = " + UtrID);
 
                     JOptionPane.showMessageDialog(null, "Utrustningen med ID-nummer: " + UtrID + " har tagits bort från systemet!");
@@ -144,7 +155,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaBortActionPerformed
 
     
-    
+//hämtar id för vald utrustning från cboxen
 private String getUtrustningsId(){
     String utrustning = cbxUtrustning.getSelectedItem().toString();
     String[] allInfo = utrustning.split("-");
@@ -152,6 +163,7 @@ private String getUtrustningsId(){
     return id;
 }
    
+//metod som laddar all utrustning i cboxen
  private void laddaUtrustning(){
      try{
          String fraga = "SELECT * FROM Utrustning";

@@ -11,7 +11,8 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Klass som listar all information om agent via angiven epost
+ * 
  * @author adamrosing
  */
 public class SokEnskildAgent extends javax.swing.JFrame {

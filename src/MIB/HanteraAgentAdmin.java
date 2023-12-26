@@ -7,7 +7,9 @@ package MIB;
 import oru.inf.InfDB;
 
 /**
- *
+ *Klass för att skicka vidare till nya klasser
+ * Funktionerar som uppdelare för att inte ett fönster skulle ha för mycket metoder
+ * 
  * @author adamrosing
  */
 public class HanteraAgentAdmin extends javax.swing.JFrame {

@@ -12,7 +12,7 @@ import oru.inf.InfException;
 
 
 /**
- *
+ *Klass som listar innehar_utrustning kopplat till Agent_ID via inloggad agent
  * @author adamrosing
  */
 public class AgentUtrustningFonster extends javax.swing.JFrame {
@@ -110,7 +110,7 @@ public class AgentUtrustningFonster extends javax.swing.JFrame {
         String agentEpost = InlogAgent.getEpost();
         //sql fraga som hämtar benämning och även attribut från teknik, vapen och kommuniktaion
         //använder LEFT join på för att tillåta null värden ifall de enbart har en utrustning
-        //registrerad under annan kategori
+        //-registrerad under annan kategori
         String fraga = "SELECT utrustning.Benamning,vapen.Kaliber, kommunikation.Overforingsteknik, teknik.Kraftkalla, Utkvitteringsdatum " +
                        "FROM agent " +
                        "JOIN innehar_utrustning ON agent.agent_id = innehar_utrustning.Agent_ID " +

@@ -10,7 +10,9 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Klass för att ändra på administratörsstatus för en agent
+ * Måste ange epost
+ * 
  * @author alvin & adam
  */
 public class GeAgentAdminstatus extends javax.swing.JFrame {
@@ -25,8 +27,10 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
     public GeAgentAdminstatus(InfDB idb) {
         initComponents();
         this.idb = idb;
+        //gömmer meddelanden om bekräftning
         jLbekraftning.setVisible(false);
         jLerror.setVisible(false);
+        
         setLocationRelativeTo(null);
     }
 
@@ -172,7 +176,7 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
         String epost = txtbEpost.getText();
         //tömmer textfältet för att slippa behöva ta bort det manuellt
         txtbEpost.setText("");
-        //gömmer fel/rätt meddelanden
+        //gömmer fel/rätt meddelanden från tidigare knapptryck
         jLbekraftning.setVisible(false);
         jLerror.setVisible(false);
         
@@ -246,7 +250,9 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
 
     private void rdbtnGeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtnGeActionPerformed
         // TODO add your handling code here:
-        String epost = txtbEpost.getText();
+        
+        //kontrollerar knapparna att inte båda kan vara valda samtidigt
+        
         if(rdbtnGe.isSelected()){
             rdbtnTabort.setEnabled(false);    
         }
@@ -259,6 +265,7 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
     private void rdbtnTabortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtnTabortActionPerformed
         // TODO add your handling code here:
         
+        //kontrollerar knapparna att inte båda kan vara valda samtidigt
         if(rdbtnTabort.isSelected()){
             rdbtnGe.setEnabled(false);  
         }

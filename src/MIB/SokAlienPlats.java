@@ -16,7 +16,8 @@ import oru.inf.InfException;
  */
 
 /**
- *
+ *klass som listar alla aliens på en specifik plats
+ * 
  * @author gustafneander & Melker
  */
 
@@ -201,21 +202,12 @@ private static InfDB idb;
             }
                 
             }
-     } 
-
-    
-    else {
-    System.out.println("Inget objekt valt.");
-}
-
-                 
-   
-
-    
-    } 
-    
-        catch (InfException ex) {
-        Logger.getLogger(SokAlienPlats.class.getName()).log(Level.SEVERE, null, ex);
+        }else {
+            System.out.println("Inget objekt valt.");
+        }
+    }catch (InfException ex) {
+         JOptionPane.showMessageDialog(null, "Något gick fel");
+         System.out.println(ex.getMessage());
     }
         
     }//GEN-LAST:event_btnHämtaAliensActionPerformed

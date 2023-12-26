@@ -9,7 +9,10 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Valideringsklass som innehåller flera metoder som används genom hela projektet
+ * Metoderna är av typen boolean och används t.ex. vid kontroll om användares epost
+ * --redan finns i databasen, ifall lösenordet är godkänd längt, ifall agent är admin osv.
+ * 
  * @author Adam
  */
 public class Validering {
@@ -24,7 +27,7 @@ public class Validering {
     
     //kontrollerar att angiven epost går att hitta i databasen
     //ifall det inte är null och den hämtade eposten stämmer överens med parametern
-    //--söker igenom både alien och agent
+    //--söker igenom både alien och agent beroende på val vad man vill logga in som
     public static boolean finnsAnvandareEpostIDB(String epost){
         boolean finns = false;
         String anvEpost;
@@ -61,6 +64,10 @@ public class Validering {
         return finns;
     }
     
+    
+    
+    //kontroll för som används vid alien/agent registrering för att hålla alla
+    //eposter unika i databasen
     public static boolean epostKontrollVidreg(String ep)
     {
         boolean finnsInte = false;
@@ -169,7 +176,8 @@ public static boolean kontrollLosenStammer(String epost, String losenord)
 
 
 
-
+//kontroll för att se ifall valet är agent eller alien i inloggningsfönstret
+//-i efterhand väldigt ångersam över denna :,)
 public static boolean valImenyInloggningFonster(String val)
 {
     boolean vald = false;
@@ -180,6 +188,8 @@ public static boolean valImenyInloggningFonster(String val)
     return vald;
 }
 
+
+//kontrollerar att lösenord inte är längre än 6 tecken, används vid reg och ändring
 public static boolean godkanndLosenLangd(String losenord)
 {
     boolean godkand = false;
@@ -200,6 +210,7 @@ public static boolean godkanndLosenLangd(String losenord)
 
 
 
+//kontrollerar att en textruta inte är tom
 public static boolean isTxtFilled(String txtb)
 {
     boolean isFilled = false;
@@ -215,6 +226,8 @@ public static boolean isTxtFilled(String txtb)
         
 
 
+//kontroll som används vid AndraLosenord för att se till att man inte anger samma
+
 public static boolean isLosenordNew(String nuv, String nytt)
 {
     boolean samma = true;
@@ -228,7 +241,8 @@ public static boolean isLosenordNew(String nuv, String nytt)
 
 
 
-
+//eftersom jag aldrig sett en epost utan @ så kontrollerar denna metod att 
+//en ny eller ändrad epost innehåller @
 public static boolean isEpostTrustable(String epost)
 {
     boolean ja = false;
@@ -242,6 +256,8 @@ public static boolean isEpostTrustable(String epost)
 }
 
 
+//metod som kontrollerar att en sträng innehåller en bokstav
+//hjälp av AI med denna för fick det inte att fungera med a-ö först
 public static boolean containsAlphabet(String txt) {
     boolean sant = false;
 
@@ -255,6 +271,10 @@ public static boolean containsAlphabet(String txt) {
     return sant;
 }
 
+
+//metod som kontrollerar att det inte finns nummer
+//skapades för !containsAlphabet inte fungerade på tänkt sätt
+//där det behövdes
 public static boolean containsOnlyNumber(String txt){
     boolean sant = true;
     if(txt.matches(".*[a-öA-Ö]+.*")){

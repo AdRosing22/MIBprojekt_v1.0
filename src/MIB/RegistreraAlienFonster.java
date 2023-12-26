@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 
 /**
- *
+ *klass för att lägga till alien i databasen
  * @author adamrosing & Melker
  */
 public class RegistreraAlienFonster extends javax.swing.JFrame {
@@ -43,9 +43,15 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     public RegistreraAlienFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
+        
+        //laddar platser och alla agenter 
         laddaPlatser();
         laddaAgenter();
+        
+        //genererar nytt id för alien
         genereraAlienID();
+        
+        //sätter reg datum till dagensdatum och kan inte ändras
         registreringsdatumField.setText(dagensDatum());
         registreringsdatumField.setEditable(false);
         
@@ -53,7 +59,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         
     }
     
-    
+    //metod för att generera dagens datum
    private String dagensDatum()
     {
         String datum = LocalDate.now().toString();
@@ -119,12 +125,12 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     private int getAgentIDAnsvarigAgent(String namn)
     {
         try{
-        //sql fråga för att hämta id på agent via parametern
-        String fraga = "SELECT Agent_ID FROM agent WHERE namn='"+namn+"'";
-        //hämta ur databasen
-        String svar = idb.fetchSingle(fraga);
-        //omvanlda svaret till int från string som fetchSingle returnerar
-        id = Integer.parseInt(svar);
+            //sql fråga för att hämta id på agent via parametern
+            String fraga = "SELECT Agent_ID FROM agent WHERE namn='"+namn+"'";
+            //hämta ur databasen
+            String svar = idb.fetchSingle(fraga);
+            //omvanlda svaret till int från string som fetchSingle returnerar
+            id = Integer.parseInt(svar);
         
         }catch(InfException ex)
         {
@@ -134,7 +140,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         return id;
     }
     
-    //metod för att hantera rull menyn för ras
+    //metod för att hantera rullmenyn för ras
     private void registreraRas(){
         //lokal variabel för att korta ner koden
         String ras = (String) cbxRas.getSelectedItem();
@@ -211,27 +217,34 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     }
     
  
-    
+    //metoden som registrerar alien info i databasen
     private void registreraNyAlien() {
         
         try {
+            //hämtar alla ifyllda textfält
             epost = epostField.getText();
             namn = txtbNamn.getText();
             losenord = losenordField.getText();
             valPlats = platsCbx.getSelectedItem().toString();
             telefon = telefonField.getText();
+            
+            //hämtar vald ansvarig agent från cboxen
             ansvarigAgent = getAgentIDAnsvarigAgent(ansvarigAgentCbx.getSelectedItem().toString());
             registreringsdatum = registreringsdatumField.getText();
             regDatum = Double.parseDouble(registreringsdatum);
             platsId = platsIdMap.get(valPlats);
+            
+            //ifall obligatoriska* textrutorna är ifyllda
             if(Validering.isTxtFilled(epost)&&Validering.isTxtFilled(losenord)&&Validering.isTxtFilled(valPlats)&& Validering.isTxtFilled(registreringsdatum)){
                 
-                
-                
+                //ifall eposten redan finns registrerad under varken agent eller alien
                 if(!Validering.epostKontrollVidreg(epost) ){
                     JOptionPane.showMessageDialog(null,"E-posten är redan registrerad i databasen, ange en ny och unik epost för den nya alien");
                     
+                 //ifall resternade textrutor är fyllda och epost innehåller @ och bokstav, och namn innehåller bokstav och lösenord inte längre än 6 tecken   
                 }else if(Validering.isTxtFilled(registreringsdatumField.getText()) && Validering.isTxtFilled(losenordField.getText()) && Validering.godkanndLosenLangd(losenord) && Validering.isEpostTrustable(epost) && Validering.containsAlphabet(epost) && Validering.containsAlphabet(namn)) {
+                    
+                    //validering så att telefonnumret enbart innehåller siffror
                     String[] TEL = telefon.split("-");
                     String nr = TEL[0]+TEL[1];
                     if(Validering.containsOnlyNumber(nr)){

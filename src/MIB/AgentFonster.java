@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 
 /**
- *
+ *Klass som enbart innehåller knappar för att öppna nya klasser
  * @author Adam
  */
 public class AgentFonster extends javax.swing.JFrame {
@@ -207,6 +207,8 @@ public class AgentFonster extends javax.swing.JFrame {
 
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
         // TODO add your handling code here:
+        
+        //tömmer InlogAgent fält för att ny kan lagras vid inloggning
         nyAgent.loggaUt();
         new InloggningsFonster(idb).setVisible(true);
         dispose();

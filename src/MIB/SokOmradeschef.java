@@ -11,7 +11,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *klass som listar områdeschef för valt område
  * @author adamrosing
  */
 public class SokOmradeschef extends javax.swing.JFrame {

@@ -7,7 +7,7 @@ package MIB;
 import oru.inf.InfDB;
 
 /**
- *
+ *Klass som enbart innehåller knappar för att öppna nya klasser
  * @author Adam
  */
 public class AlienFonster extends javax.swing.JFrame {
@@ -132,6 +132,8 @@ public class AlienFonster extends javax.swing.JFrame {
 
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
         // TODO add your handling code here:
+        
+        //tömmer InlogAlien state för att kunna fylla med nya värden från ny inloggning
         nyAlien.loggaUt();
         new InloggningsFonster(idb).setVisible(true);
         dispose();
@@ -144,6 +146,7 @@ public class AlienFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOmradesChefActionPerformed
 
 
+    //metod för att sätta välkommen text
     private void setValkommen(String namn)
     {
         if(namn != null){

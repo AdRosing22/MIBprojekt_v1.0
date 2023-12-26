@@ -6,7 +6,7 @@ package MIB;
 
 import oru.inf.InfDB;
 
-/**
+/**Klass som enbart innehåller knappar för att öppna upp nya klasser
  *
  * @author Adam & Melker & Alvin
  */
@@ -189,6 +189,8 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     private void btnLoggautActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggautActionPerformed
         // TODO add your handling code here:
+        
+        //tömmer InlogAgent state så att ny kan lagras vid inloggning
         nyAgent.loggaUt();
         new InloggningsFonster(idb).setVisible(true);
         dispose();
@@ -246,6 +248,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_jSokAgentActionPerformed
 
 
+    //kontroll för att sätta namnet efter välkommen vid inloggning
     private void setValkommen()
     {
         if(InlogAgent.getNamn() != null){

@@ -12,7 +12,8 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Klass för att registrera ny agent i databasen
+ * 
  * @author adamrosing
  */
 public class RegistreraNyAgent extends javax.swing.JFrame {
@@ -221,6 +222,7 @@ public class RegistreraNyAgent extends javax.swing.JFrame {
         String adminSvar = cbxAdmin.getSelectedItem().toString();
         String admin = adminSvar.substring(0, 1);
        
+        //hämtar textfälten
         String epost = txtfEpost.getText();
         String losen = txtfLosen.getText();
         String namn = txtfNamn.getText();
@@ -228,17 +230,20 @@ public class RegistreraNyAgent extends javax.swing.JFrame {
         
         
         try{
-            
+            //validering att textrutor är ifyllda och namn innehåller bokstav, epost innehåller @ och bokstav, lösenordet är godkänd längd
             if(Validering.isTxtFilled(epost) && Validering.isTxtFilled(losen)&&Validering.isTxtFilled(namn)&&Validering.isTxtFilled(telefon) && Validering.containsAlphabet(namn) && Validering.isEpostTrustable(epost) && Validering.godkanndLosenLangd(losen)){
+                
+                //validering att telefonnumret är ifyllt på korrekt sätt
                 String[] TEL = txtfTelefon.getText().split("-");
                 if(TEL.length != 2){
                     JOptionPane.showMessageDialog(null,"Du kan inte bara ha riktnumret som telefon utan du måste ha exempelvis: 555-555");
                 }else{
                     telefon = TEL[0]+TEL[1];
                 
-                
+                    //kontroll att eposten inte finns under varken alien eller agent redan
                     if(Validering.epostKontrollVidreg(epost)){
                 
+                        //validering att telefonnumret enbart innehåller siffror
                         if(Validering.containsOnlyNumber(telefon)){
                             
                             String Aid = genereraAgentId();
@@ -268,7 +273,7 @@ public class RegistreraNyAgent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
 
-    
+ //metod som tömmer alla fält 
 private void tomFalt()
 {
     txtfEpost.setText("");
@@ -277,7 +282,9 @@ private void tomFalt()
     txtfTelefon.setText("555-");
     txtfID.setText(genereraAgentId());
 }
-    
+ 
+
+//metod som laddar alla områden
 private void laddaOmraden(){
     try{
         ArrayList<HashMap<String, String>> omradeList = idb.fetchRows("SELECT * FROM omrade");
@@ -295,6 +302,7 @@ private void laddaOmraden(){
 }
 
 
+//metod som skapar nytt agentid
 private String genereraAgentId()
 {
     String nyAgentId ="";

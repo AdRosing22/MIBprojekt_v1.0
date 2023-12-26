@@ -1,11 +1,11 @@
 package MIB;
 
 
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -15,7 +15,7 @@ import oru.inf.InfException;
  */
 
 /**
- *
+ *Klass för att söka efter aliens registrerade mellan två datum
  * @author gustafneander
  */
 public class AlienDatum extends javax.swing.JFrame {
@@ -128,15 +128,19 @@ private static InfDB idb;
 
     private void btnHamtaAlienDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtaAlienDatumActionPerformed
         // TODO add your handling code here:
+        
+        //sätter text ifall inget datum är valt
     if (jDateFrom.getDate() == null) {
-txtAliensDatum.setText("Välj ett fråndatum");
-return;
-}
-        if (jDateTo.getDate() == null) {
-txtAliensDatum.setText("Välj ett tilldatum");
-return;
-}
+        txtAliensDatum.setText("Välj ett fråndatum");
+        return;
+    }
+    //sätter text ifall inget datum är valt
+    if (jDateTo.getDate() == null) {
+        txtAliensDatum.setText("Välj ett tilldatum");
+        return;
+    }
        
+        //
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (jDateFrom.getDate().after(jDateTo.getDate())) {
             txtAliensDatum.setText("Datum från måste vara mindre än eller \nsamma som datum till");
@@ -147,7 +151,6 @@ return;
             String SQLQuery = "select Namn,Registreringsdatum from alien where Registreringsdatum >= '"+ datefrom + "' and Registreringsdatum <= '" + dateto + "' order by Registreringsdatum;";
             System.out.println(SQLQuery);
             try {
-                idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
                 // Object ras = cbxRas.getSelectedItem();
                 System.out.println(SQLQuery);
                 //kör sql frågan till en ArrayList.
@@ -184,7 +187,8 @@ return;
             }
 
             catch (InfException ex) {
-              //  Logger.getLogger(AlienDatum.class.getName()).log(Level.SEVERE, null, ex);
+              JOptionPane.showMessageDialog(null, "Något gick fel");
+              System.out.println(ex.getMessage());
 
             }
 

@@ -10,7 +10,9 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Metod som alien kommer åt
+ * Visar agentinfo för den som är chef för området som en aliens plats hör till
+ * 
  * @author adamrosing
  */
 public class OmradesChefInfo extends javax.swing.JFrame {
@@ -110,7 +112,7 @@ public class OmradesChefInfo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHamtaOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtaOmradesChefActionPerformed
-        // TODO add your handling code here:
+       
 try {
         //SQL fråga för sammanfoga alien och agent på plats, till område, till områdeschef, till agent.
         String fraga = "SELECT agent.namn, agent.telefon, agent.anstallningsdatum, agent.epost, omrade.benamning FROM Agent "

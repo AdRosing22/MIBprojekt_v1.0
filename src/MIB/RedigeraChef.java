@@ -11,7 +11,8 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Klass för att ändra områdeschef eller kontorschef
+ * 
  * @author Adam
  */
 public class RedigeraChef extends javax.swing.JFrame {
@@ -28,6 +29,8 @@ public class RedigeraChef extends javax.swing.JFrame {
         laddaAgenter();
         laddaOmraden();
         laddaKontor();
+        
+        //gömmer all instruktionstext till val av knapptryck
         jLvaljAgent.setVisible(false);
         cbxAgenter.setVisible(false);
         cbxOmrade.setVisible(false);
@@ -227,6 +230,8 @@ public class RedigeraChef extends javax.swing.JFrame {
 
     private void btnOmradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOmradeActionPerformed
         // TODO add your handling code here:
+        
+        //tar fram alla instruktioner för område
         jLvarning.setVisible(true);
         jLvarning2.setVisible(true);
         jLvaljAgent.setVisible(true);
@@ -235,6 +240,8 @@ public class RedigeraChef extends javax.swing.JFrame {
         jLomrade.setVisible(true);
         btnOmradesChefBekrafta.setVisible(true);
         btnOmradesChefBekrafta.setEnabled(true);
+        
+        //gömmer alla instruktioner för kontor
         cbxKontor.setVisible(false);
         jLkontor.setVisible(false);
         btnKontorsChefBekräfta.setVisible(false);
@@ -247,6 +254,8 @@ public class RedigeraChef extends javax.swing.JFrame {
 
     private void btnKontorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKontorActionPerformed
         // TODO add your handling code here:
+        
+        //tar fram alla instruktioner för kontor
         jLinfo.setVisible(true);
         jLvarning.setVisible(true);
         jLvarning2.setVisible(true);
@@ -256,6 +265,8 @@ public class RedigeraChef extends javax.swing.JFrame {
         jLkontor.setVisible(true);
         btnKontorsChefBekräfta.setVisible(true);
         btnKontorsChefBekräfta.setEnabled(true);
+        
+        //gömmer alla instruktioner för område
         cbxOmrade.setVisible(false);
         jLomrade.setVisible(false);
         btnOmradesChefBekrafta.setVisible(false);
@@ -389,7 +400,7 @@ public class RedigeraChef extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Agenten är redan chef över det kontoret");
             }else{
             
-                 //kontroll att personen inte redan är chef
+                 //kontroll att personen inte redan är chef eftersom man bara kan vara chef över ett kontor åt gången
                 if(arChefint<1){
                     idb.update(fraga1);
                     JOptionPane.showMessageDialog(null, "Uppdaterat! Chef för kontoret " + beteckning+" är nu "+agentnamn);
@@ -416,6 +427,7 @@ public class RedigeraChef extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxOmradeActionPerformed
 
 
+    //metod för att ladda cboxen med alla kontor och agentid vem som är ansvarig
     private void laddaKontor()
     {
         try{
@@ -434,6 +446,7 @@ public class RedigeraChef extends javax.swing.JFrame {
     }
     
     
+    //metod för att ladda alla agenter
   private void laddaAgenter() {
         try {
             ArrayList<HashMap<String, String>> agentlist = idb.fetchRows("SELECT Agent_ID, Namn FROM agent");
@@ -448,7 +461,8 @@ public class RedigeraChef extends javax.swing.JFrame {
         }
     }
   
-      private void laddaOmraden(){
+  //metod för att ladda alla områden
+    private void laddaOmraden(){
         try{
             ArrayList<HashMap<String, String>> omradeList = idb.fetchRows("SELECT * FROM omrade");
             cbxOmrade.removeAllItems();

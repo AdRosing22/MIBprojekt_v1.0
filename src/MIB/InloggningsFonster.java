@@ -11,7 +11,10 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Det första som öppnas upp via main metoden
+ * Hanterar inmatning av epost och lösenord för att bestämma vem det är som loggar in
+ * Val av agent/alien vid inloggning är väsentligt för resten av systemet
+ * 
  * @author Adam
  */
 public class InloggningsFonster extends javax.swing.JFrame {

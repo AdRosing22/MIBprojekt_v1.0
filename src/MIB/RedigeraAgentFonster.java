@@ -12,6 +12,11 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * Klass för att ändra på lagrad information om agent
+ * Kan inte redigera e-post eftersom det används som unik identifierare
+ * --kan lätt justera att det går att ändra epost vid behov men att man inte kan ändra epost
+ * --på inloggad agent.Det som blir problem är att man kan inte validera att den inte redan finns
+ * --ifall man inte redigerar den alls. För då kommer det stoppas av valideringen
  *
  * @author adamrosing
  */
@@ -310,8 +315,8 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
             String inID = gamUtrID[0];
             
             
-            //ifall rutorna är fyllda, eposten innehåller @ och bokstav och namnet innehåller bokstav
-            if(Validering.isTxtFilled(epost) && Validering.isTxtFilled(namn)&&Validering.isTxtFilled(losenord)&&Validering.isTxtFilled(datumFalse)&&Validering.isTxtFilled(telefon) && Validering.containsAlphabet(namn)&&Validering.containsAlphabet(epost)&&Validering.isEpostTrustable(epost)&&Validering.godkanndLosenLangd(losenord)){
+            //ifall rutorna är fyllda, namnet innehåller bokstav och lösenord inte längre än 6 tecken
+            if(Validering.isTxtFilled(namn)&&Validering.isTxtFilled(losenord)&&Validering.isTxtFilled(datumFalse)&&Validering.isTxtFilled(telefon) && Validering.containsAlphabet(namn)&&Validering.godkanndLosenLangd(losenord)){
                 
                 //validering för datum
                 String [] datum = datumFalse.split("-");
@@ -530,17 +535,18 @@ private void laddaAllUtrustning()
     
 //metod som hämtar alla agenter
 private void laddaAgenter() {
-        try {
-            ArrayList<HashMap<String, String>> agentlist = idb.fetchRows("SELECT Agent_ID, Namn FROM agent");
-            cbxAgenter.removeAllItems();
-            for(HashMap<String, String> agent : agentlist) {
-                    String agentid = agent.get("Agent_ID");
-                    String namn = agent.get("Namn");
+    try {
+        ArrayList<HashMap<String, String>> agentlist = idb.fetchRows("SELECT Agent_ID, Namn FROM agent");
+        cbxAgenter.removeAllItems();
+        for(HashMap<String, String> agent : agentlist) {
+            String agentid = agent.get("Agent_ID");
+            String namn = agent.get("Namn");
                     
-                    cbxAgenter.addItem(agentid+"-"+namn);
+            cbxAgenter.addItem(agentid+"-"+namn);
             }
-        } catch (InfException e) {
+        }catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+            System.out.println(e.getMessage());
         }
     }
             

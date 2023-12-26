@@ -12,7 +12,8 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *Metod för att ändra på innehar_utrustning hos agent
+ * 
  * @author adamrosing
  */
 public class KvitteringUtrustningAgent extends javax.swing.JFrame {
@@ -149,28 +150,35 @@ public class KvitteringUtrustningAgent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
-        // TODO add your handling code here:
+        
+            //tömmer bekräftelse meddelanden
             jLutk.setText("");
             jLink.setText("");
         
+            //hämmtar index för utkvitterings utrustning från cboxen
             String valNyUtr = cbxUtrustning.getSelectedItem().toString();
             String[] nyUtrID = valNyUtr.split("-");
             String utID = nyUtrID[0];
             
+            //hämtar index för inkvitterings utrustning från cboxen
             String valGammalUtr = cbxInneharUtr.getSelectedItem().toString();
             String[] gamUtrID = valGammalUtr.split("-");
             String inID = gamUtrID[0];
             
+            //anropar metoden för att hämta id för agenten som är inloggad
             String agentid = hamtaAgentID();
             
+            
+            //genererar dagens datum
             String dagensdatum = dagensDatum();
             
             try{
             
+            //ifall inget är valt att utkvittera
             if(valNyUtr.equals("Välj")){
                         System.out.println("Ingen förändring i utag av utrustning");
                     }else{
-                        //annars sätter man in agentid, utrustningsid och dagensdatum
+                        //annars sätter man in agentid, utrustningsid och dagensdatum i innehar_utrustning
                         String fraga = "INSERT INTO innehar_utrustning VALUES ("+agentid+", "+utID+",'"+dagensdatum+"')";
                         idb.insert(fraga);
                         jLutk.setText("Utkvitterat!");
@@ -185,6 +193,7 @@ public class KvitteringUtrustningAgent extends javax.swing.JFrame {
                         idb.delete(fraga);  
                         jLink.setText("Inkvitterat!");
                     }
+                    //laddar cboxarna för att de förändringar man gjort ska synas
                     laddaInneharUtrustning();
                     laddaAllUtrustning();
             }catch(InfException ex){
@@ -195,7 +204,7 @@ public class KvitteringUtrustningAgent extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
-    
+ //metod för att generera dagens datum
  private String dagensDatum()
 {
     String datum = LocalDate.now().toString();
@@ -207,6 +216,7 @@ public class KvitteringUtrustningAgent extends javax.swing.JFrame {
     return dagensdatum;
 }
  
+ //metod som hämtar Agent_ID på inloggade agenten via InlogAgent klassen
  private String hamtaAgentID(){
      String id = InlogAgent.getAgentId();
      return id;
