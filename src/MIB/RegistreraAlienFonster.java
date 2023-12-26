@@ -180,26 +180,29 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         
         try{
             //hårdkodat så ifall Squid eller Boglodite är valt:
-            if(ras == null || ras.equals("Välj") || txtSvar.isEmpty()){
+            if(ras == null || ras.equals("Välj")){
                  JOptionPane.showMessageDialog(null, "Du valde inte någon ras för den nya alien, för att lägga till det nu i efterhand kan du använda dig av 'redigera alien' funktionen");
-            }
-            //hårdkodat så ifall Squid eller Boglodite är valt:
-            else if(ras.equals("Squid") || ras.equals("Boglodite")){
-                //svaret i txtrutan omvandlas till int
-                rasValINT = Integer.parseInt(txtSvar);
-                //kompletterar frågan med rasValINT variabeln
-                String sqlfraga = fraga+rasValINT+")";
-                //kör fråga mot databasen
-                idb.insert(sqlfraga);
-            }
-            else if(ras.equals("Worm")){
-                rasValDouble = Double.parseDouble(txtSvar);
-                String sqlfraga = fraga+rasValDouble+")";
-                idb.insert(sqlfraga);
-            }
-               
+            }else{
+                if(txtSvar.isEmpty()){
+                    JOptionPane.showMessageDialog(null,"Du måste fylla i ras attributet för att rasen ska registreras!");
+                }else{
             
-
+                    //hårdkodat så ifall Squid eller Boglodite är valt:
+                    if(ras.equals("Squid") || ras.equals("Boglodite")){
+                        //svaret i txtrutan omvandlas till int
+                        rasValINT = Integer.parseInt(txtSvar);
+                        //kompletterar frågan med rasValINT variabeln
+                        String sqlfraga = fraga+rasValINT+")";
+                        //kör fråga mot databasen
+                        idb.insert(sqlfraga);
+                    }
+                    else if(ras.equals("Worm")){
+                        rasValDouble = Double.parseDouble(txtSvar);
+                        String sqlfraga = fraga+rasValDouble+")";
+                        idb.insert(sqlfraga);
+                    }
+                }
+            }
         }
         catch(InfException ex){
             JOptionPane.showMessageDialog(null,"Något gick fel");
