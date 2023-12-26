@@ -32,10 +32,11 @@
                   <Component id="btnHanteraAlien" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnRegUtr" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="46" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <EmptySpace pref="60" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="btnSeutrustning" max="32767" attributes="0"/>
-                  <Component id="btnKvittera" pref="164" max="32767" attributes="0"/>
+                  <Component id="btnKvittera" alignment="1" pref="150" max="32767" attributes="0"/>
+                  <Component id="btnAnsvarigAgent" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
@@ -76,13 +77,16 @@
                   <Component id="btnHanteraAlien" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnKvittera" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="btnRegUtr" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnRegUtr" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAnsvarigAgent" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="btnSokOChef" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnAndraLosen1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <EmptySpace pref="37" max="32767" attributes="0"/>
               <Component id="btnAvsluta" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -162,6 +166,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKvitteraActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAnsvarigAgent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ansvariga agenter"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnsvarigAgentActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

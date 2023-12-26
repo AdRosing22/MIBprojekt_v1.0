@@ -55,6 +55,7 @@ public class AgentFonster extends javax.swing.JFrame {
         btnAndraLosen1 = new javax.swing.JButton();
         btnSeutrustning = new javax.swing.JToggleButton();
         btnKvittera = new javax.swing.JToggleButton();
+        btnAnsvarigAgent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,6 +119,13 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
+        btnAnsvarigAgent.setText("Ansvariga agenter");
+        btnAnsvarigAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnsvarigAgentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,10 +138,11 @@ public class AgentFonster extends javax.swing.JFrame {
                     .addComponent(btnAndraLosen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHanteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRegUtr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnSeutrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnKvittera, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                    .addComponent(btnKvittera, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(btnAnsvarigAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -164,13 +173,15 @@ public class AgentFonster extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHanteraAlien)
                     .addComponent(btnKvittera))
-                .addGap(12, 12, 12)
-                .addComponent(btnRegUtr)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegUtr)
+                    .addComponent(btnAnsvarigAgent))
                 .addGap(12, 12, 12)
                 .addComponent(btnSokOChef)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(btnAndraLosen1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(btnAvsluta)
                 .addContainerGap())
         );
@@ -232,6 +243,12 @@ public class AgentFonster extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnKvitteraActionPerformed
 
+    private void btnAnsvarigAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnsvarigAgentActionPerformed
+        // TODO add your handling code here:
+        new Top3AnsvarigaAgenter(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAnsvarigAgentActionPerformed
+
     private void setValkommen(String namn)
     {
         if(namn!=null){
@@ -246,6 +263,7 @@ public class AgentFonster extends javax.swing.JFrame {
     private javax.swing.JLabel JLvalkommen;
     private javax.swing.JButton btnAndraLosen;
     private javax.swing.JButton btnAndraLosen1;
+    private javax.swing.JButton btnAnsvarigAgent;
     private javax.swing.JToggleButton btnAvsluta;
     private javax.swing.JButton btnHanteraAlien;
     private javax.swing.JToggleButton btnKvittera;
