@@ -4,13 +4,15 @@
  */
 package MIB;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
  *
- * @author alvin
+ * @author alvin & adam
  */
 public class TaBortUtrustning extends javax.swing.JFrame {
 
@@ -22,6 +24,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         setLocationRelativeTo(null);
+        laddaUtrustning();
     }
 
     /**
@@ -34,21 +37,15 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     private void initComponents() {
 
         jLtitel = new javax.swing.JLabel();
-        txtbID = new javax.swing.JTextField();
         btnTillbaka = new javax.swing.JToggleButton();
         btnTaBort = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
+        cbxUtrustning = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLtitel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLtitel.setText("Ta bort agentutrustning");
-
-        txtbID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtbIDActionPerformed(evt);
-            }
-        });
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +61,9 @@ public class TaBortUtrustning extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Fyll i utrustningens ID-nummer:");
+        jLabel1.setText("Välj utrustning att ta bort:");
+
+        cbxUtrustning.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,12 +80,12 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(jLabel1)
-                        .addGap(34, 34, 34)
-                        .addComponent(txtbID, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,7 +95,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                 .addGap(97, 97, 97)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtbID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(btnTaBort)
                 .addGap(47, 47, 47)
@@ -114,22 +113,20 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
-        String IDstrang = txtbID.getText();
+        String IDstrang = getUtrustningsId();
 
         try {
-
-            if (Validering.isTxtFilled(IDstrang)) {
                 int UtrID = Integer.parseInt(IDstrang);
 
                 idb.delete("DELETE FROM vapen WHERE Utrustnings_ID = " + UtrID);
                 idb.delete("DELETE FROM kommunikation WHERE Utrustnings_ID = " + UtrID);
                 idb.delete("DELETE FROM teknik WHERE Utrustnings_ID = " + UtrID);
+                idb.delete("DELETE FROM innehar_utrustning WHERE Utrustnings_ID ="+ UtrID);
                 idb.delete("DELETE FROM utrustning WHERE Utrustnings_ID = " + UtrID);
 
-                JOptionPane.showMessageDialog(null, "Utrustningen med ID-nummer: " + UtrID + " har tagits bort");
-            } else {
-                JOptionPane.showMessageDialog(null, "Vänligen fyll i ID-fältet");
-            }
+                JOptionPane.showMessageDialog(null, "Utrustningen med ID-nummer: " + UtrID + " har tagits bort från systemet!");
+            
+                laddaUtrustning();
 
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Det finns ingen utrustning med det valda ID-numret");
@@ -140,19 +137,39 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_btnTaBortActionPerformed
 
-    private void txtbIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbIDActionPerformed
-
+    
+    
+private String getUtrustningsId(){
+    String utrustning = cbxUtrustning.getSelectedItem().toString();
+    String[] allInfo = utrustning.split("-");
+    String id = allInfo[0];
+    return id;
+}
    
-        
+ private void laddaUtrustning(){
+     try{
+         String fraga = "SELECT * FROM Utrustning";
+         ArrayList<HashMap<String, String>> utrustningInfo = idb.fetchRows(fraga);
+         cbxUtrustning.removeAllItems();
+         for(HashMap<String, String> enUtrustning : utrustningInfo){
+             String id = enUtrustning.get("Utrustnings_ID");
+             String namn = enUtrustning.get("Benamning");
+             
+             cbxUtrustning.addItem(id+"-"+namn);
+         }
+         
+     }catch(InfException ex){
+         JOptionPane.showMessageDialog(null,"Något gick fel");
+         System.out.println("Internt felmed: "+ex.getMessage());
+     }
+ }  
     
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnTaBort;
     private javax.swing.JToggleButton btnTillbaka;
+    private javax.swing.JComboBox<String> cbxUtrustning;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLtitel;
-    private javax.swing.JTextField txtbID;
     // End of variables declaration//GEN-END:variables
 }
