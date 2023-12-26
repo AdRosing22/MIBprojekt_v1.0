@@ -248,6 +248,7 @@ public class RegistreraNyAgent extends javax.swing.JFrame {
                             String nyFaltAgent = "INSERT INTO Faltagent VALUES ("+Aid+")";
                             idb.insert(nyFaltAgent);
                             JOptionPane.showMessageDialog(null, "Ny agent registrerad med epost: "+epost+" och lösenord: "+losen);
+                            tomFalt(); 
                         }else{
                             JOptionPane.showMessageDialog(null, "Du kan inte ha bokstäver i telefonnumret!");
                         }
@@ -257,7 +258,7 @@ public class RegistreraNyAgent extends javax.swing.JFrame {
                     }
                 }
             }
-            tomFalt();  
+             
         }catch(InfException ex){
             JOptionPane.showMessageDialog(null,"Något gick fel");
             System.out.println(ex.getMessage());

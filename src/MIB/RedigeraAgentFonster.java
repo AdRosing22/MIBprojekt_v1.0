@@ -291,11 +291,7 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
         String losenord = txtfLosen.getText();
         String telefon = txtfTelefon.getText();
         String datumFalse = txtfDatum.getText();
-        
-        
-        
-        
-        
+         
         try{
             
             String agentid =hamtaAgentID();
