@@ -11,7 +11,8 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ *klass som listar de tre agenter som är ansvarig agent för flest aliens
+ * 
  * @author adamrosing
  */
 public class Top3AnsvarigaAgenter extends javax.swing.JFrame {
