@@ -180,9 +180,10 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         
         try{
             //hårdkodat så ifall Squid eller Boglodite är valt:
-            if(ras == null || ras.equals("Välj")){
+            if(ras == null || ras.equals("Välj") || txtSvar.isEmpty()){
                  JOptionPane.showMessageDialog(null, "Du valde inte någon ras för den nya alien, för att lägga till det nu i efterhand kan du använda dig av 'redigera alien' funktionen");
             }
+            //hårdkodat så ifall Squid eller Boglodite är valt:
             else if(ras.equals("Squid") || ras.equals("Boglodite")){
                 //svaret i txtrutan omvandlas till int
                 rasValINT = Integer.parseInt(txtSvar);
