@@ -385,13 +385,13 @@ public class RedigeraAlien extends javax.swing.JFrame {
                     //ifall ny ras är worm och attribut är ifyllt
                 }else if(valdRas.equals("Worm") && !attribut.isEmpty()){
                     
-                    //kontroll som blir lite fel för vill ju kunna ha , eller . för cm, aja vet inte hur jag ska fixa
-                    if(Validering.containsOnlyNumber(attribut) || Validering.containsAlphabet(attribut)){
+                    //kontroll att det är siffra . siffra siffra för längd hos worm
+                    if(Character.isDigit(attribut.charAt(0)) && Character.isAlphabetic(1) && Character.isDigit(attribut.charAt(2)) && Character.isDigit(attribut.charAt(3)) && attribut.length()<4&& attribut.matches(".")){
                         idb.insert("INSERT INTO Worm VALUES ("+alienid+", "+attribut+")");
                         
                         //påminnelse
                     }else{
-                        JOptionPane.showMessageDialog(null,"Skriv längd med siffor!");
+                        JOptionPane.showMessageDialog(null,"Skriv längd med siffor i format 0.00!");
                     }
                     
                     //ifall squid är valt och attribut är ifyllt

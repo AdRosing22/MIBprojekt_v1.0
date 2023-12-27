@@ -198,8 +198,9 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Du måste fylla i ras attributet för att rasen ska registreras!");
                 }else{
             
+                if(Validering.containsOnlyNumber(txtSvar)){    
                     //hårdkodat så ifall Squid eller Boglodite är valt:
-                    if(Validering.containsOnlyNumber(txtSvar) && ras.equals("Squid") || ras.equals("Boglodite")){
+                    if(ras.equals("Squid") || ras.equals("Boglodite")){
                         //svaret i txtrutan omvandlas till int
                         rasValINT = Integer.parseInt(txtSvar);
                         //kompletterar frågan med rasValINT variabeln
@@ -207,12 +208,16 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                         //kör fråga mot databasen
                         idb.insert(sqlfraga);
                     }
-                    else if(ras.equals("Worm") && txtSvar.length() <4 && txtSvar.matches(".")){
-                        rasValDouble = Double.parseDouble(txtSvar);
-                        String sqlfraga = fraga+rasValDouble+")";
-                        idb.insert(sqlfraga);
                     }else{
-                        JOptionPane.showMessageDialog(null,"Kontrollera att du anget attribut i rätt form, nu registreras alien fast utan ras!");
+                        
+                 
+                        if(ras.equals("Worm") && Character.isDigit(txtSvar.charAt(0)) && Character.isAlphabetic(txtSvar.charAt(1)) && Character.isDigit(txtSvar.charAt(2)) && Character.isDigit(txtSvar.charAt(3)) && txtSvar.length()<4&& txtSvar.matches(".")){
+                            rasValDouble = Double.parseDouble(txtSvar);
+                            String sqlfraga = fraga+rasValDouble+")";
+                            idb.insert(sqlfraga);
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Kontrollera att du anget attribut i rätt form, nu registreras alien fast utan ras!");
+                        }
                     }
                 }
             }
