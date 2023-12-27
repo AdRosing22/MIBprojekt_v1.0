@@ -120,7 +120,7 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
 
     private void btnRedigeraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAlienActionPerformed
         // TODO add your handling code here:
-        new RedigeraAlien2(idb).setVisible(true);
+        new RedigeraAlien(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRedigeraAlienActionPerformed
 
