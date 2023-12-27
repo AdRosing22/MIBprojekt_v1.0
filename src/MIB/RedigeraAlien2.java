@@ -40,7 +40,7 @@ public class RedigeraAlien2 extends javax.swing.JFrame {
         this.idb = idb;
         epost = InlogAgent.getEpost();
         attributLabel.setVisible(false);
-        
+        laddaAlien();
     }
     
     
@@ -108,41 +108,50 @@ public class RedigeraAlien2 extends javax.swing.JFrame {
         Object val = rasCbx.getSelectedItem();
         String menyVal = val.toString();
         tidigareRas = "";
-        String delete = "";
-        String fraga = "";
+                
         
         try {
             String fragaAlienID = idb.fetchSingle("SELECT Alien_ID FROM alien WHERE Epost = '"+epost+"'");
             int alienid = Integer.parseInt(fragaAlienID);
+            String attribut = attributField.getText();
             hamtaTidigareRas(epost);
-            switch (menyVal) {
-                case "Squid":
-                    attribut = attributField.getText();
-                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
-                    fraga = "INSERT INTO Squid VALUES (" + alienid + ", '" + attribut + "')";
-                    idb.delete(delete);
-                    idb.insert(fraga);
-                    
-                    break;
-                case "Worm":
-                    attribut = attributField.getText();
-                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
-                    fraga = "INSERT INTO worm VALUES (" + alienid + ", '" + attribut + "')";
-                    idb.delete(delete);
-                    idb.insert(fraga);
-                    
-                    break;
-                case "Boglodite":
-                    attribut = attributField.getText();
-                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
-                    fraga = "INSERT INTO Boglodite VALUES (" + alienid + ", '" + attribut + "')";
-                    idb.delete(delete);
-                    idb.insert(fraga);
-                    
-                    break;
-                case "Välj":
-                    break;
+            if(!tidigareRas.equals("Squid") && !tidigareRas.isEmpty()) {
+                String delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
+                idb.delete(delete);
             }
+            
+            String checkSquid = idb.fetchSingle("SELECT Alien_ID FROM squid WHERE Alien_ID = " + alienid);
+            if(checkSquid != null) {
+                String fragaUpdate = "UPDATE squid SET Antal_Armar = '" + attribut + "' WHERE Alien_ID = " + alienid;
+                idb.update(fragaUpdate);
+            } else {
+                String fragaInsert = "INSERT INTO squid (Alien_ID, Antal_Armar) VALUES (" + alienid + ", '" + attribut + "')";
+                idb.insert(fragaInsert);
+            }
+            if(!tidigareRas.equals("Squid") && !tidigareRas.isEmpty()) {
+                String delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
+                idb.delete(delete);
+            }
+            
+            String checkWorm = idb.fetchSingle("SELECT Alien_ID FROM worm WHERE Alien_ID = " + alienid);
+            if(checkWorm != null) {
+                String fragaUpdate = "UPDATE worm SET Langd = '" + attribut + "' WHERE Alien_ID = " + alienid;
+                idb.update(fragaUpdate);
+            } else {
+                String fragaInsert = "INSERT INTO worm (Alien_ID, Langd) VALUES (" + alienid + ", '" + attribut + "')";
+                idb.insert(fragaInsert);
+            }
+            
+            
+            String checkBog = idb.fetchSingle("SELECT Alien_ID FROM boglodite WHERE Alien_ID = " + alienid);
+            if(checkBog != null) {
+                String fragaUpdate = "UPDATE boglodite SET Antal_Boogies = '" + attribut + "' WHERE Alien_ID = " + alienid;
+                idb.update(fragaUpdate);
+            } else {
+                String fragaInsert = "INSERT INTO boglodite (Alien_ID, Antal_Boogies) VALUES (" + alienid + ", '" + attribut + "')";
+                idb.insert(fragaInsert);
+            }
+            
             attributField.setText("");
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -150,7 +159,12 @@ public class RedigeraAlien2 extends javax.swing.JFrame {
     }
     
     private void visaAlienInformation(String epost) {
-        try {
+        
+                regDatumField.setText("");
+                losenordField.setText("");
+                telefonField.setText("");
+                
+                try {
             HashMap<String, String> alienInfo = idb.fetchRow("SELECT * FROM alien WHERE Epost = '" + epost + "'");
             if (alienInfo != null) {
                 regDatumField.setText(alienInfo.get("Registreringsdatum"));
@@ -160,9 +174,12 @@ public class RedigeraAlien2 extends javax.swing.JFrame {
                 
                 
                 
+                
+                
             }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+            e.printStackTrace();
         }
     }
     
@@ -221,6 +238,7 @@ public class RedigeraAlien2 extends javax.swing.JFrame {
         try {
             ArrayList<HashMap<String, String>> platslist = idb.fetchRows("SELECT Plats_ID, Benamning FROM plats");
             platsCbx.removeAllItems();
+            platsCbx.addItem("Välj plats...");
             for (HashMap<String, String> plats : platslist) {
                 platsCbx.addItem(plats.get("Benamning"));
             }
@@ -233,6 +251,7 @@ public class RedigeraAlien2 extends javax.swing.JFrame {
         try {
             ArrayList<HashMap<String, String>> agentlist = idb.fetchRows("SELECT Agent_ID, Namn FROM agent");
             ansvarigAgentCbx.removeAllItems();
+            ansvarigAgentCbx.addItem("Välj agent...");
             for (HashMap<String, String> agent : agentlist) {
                 ansvarigAgentCbx.addItem(agent.get("Namn"));
             }
@@ -409,12 +428,16 @@ public class RedigeraAlien2 extends javax.swing.JFrame {
 
     private void btnLaddaAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaddaAlienActionPerformed
         // TODO add your handling code here:
-        laddaAlien();
-        visaAlienInformation(epost);
-        laddaPlatser();
-        laddaAgenter();
+        String selected = (String) alienCbx.getSelectedItem();
+        if (selected != null && !selected.isEmpty()) {
+            String epost = alienEpostMap.get(selected.split(" \\(")[0]);
+            JOptionPane.showMessageDialog(null, "Laddar information för: " + epost);
+            visaAlienInformation(epost);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingen alien är vald.");
     }//GEN-LAST:event_btnLaddaAlienActionPerformed
-
+    }
+    
     private void btnRedigeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraActionPerformed
         // TODO add your handling code here:
         String selected = (String) alienCbx.getSelectedItem();
