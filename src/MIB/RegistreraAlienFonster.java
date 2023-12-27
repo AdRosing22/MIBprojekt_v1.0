@@ -212,7 +212,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                         String sqlfraga = fraga+rasValDouble+")";
                         idb.insert(sqlfraga);
                     }else{
-                        JOptionPane.showMessageDialog(null,"Kontrollera att du anget attribut i rätt form");
+                        JOptionPane.showMessageDialog(null,"Kontrollera att du anget attribut i rätt form, nu registreras alien fast utan ras!");
                     }
                 }
             }
@@ -275,6 +275,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                             ansvarigAgentCbx.setSelectedIndex(0);
                             registreringsdatumField.setText(dagensDatum());
                             txtbRasAttribut.setText("");
+                             
                             registreraRas(); 
                         }else{
                             JOptionPane.showMessageDialog(null,"Telefonnumret får inte innehålla bokstäver");
