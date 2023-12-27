@@ -386,7 +386,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
                 }else if(valdRas.equals("Worm") && !attribut.isEmpty()){
                     
                     //kontroll att det är siffra . siffra siffra för längd hos worm
-                    if(Character.isDigit(attribut.charAt(0)) && Character.isAlphabetic(1) && Character.isDigit(attribut.charAt(2)) && Character.isDigit(attribut.charAt(3)) && attribut.length()<4&& attribut.matches(".")){
+                    if(Character.isDigit(attribut.charAt(0)) && Character.isDigit(attribut.charAt(2)) && Character.isDigit(attribut.charAt(3)) && attribut.length()<5&& attribut.contains(".")){
                         idb.insert("INSERT INTO Worm VALUES ("+alienid+", "+attribut+")");
                         
                         //påminnelse

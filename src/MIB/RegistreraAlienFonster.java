@@ -211,7 +211,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                     }else{
                         
                  
-                        if(ras.equals("Worm") && Character.isDigit(txtSvar.charAt(0)) && Character.isAlphabetic(txtSvar.charAt(1)) && Character.isDigit(txtSvar.charAt(2)) && Character.isDigit(txtSvar.charAt(3)) && txtSvar.length()<4&& txtSvar.matches(".")){
+                        if(ras.equals("Worm") && Character.isDigit(txtSvar.charAt(0)) &&  Character.isDigit(txtSvar.charAt(2)) && Character.isDigit(txtSvar.charAt(3)) && txtSvar.length()<5&& txtSvar.contains(".")){
                             rasValDouble = Double.parseDouble(txtSvar);
                             String sqlfraga = fraga+rasValDouble+")";
                             idb.insert(sqlfraga);
