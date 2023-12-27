@@ -16,7 +16,7 @@ import oru.inf.InfException;
  * --ifall telefon och datum fält är tomma eller fel format uppdateras inte det
  * 
  * 
- * @author adamrosing
+ * @author adamrosing & Melker
  */
 public class RedigeraAlien extends javax.swing.JFrame {
 

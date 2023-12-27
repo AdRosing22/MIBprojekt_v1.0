@@ -15,7 +15,7 @@ import oru.inf.InfException;
  * Kontrollerar ifall aliens id finns med i någon ras tabell och tar bort där också
  * Tar bort alien även om den saknar ras
  * 
- * @author adamrosing
+ * @author adamrosing & Melker
  */
 public class TabortAlien extends javax.swing.JFrame {
     
