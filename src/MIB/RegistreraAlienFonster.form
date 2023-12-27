@@ -282,7 +282,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLnamn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Namn:"/>
+        <Property name="text" type="java.lang.String" value="Namn:*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JToggleButton" name="btnTillbaka">

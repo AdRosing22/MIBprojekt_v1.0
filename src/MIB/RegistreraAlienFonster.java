@@ -246,25 +246,29 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                     
                     //validering så att telefonnumret enbart innehåller siffror
                     String[] TEL = telefon.split("-");
-                    String nr = TEL[0]+TEL[1];
-                    if(Validering.containsOnlyNumber(nr)){
-                        String fraga =  "INSERT INTO Alien VALUES ("+alienid +","+regDatum+",'"+epost+"','"+losenord+"','"+namn+"','"+telefon+"',"+platsId+","+ansvarigAgent+")";
-                        idb.insert(fraga);
-                        registreraRasIdb();
-                
-                        JOptionPane.showMessageDialog(null, "En ny alien har registrerats.");
-                
-                        epostField.setText("");
-                        losenordField.setText("");
-                        txtbNamn.setText("");
-                        platsCbx.setSelectedIndex(0);
-                        telefonField.setText("555-");
-                        ansvarigAgentCbx.setSelectedIndex(0);
-                        registreringsdatumField.setText(dagensDatum());
-                        txtbRasAttribut.setText("");
-                        registreraRas(); 
+                    if(TEL.length != 2){
+                        JOptionPane.showMessageDialog(null,"Ifall alien saknar nummer kan du lämna fältet helt tomt! Annrs fyll i enligt format 555-555");
                     }else{
-                        JOptionPane.showMessageDialog(null,"Telefonnumret får inte innehålla bokstäver");
+                        String nr = TEL[0]+TEL[1];
+                        if(Validering.containsOnlyNumber(nr)){
+                            String fraga =  "INSERT INTO Alien VALUES ("+alienid +","+regDatum+",'"+epost+"','"+losenord+"','"+namn+"','"+telefon+"',"+platsId+","+ansvarigAgent+")";
+                            idb.insert(fraga);
+                            registreraRasIdb();
+                
+                            JOptionPane.showMessageDialog(null, "En ny alien har registrerats.");
+                
+                            epostField.setText("");
+                            losenordField.setText("");
+                            txtbNamn.setText("");
+                            platsCbx.setSelectedIndex(0);
+                            telefonField.setText("555-");
+                            ansvarigAgentCbx.setSelectedIndex(0);
+                            registreringsdatumField.setText(dagensDatum());
+                            txtbRasAttribut.setText("");
+                            registreraRas(); 
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Telefonnumret får inte innehålla bokstäver");
+                        }
                     }
                 }
             }
@@ -386,7 +390,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
             }
         });
 
-        jLnamn.setText("Namn:");
+        jLnamn.setText("Namn:*");
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
