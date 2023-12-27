@@ -7,6 +7,7 @@ package MIB;
 
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -212,7 +213,20 @@ public class InloggningsFonster extends javax.swing.JFrame {
     
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
         // TODO add your handling code here:
-        dispose();
+        UIManager.put("OptionPane.yesButtonText", "Ja");
+        UIManager.put("OptionPane.noButtonText", "Nej");
+        int choice = JOptionPane.showConfirmDialog(
+        this, // Komponenten att centrera popup på
+        "Vill du verkligen avsluta programmet?", // Meddelandetext
+        "Bekräftelse", // Titel på popup
+        JOptionPane.YES_NO_OPTION // Visa Ja/Nej-knappar
+        );
+
+        // Kontrollera användarens val
+        if (choice == JOptionPane.YES_OPTION) {
+            dispose();
+        }
+        
     }//GEN-LAST:event_btnAvslutaActionPerformed
 
     

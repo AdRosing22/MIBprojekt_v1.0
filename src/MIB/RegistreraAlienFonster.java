@@ -108,9 +108,14 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     //generarar nytt AlienID utifrån senast tillagdas id-värde
     private void genereraAlienID()
     {
+        int hamtatID = 0;
         try{
             String fragaID = idb.getAutoIncrement("alien", "Alien_ID");
-            int hamtatID= Integer.parseInt(fragaID);
+            if(fragaID == null){
+                hamtatID = 1;
+            }else{
+                hamtatID= Integer.parseInt(fragaID);
+            }
             System.out.println(hamtatID);
             alienid = hamtatID;
         }catch (InfException ex){
@@ -244,12 +249,15 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                  //ifall resternade textrutor är fyllda och epost innehåller @ och bokstav, och namn innehåller bokstav och lösenord inte längre än 6 tecken   
                 }else if(Validering.isTxtFilled(registreringsdatumField.getText()) && Validering.isTxtFilled(losenordField.getText()) && Validering.godkanndLosenLangd(losenord) && Validering.isEpostTrustable(epost) && Validering.containsAlphabet(epost) && Validering.containsAlphabet(namn)) {
                     
-                    //validering så att telefonnumret enbart innehåller siffror
+                    
+                    //validering så att telefonnumret är ifyllt enligt rätt format
                     String[] TEL = telefon.split("-");
                     if(TEL.length != 2){
-                        JOptionPane.showMessageDialog(null,"Ifall alien saknar nummer kan du lämna fältet helt tomt! Annrs fyll i enligt format 555-555");
+                        JOptionPane.showMessageDialog(null,"Fyll i telefonnumret enligt format 555-555");
                     }else{
                         String nr = TEL[0]+TEL[1];
+                      
+                        //validering att telefonnumret enbart innehåller siffror
                         if(Validering.containsOnlyNumber(nr)){
                             String fraga =  "INSERT INTO Alien VALUES ("+alienid +","+regDatum+",'"+epost+"','"+losenord+"','"+namn+"','"+telefon+"',"+platsId+","+ansvarigAgent+")";
                             idb.insert(fraga);
@@ -319,7 +327,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
 
         platsText.setText("Plats:*");
 
-        telefonText.setText("Telefon:");
+        telefonText.setText("Telefon:*");
 
         ansvarigAgentText.setText("Ansvarig agent:*");
 
@@ -371,7 +379,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
 
         registreringsdatumText1.setText("Ras:");
 
-        cbxRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj", "Squid", "Boglodite", "Worm", " " }));
+        cbxRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj", "Squid", "Boglodite", "Worm" }));
         cbxRas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxRasActionPerformed(evt);
