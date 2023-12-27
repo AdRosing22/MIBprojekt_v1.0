@@ -285,6 +285,20 @@ public static boolean containsOnlyNumber(String txt){
 }
 
 
+public static boolean korrektFormWorm(String txtSvar)
+{
+    boolean stammer = false;
+    
+    if(Character.isDigit(txtSvar.charAt(0)) &&  Character.isDigit(txtSvar.charAt(2)) && Character.isDigit(txtSvar.charAt(3)) && txtSvar.length()<5&& txtSvar.contains(".")){
+        stammer = true;
+    }
+    return stammer;
+    
+    
+    
+}
+
+
 }
 
 
