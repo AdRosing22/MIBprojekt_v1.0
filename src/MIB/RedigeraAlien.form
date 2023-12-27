@@ -200,21 +200,21 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLnamn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Namn:"/>
+        <Property name="text" type="java.lang.String" value="Namn:*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtfNamn">
     </Component>
     <Component class="javax.swing.JLabel" name="jLlosen">
       <Properties>
-        <Property name="text" type="java.lang.String" value="L&#xf6;senord:"/>
+        <Property name="text" type="java.lang.String" value="L&#xf6;senord:*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtfLosen">
     </Component>
     <Component class="javax.swing.JLabel" name="jLtelefon">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Telefon:"/>
+        <Property name="text" type="java.lang.String" value="Telefon:*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtfTelefon">
@@ -310,7 +310,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLtelefon1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Registreringsdatum:"/>
+        <Property name="text" type="java.lang.String" value="Registreringsdatum:*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtfDatum">

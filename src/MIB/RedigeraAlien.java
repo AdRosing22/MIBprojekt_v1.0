@@ -91,11 +91,11 @@ public class RedigeraAlien extends javax.swing.JFrame {
 
         jLepost.setText("E-post:");
 
-        jLnamn.setText("Namn:");
+        jLnamn.setText("Namn:*");
 
-        jLlosen.setText("Lösenord:");
+        jLlosen.setText("Lösenord:*");
 
-        jLtelefon.setText("Telefon:");
+        jLtelefon.setText("Telefon:*");
 
         jLplats.setText("Plats:");
 
@@ -125,7 +125,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
 
         jLnuvAnsA.setText("Ansvarig agent nu:");
 
-        jLtelefon1.setText("Registreringsdatum:");
+        jLtelefon1.setText("Registreringsdatum:*");
 
         jLnuvRas.setText("Nuvarande ras:");
 
@@ -451,8 +451,8 @@ public class RedigeraAlien extends javax.swing.JFrame {
         //omvandlar till int
         int dagensDatum = Integer.parseInt(dagensDat);
         
-        //ifall inget är ifyllt, måste alltså inte finnas med!
-        if(datum != null){
+        //ifall inget är ifyllt, kommer inte ändras till tomt isåfal!
+        if(datum == null){
             stammer = false;
             
             //ifall datum är inmatat HELST i formen åååå-mm-dd, kan inte splitta tidigare ifall det är tomt
