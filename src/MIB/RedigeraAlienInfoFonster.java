@@ -30,7 +30,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     private int platsID;
     private String tidigareRas;
     private String attribut;
-    private int alienid;
+    private String nuvAlienid;
     /**
      * Creates new form RedigeraAlienInfoFonster
      */
@@ -40,7 +40,6 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
         epost = InlogAgent.getEpost();
         kontrolleraAdminStatus();
         alienIDField.setEditable(false);
-        epost = InlogAgent.getEpost();
     }
     
     private void laddaAliens() {
@@ -219,9 +218,9 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
         try {
             String fragaAlienID = idb.fetchSingle("SELECT Alien_ID FROM alien WHERE Epost = '"+epost+"'");
             int alienid = Integer.parseInt(fragaAlienID);
-            String fragaWorm = idb.fetchSingle("SELECT Alien_ID FROM worm WHERE Alien_ID = '"+alienid+"'");
-            String fragaBog = idb.fetchSingle("SELECT Alien_ID FROM boglodite WHERE Alien_ID = '"+alienid+"'");
-            String fragaSquid = idb.fetchSingle("SELECT Alien_ID FROM squid WHERE Alien_ID = '"+alienid+"'");
+            String fragaWorm = idb.fetchSingle("SELECT Alien_ID FROM worm WHERE Alien_ID = "+alienid);
+            String fragaBog = idb.fetchSingle("SELECT Alien_ID FROM boglodite WHERE Alien_ID = "+alienid);
+            String fragaSquid = idb.fetchSingle("SELECT Alien_ID FROM squid WHERE Alien_ID = "+alienid);
             
             if(fragaSquid != null) {
                 tidigareRas = "Squid";
@@ -231,7 +230,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
                 tidigareRas = "Boglodite";
             }
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Ett fell uppstod.");
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
             System.out.println("Internt felmeddelande: " + e.getMessage());
         }
     }
@@ -250,7 +249,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
             switch (menyVal) {
                 case "Squid":
                     attribut = rasEgenskaper.getText();
-                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid + "";
+                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
                     fraga = "INSERT INTO Squid VALUES (" + alienid + ", '" + attribut + "')";
                     idb.delete(delete);
                     idb.insert(fraga);
@@ -259,7 +258,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
                     
                 case "Worm":
                     attribut = rasEgenskaper.getText();
-                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid + "";
+                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
                     fraga = "INSERT INTO Worm VALUES (" + alienid + ", '" + attribut + "')";
                     idb.delete(delete);
                     idb.insert(fraga);
@@ -268,7 +267,7 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
                     
                 case "Boglodite":
                     attribut = rasEgenskaper.getText();
-                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid + "";
+                    delete = "DELETE FROM " + tidigareRas + " WHERE Alien_ID = " + alienid;
                     fraga = "INSERT INTO Boglodite VALUES (" + alienid + ", '" + attribut + "')";
                     idb.delete(delete);
                     idb.insert(fraga);
@@ -547,9 +546,11 @@ public class RedigeraAlienInfoFonster extends javax.swing.JFrame {
     private void chooseAlienCbxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseAlienCbxActionPerformed
         // TODO add your handling code here:
         String selected = (String) chooseAlienCbx.getSelectedItem();
-        if(selected != null & !selected.isEmpty()) {
+        if(selected != null) {
             String epost = alienEpostMap.get(selected.split(" \\(")[0]);
             visaAlienInformation(epost);
+        } else {
+            JOptionPane.showMessageDialog(null, "Vänta lite innan du hanterar nästa alien.");
         }
     }//GEN-LAST:event_chooseAlienCbxActionPerformed
 
