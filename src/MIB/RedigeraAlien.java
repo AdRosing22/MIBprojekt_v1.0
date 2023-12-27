@@ -79,6 +79,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
         txtfNuvRas = new javax.swing.JTextField();
         btnBekrafta = new javax.swing.JToggleButton();
         btnTillbaka = new javax.swing.JToggleButton();
+        jLinformation = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,6 +144,9 @@ public class RedigeraAlien extends javax.swing.JFrame {
             }
         });
 
+        jLinformation.setForeground(new java.awt.Color(255, 51, 51));
+        jLinformation.setText("Tomma fält kommer inte registreras då vi inte accepterar brisfällig information i vår delikata bransch");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -199,13 +203,19 @@ public class RedigeraAlien extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnTillbaka)))
                 .addContainerGap(99, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 99, Short.MAX_VALUE)
+                .addComponent(jLinformation, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLtitel)
-                .addGap(55, 55, 55)
+                .addGap(18, 18, 18)
+                .addComponent(jLinformation)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLvaljAlien)
                     .addComponent(cbxAlien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -687,6 +697,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxRas;
     private javax.swing.JLabel jLansAgent;
     private javax.swing.JLabel jLepost;
+    private javax.swing.JLabel jLinformation;
     private javax.swing.JLabel jLlosen;
     private javax.swing.JLabel jLnamn;
     private javax.swing.JLabel jLnuvAnsA;
