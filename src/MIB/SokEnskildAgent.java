@@ -174,7 +174,7 @@ public class SokEnskildAgent extends javax.swing.JFrame {
                     if(omradechef != null){
                         txtFagentinfo.append("Arbetar och är chef i : "+omradenamn+"\n");
                     }else{
-                        txtFagentinfo.append("Stationerad i omrdåe: "+omradenamn+"\n");
+                        txtFagentinfo.append("Stationerad i område: "+omradenamn+"\n");
                     }
                     //kontroll ifall agenten är kontorschef
                     if(kontorchef != null){
@@ -182,7 +182,7 @@ public class SokEnskildAgent extends javax.swing.JFrame {
                     }
                     
                     //hämtar ut utrustningsnamnen. Kontroll så att det inte är tom i ArrayListan
-                    if(utrustning.get(0) != null){
+                    if(utrustning.size() != 0){
                         txtFagentinfo.append("Innehar utrustning:"+"\n");
                         for(HashMap<String, String> rad : utrustning){
                             String utrustningnamn = rad.get("Benamning");

@@ -5,6 +5,7 @@
 package MIB;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import oru.inf.InfDB;
 
 /**
@@ -217,12 +218,23 @@ public class AgentFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSokOChefActionPerformed
 
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
-        // TODO add your handling code here:
-        
-        //tömmer InlogAgent fält för att ny kan lagras vid inloggning
-        nyAgent.loggaUt();
-        new InloggningsFonster(idb).setVisible(true);
-        dispose();
+        // Visa en bekräftelsepopup
+        UIManager.put("OptionPane.yesButtonText", "Ja");
+        UIManager.put("OptionPane.noButtonText", "Nej");
+        int choice = JOptionPane.showConfirmDialog(
+        this, // Komponenten att centrera popup på
+        "Vill du verkligen logga ut?", // Meddelandetext
+        "Bekräftelse", // Titel på popup
+        JOptionPane.YES_NO_OPTION // Visa Ja/Nej-knappar
+        );
+
+        // Kontrollera användarens val
+        if (choice == JOptionPane.YES_OPTION) {
+            // Töm InlogAgent state så att ny kan lagras vid inloggning
+            nyAgent.loggaUt();
+            new InloggningsFonster(idb).setVisible(true);
+            dispose();
+    }
     }//GEN-LAST:event_btnAvslutaActionPerformed
 
     private void btnAndraLosen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosen1ActionPerformed
