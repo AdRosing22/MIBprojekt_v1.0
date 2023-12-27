@@ -22,7 +22,11 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
     public HanteraAliensFonster(InfDB idb) {
         initComponents();
         this.idb = idb;
-       
+        if(Validering.kontrollOmAdmin(InlogAgent.getEpost())){
+            btnTabortAlien.setVisible(true);
+        }else{
+            btnTabortAlien.setVisible(false);
+        }
         
     }
 
@@ -39,7 +43,7 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
         btnRegNyAlien = new javax.swing.JToggleButton();
         btnRedigeraAlien = new javax.swing.JToggleButton();
         btnBacka = new javax.swing.JToggleButton();
-        jButton1 = new javax.swing.JButton();
+        btnTabortAlien = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,7 +71,12 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ta bort alien");
+        btnTabortAlien.setText("Ta bort alien");
+        btnTabortAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTabortAlienActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,7 +95,7 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRegNyAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTabortAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -96,11 +105,11 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
                 .addComponent(jTtitel)
                 .addGap(59, 59, 59)
                 .addComponent(btnRegNyAlien)
-                .addGap(32, 32, 32)
-                .addComponent(btnRedigeraAlien)
                 .addGap(30, 30, 30)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(btnRedigeraAlien)
+                .addGap(29, 29, 29)
+                .addComponent(btnTabortAlien)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(btnBacka)
                 .addGap(20, 20, 20))
         );
@@ -135,13 +144,19 @@ public class HanteraAliensFonster extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnRegNyAlienActionPerformed
 
+    private void btnTabortAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabortAlienActionPerformed
+        // TODO add your handling code here:
+        new TabortAlien(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnTabortAlienActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnBacka;
     private javax.swing.JToggleButton btnRedigeraAlien;
     private javax.swing.JToggleButton btnRegNyAlien;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JToggleButton btnTabortAlien;
     private javax.swing.JLabel jTtitel;
     // End of variables declaration//GEN-END:variables
 }
