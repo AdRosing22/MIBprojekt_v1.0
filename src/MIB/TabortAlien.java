@@ -117,6 +117,7 @@ public class TabortAlien extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try{
+            //ifall man inte valt alien får meddelande
             if(cbxAlien.getSelectedItem().toString().equals("Välj")){
                 JOptionPane.showMessageDialog(null,"Du måste välja alien att ta bort");
             }else{
