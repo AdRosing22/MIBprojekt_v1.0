@@ -207,7 +207,7 @@ public class RegNyUtrustning extends javax.swing.JFrame {
                         System.out.println(fraga2);
                     
                         //validering att båda textrutor är ifyllda och namnet innehåller bokstav
-                    if(Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()) && Validering.containsAlphabet(txtbNamn.getText()) && Validering.korrektFormWorm(txtbEgenskap.getText()))
+                    if(Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()) && Validering.containsAlphabet(txtbNamn.getText()))
                     {
                         idb.insert(fraga1);
                         idb.insert(fraga2);
@@ -215,9 +215,10 @@ public class RegNyUtrustning extends javax.swing.JFrame {
                         txtbNamn.setText("");
                         txtbEgenskap.setText("");
                     }
+                   
                 }catch(InfException ex)
                 {
-                    JOptionPane.showMessageDialog(null,"Något gick fel");
+                    JOptionPane.showMessageDialog(null,"Ange inte kaliber med bokstäver!");
                     System.out.println(ex.getMessage());
                 }
                 
