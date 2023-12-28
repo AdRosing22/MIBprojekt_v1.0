@@ -10,7 +10,7 @@ import oru.inf.InfDB;
 
 /**
  *Klass som enbart innehåller knappar för att öppna nya klasser
- * @author Adam
+ * @author Adam & Melker
  */
 public class AgentFonster extends javax.swing.JFrame {
 
