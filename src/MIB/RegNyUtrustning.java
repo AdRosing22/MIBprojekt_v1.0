@@ -162,7 +162,7 @@ public class RegNyUtrustning extends javax.swing.JFrame {
             
             //ifall vapen är valt blir instruktionen att mata in kaliber
             case "Vapen":
-                jLattribut.setText("Kaliber");
+                jLattribut.setText("Kaliber i formen 0.00");
                 break;
             case "Kommunikation":
                 jLattribut.setText("Överföringsteknik");
@@ -207,7 +207,7 @@ public class RegNyUtrustning extends javax.swing.JFrame {
                         System.out.println(fraga2);
                     
                         //validering att båda textrutor är ifyllda och namnet innehåller bokstav
-                    if(Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()) && Validering.containsAlphabet(txtbNamn.getText()))
+                    if(Validering.isTxtFilled(txtbNamn.getText()) && Validering.isTxtFilled(txtbEgenskap.getText()) && Validering.containsAlphabet(txtbNamn.getText()) && Validering.korrektFormWorm(txtbEgenskap.getText()))
                     {
                         idb.insert(fraga1);
                         idb.insert(fraga2);
