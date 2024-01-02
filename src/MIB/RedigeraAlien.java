@@ -627,8 +627,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
                 String nuvAnsagent = idb.fetchSingle("SELECT namn FROM Agent WHERE Agent_ID = "+ansagent);
                 String nuvPlats = idb.fetchSingle("SELECT benamning FROM plats WHERE Plats_ID = "+plats);
                 
-                String nuvarandeRas = txtfNuvRas.getText();
-                
                 //uppdatera comboboxar
                 if (plats != null && !plats.trim().isEmpty()) {
                     setCbxToValue(cbxPlatser, plats);
