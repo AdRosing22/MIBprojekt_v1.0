@@ -7,6 +7,7 @@ package MIB;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -626,6 +627,18 @@ public class RedigeraAlien extends javax.swing.JFrame {
                 String nuvAnsagent = idb.fetchSingle("SELECT namn FROM Agent WHERE Agent_ID = "+ansagent);
                 String nuvPlats = idb.fetchSingle("SELECT benamning FROM plats WHERE Plats_ID = "+plats);
                 
+                String nuvarandeRas = txtfNuvRas.getText();
+                
+                //uppdatera comboboxar
+                if (plats != null && !plats.trim().isEmpty()) {
+                    setCbxToValue(cbxPlatser, plats);
+                }
+                
+                if(ansagent != null && !ansagent.trim().isEmpty()) {
+                    setCbxToValue(cbxAnsvarigAgent, ansagent);
+                }
+                
+                
                 txtfEpost.setText(epost);
                 
                 //kontroll att fält inte är tomma
@@ -657,7 +670,16 @@ public class RedigeraAlien extends javax.swing.JFrame {
         
     }
     
-    
+        //Denna metod används för att kunna uppdatera comboboxarna när man vill hämta information om en alien, till exempel väljer du en alien som har Agent Z som ansvarar en kommer Agent Z direkt upp i comboboxen när man väljer hen.
+    private void setCbxToValue(JComboBox<String> comboBox, String ID) {
+        for (int i = 0; i < comboBox.getItemCount(); i++) {
+            String item = comboBox.getItemAt(i).toString();
+            if(item.startsWith(ID + "-")) {
+                comboBox.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
     
     //metod för att få id för vald alien i cboxen
     private String getAlienId(){
