@@ -13,7 +13,8 @@ import oru.inf.InfException;
 /**
  *Klass som kan söka efter enskild alien på epost
  * eller skicka vidare för att söka via datum, ras och plats
- * 
+ * Sökes via epost istället för färdig combobox med åtanke att det skulle kunna finnas massa aliens i systemet
+ * --som skulle göra det otympligt med combobox färdigt laddat med alla aliens
  * 
  * @author adamrosing
  */

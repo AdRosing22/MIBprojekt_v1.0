@@ -12,6 +12,8 @@ import oru.inf.InfException;
 
 /**
  *Klass som listar all information om agent via angiven epost
+ * --söker på epost istället för färdig combobox då det skulle kunna finnas massa agenter i systemet
+ * --som skulle göra det otympligt med färdigladdad combobox
  * 
  * @author adamrosing
  */
