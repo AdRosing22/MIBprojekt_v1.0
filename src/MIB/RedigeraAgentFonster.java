@@ -387,7 +387,7 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
                     }
                 } 
             }
-        }catch(Exception ex){
+        }catch(InfException ex){
             JOptionPane.showMessageDialog(null,"Något gick fel");
             System.out.println("Intern felmed: "+ex.getMessage());
         }
