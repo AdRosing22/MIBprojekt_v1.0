@@ -35,7 +35,8 @@ public class InloggningsFonster extends javax.swing.JFrame {
      */
     public InloggningsFonster(InfDB idb) {
         initComponents();
-        this.idb = idb;     
+        this.idb = idb;    
+        new Validering(idb);
     }
 
     /**
