@@ -446,7 +446,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
         //omvandlar till int
         int dagensDatum = Integer.parseInt(dagensDat);
         
-        //ifall inget är ifyllt, kommer inte ändras till tomt isåfal!
+        //ifall inget är ifyllt, kommer inte ändras till tomt isåfall!
         if(datum == null){
             stammer = false;
             
@@ -461,10 +461,14 @@ public class RedigeraAlien extends javax.swing.JFrame {
             int dag = Integer.parseInt(datumFalse[2]);
             
             //hela årtalet ihop
-            int inputDatum = ar+manad+dag;
+            String inputDatum = ""+ar+manad+dag;
+            int inDatum = Integer.parseInt(inputDatum);
+            
+            //kontroll för att se datumformerna är rätt
+            System.out.println(inDatum + " "+ dagensDatum);
             
             //år kan inte vara mindre än 1900, månad 01-12, dag 01-31 och datum mindre än dagensdatum
-            if(ar > 1900 && manad<13 && dag < 32 && manad != 00 && dag != 00 && inputDatum <= dagensDatum){
+            if(inDatum <= dagensDatum && ar > 1900 && manad<13 && dag < 32 && manad != 00 && dag != 00){
                 stammer = true;
             }else{
                 JOptionPane.showMessageDialog(null,"Något konstigt med ditt datum, kontrollera och försök igen");
