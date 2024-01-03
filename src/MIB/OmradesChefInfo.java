@@ -148,11 +148,11 @@ try {
           
         //ifall alien inte har någon som är områdeschef, eller saknar område
         } else {
-            txtOmradeschef.append("Ingen information kunde hittas, kontakta kontoret");  
+            txtOmradeschef.append("Det finns ingen chef för ditt område!");  
         }
         }
     } catch (InfException ex) {
-        JOptionPane.showMessageDialog(null, "Fel");
+        JOptionPane.showMessageDialog(null, "Något gick fel");
         System.out.println("Internt felmeddelande:" + ex.getMessage());
     }
 
