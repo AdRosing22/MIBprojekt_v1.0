@@ -4,7 +4,6 @@
  */
 package MIB;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -199,36 +198,40 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
             //kontrollerar att textrutan är ifylld
             if(Validering.isTxtFilled(epost)){
                 
-                //kontroll för att inte kunna ändra sin egen status
-                if(!InlogAgent.getEpost().equals(epost) && Validering.finnsAnvandareEpostIDB(epost)){
-               
-                     //ifall något av villkoren som kontrollerar adminstatus stämde, ifall inte så kommer val vara X
-                    if(val.equals("J") || val.equals("N")){
+                //kontroll att användaren finns att söka efter
+                if(Validering.finnsAnvandareEpostIDB(epost)){
                 
-                        //sql fråga
-                        String fraga = "UPDATE Agent SET Administrator ='"+val+"' WHERE epost ='"+epost+"'";
-                        
-                        //ifall någon av knapparna är valda
-                        if(rdbtnTabort.isSelected() || rdbtnGe.isSelected()){
-                                //uppdaterar databasen
-                                idb.update(fraga);
-                                
-                                //visar label att det lyckades
-                                jLbekraftning.setVisible(true);
-                                JOptionPane.showMessageDialog(null,"Ändringen lyckades, uppdaterad behörighet för konto med e-post: "+epost);
-                            
+                    //kontroll för att inte kunna ändra sin egen status
+                    if(!InlogAgent.getEpost().equals(epost)){
+
+                         //ifall något av villkoren som kontrollerar adminstatus stämde, ifall inte så kommer val vara X
+                        if(val.equals("J") || val.equals("N")){
+
+                            //sql fråga
+                            String fraga = "UPDATE Agent SET Administrator ='"+val+"' WHERE epost ='"+epost+"'";
+
+                            //ifall någon av knapparna är valda
+                            if(rdbtnTabort.isSelected() || rdbtnGe.isSelected()){
+                                    //uppdaterar databasen
+                                    idb.update(fraga);
+
+                                    //visar label att det lyckades
+                                    jLbekraftning.setVisible(true);
+                                    JOptionPane.showMessageDialog(null,"Ändringen lyckades, uppdaterad behörighet för konto med e-post: "+epost);
+
+                            }else{
+                                JOptionPane.showMessageDialog(null,"Välj en av åtgärderna för att fortsätta");
+
+                            }
                         }else{
-                            JOptionPane.showMessageDialog(null,"Välj en av åtgärderna för att fortsätta");
-                            
+                            JOptionPane.showMessageDialog(null,"Användaren har redan rättigheterna du försöker ge");
+
                         }
                     }else{
-                        JOptionPane.showMessageDialog(null,"Användaren har redan rättigheterna du försöker ge");
-                        
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Du kan inte ändra dina egna rättigheter");
-                    
-                } 
+                        JOptionPane.showMessageDialog(null, "Du kan inte ändra dina egna rättigheter");
+
+                    } 
+                }
             }else{
                 jLerror.setVisible(true);
             }
