@@ -341,7 +341,7 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
                     }else{
                         telefon = TEL[0]+TEL[1];
                         
-                        //ytterligare validering för datum att det enbart innehåller siffror och inte är längre än 0000-00-00
+                        //ytterligare validering för datum att det enbart innehåller siffror och inte är i annan form än 0000-00-00
                         if(Validering.containsOnlyNumber(datumTrue) && datumTrue.length() == 8){
                             
                             //kontroll att inte telefonnumret innehåller bokstäver
