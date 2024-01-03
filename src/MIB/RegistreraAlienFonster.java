@@ -324,6 +324,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         txtbNamn = new javax.swing.JTextField();
         jLnamn = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JToggleButton();
+        jLinfotext = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -415,6 +416,9 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
             }
         });
 
+        jLinfotext.setForeground(new java.awt.Color(255, 0, 0));
+        jLinfotext.setText("Alla fält med * måste vara ifyllda");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -465,7 +469,10 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                                         .addComponent(txtbRasAttribut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(jLinfotext, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(114, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -474,6 +481,8 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(registreraNyAlienText)
                 .addGap(18, 18, 18)
+                .addComponent(jLinfotext)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(epostText)
                     .addComponent(epostField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -514,7 +523,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                 .addComponent(registreraKnapp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTillbaka)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -581,6 +590,7 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
     private javax.swing.JTextField epostField;
     private javax.swing.JLabel epostText;
     private javax.swing.JLabel jLattribut;
+    private javax.swing.JLabel jLinfotext;
     private javax.swing.JLabel jLnamn;
     private javax.swing.JTextField losenordField;
     private javax.swing.JLabel losenordText;

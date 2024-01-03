@@ -40,8 +40,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
         //kan inte redigera epost och inforutor om nuvarande värden
         txtfEpost.setEditable(false);
         txtfNuvRas.setEditable(false);
-        txtfNuvAnsAgent.setEditable(false);
-        txtfNuvPlats.setEditable(false);
     }
 
     /**
@@ -73,10 +71,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
         attributRas = new javax.swing.JLabel();
         txtfRasAttribut = new javax.swing.JTextField();
         btnHamtaInfo = new javax.swing.JToggleButton();
-        jLnuvPlats = new javax.swing.JLabel();
-        txtfNuvPlats = new javax.swing.JTextField();
-        jLnuvAnsA = new javax.swing.JLabel();
-        txtfNuvAnsAgent = new javax.swing.JTextField();
         jLtelefon1 = new javax.swing.JLabel();
         txtfDatum = new javax.swing.JTextField();
         jLnuvRas = new javax.swing.JLabel();
@@ -125,10 +119,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
                 btnHamtaInfoActionPerformed(evt);
             }
         });
-
-        jLnuvPlats.setText("Nuvarande plats:");
-
-        jLnuvAnsA.setText("Ansvarig agent nu:");
 
         jLtelefon1.setText("Registreringsdatum:*");
 
@@ -188,15 +178,10 @@ public class RedigeraAlien extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnHamtaInfo)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLnuvAnsA)
-                                            .addComponent(jLnuvRas, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLnuvPlats, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(20, 20, 20)
+                                        .addComponent(jLnuvRas)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtfNuvRas, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtfNuvPlats, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtfNuvAnsAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(txtfNuvRas, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(58, 58, 58)
                                 .addComponent(jLtitel))))
@@ -205,20 +190,21 @@ public class RedigeraAlien extends javax.swing.JFrame {
                         .addComponent(btnBekrafta))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnTillbaka))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLinformation, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                        .addComponent(btnTillbaka)))
+                .addContainerGap(109, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 103, Short.MAX_VALUE)
+                .addComponent(jLinformation, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLtitel)
-                .addGap(20, 20, 20)
-                .addComponent(jLinformation)
                 .addGap(18, 18, 18)
+                .addComponent(jLinformation)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLvaljAlien)
                     .addComponent(cbxAlien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,15 +232,11 @@ public class RedigeraAlien extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLplats)
-                    .addComponent(cbxPlatser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLnuvPlats)
-                    .addComponent(txtfNuvPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxPlatser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLansAgent)
-                    .addComponent(cbxAnsvarigAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLnuvAnsA)
-                    .addComponent(txtfNuvAnsAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxAnsvarigAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLras)
@@ -369,8 +351,8 @@ public class RedigeraAlien extends javax.swing.JFrame {
                 String attribut = txtfRasAttribut.getText();
                 
                 
-                //ifall alien inte hade tidigare ras sker ingenting
-                if(nuRas.equals("Info saknas")){
+                //ifall alien inte hade tidigare ras eller inte valt någon ny ras sker ingenting
+                if(nuRas.equals("Info saknas") || valdRas.equals("Välj")){
                     System.out.println("Ingen förändring i gamla ras");
                 }else{
                     //annars deletas den från tidigare ras för att kunna lägga in i ny ras
@@ -652,9 +634,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
                 }else{
                     txtfTelefon.setText("Info saknas");
                 }
-                
-                txtfNuvPlats.setText(nuvPlats);
-                txtfNuvAnsAgent.setText(nuvAnsagent);
                 getNuvarandeRas();
                 
             }
@@ -722,8 +701,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
     private javax.swing.JLabel jLinformation;
     private javax.swing.JLabel jLlosen;
     private javax.swing.JLabel jLnamn;
-    private javax.swing.JLabel jLnuvAnsA;
-    private javax.swing.JLabel jLnuvPlats;
     private javax.swing.JLabel jLnuvRas;
     private javax.swing.JLabel jLplats;
     private javax.swing.JLabel jLras;
@@ -735,8 +712,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
     private javax.swing.JTextField txtfEpost;
     private javax.swing.JTextField txtfLosen;
     private javax.swing.JTextField txtfNamn;
-    private javax.swing.JTextField txtfNuvAnsAgent;
-    private javax.swing.JTextField txtfNuvPlats;
     private javax.swing.JTextField txtfNuvRas;
     private javax.swing.JTextField txtfRasAttribut;
     private javax.swing.JTextField txtfTelefon;

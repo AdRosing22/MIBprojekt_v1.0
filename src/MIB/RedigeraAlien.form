@@ -58,17 +58,10 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnHamtaInfo" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLnuvAnsA" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLnuvRas" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLnuvPlats" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="jLnuvRas" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtfNuvRas" min="-2" pref="118" max="-2" attributes="0"/>
-                                          <Component id="txtfNuvPlats" min="-2" pref="118" max="-2" attributes="0"/>
-                                          <Component id="txtfNuvAnsAgent" min="-2" pref="118" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="txtfNuvRas" min="-2" pref="118" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -86,12 +79,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                      <Component id="jLinformation" min="-2" pref="669" max="-2" attributes="0"/>
-                  </Group>
               </Group>
-              <EmptySpace pref="67" max="32767" attributes="0"/>
+              <EmptySpace pref="109" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="103" max="32767" attributes="0"/>
+              <Component id="jLinformation" min="-2" pref="669" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,9 +94,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="jLtitel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Component id="jLinformation" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLinformation" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLvaljAlien" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbxAlien" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -137,15 +131,11 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLplats" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbxPlatser" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLnuvPlats" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtfNuvPlats" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLansAgent" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbxAnsvarigAgent" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLnuvAnsA" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtfNuvAnsAgent" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -299,20 +289,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHamtaInfoActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLnuvPlats">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nuvarande plats:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtfNuvPlats">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLnuvAnsA">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ansvarig agent nu:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtfNuvAnsAgent">
     </Component>
     <Component class="javax.swing.JLabel" name="jLtelefon1">
       <Properties>
