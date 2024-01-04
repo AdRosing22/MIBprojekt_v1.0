@@ -55,6 +55,12 @@ public class SokEnskildAgent extends javax.swing.JFrame {
         txtFagentinfo.setRows(5);
         jScrollPane1.setViewportView(txtFagentinfo);
 
+        txtbEpost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbEpostKeyPressed(evt);
+            }
+        });
+
         jLepost.setText("E-post:");
 
         btnSok.setText("Sök");
@@ -207,6 +213,13 @@ public class SokEnskildAgent extends javax.swing.JFrame {
         new AgentAdminFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void txtbEpostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbEpostKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            btnSok.doClick();
+        }
+    }//GEN-LAST:event_txtbEpostKeyPressed
 
 
 

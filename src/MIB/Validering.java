@@ -13,6 +13,7 @@ import oru.inf.InfException;
  *Valideringsklass som innehåller flera metoder som används genom hela projektet
  * Metoderna är av typen boolean och används t.ex. vid kontroll om användares epost
  * --redan finns i databasen, ifall lösenordet är godkänd längt, ifall agent är admin osv.
+ * Finns en metod med return string som genererar dagensdatum
  * 
  * @author Adam
  */
@@ -287,6 +288,7 @@ public static boolean containsOnlyNumber(String txt){
 }
 
 
+//vid ändring av ras worm eller registrering ska det vara i formen 0.00
 public static boolean korrektFormWorm(String txtSvar)
 {
     boolean stammer = false;
@@ -398,6 +400,8 @@ public static boolean telValidering(String telefon){
 }
 
 
+//metod som kontrollerar att input är ett heltal
+//används vid reg av squid eller boglodite alienras
 public static boolean isHeltal(String txt) {
     try {
         int intValue = Integer.parseInt(txt);

@@ -94,6 +94,12 @@ public class ValjTypSokAvAlien extends javax.swing.JFrame {
 
         jLfonsterAtgard.setText("Sök efter all information om en alien");
 
+        txtFepost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFepostKeyPressed(evt);
+            }
+        });
+
         jLepost.setText("E-post:");
 
         btnTillbaka.setText("Tillbaka");
@@ -295,6 +301,13 @@ public class ValjTypSokAvAlien extends javax.swing.JFrame {
         new AlienDatum(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnSokRas1ActionPerformed
+
+    private void txtFepostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFepostKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            btnSok.doClick();
+        }
+    }//GEN-LAST:event_txtFepostKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
