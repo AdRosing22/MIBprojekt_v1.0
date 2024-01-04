@@ -29,6 +29,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
     
     
     
+    
 
     /**
      * Creates new form InloggningsFonster
@@ -37,6 +38,7 @@ public class InloggningsFonster extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;    
         new Validering(idb);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -57,29 +59,47 @@ public class InloggningsFonster extends javax.swing.JFrame {
         btnLoggaIn = new javax.swing.JButton();
         JComboBox = new javax.swing.JComboBox<>();
         btnAvsluta = new javax.swing.JButton();
+        bakgrundsBild = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLtitel.setBackground(new java.awt.Color(0, 0, 0));
         jLtitel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLtitel.setForeground(new java.awt.Color(255, 255, 255));
         jLtitel.setText("Välkommen till Men In Black");
+        getContentPane().add(jLtitel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 280, 42));
 
+        jLinloggning.setForeground(new java.awt.Color(255, 255, 255));
         jLinloggning.setText("Välj typ av användare:");
+        getContentPane().add(jLinloggning, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 140, -1));
 
         txtbEpost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtbEpostActionPerformed(evt);
             }
         });
+        getContentPane().add(txtbEpost, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 143, 150, -1));
 
         txtbLosenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtbLosenordActionPerformed(evt);
             }
         });
+        txtbLosenord.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbLosenordKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtbLosenord, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 187, 150, -1));
 
+        jLepost.setForeground(new java.awt.Color(255, 255, 255));
         jLepost.setText("E-post:");
+        getContentPane().add(jLepost, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 148, 62, -1));
 
+        jLlosenord.setForeground(new java.awt.Color(255, 255, 255));
         jLlosenord.setText("Lösenord:");
+        getContentPane().add(jLlosenord, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 192, 62, -1));
 
         btnLoggaIn.setText("Logga in");
         btnLoggaIn.addActionListener(new java.awt.event.ActionListener() {
@@ -87,9 +107,16 @@ public class InloggningsFonster extends javax.swing.JFrame {
                 btnLoggaInActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLoggaIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
 
         JComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agent", "Alien" }));
         JComboBox.setToolTipText("");
+        JComboBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JComboBoxKeyPressed(evt);
+            }
+        });
+        getContentPane().add(JComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 99, 94, -1));
 
         btnAvsluta.setText("Avsluta");
         btnAvsluta.addActionListener(new java.awt.event.ActionListener() {
@@ -97,63 +124,11 @@ public class InloggningsFonster extends javax.swing.JFrame {
                 btnAvslutaActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAvsluta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(142, Short.MAX_VALUE)
-                .addComponent(jLtitel)
-                .addGap(126, 126, 126))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLepost, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtbEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLinloggning)
-                        .addGap(18, 18, 18)
-                        .addComponent(JComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLlosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtbLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLoggaIn)
-                .addGap(198, 198, 198))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAvsluta)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLtitel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLinloggning)
-                    .addComponent(JComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLepost))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLlosenord))
-                .addGap(34, 34, 34)
-                .addComponent(btnLoggaIn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(btnAvsluta)
-                .addContainerGap())
-        );
+        bakgrundsBild.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/46a22884bfb0164c9d70b69a5db74027.jpg"))); // NOI18N
+        bakgrundsBild.setText("jLabel1");
+        getContentPane().add(bakgrundsBild, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 360));
 
         pack();
         setLocationRelativeTo(null);
@@ -230,6 +205,19 @@ public class InloggningsFonster extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAvslutaActionPerformed
 
+    private void JComboBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JComboBoxKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_JComboBoxKeyPressed
+
+    private void txtbLosenordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbLosenordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            btnLoggaIn.doClick();
+            
+        }
+    }//GEN-LAST:event_txtbLosenordKeyPressed
+
     
     
     //hämtar val av inloggningssätt från rullmenyn och lagrar i variabeln menyVal.
@@ -245,6 +233,7 @@ public static String getMenyval()
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JComboBox;
+    private javax.swing.JLabel bakgrundsBild;
     private javax.swing.JButton btnAvsluta;
     private javax.swing.JButton btnLoggaIn;
     private javax.swing.JLabel jLepost;

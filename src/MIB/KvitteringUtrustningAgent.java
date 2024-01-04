@@ -57,10 +57,20 @@ public class KvitteringUtrustningAgent extends javax.swing.JFrame {
         jLutrustning.setText("Kvittera ut utrustning:");
 
         cbxUtrustning.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj" }));
+        cbxUtrustning.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cbxUtrustningKeyPressed(evt);
+            }
+        });
 
         jLlamnaIn.setText("Kvittera in utrustning:");
 
         cbxInneharUtr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj" }));
+        cbxInneharUtr.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cbxInneharUtrKeyPressed(evt);
+            }
+        });
 
         btnBekrafta.setText("Bekräfta");
         btnBekrafta.addActionListener(new java.awt.event.ActionListener() {
@@ -203,6 +213,22 @@ public class KvitteringUtrustningAgent extends javax.swing.JFrame {
                     
         
     }//GEN-LAST:event_btnBekraftaActionPerformed
+
+    private void cbxUtrustningKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxUtrustningKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            btnBekrafta.doClick();
+            
+        }
+    }//GEN-LAST:event_cbxUtrustningKeyPressed
+
+    private void cbxInneharUtrKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxInneharUtrKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            btnBekrafta.doClick();
+            
+        }
+    }//GEN-LAST:event_cbxInneharUtrKeyPressed
 
  //metod för att generera dagens datum
  private String dagensDatum()

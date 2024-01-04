@@ -126,6 +126,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtbEpost">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtbEpostKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="btnBekrafta">
       <Properties>

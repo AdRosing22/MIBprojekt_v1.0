@@ -57,6 +57,12 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
             }
         });
 
+        txtbNyttLosen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbNyttLosenKeyPressed(evt);
+            }
+        });
+
         jLabel1.setText("Nytt lösenord:");
 
         jLabel2.setText("Nuvarande lösenord:");
@@ -194,6 +200,14 @@ public class AndraLosenordFonster extends javax.swing.JFrame {
     private void txtbNuvLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbNuvLosenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbNuvLosenActionPerformed
+
+    private void txtbNyttLosenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbNyttLosenKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            btnBekrafta.doClick();
+            
+        }
+    }//GEN-LAST:event_txtbNyttLosenKeyPressed
 
 
 

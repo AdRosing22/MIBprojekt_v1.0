@@ -62,6 +62,12 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
 
         jLinformation.setText("Välj åtgärd:");
 
+        txtbEpost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbEpostKeyPressed(evt);
+            }
+        });
+
         btnBekrafta.setText("Bekräfta");
         btnBekrafta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,6 +282,14 @@ public class GeAgentAdminstatus extends javax.swing.JFrame {
             rdbtnGe.setEnabled(true);
         }
     }//GEN-LAST:event_rdbtnTabortActionPerformed
+
+    private void txtbEpostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbEpostKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            btnBekrafta.doClick();
+            
+        }
+    }//GEN-LAST:event_txtbEpostKeyPressed
 
 
 

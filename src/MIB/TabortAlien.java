@@ -47,6 +47,11 @@ public class TabortAlien extends javax.swing.JFrame {
         btnTillbaka = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jLtitel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLtitel.setText("Ta bort alien ur systemet");
@@ -54,11 +59,21 @@ public class TabortAlien extends javax.swing.JFrame {
         jLvaljAlien.setText("Välj alien:");
 
         cbxAlien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxAlien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cbxAlienKeyPressed(evt);
+            }
+        });
 
         btnTabort.setText("Bekräfta");
         btnTabort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTabortActionPerformed(evt);
+            }
+        });
+        btnTabort.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnTabortKeyPressed(evt);
             }
         });
 
@@ -167,6 +182,25 @@ public class TabortAlien extends javax.swing.JFrame {
         new HanteraAliensFonster(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void btnTabortKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnTabortKeyPressed
+         
+    }//GEN-LAST:event_btnTabortKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formKeyPressed
+
+    
+    //funkar att trycka enter, behöver inte trycka på knappen med musen
+    private void cbxAlienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxAlienKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            btnTabort.doClick();
+            
+        }
+    }//GEN-LAST:event_cbxAlienKeyPressed
 
     
     
