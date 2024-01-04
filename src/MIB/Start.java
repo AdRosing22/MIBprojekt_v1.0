@@ -32,6 +32,9 @@ public class Start {
             
         }
 
+        //systemet är byggt på JFrames som är kopplade till varandra på knapptryck
+        //det första fönstret är inloggningsfönstret och beroende på vem som loggar in
+        //formar sig programmet efter det
         new InloggningsFonster(idb).setVisible(true);
     }
     
