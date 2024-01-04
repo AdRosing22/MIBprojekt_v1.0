@@ -4,6 +4,7 @@
  */
 package MIB;
 
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -235,6 +236,7 @@ public static boolean isLosenordNew(String nuv, String nytt)
     if(nuv.equals(nytt)){
         JOptionPane.showMessageDialog(null, "Lösenord är samma som det gamla, pröva någonting nytt");
         samma = false;
+        
     }
     return samma;  
 }
@@ -277,7 +279,7 @@ public static boolean containsAlphabet(String txt) {
 //där det behövdes
 public static boolean containsOnlyNumber(String txt){
     boolean sant = true;
-    if(txt.matches(".*[a-öA-Ö]+.*")){
+    if(txt.matches(".*[a-öA-Ö]+.*") || txt.matches(".*[,.!\"].*")){
         sant = false;
     }
     return sant;
@@ -289,13 +291,125 @@ public static boolean korrektFormWorm(String txtSvar)
 {
     boolean stammer = false;
     
-    if(txtSvar.length()>2 && Character.isDigit(txtSvar.charAt(0)) &&  Character.isDigit(txtSvar.charAt(2)) && Character.isDigit(txtSvar.charAt(3)) && txtSvar.length()<5&& txtSvar.contains(".")){
-        stammer = true;
+    try{
+        if(txtSvar.length()==4 && Character.isDigit(txtSvar.charAt(0)) &&  Character.isDigit(txtSvar.charAt(2)) && Character.isDigit(txtSvar.charAt(3))&& txtSvar.contains(".")){
+            stammer = true;
+        }
+    }catch(NumberFormatException e){
+        JOptionPane.showMessageDialog(null,"Fel format på längd för worm!");
     }
     return stammer;
     
     
     
+}
+
+
+//metod för att få dagensdatum, används vid registreringsdatum validering
+public static String dagensDatum()
+{
+    String datum = LocalDate.now().toString();
+    String ar = datum.substring(0, 4);
+    String manad = datum.substring(5, 7);
+    String dag = datum.substring(8, 10);
+    System.out.println(ar + manad + dag);
+    String dagensdatum = ar + manad + dag;
+    return dagensdatum;
+}
+    
+    
+//valideringsmetod för att kontrollera ifyllt datum
+public static boolean datumValidering(String datum){
+    boolean stammer = false;
+
+    //hämtar dagens datum
+    String dagensDat = dagensDatum();
+
+    //omvandlar till int
+    int dagensDatum = Integer.parseInt(dagensDat);
+
+    //ifall inget är ifyllt, kommer inte ändras till tomt isåfall!
+    if(datum == null){
+        stammer = false;
+
+        //ifall datum är inmatat HELST i formen åååå-mm-dd, kan inte splitta tidigare ifall det är tomt
+    }else if(datum.length() == 10){
+        //splittar datum
+        String[] datumFalse = datum.split("-");
+        String kontroll = datumFalse[0]+datumFalse[1]+datumFalse[2];
+        
+        if(Validering.containsOnlyNumber(kontroll)){
+
+            //delar upp i år, månad och dag som int
+            int ar = Integer.parseInt(datumFalse[0]);
+            int manad = Integer.parseInt(datumFalse[1]);
+            int dag = Integer.parseInt(datumFalse[2]);
+
+            
+            int inDatum = Integer.parseInt(kontroll);
+
+            //kontroll för att se datumformerna är rätt
+            System.out.println(inDatum + " "+ dagensDatum);
+
+            //år kan inte vara mindre än 1900, månad 01-12, dag 01-31 och datum mindre än dagensdatum
+            if(inDatum <= dagensDatum && ar > 1900 && manad<13 && dag < 32 && manad != 00 && dag != 00){
+                stammer = true;
+            }else{
+                JOptionPane.showMessageDialog(null,"Något konstigt med ditt datum, kontrollera och försök igen");
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(null,"Datum kan inte innehålla bokstäver!");
+        }
+    }else{
+            JOptionPane.showMessageDialog(null,"Datum måste skrivat i formatet ÅÅÅÅ-MM-DD");
+    }
+    return stammer;
+
+}
+    
+    
+//valideringsmetod för telefonnumret
+public static boolean telValidering(String telefon){
+    boolean stammer = false;
+
+    //ifall det textfältet inte är tomt
+    if(telefon != null){
+        //splittar vid - 
+        String[] TEL = telefon.split("-");
+
+        //kontroll ifall det är inslaget på annat sätt än xxx-xxxxxx
+        if(TEL.length != 2){
+            JOptionPane.showMessageDialog(null,"Telefonnumret måste fyllas i enligt formatet 555-555");
+        }else{
+            //slår ihop numret utan -
+            String telnr = TEL[0]+TEL[1];
+
+            //kontroll att det bara är siffor
+            if(Validering.containsOnlyNumber(telnr)){
+                stammer = true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Kan inte ha bokstäver i telefonnumret!");
+            }
+        }
+    } 
+
+    return stammer;
+}
+
+
+public static boolean isHeltal(String txt) {
+    try {
+        int intValue = Integer.parseInt(txt);
+        // Kontrollera om det finns några decimaldelar
+        if (intValue == Double.parseDouble(txt)) {
+            return true;  
+        } else {
+            return false; 
+        }
+    } catch (NumberFormatException e) {
+        return false; 
+    }
 }
 
 

@@ -163,10 +163,10 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
         //switch som bestämmer vilken beskrivande text som ska visas bredvid inmatningsfältet
         switch(ras){
             case "Squid":
-                jLattribut.setText("Antal armar:");
+                jLattribut.setText("Antal armar, enbart heltal:");
                 break;
             case "Boglodite":
-                jLattribut.setText("Antal boogies:");
+                jLattribut.setText("Antal boogies, enbart heltal:");
                 break;
             case "Worm":
                 jLattribut.setText("Längd i formen 0.00:");
@@ -197,21 +197,21 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                 if(txtSvar.isEmpty()){
                     JOptionPane.showMessageDialog(null,"Du måste fylla i ras attributet för att rasen ska registreras!");
                 }else{
-            
-                if(Validering.containsOnlyNumber(txtSvar)){    
-                    //hårdkodat så ifall Squid eller Boglodite är valt:
-                    if(ras.equals("Squid") || ras.equals("Boglodite")){
-                        //svaret i txtrutan omvandlas till int
-                        rasValINT = Integer.parseInt(txtSvar);
-                        //kompletterar frågan med rasValINT variabeln
-                        String sqlfraga = fraga+rasValINT+")";
-                        //kör fråga mot databasen
-                        idb.insert(sqlfraga);
-                    }
-                    }else{
+           
+                    if(ras.equals("Squid") || ras.equals("Boglodite")){    
+                        //hårdkodat så ifall Squid eller Boglodite är valt:
+                        if(Validering.containsOnlyNumber(txtSvar) && Validering.isHeltal(txtSvar)){
+                            //svaret i txtrutan omvandlas till int
+                            rasValINT = Integer.parseInt(txtSvar);
+                            //kompletterar frågan med rasValINT variabeln
+                            String sqlfraga = fraga+rasValINT+")";
+                            //kör fråga mot databasen
+                            idb.insert(sqlfraga);
+                        }
+                    
+                    }else if(ras.equals("Worm")){
                         
-                 
-                        if(ras.equals("Worm") && Validering.korrektFormWorm(txtSvar)){
+                        if(Validering.korrektFormWorm(txtSvar)){
                             rasValDouble = Double.parseDouble(txtSvar);
                             String sqlfraga = fraga+rasValDouble+")";
                             idb.insert(sqlfraga);
@@ -257,15 +257,8 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                 }else if(Validering.isTxtFilled(registreringsdatumField.getText()) && Validering.isTxtFilled(losenordField.getText()) && Validering.godkanndLosenLangd(losenord) && Validering.isEpostTrustable(epost) && Validering.containsAlphabet(epost) && Validering.containsAlphabet(namn)) {
                     
                     
-                    //validering så att telefonnumret är ifyllt enligt rätt format
-                    String[] TEL = telefon.split("-");
-                    if(TEL.length != 2){
-                        JOptionPane.showMessageDialog(null,"Fyll i telefonnumret enligt format 555-555");
-                    }else{
-                        String nr = TEL[0]+TEL[1];
-                      
-                        //validering att telefonnumret enbart innehåller siffror
-                        if(Validering.containsOnlyNumber(nr)){
+                    
+                        if(Validering.telValidering(telefon)){
                             String fraga =  "INSERT INTO Alien VALUES ("+alienid +","+regDatum+",'"+epost+"','"+losenord+"','"+namn+"','"+telefon+"',"+platsId+","+ansvarigAgent+")";
                             idb.insert(fraga);
                             registreraRasIdb();
@@ -282,9 +275,6 @@ public class RegistreraAlienFonster extends javax.swing.JFrame {
                             txtbRasAttribut.setText("");
                              
                             registreraRas(); 
-                        }else{
-                            JOptionPane.showMessageDialog(null,"Telefonnumret får inte innehålla bokstäver");
-                        }
                     }
                 }
             }

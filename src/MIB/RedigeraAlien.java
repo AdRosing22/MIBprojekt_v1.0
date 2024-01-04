@@ -4,7 +4,6 @@
  */
 package MIB;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JComboBox;
@@ -77,7 +76,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
         txtfNuvRas = new javax.swing.JTextField();
         btnBekrafta = new javax.swing.JToggleButton();
         btnTillbaka = new javax.swing.JToggleButton();
-        jLinformation = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,9 +136,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
             }
         });
 
-        jLinformation.setForeground(new java.awt.Color(255, 51, 51));
-        jLinformation.setText("Tomma fält kommer inte registreras då vi inte accepterar brisfällig information i vår delikata bransch");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,19 +187,13 @@ public class RedigeraAlien extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnTillbaka)))
                 .addContainerGap(109, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 103, Short.MAX_VALUE)
-                .addComponent(jLinformation, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLtitel)
-                .addGap(18, 18, 18)
-                .addComponent(jLinformation)
-                .addGap(20, 20, 20)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLvaljAlien)
                     .addComponent(cbxAlien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,129 +275,28 @@ public class RedigeraAlien extends javax.swing.JFrame {
         String datum = txtfDatum.getText();
         
         try{
-            
             //hämtar id för vald alien i cboxen
             String alienid = getAlienId();
-            
             //obligatoriska rutor är fyllda, lösen inte längre än 6 tecken och namn innehåller bokstav
-            if(Validering.isTxtFilled(namn)&& Validering.isTxtFilled(losen)&&Validering.isTxtFilled(datum)&&Validering.containsAlphabet(namn)&&Validering.godkanndLosenLangd(losen)){
-                
-                //kontrollerar form på registreringsdatum att det är korrekt via metod
-                if(datumValidering(datum)){
-                    String uptDatum = "UPDATE Alien SET Registreringsdatum = '"+datum+"' WHERE Alien_ID = "+alienid;
-                    idb.update(uptDatum);
-                    System.out.println("datum updt");
-                
-                }
-                
-                //kontrollerar form på telefonnummer att det är korrekt via metod
-                if(telValidering(telefon)){
-                    String uptTelefon = "UPDATE Alien SET Telefon = '"+telefon+"' WHERE Alien_ID = "+alienid;
-                    idb.update(uptTelefon);
-                    System.out.println("telefon updt");
-                }
-                
-                
-                //hämtar agent id från val för ansvarig agent från cboxen
-                String ansAgent = cbxAnsvarigAgent.getSelectedItem().toString();
-                String[] deladAgent = ansAgent.split("-");
-                String agentid = deladAgent[0];
-                
-                //ifall inget är valt händer ingenting
-                if(ansAgent.equals("Välj")){
-                    System.out.println("Ingen ändring agent");
-                }else{
-                    //uppdaterar ansvarig agent
-                    String uptAgent = "UPDATE Alien SET ansvarig_agent = "+agentid+" WHERE Alien_ID = "+alienid;
-                    idb.update(uptAgent);
-                    System.out.println("Ansvarig agent uppdaterad");
-                }
-                
-                
-                //hämtar platsid för val av ny plats från cboxen
-                String valdPlats = cbxPlatser.getSelectedItem().toString();
-                String[] deladPlats = valdPlats.split("-");
-                String platsId = deladPlats[0];
-                
-                //ifall ingenting är valt händer ingenting
-                if(valdPlats.equals("Välj")){
-                    System.out.println("Ingen ändring plats");
-                }else{
-                    //uppdaterar plats
-                    String uptPlats = "UPDATE Alien SET plats = "+platsId+" WHERE Alien_ID = "+alienid;
-                    idb.update(uptPlats);
-                    System.out.println("Plats uppdaterad");
-                }
-                
-                
-                //hämtar val av ny ras
-                String valdRas = cbxRas.getSelectedItem().toString();
-                
-                //hämtar gamla rasen
-                String nuRas = txtfNuvRas.getText();
-                
-                //hämtar info om attribut för ras som användaren angett
-                String attribut = txtfRasAttribut.getText();
-                
-                
-                //ifall alien inte hade tidigare ras eller inte valt någon ny ras sker ingenting
-                if(nuRas.equals("Info saknas") || valdRas.equals("Välj")){
-                    System.out.println("Ingen förändring i gamla ras");
-                }else{
-                    //annars deletas den från tidigare ras för att kunna lägga in i ny ras
-                    idb.delete("DELETE FROM "+nuRas+" WHERE Alien_ID = "+alienid);
-                }
-                
-                
-                //ifall ny ras inte är vald händer ingenting
-                if(valdRas.equals("Välj")){
-                    System.out.println("Ingen förändirng i ras");
+            if(Validering.isTxtFilled(namn)&& Validering.isTxtFilled(losen)&&Validering.isTxtFilled(datum)&&Validering.containsAlphabet(namn)&&Validering.godkanndLosenLangd(losen) && Validering.datumValidering(datum) && Validering.telValidering(telefon)){
+         
+               
+                String uptDatum = "UPDATE Alien SET Registreringsdatum = '"+datum+"' WHERE Alien_ID = "+alienid;
+                idb.update(uptDatum);
                     
-                    //ifall ny ras är worm och attribut är ifyllt
-                }else if(valdRas.equals("Worm") && !attribut.isEmpty()){
+                String uptTelefon = "UPDATE Alien SET Telefon = '"+telefon+"' WHERE Alien_ID = "+alienid;
+                idb.update(uptTelefon);
                     
-                    //kontroll att det är siffra . siffra siffra för längd hos worm
-                    if(Validering.korrektFormWorm(attribut)){
-                        idb.insert("INSERT INTO Worm VALUES ("+alienid+", "+attribut+")");
-                        
-                        //påminnelse
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Skriv längd med siffor i format 0.00!");
-                    }
-                    
-                    //ifall squid är valt och attribut är ifyllt
-                }else if(valdRas.equals("Squid") && !attribut.isEmpty() ){
-                    
-                    //attribut enbart innehåller siffor för antal armar
-                    if(Validering.containsOnlyNumber(attribut)){
-                        idb.insert("INSERT INTO Squid VALUES ("+alienid+", "+attribut+")");
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Skriv antal armar med siffor!");
-                    }
-                    
-                    //ifall boglodite är valt och attribut är ifyllt
-                }else if(valdRas.equals("Boglodite")&& !attribut.isEmpty() ){
-                    
-                    //kontroll att enbart siffor för antal boogies
-                    if(Validering.containsOnlyNumber(attribut)){
-                        idb.insert("INSERT INTO Boglodite VALUES ("+alienid+", "+attribut+")");
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Skriv antal boogies med siffor!");
-                    }
-                    //annars påminnelse att ras inte ändras ifall attributfältet är tomt
-                }else{
-                    JOptionPane.showMessageDialog(null, "Fyll i rasattribut för att rasen ska ändras!");
-                }
-                
-                
-                
+                //uppdaterar resten via metoderna i klassen
+                uppdateraAnsAgent();
+                uppdateraPlats();
+                uppdateraRas();
                 //uppdaterar alien
                 String uptAlien = "UPDATE Alien SET Namn = '"+namn+"', Losenord = '"+losen+"' WHERE Alien_ID = "+alienid;
                 idb.update(uptAlien);    
                 
                 //bekräftelsemeddelande
-                JOptionPane.showMessageDialog(null,"Alien uppdaterad med dem ändringar som var godkända!");
-                
+                JOptionPane.showMessageDialog(null,"Alien uppdaterad!");
             }   
         }catch(InfException ex){
             JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -423,91 +311,124 @@ public class RedigeraAlien extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-    //metod för att få dagensdatum, används vid registreringsdatum validering
-    private String dagensDatum()
+  
+    private void uppdateraAnsAgent()
     {
-        String datum = LocalDate.now().toString();
-        String ar = datum.substring(0, 4);
-        String manad = datum.substring(5, 7);
-        String dag = datum.substring(8, 10);
-        System.out.println(ar + manad + dag);
-        String dagensdatum = ar + manad + dag;
-        return dagensdatum;
-    }
-    
-    
-    //valideringsmetod för att kontrollera ifyllt datum
-    private boolean datumValidering(String datum){
-        boolean stammer = false;
-        
-        //hämtar dagens datum
-        String dagensDat = dagensDatum();
-        
-        //omvandlar till int
-        int dagensDatum = Integer.parseInt(dagensDat);
-        
-        //ifall inget är ifyllt, kommer inte ändras till tomt isåfall!
-        if(datum == null){
-            stammer = false;
-            
-            //ifall datum är inmatat HELST i formen åååå-mm-dd, kan inte splitta tidigare ifall det är tomt
-        }else if(datum.length() == 10){
-            //splittar datum
-            String[] datumFalse = datum.split("-");
-            
-            //delar upp i år, månad och dag som int
-            int ar = Integer.parseInt(datumFalse[0]);
-            int manad = Integer.parseInt(datumFalse[1]);
-            int dag = Integer.parseInt(datumFalse[2]);
-            
-            //hela årtalet ihop
-            String inputDatum = ""+ar+manad+dag;
-            int inDatum = Integer.parseInt(inputDatum);
-            
-            //kontroll för att se datumformerna är rätt
-            System.out.println(inDatum + " "+ dagensDatum);
-            
-            //år kan inte vara mindre än 1900, månad 01-12, dag 01-31 och datum mindre än dagensdatum
-            if(inDatum <= dagensDatum && ar > 1900 && manad<13 && dag < 32 && manad != 00 && dag != 00){
-                stammer = true;
+        try{
+            String alienid = getAlienId();
+            //hämtar agent id från val för ansvarig agent från cboxen
+            String ansAgent = cbxAnsvarigAgent.getSelectedItem().toString();
+            String[] deladAgent = ansAgent.split("-");
+            String agentid = deladAgent[0];
+
+            //ifall inget är valt händer ingenting
+            if(ansAgent.equals("Välj")){
+                System.out.println("Ingen ändring agent");
             }else{
-                JOptionPane.showMessageDialog(null,"Något konstigt med ditt datum, kontrollera och försök igen");
+                //uppdaterar ansvarig agent
+                String uptAgent = "UPDATE Alien SET ansvarig_agent = "+agentid+" WHERE Alien_ID = "+alienid;
+                idb.update(uptAgent);
+                System.out.println("Ansvarig agent uppdaterad");
             }
-             
-        }else{
-            JOptionPane.showMessageDialog(null,"Datum måste skrivat i formatet ÅÅÅÅ-MM-DD");
+        }catch(InfException ex){
+            JOptionPane.showMessageDialog(null,"Något gick fel vid uppdatering av ansvarig agent!");
+            System.out.println(ex.getMessage());
         }
-        return stammer;
-        
     }
     
     
-    //valideringsmetod för telefonnumret
-    private boolean telValidering(String telefon){
-        boolean stammer = false;
-        
-        //ifall det textfältet inte är tomt
-        if(telefon != null){
-            //splittar vid - 
-            String[] TEL = telefon.split("-");
-            
-            //kontroll ifall det är inslaget på annat sätt än xxx-xxxxxx
-            if(TEL.length != 2){
-                JOptionPane.showMessageDialog(null,"Telefonnumret måste fyllas i enligt formatet 555-555");
+    
+    private void uppdateraPlats()
+    {
+        try{
+            String alienid = getAlienId();
+            //hämtar platsid för val av ny plats från cboxen
+            String valdPlats = cbxPlatser.getSelectedItem().toString();
+            String[] deladPlats = valdPlats.split("-");
+            String platsId = deladPlats[0];
+
+            //ifall ingenting är valt händer ingenting
+            if(valdPlats.equals("Välj")){
+                System.out.println("Ingen ändring plats");
             }else{
-                //slår ihop numret utan -
-                String telnr = TEL[0]+TEL[1];
-                
-                //kontroll att det bara är siffor
-                if(Validering.containsOnlyNumber(telnr)){
-                    stammer = true;
-                }
+                //uppdaterar plats
+                String uptPlats = "UPDATE Alien SET plats = "+platsId+" WHERE Alien_ID = "+alienid;
+                idb.update(uptPlats);
+                System.out.println("Plats uppdaterad");
             }
-        } 
-        
-        return stammer;
+        }catch(InfException ex){
+            JOptionPane.showMessageDialog(null,"Något gick fel vid uppdatering av plats");
+            System.out.println(ex.getMessage());
+        }
     }
     
+    private void uppdateraRas()
+    {
+        try{
+            String alienid = getAlienId();
+            //hämtar val av ny ras
+            String valdRas = cbxRas.getSelectedItem().toString();
+
+            //hämtar gamla rasen
+            String nuRas = txtfNuvRas.getText();
+
+            //hämtar info om attribut för ras som användaren angett
+            String attribut = txtfRasAttribut.getText();
+
+
+            //ifall alien inte hade tidigare ras eller inte valt någon ny ras sker ingenting
+            if(nuRas.equals("Info saknas") || valdRas.equals("Välj")){
+                System.out.println("Ingen förändring i gamla ras");
+            }else{
+                //annars deletas den från tidigare ras för att kunna lägga in i ny ras
+                idb.delete("DELETE FROM "+nuRas+" WHERE Alien_ID = "+alienid);
+            }
+
+
+            //ifall ny ras inte är vald händer ingenting
+            if(valdRas.equals("Välj")){
+                System.out.println("Ingen förändirng i ras");
+
+                //ifall ny ras är worm och attribut är ifyllt
+            }else if(valdRas.equals("Worm") && !attribut.isEmpty()){
+
+                //kontroll att det är siffra . siffra siffra för längd hos worm
+                if(Validering.korrektFormWorm(attribut)){
+                    idb.insert("INSERT INTO Worm VALUES ("+alienid+", "+attribut+")");
+
+                    //påminnelse
+                }else{
+                    JOptionPane.showMessageDialog(null,"Skriv längd med siffor i format 0.00!");
+                }
+
+                //ifall squid är valt och attribut är ifyllt
+            }else if(valdRas.equals("Squid") && !attribut.isEmpty() ){
+
+                //attribut enbart innehåller siffor för antal armar
+                if(Validering.isHeltal(attribut)){
+                    idb.insert("INSERT INTO Squid VALUES ("+alienid+", "+attribut+")");
+                }else{
+                    JOptionPane.showMessageDialog(null,"Skriv antal armar i heltal!");
+                }
+
+                //ifall boglodite är valt och attribut är ifyllt
+            }else if(valdRas.equals("Boglodite")&& !attribut.isEmpty() ){
+
+                //kontroll att enbart siffor för antal boogies
+                if(Validering.isHeltal(attribut)){
+                    idb.insert("INSERT INTO Boglodite VALUES ("+alienid+", "+attribut+")");
+                }else{
+                    JOptionPane.showMessageDialog(null,"Skriv antal boogies med heltal!");
+                }
+                //annars påminnelse att ras inte ändras ifall attributfältet är tomt
+            }else{
+                JOptionPane.showMessageDialog(null, "Fyll i rasattribut för att rasen ska ändras!");
+            }
+        }catch(InfException ex){
+            JOptionPane.showMessageDialog(null,"Något fel vid uppdatering av ras!");
+            System.out.println(ex.getMessage());
+        }
+    }
     
     //metod för att hämta nuvarande ras för alien
     private void getNuvarandeRas(){
@@ -622,7 +543,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
                     setCbxToValue(cbxAnsvarigAgent, ansagent);
                 }
                 
-                
                 txtfEpost.setText(epost);
                 
                 //kontroll att fält inte är tomma
@@ -702,7 +622,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxRas;
     private javax.swing.JLabel jLansAgent;
     private javax.swing.JLabel jLepost;
-    private javax.swing.JLabel jLinformation;
     private javax.swing.JLabel jLlosen;
     private javax.swing.JLabel jLnamn;
     private javax.swing.JLabel jLnuvRas;

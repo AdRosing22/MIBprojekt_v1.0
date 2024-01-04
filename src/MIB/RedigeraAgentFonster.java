@@ -14,18 +14,13 @@ import oru.inf.InfException;
 /**
  * Klass för att ändra på lagrad information om agent
  * Kan inte redigera e-post eftersom det används som unik identifierare
- * --kan lätt justera att det går att ändra epost vid behov men att man inte kan ändra epost
- * --på inloggad agent.Det som blir problem är att man kan inte validera att den inte redan finns
- * --ifall man inte redigerar den alls. För då kommer det stoppas av valideringen
+ * 
  *
  * @author adamrosing
  */
 public class RedigeraAgentFonster extends javax.swing.JFrame {
 
     private InfDB idb;
-    private String dagensdatum;
-    
-    
     
     /**
      * Creates new form RedigeraAgentFonster
@@ -286,107 +281,43 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
-        // printar ut för att avskilja och kunna följa processen i system printen
-        System.out.println("----------");
-        //genererar dagens datum
-        dagensDatum();
+        
         //hämtar all information från textrutorna
         String epost = txtfEpost.getText();
         String namn = txtfNamn.getText();
         String losenord = txtfLosen.getText();
         String telefon = txtfTelefon.getText();
-        String datumFalse = txtfDatum.getText();
+        String datum = txtfDatum.getText();
          
         try{
             
             String agentid =hamtaAgentID();
             
-            //splitar alla cboxar för att få ut id från varje
+            //splitar cbox för att få områdes id
             String valOmrade = cbxOmrade.getSelectedItem().toString();
             String[] omrade = valOmrade.split("-");
             String omradeid = omrade[0];
             
-            String valNyUtr = cbxUtrustning.getSelectedItem().toString();
-            String[] nyUtrID = valNyUtr.split("-");
-            String utID = nyUtrID[0];
-            
-            String valGammalUtr = cbxInneharUtr.getSelectedItem().toString();
-            String[] gamUtrID = valGammalUtr.split("-");
-            String inID = gamUtrID[0];
-            
-            
-            //ifall rutorna är fyllda, namnet innehåller bokstav och lösenord inte längre än 6 tecken
-            if(Validering.isTxtFilled(namn)&&Validering.isTxtFilled(losenord)&&Validering.isTxtFilled(datumFalse)&&Validering.isTxtFilled(telefon) && Validering.containsAlphabet(namn)&&Validering.godkanndLosenLangd(losenord)){
+            //ifall rutorna är fyllda, namnet innehåller bokstav, lösenord inte längre än 6 tecken, datum och telefon är i rätt form
+            if(Validering.isTxtFilled(namn)&&Validering.isTxtFilled(losenord)&&Validering.isTxtFilled(datum)&&Validering.isTxtFilled(telefon) && Validering.containsAlphabet(namn)&&Validering.godkanndLosenLangd(losenord) && Validering.telValidering(telefon) && Validering.datumValidering(datum)){
                 
-                //validering för datum
-                String [] datum = datumFalse.split("-");
-                String datumTrue = datum[0]+datum[1]+datum[2];
-                int datums = Integer.parseInt(datumTrue);
-                int manad = Integer.parseInt(datum[1]);
-                int ar = Integer.parseInt(datum[0]);
-                int dag = Integer.parseInt(datum[2]);
-                int dagensDatum = Integer.parseInt(dagensDatum());
-                
-                //månad får inte vara större än 12, året kan inte vara mindre än 1900, datumet får inte vara större än dagens datum
-                //dag får inte vara större än 31, dag kan inte vara 00 och månad kan inte vara 00
-                if(manad>12 || ar<1900 || datums>dagensDatum || dag > 31 || dag == 00 || manad == 00){
-                    JOptionPane.showMessageDialog(null,"Ogiltigt datum");
-                 
+                //ifall man inte valt något nytt område så ska inte områdesid uppdateras
+                if(valOmrade.equals("Välj")){
+                    String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datum+"' WHERE Agent_ID = "+agentid;
+                    idb.update(fraga);
+                    JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");   
                 }else{
-                
-                    //validering för telefonnumret, att det är i rätt form med riktnummer och nummer
-                    String[] TEL = telefon.split("-");
-                    if(TEL.length != 2){
-                        JOptionPane.showMessageDialog(null,"Telefonnumret måste skrivas i formen: 999-999");
-                    }else{
-                        telefon = TEL[0]+TEL[1];
-                        
-                        //ytterligare validering för datum att det enbart innehåller siffror och inte är i annan form än 0000-00-00
-                        if(Validering.containsOnlyNumber(datumTrue) && datumTrue.length() == 8){
-                            
-                            //kontroll att inte telefonnumret innehåller bokstäver
-                            if(Validering.containsOnlyNumber(telefon)){
-                                telefon = TEL[0]+"-"+TEL[1];
-                
-                                //ifall man inte valt något nytt område så ska inte områdesid uppdateras
-                                if(valOmrade.equals("Välj")){
-                                    String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"' WHERE Agent_ID = "+agentid;
-                                    idb.update(fraga);
-                                    JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");   
-                                }else{
-                                    String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datumTrue+"', Omrade = "+omradeid+" WHERE Agent_ID = "+agentid;
-                                    idb.update(fraga);
-                                    JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");
-                                }
-                
-                                //ifall man inte valt att kvittera ut någon utrustning så får man bara system meddelande, inget ska visas för användaren
-                                if(valNyUtr.equals("Välj")){
-                                    System.out.println("Ingen förändring i utag av utrustning");
-                                }else{
-                                     //annars sätter man in agentid, utrustningsid och dagensdatum
-                                    String fraga = "INSERT INTO innehar_utrustning VALUES ("+agentid+", "+utID+",'"+dagensdatum+"')";
-                                    idb.insert(fraga);
-                                }
-                
-                                //ifall man inte valt att kvittera in innehavd utrustning
-                                if(valGammalUtr.equals("Välj")){
-                                    System.out.println("Ingen förändring i inkvittering av utrustning");
-                                }else{
-                                    //annars deletas det från innehar_utrustning eftersom man lämnar tillbaka
-                                    String fraga = "DELETE FROM innehar_utrustning WHERE Agent_ID = "+agentid+" AND Utrustnings_ID = "+inID;
-                                    idb.delete(fraga);
-                                }
-                                //tömmer alla fält så, eftersom uppdateringarna inte syns direkt i cboxarna
-                                tomAllaFalt();
-                            }else{
-                                JOptionPane.showMessageDialog(null, "Du kan inte ha bokstäver i telefonnumret!");
-                            }   
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Datumet är i fel format. Det kan inte inehålla bokstäver och måste vara i formatet 0000-00-00");
-                        }
-                    }
-                } 
+                    String fraga = "UPDATE Agent SET Epost = '"+epost+"', Namn = '"+namn+"', Losenord = '"+losenord+"', Telefon = '"+telefon+"', Anstallningsdatum = '"+datum+"', Omrade = "+omradeid+" WHERE Agent_ID = "+agentid;
+                    idb.update(fraga);
+                    JOptionPane.showMessageDialog(null, "Agentinformation har uppdaterats!");
+                }
+
+                uppdateraUtrustning();
+                //tömmer alla fält så, eftersom uppdateringarna inte syns direkt i cboxarna
+                tomAllaFalt();
             }
+                 
+            
         }catch(InfException ex){
             JOptionPane.showMessageDialog(null,"Något gick fel");
             System.out.println("Intern felmed: "+ex.getMessage());
@@ -394,17 +325,44 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBekraftaActionPerformed
 
     
-//live metod för att generera dagens datum
-private String dagensDatum()
-    {
-        String datum = LocalDate.now().toString();
-        String ar = datum.substring(0, 4);
-        String manad = datum.substring(5, 7);
-        String dag = datum.substring(8, 10);
-        System.out.println(ar + manad + dag);
-        dagensdatum = ar + manad + dag;
-        return dagensdatum;
+
+private void uppdateraUtrustning()
+{
+    try{
+        String agentid = hamtaAgentID();
+        String dagensdatum = Validering.dagensDatum();
+        
+        String valNyUtr = cbxUtrustning.getSelectedItem().toString();
+        String[] nyUtrID = valNyUtr.split("-");
+        String utID = nyUtrID[0];
+            
+        String valGammalUtr = cbxInneharUtr.getSelectedItem().toString();
+        String[] gamUtrID = valGammalUtr.split("-");
+        String inID = gamUtrID[0];
+        
+        //ifall man inte valt att kvittera ut någon utrustning så får man bara system meddelande, inget ska visas för användaren
+        if(valNyUtr.equals("Välj")){
+            System.out.println("Ingen förändring i utag av utrustning");
+        }else{
+             //annars sätter man in agentid, utrustningsid och dagensdatum
+            String fraga = "INSERT INTO innehar_utrustning VALUES ("+agentid+", "+utID+",'"+dagensdatum+"')";
+            idb.insert(fraga);
+        }
+
+        //ifall man inte valt att kvittera in innehavd utrustning
+        if(valGammalUtr.equals("Välj")){
+            System.out.println("Ingen förändring i inkvittering av utrustning");
+        }else{
+            //annars deletas det från innehar_utrustning eftersom man lämnar tillbaka
+            String fraga = "DELETE FROM innehar_utrustning WHERE Agent_ID = "+agentid+" AND Utrustnings_ID = "+inID;
+            idb.delete(fraga);
+        }
+    }catch(InfException ex){
+        JOptionPane.showMessageDialog(null,"Något gick fel vid kvittering av utrustning");
+        System.out.println(ex.getMessage());
     }
+}
+    
     
 //metod för att tömma alla fält
 private void tomAllaFalt(){
@@ -425,9 +383,8 @@ private void tomAllaFalt(){
 //metod för att hämta all info från agent tabellen
 private void hamtaInfoAgent(){
     
+    String dagensDatum = Validering.dagensDatum();
     String id = hamtaAgentID();
-    
-  
     String fraga = "SELECT * FROM Agent WHERE Agent_ID = "+id;
     
     try{
@@ -451,7 +408,7 @@ private void hamtaInfoAgent(){
             if(datum != null){
                 txtfDatum.setText(datum);
             }else{
-                txtfDatum.setText(dagensDatum());
+                txtfDatum.setText(dagensDatum);
             }
             String epost = agentInfo.get("Epost");
             if(epost != null){
@@ -465,9 +422,7 @@ private void hamtaInfoAgent(){
             //hämtar nuvarande område för agenten
             String nuvOmradesID = agentInfo.get("Omrade");
             String omrnamn = idb.fetchSingle("SELECT benamning FROM omrade where Omrades_ID= "+nuvOmradesID);
-            txtfNuvomrade.setText(omrnamn);
-            
-            
+            txtfNuvomrade.setText(omrnamn); 
         }
         
     }catch(InfException ex){
@@ -544,11 +499,11 @@ private void laddaAgenter() {
                     
             cbxAgenter.addItem(agentid+"-"+namn);
             }
-        }catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
-            System.out.println(e.getMessage());
-        }
+    }catch (InfException e) {
+        JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+        System.out.println(e.getMessage());
     }
+}
             
 //metod som hämtar alla områden
 private void laddaOmraden(){
@@ -562,11 +517,11 @@ private void laddaOmraden(){
             String namn = omrade.get("Benamning");
             cbxOmrade.addItem(omradeid+"-"+namn);
         }
-        }catch(InfException ex){
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmed:"+ex.getMessage());
-        }
-    }    
+    }catch(InfException ex){
+        JOptionPane.showMessageDialog(null, "Något gick fel");
+        System.out.println("Internt felmed:"+ex.getMessage());
+    }
+}    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

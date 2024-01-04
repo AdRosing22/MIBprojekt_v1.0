@@ -6,7 +6,6 @@ package MIB;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -30,15 +29,12 @@ public class Start {
             System.out.println("Koppling mot databas LYCKAD");
         } catch (InfException ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Fel i systemet, vänligen testa igen");
-            System.out.println("Internt felmeddelande" + ex.getMessage());
+            
         }
 
         new InloggningsFonster(idb).setVisible(true);
-        
-        
-
     }
+    
     
 }
     

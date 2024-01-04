@@ -113,7 +113,10 @@ public class OmradesChefInfo extends javax.swing.JFrame {
 
     private void btnHamtaOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtaOmradesChefActionPerformed
        
-try {
+    try {
+        //tömmer info i rutan ifall användaren skulle klicka på knappen flera gånger
+        txtOmradeschef.setText("");
+        
         //SQL fråga för sammanfoga alien och agent på plats, till område, till områdeschef, till agent.
         String fraga = "SELECT agent.namn, agent.telefon, agent.anstallningsdatum, agent.epost, omrade.benamning FROM Agent "
                     + "JOIN omradeschef ON agent.agent_id = omradeschef.Agent_ID "
