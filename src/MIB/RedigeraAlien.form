@@ -29,7 +29,6 @@
                       <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLtelefon1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLras" min="-2" max="-2" attributes="0"/>
                           <Component id="jLansAgent" min="-2" max="-2" attributes="0"/>
                           <Component id="jLplats" min="-2" max="-2" attributes="0"/>
                           <Component id="jLtelefon" min="-2" max="-2" attributes="0"/>
@@ -38,6 +37,7 @@
                           <Component id="jLepost" min="-2" max="-2" attributes="0"/>
                           <Component id="jLvaljAlien" min="-2" max="-2" attributes="0"/>
                           <Component id="attributRas" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="jLras" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -176,6 +176,10 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="cbxAlienMouseDragged"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxAlienActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -250,18 +254,13 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLras">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ras:"/>
+        <Property name="text" type="java.lang.String" value="Ny Ras:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbxRas">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="V&#xe4;lj"/>
-            <StringItem index="1" value="Squid"/>
-            <StringItem index="2" value="Worm"/>
-            <StringItem index="3" value="Boglodite"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>

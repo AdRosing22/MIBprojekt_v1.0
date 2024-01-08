@@ -4,6 +4,7 @@
  */
 package MIB;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JComboBox;
@@ -33,12 +34,14 @@ public class RedigeraAlien extends javax.swing.JFrame {
         laddaAliens();
         laddaPlatser();
         laddaAgenter();
+        laddaRaser();
         
         setLocationRelativeTo(null);
         
         //kan inte redigera epost och inforutor om nuvarande värden
         txtfEpost.setEditable(false);
         txtfNuvRas.setEditable(false);
+        
     }
 
     /**
@@ -85,6 +88,16 @@ public class RedigeraAlien extends javax.swing.JFrame {
         jLvaljAlien.setText("Välj alien:");
 
         cbxAlien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxAlien.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                cbxAlienMouseDragged(evt);
+            }
+        });
+        cbxAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxAlienActionPerformed(evt);
+            }
+        });
 
         jLepost.setText("E-post:");
 
@@ -102,9 +115,8 @@ public class RedigeraAlien extends javax.swing.JFrame {
 
         cbxAnsvarigAgent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLras.setText("Ras:");
+        jLras.setText("Ny Ras:");
 
-        cbxRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj", "Squid", "Worm", "Boglodite" }));
         cbxRas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxRasActionPerformed(evt);
@@ -146,7 +158,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
                         .addGap(129, 129, 129)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLtelefon1)
-                            .addComponent(jLras)
                             .addComponent(jLansAgent)
                             .addComponent(jLplats)
                             .addComponent(jLtelefon)
@@ -154,7 +165,8 @@ public class RedigeraAlien extends javax.swing.JFrame {
                             .addComponent(jLnamn)
                             .addComponent(jLepost)
                             .addComponent(jLvaljAlien)
-                            .addComponent(attributRas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(attributRas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLras))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -253,8 +265,9 @@ public class RedigeraAlien extends javax.swing.JFrame {
         if(cbxAlien.getSelectedItem().toString().equals("Välj")){
             JOptionPane.showMessageDialog(null,"Välj alien för att hämta information");
         }else{
-            //hämta info om alien och fyllt textrutorna
+            //hämta info om alien och fyll textrutorna
             hamtaAlienInfo();
+            nuvRasFarg();
         }
         
     }//GEN-LAST:event_btnHamtaInfoActionPerformed
@@ -297,6 +310,17 @@ public class RedigeraAlien extends javax.swing.JFrame {
                 
                 //bekräftelsemeddelande
                 JOptionPane.showMessageDialog(null,"Alien uppdaterad!");
+                
+                
+                //som det märks så har vi inte lyckats sätta combobox vid ras till nuvarande ras
+                //därför sätter vi det automatiskt tillbaka på välj
+                cbxRas.setSelectedItem("Välj");
+                txtfRasAttribut.setText("");
+                
+                
+                //för att undvika fel med gamla nuvarande ras ifall man skulle försöka börja ändra info direkt igen
+                //hämtar info med nya uppdateringarna
+                btnHamtaInfo.doClick();   
             }   
         }catch(InfException ex){
             JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -311,7 +335,28 @@ public class RedigeraAlien extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void cbxAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAlienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxAlienActionPerformed
+
+    private void cbxAlienMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxAlienMouseDragged
+      
+    }//GEN-LAST:event_cbxAlienMouseDragged
+
   
+    private void nuvRasFarg()
+    {
+        //lite förtydligande med uppdatering av ras med färger i textrutan
+        //vid felinmatning tas rasen bort
+        //inte optimalt men aja :p
+        if(txtfNuvRas.getText().equals("Info saknas")){
+            txtfNuvRas.setBackground(Color.red);
+        }else{
+            txtfNuvRas.setBackground(Color.green);
+        }
+    }
+    
+    
     private void uppdateraAnsAgent()
     {
         try{
@@ -477,6 +522,16 @@ public class RedigeraAlien extends javax.swing.JFrame {
             case "Välj":
                 attributRas.setVisible(false);
         }
+    }
+    
+    
+    private void laddaRaser()
+    {
+        cbxRas.removeAllItems();
+        cbxRas.addItem("Välj");
+        cbxRas.addItem("Squid");
+        cbxRas.addItem("Worm");
+        cbxRas.addItem("Boglodite");
     }
     
     

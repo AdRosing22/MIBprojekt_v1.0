@@ -31,6 +31,7 @@ public class RedigeraAgentFonster extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         laddaAgenter();
         laddaOmraden();
+        txtfNuvomrade.setEditable(false);
         txtfEpost.setEditable(false);
         
     }
