@@ -268,7 +268,7 @@ public static boolean containsAlphabet(String txt) {
         sant = true;
     } else {
         System.out.println("Txt: " + txt);
-        JOptionPane.showMessageDialog(null, "Du har fält som innehåller enbart siffror istället för kombination av siffror och tecken. Kontrollera ifall du har ett namnfält eller epostfält att inmatning är korrekt");
+        JOptionPane.showMessageDialog(null, "Du har fält som innehåller enbart siffror istället för tecken eller en kombination av bägge. Kontrollera ifall du har ett namnfält eller epostfält att inmatning är korrekt");
     }
 
     return sant;
