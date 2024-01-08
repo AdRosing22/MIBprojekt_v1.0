@@ -12,8 +12,8 @@ import oru.inf.InfException;
 /**
  *
  * @author adamrosing, melker langell, gustaf neander, alvin källberg
- * //V1.0 2023-12-09
- *
+ * V1.0 2023-12-09
+ * V2.0 2024-01-08
  * 
  */
 public class Start {

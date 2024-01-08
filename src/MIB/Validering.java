@@ -404,9 +404,9 @@ public static boolean telValidering(String telefon){
 //används vid reg av squid eller boglodite alienras
 public static boolean isHeltal(String txt) {
     try {
-        int intValue = Integer.parseInt(txt);
+        int kontroll = Integer.parseInt(txt);
         // Kontrollera om det finns några decimaldelar
-        if (intValue == Double.parseDouble(txt)) {
+        if (kontroll == Double.parseDouble(txt)) {
             return true;  
         } else {
             return false; 
