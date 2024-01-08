@@ -59,6 +59,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
         jSokAlien = new javax.swing.JButton();
         jSokAgent = new javax.swing.JButton();
         jAtgarder = new javax.swing.JLabel();
+        btnVanligAgent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,14 +128,17 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
         jAtgarder.setText("Åtgärder:");
 
+        btnVanligAgent.setText("Fältagent testvy");
+        btnVanligAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVanligAgentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnLoggaut)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jAtgarder)
@@ -145,14 +149,20 @@ public class AgentAdminFonster extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLvalkommen, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jRegistreraUtrustning, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jAndraLosenord, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSokAgent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jHanteraUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jRegistreraUtrustning, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jAndraLosenord, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jSokAgent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jHanteraUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnLoggaut)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVanligAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSokAlien, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(jHanteraAgenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jHanteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -185,7 +195,9 @@ public class AgentAdminFonster extends javax.swing.JFrame {
                         .addComponent(jRegistreraUtrustning)
                         .addComponent(jHanteraAlien)))
                 .addGap(59, 59, 59)
-                .addComponent(btnLoggaut)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLoggaut)
+                    .addComponent(btnVanligAgent))
                 .addContainerGap())
         );
 
@@ -197,15 +209,10 @@ public class AgentAdminFonster extends javax.swing.JFrame {
         // Visa en bekräftelsepopup
         UIManager.put("OptionPane.yesButtonText", "Ja");
         UIManager.put("OptionPane.noButtonText", "Nej");
-        int choice = JOptionPane.showConfirmDialog(
-        this, // Komponenten att centrera popup på
-        "Vill du verkligen logga ut?", // Meddelandetext
-        "Bekräftelse", // Titel på popup
-        JOptionPane.YES_NO_OPTION // Visa Ja/Nej-knappar
-        );
+        int val = JOptionPane.showConfirmDialog(this,"Vill du verkligen logga ut?","Bekräftelse", JOptionPane.YES_NO_OPTION );
 
         // Kontrollera användarens val
-        if (choice == JOptionPane.YES_OPTION) {
+        if (val == JOptionPane.YES_OPTION) {
             // Töm InlogAgent state så att ny kan lagras vid inloggning
             nyAgent.loggaUt();
             new InloggningsFonster(idb).setVisible(true);
@@ -264,6 +271,13 @@ public class AgentAdminFonster extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jSokAgentActionPerformed
 
+    private void btnVanligAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVanligAgentActionPerformed
+        // TODO add your handling code here:
+        new AgentFonster(idb).setVisible(true);
+        JOptionPane.showMessageDialog(null, "De åtgärder som du även har i adminfönstret är inte tillgängliga i denna testvy!");
+        dispose();
+    }//GEN-LAST:event_btnVanligAgentActionPerformed
+
 
     //kontroll för att sätta namnet efter välkommen vid inloggning
     private void setValkommen()
@@ -278,6 +292,7 @@ public class AgentAdminFonster extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnLoggaut;
+    private javax.swing.JButton btnVanligAgent;
     private javax.swing.JButton jAndraLosenord;
     private javax.swing.JLabel jAtgarder;
     private javax.swing.JButton jHanteraAgenter;

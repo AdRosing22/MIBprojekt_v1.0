@@ -23,23 +23,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnAndraLosen1" max="32767" attributes="0"/>
-                  <Component id="btnSokOChef" alignment="1" max="32767" attributes="0"/>
-                  <Component id="btnAndraLosen" alignment="1" max="32767" attributes="0"/>
-                  <Component id="btnHanteraAlien" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnRegUtr" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace pref="60" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="btnSeutrustning" max="32767" attributes="0"/>
-                  <Component id="btnKvittera" alignment="1" pref="150" max="32767" attributes="0"/>
-                  <Component id="btnAnsvarigAgent" alignment="1" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -53,10 +36,31 @@
                   </Group>
               </Group>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAvsluta" min="-2" pref="86" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnSokAlien" max="32767" attributes="0"/>
+                          <Component id="btnSokOChef" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnAndraLosen" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnHanteraAlien" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnRegUtr" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAvsluta" min="-2" pref="86" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="60" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="btnSeutrustning" max="32767" attributes="0"/>
+                  <Component id="btnKvittera" alignment="1" pref="150" max="32767" attributes="0"/>
+                  <Component id="btnAnsvarigAgent" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnAdmin" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,10 +89,18 @@
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="btnSokOChef" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnAndraLosen1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
-              <Component id="btnAvsluta" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnSokAlien" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnAvsluta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnAdmin" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -144,12 +156,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvslutaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAndraLosen1">
+    <Component class="javax.swing.JButton" name="btnSokAlien">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xf6;k Alien"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAndraLosen1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSokAlienActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="btnSeutrustning">
@@ -174,6 +186,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnsvarigAgentActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="btnAdmin">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="G&#xe5; tillbaka till admin"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

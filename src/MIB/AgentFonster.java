@@ -26,6 +26,7 @@ public class AgentFonster extends javax.swing.JFrame {
         setValkommen(InlogAgent.getEpost());
         this.idb = idb;  
         this.nyAgent = nyAgent;
+        btnAdmin.setVisible(false);
     }
     
     public AgentFonster(InfDB idb)
@@ -33,6 +34,16 @@ public class AgentFonster extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         setValkommen(InlogAgent.getEpost());
+        
+        //ifall man kommer från adminfönstret i testvy
+        btnAdmin.setVisible(false);
+        if(Validering.kontrollOmAdmin(InlogAgent.getEpost())){
+            btnAndraLosen.setEnabled(false);
+            btnHanteraAlien.setEnabled(false);
+            btnRegUtr.setEnabled(false);
+            btnSokAlien.setEnabled(false);
+            btnAdmin.setVisible(true);
+        }
     }
     
    
@@ -53,10 +64,11 @@ public class AgentFonster extends javax.swing.JFrame {
         btnSokOChef = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnAvsluta = new javax.swing.JToggleButton();
-        btnAndraLosen1 = new javax.swing.JButton();
+        btnSokAlien = new javax.swing.JButton();
         btnSeutrustning = new javax.swing.JToggleButton();
         btnKvittera = new javax.swing.JToggleButton();
         btnAnsvarigAgent = new javax.swing.JButton();
+        btnAdmin = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,10 +111,10 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
-        btnAndraLosen1.setText("Sök Alien");
-        btnAndraLosen1.addActionListener(new java.awt.event.ActionListener() {
+        btnSokAlien.setText("Sök Alien");
+        btnSokAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAndraLosen1ActionPerformed(evt);
+                btnSokAlienActionPerformed(evt);
             }
         });
 
@@ -127,24 +139,17 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
+        btnAdmin.setText("Gå tillbaka till admin");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAndraLosen1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSokOChef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAndraLosen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHanteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRegUtr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnSeutrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnKvittera, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(btnAnsvarigAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,10 +159,26 @@ public class AgentFonster extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(178, 178, 178))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAvsluta, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSokAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSokOChef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAndraLosen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnHanteraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRegUtr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAvsluta, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnSeutrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnKvittera, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(btnAnsvarigAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,10 +202,15 @@ public class AgentFonster extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(btnSokOChef)
                 .addGap(18, 18, 18)
-                .addComponent(btnAndraLosen1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(btnAvsluta)
-                .addContainerGap())
+                .addComponent(btnSokAlien)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnAvsluta)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnAdmin)
+                        .addGap(16, 16, 16))))
         );
 
         pack();
@@ -221,15 +247,10 @@ public class AgentFonster extends javax.swing.JFrame {
         // Visa en bekräftelsepopup
         UIManager.put("OptionPane.yesButtonText", "Ja");
         UIManager.put("OptionPane.noButtonText", "Nej");
-        int choice = JOptionPane.showConfirmDialog(
-        this, // Komponenten att centrera popup på
-        "Vill du verkligen logga ut?", // Meddelandetext
-        "Bekräftelse", // Titel på popup
-        JOptionPane.YES_NO_OPTION // Visa Ja/Nej-knappar
-        );
+        int val = JOptionPane.showConfirmDialog(this,"Vill du verkligen logga ut?","Bekräftelse", JOptionPane.YES_NO_OPTION);
 
         // Kontrollera användarens val
-        if (choice == JOptionPane.YES_OPTION) {
+        if (val == JOptionPane.YES_OPTION) {
             // Töm InlogAgent state så att ny kan lagras vid inloggning
             nyAgent.loggaUt();
             new InloggningsFonster(idb).setVisible(true);
@@ -237,11 +258,11 @@ public class AgentFonster extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btnAvslutaActionPerformed
 
-    private void btnAndraLosen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraLosen1ActionPerformed
+    private void btnSokAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokAlienActionPerformed
         // TODO add your handling code here:
         new ValjTypSokAvAlien(idb).setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnAndraLosen1ActionPerformed
+    }//GEN-LAST:event_btnSokAlienActionPerformed
 
     private void btnSeutrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeutrustningActionPerformed
         // TODO add your handling code here:
@@ -261,6 +282,12 @@ public class AgentFonster extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnAnsvarigAgentActionPerformed
 
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        // TODO add your handling code here:
+        new AgentAdminFonster(idb).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAdminActionPerformed
+
     private void setValkommen(String namn)
     {
         if(namn!=null){
@@ -273,14 +300,15 @@ public class AgentFonster extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLvalkommen;
+    private javax.swing.JToggleButton btnAdmin;
     private javax.swing.JButton btnAndraLosen;
-    private javax.swing.JButton btnAndraLosen1;
     private javax.swing.JButton btnAnsvarigAgent;
     private javax.swing.JToggleButton btnAvsluta;
     private javax.swing.JButton btnHanteraAlien;
     private javax.swing.JToggleButton btnKvittera;
     private javax.swing.JButton btnRegUtr;
     private javax.swing.JToggleButton btnSeutrustning;
+    private javax.swing.JButton btnSokAlien;
     private javax.swing.JButton btnSokOChef;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

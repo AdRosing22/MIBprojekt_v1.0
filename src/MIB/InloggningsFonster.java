@@ -191,15 +191,10 @@ public class InloggningsFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
         UIManager.put("OptionPane.yesButtonText", "Ja");
         UIManager.put("OptionPane.noButtonText", "Nej");
-        int choice = JOptionPane.showConfirmDialog(
-        this, // Komponenten att centrera popup på
-        "Vill du verkligen avsluta programmet?", // Meddelandetext
-        "Bekräftelse", // Titel på popup
-        JOptionPane.YES_NO_OPTION // Visa Ja/Nej-knappar
-        );
+        int val = JOptionPane.showConfirmDialog(this, "Vill du verkligen avsluta programmet?", "Bekräftelse", JOptionPane.YES_NO_OPTION );
 
         // Kontrollera användarens val
-        if (choice == JOptionPane.YES_OPTION) {
+        if (val == JOptionPane.YES_OPTION) {
             dispose();
         }
         
