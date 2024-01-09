@@ -14,7 +14,6 @@ import oru.inf.InfException;
 
 /**
  *klass för att redigera information om alien
- * --ifall telefon och datum fält är tomma eller fel format uppdateras inte det
  * 
  * 
  * @author adamrosing & Melker
